@@ -1,4 +1,5 @@
 from odoo import models, fields
+from odoo.exceptions import ValidationError
 
 #
 # For Club Boards and Working Groups
@@ -20,3 +21,11 @@ class ClubBoard(models.Model):
         ('working', 'Working Group')
     ], default='board')
     active = fields.Boolean(default=True)
+
+    def unlink(self):
+        for board in self:
+            if board.member_ids:
+                raise ValidationError(
+                    "Board has members. Cannot delete board! Consider deactivating it instead."
+                )
+        return super(ClubBoard, self).unlink()

@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class ClubRole(models.Model):
     _name = 'club.role'

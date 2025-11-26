@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="module_category_clubmanagement" model="ir.module.category">
+            <field name="name">Clubmanagement</field>
+            <field name="description">Access Permissions for Clubmanagement Suite</field>
+            <field name="sequence">10</field>
+        </record>
+
+
+        <record id="group_clubmanagement_user" model="res.groups">
+            <field name="name">Standard User</field>
+            <field name="category_id" ref="module_category_clubmanagement" />
+            <field name="comment">Access to given organisational</field>
+        </record>
+
+        <record id="group_clubmanagement_key_user" model="res.groups">
+            <field name="name">Key User</field>
+            <field name="category_id" ref="module_category_clubmanagement" />
+            <field name="comment">Full access permission to Clubmanagement Suite W/o configuration</field>
+            <field name="implied_ids" eval="[(4, ref('group_clubmanagement_user'))]"/>
+        </record>
+
+        <record id="group_clubmanagement_master_user" model="res.groups">
+            <field name="name">Master User</field>
+            <field name="category_id" ref="module_category_clubmanagement" />
+            <field name="comment">Full access permission to Clubmanagaement Suite including organisation configuration</field>
+            <field name="implied_ids" eval="[
+                (4, ref('group_clubmanagement_user')),
+                (4, ref('group_clubmanagement_key_user'))
+            ]"/>
+        </record>
+
+        <record id="group_clubmanagement_administrator" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="module_category_clubmanagement" />
+            <field name="comment">Full access permission to Clubmanagement Suite including configuration</field>
+            <field name="implied_ids" eval="[
+                (4, ref('group_clubmanagement_user')), 
+                (4, ref('group_clubmanagement_key_user')),
+                (4, ref('group_clubmanagement_master_user'))
+            ]"/>
+        </record>
+
+    </data>
+    
+
+</odoo>

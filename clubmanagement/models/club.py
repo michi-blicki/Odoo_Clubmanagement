@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class Club(models.Model):
     _name = 'club.club'
@@ -15,6 +16,23 @@ class Club(models.Model):
     department_ids = fields.One2many('club.department', 'club_id', string='Departments')
     active = fields.Boolean(default=True)
 
+    def unlink(self):
+        for club in self:
+            if club.subclub_ids:
+                raise ValidationError(
+                    "Subclubs associated to club. Club cannot be deleted!"
+                )
+            if club.board_ids:
+                raise ValidationError(
+                    "Boards associated to club. Club cannot be deleted!"
+                )
+            if club.department_ids:
+                raise ValidationError(
+                    "Departments associated to club. Club cannot be deleted! Deactivate Club instead."
+                )
+        return super(Club, self).unlink()
+
+
 class SubClub(models.Model):
     _name = 'club.subclub'
     _description = 'Sub Club / Sub-Association'
@@ -29,3 +47,15 @@ class SubClub(models.Model):
     board_ids = fields.One2many('club.board', 'subclub_id', string="Board")
     department_ids = fields.One2many('club.department', 'subclub_id', string="Departments")
     active = fields.Boolean(default=True)
+
+    def unlink(self):
+        for subclub in self:
+            if subclub.board_ids:
+                raise ValidationError(
+                    "Boards associated to Sub-Club. Sub-Club cannot be deleted!"
+                )
+            if subclub.department_ids:
+                raise ValidationError(
+                    "Departments associated to Sub-Club. Sub-Club cannot be deleted! Deactive Sub-Club instead."
+                )
+        return super(SubClub, self).unlink()

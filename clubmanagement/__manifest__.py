@@ -28,22 +28,28 @@ Long description of module's purpose
     # any module necessary for this one to work correctly
     'depends': [
         'base',
+        'account',
         'contacts',
         'hr',
-        'product',
+        'hr_contract',
         'mail',
-        'web',
-        'multi-company',
+        'website',
         'partner_contact_birthdate',
         'partner_contact_gender',
-        'partner_contact_nationality'
+        'partner_contact_nationality',
+        'partner_multi_company'
     ],
 
     # always loaded
     'data': [
+        'security/clubmanagement_groups.xml',
         'security/ir.model.access.csv',
-        'views/club_management_main_menu.xml',
-        'views/club_management_views.xml',
+        'views/clubmanagement_main_menu.xml',
+        'views/club_config_club.xml',
+#        'views/club_config_department.xml',
+#        'views/club_config_pool.xml',
+#        'views/club_config_subclub.xml',
+#        'views/club_config_team.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

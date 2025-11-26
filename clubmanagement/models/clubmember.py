@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from dateutils.relativedelta import relativedelta
+from dateutil.relativedelta import relativedelta
 from datetime import date
 
 class ClubMember(models.Model):
@@ -11,7 +11,6 @@ class ClubMember(models.Model):
     birthdate_date = fields.Date(related='partner_id.birthdate_date', store=True, string='Birthdate', readonly=False)
     gender = fields.Selection(related='partner_id.gender', store=True, string='Gender', readonly=False)
     nationality_id = fields.Many2one('res.country', related='partner_id.nationality_id', store=True, string='Nationality', readonly=False)
-    team_ids = fields.One2many('club.team', string='Teams')
     department_ids = fields.Many2many('club.department', string='Departments')
     
     is_employee = fields.Boolean('Is Employee', default=False)
@@ -45,7 +44,7 @@ class ClubMember(models.Model):
             else:
                 mem.age = False
 
-    @api.depends('membership_ids.start_Date', 'membership_ids.end_date')
+    @api.depends('membership_ids.start_date', 'membership_ids.end_date')
     def _compute_membership_duration(self):
         today = fields.Date.context_today(self)
         for mem in self:
