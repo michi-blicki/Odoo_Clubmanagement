@@ -29,11 +29,31 @@ Usage
 =====
 
 1. Meet the requirements: Pillow
-2. Install the **clubmanagement** module.
-3. Configure your club, subclubs, departments and board.
-4. Assign members and custom roles.
-5. Customize additional fields via the admin interface.
-6. Use the website or API for external integrations.
+2. Setup Companies in **Settings** => **User & Companies** => **Companies**
+    * Also setup Subcompanies, if required by your association.
+3. Install the **clubmanagement** module. It depends on many CE mdules:
+    * 'base',
+    * 'account',
+    * 'contacts',
+    * 'hr',
+    * 'hr_contract',
+    * 'mail',
+    * 'mis_builder',
+    * 'website',
+    * 'website_payment',
+    * 'partner_contact_birthdate',
+    * 'partner_contact_gender',
+    * 'partner_contact_nationality',
+    * 'partner_multi_company',
+    * 'partner_firstname'
+
+4. Setup **HR Departments** in Employees => Departments, if you would like to use them for payed employees and contracting
+5. Create your **Club/Association** in **Clubmanagement** => **Administration**
+    * do not forget to push the "Create Default Roles and Boards" button
+6. If your organization has multiple Subclubs, like within a group company, create these now and associate them with the according companies
+7. Create the **Departments** and associate them with **HR Departments** if in use
+8. Create the **Roles** required by your association.
+more to follow... It will be a long list once finished ;)
 
 Configuration
 =============
