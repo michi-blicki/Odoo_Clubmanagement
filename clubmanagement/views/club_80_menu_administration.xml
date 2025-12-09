@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <menuitem
+            id="club_administration_root_menu"
+            name="Administration"
+            groups="clubmanagement.group_clubmanagement_master_user"
+            parent="clubmanagement_root_menu"
+            sequence="80"/>
+    
+    </data>
+    
+
+</odoo>

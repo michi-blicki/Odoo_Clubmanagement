@@ -1,19 +1,23 @@
-from odoo import models, fields
+from odoo import models, fields, _
 
 class ClubMemberState(models.Model):
     _name = 'club.member.state'
-    _description = 'Member Status History'
+    _description = 'Member Status'
+    _order ='sequence, id'
+    _sql_constraints = [
+        ('unique_code', 'UNIQUE(code)', 'State Code must be unique!')
+    ]
 
-    member_id = fields.Many2one('club.member', required=True)
-    state = fields.Selection([
-        ('pending', 'Pending'),
-        ('joining', 'Joining'),
-        ('active', 'active'),
-        ('inactive', 'inactive'),
-        ('blocked_club', 'blocked_club'),
-        ('blocked_official', 'blocked_official'),
-        ('left', 'left')
-    ], default='pending', required=True)
-    start_date = fields.Date(required=True)
-    end_date = fields.Date()
-    reason = fields.Text(required=False)
+    name = fields.Char(string=_("State Name"), required=True)
+    code = fields.Char(string=_("Code"), required=True)
+    sequence = fields.Integer(required=True, default=10)
+    state_type = fields.Selection([
+        ('pending', _('Pending')),
+        ('active', _('Active')),
+        ('inactive', _('Inactive')),
+        ('blocked', _('Blocked')),
+        ('archived', _('Archived')),
+        ('deleted', _('Deleted'))
+    ], required=True, default='pending', string=_("State Type"))
+    description = fields.Text(string=_("Description"))
+    active = fields.Boolean(default=True)

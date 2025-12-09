@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_member_membership_form_view" model="ir.ui.view">
+            <field name="name">club.member.membership.form</field>
+            <field name="model">club.member.membership</field>
+            <field name="arch" type="xml">
+                <form string="Membership">
+                    <header>
+                        <field name="active"/>
+                        <button string="Archive" type="object" name="action_archive" invisible="active == False" class="btn-secondary"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <field name="name"/>
+                            <field name="code"/>
+                        </div>
+                        <group>
+                            <field name="main_product_id"/>
+                            <field name="additional_product_ids"/>
+                            <field name="price"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="member_count" readonly="1"/>
+                            <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                        </group>
+                        <!-- Smart Button Section -->
+                        <div name="button_box" class="oe_button_box" style="margin-bottom: 16px;">
+                            <button
+                                name="action_show_members"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-users"
+                                string="Members"
+                                invisible="member_count == 0"
+                            >
+                                <span class="o_stat_text" title="'View Members'"/>
+                                <span class="o_stat_value">
+                                    <field name="member_count" widget="statinfo"/>
+                                </span>
+                            </button>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="club_member_membership_kanban_view" model="ir.ui.view">
+            <field name="name">club.member.membership.kanban</field>
+            <field name="model">club.member.membership</field>
+            <field name="arch" type="xml">
+                <kanban string="Memberships">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_tab">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <strong>
+                                        <t t-esc="record.name.value"/>
+                                        <span class="ms-2 text-muted">(<t t-esc="record.code.value"/>)</span>
+                                    </strong>
+                                    <span class="badge bg-primary" title="Member Count">
+                                        <i class="fa fa-users"/> <t t-esc="record.member_count.value"/>
+                                    </span>
+                                </div>
+                                <div class="mt8 mb8" t-if="record.description.value">
+                                    <t t-esc="record.description.value"/>
+                                </div>
+                                <div>
+                                    <span class="badge bg-info" title="Main Product">
+                                        <t t-esc="record.main_product_id.value and record.main_product_id.value[1] or ''"/>
+                                    </span>
+                                    <t t-if="record.additional_product_ids.value">
+                                        <span class="badge bg-secondary ms-1" title="Additional Products">
+                                            <t t-esc="record.additional_product_ids.value[1]"/>
+                                        </span>
+                                    </t>
+                                </div>
+                                <div class="mt8" t-if="record.price.value">
+                                    <span class="bg-light text-dark px-2 py-1 rounded">
+                                        <t t-esc="format(record.price.value, '.2f')"/> €
+                                    </span>
+                                </div>
+                                <div class="mt8 mb8">
+                                    <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                                </div>
+                                <div>
+                                    <field name="active"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="club_member_membership_list_view" model="ir.ui.view">
+            <field name="name">club.member.membership.list</field>
+            <field name="model">club.member.membership</field>
+            <field name="arch" type="xml">
+                <list string="Memberships" default_order="sequence">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="main_product_id"/>
+                    <field name="price"/>
+                    <field name="member_count"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_member_list_view_for_membership" model="ir.ui.view">
+            <field name="name">club.member.list.for.membership</field>
+            <field name="model">club.member</field>
+            <field name="arch" type="xml">
+                <list string="Members">
+                    <field name="photo" widget="image" options="{'size': [36, 36]}"/>
+                    <field name="firstname"/>
+                    <field name="lastname"/>
+                    <field name="gender"/>
+                    <field name="birthdate_date"/>
+                    <field name="city"/>
+                    <field name="nationality_id"/>
+                    <field name="club_id"/>
+                    <field name="department_ids"/>
+                    <field name="team_ids"/>
+                    <field name="membership_date_start"/>
+                    <field name="membership_date_end"/>
+                    <field name="current_state_id"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_member_membership_search_view" model="ir.ui.view">
+            <field name="name">club.member.membership.search</field>
+            <field name="model">club.member.membership</field>
+            <field name="arch" type="xml">
+                <search string="Search Memberships">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="main_product_id"/>
+                    <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                    <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_club_member_list_for_membership" model="ir.actions.act_window">
+            <field name="name">Members</field>
+            <field name="res_model">club.member</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('current_membership_id', '=', active_id)]</field>
+            <field name="context">{'search_default_current_membership_id': active_id}</field>
+            <field name="view_id" ref="club_member_list_view_for_membership"/>
+        </record>
+
+        <record id="club_member_membership_list_action" model="ir.actions.act_window">
+            <field name="name">Memberships</field>
+            <field name="res_model">club.member.membership</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_member_membership_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_membership_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_membership_form_view')}),
+            ]"/>
+            <field name="search_view_id" ref="club_member_membership_search_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first membership type for your club!
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="club_membership_list_menu"
+            name="Membership Types"
+            action="club_member_membership_list_action"
+            groups="clubmanagement.group_clubmanagement_master_user"
+            parent="club_administration_root_menu"
+            sequence="30"/>
+    
+    </data>
+    
+
+</odoo>

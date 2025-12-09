@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_member_waiting_kanban_view" model="ir.ui.view">
+            <field name="name">club.member.waiting.kanban</field>
+            <field name="model">club.member</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="o_kanban_record_top {{ state_header_color }}">
+                                <div class="o_kanban_primary_left">
+                                    <span>
+                                        <t t-if="record.gender.raw_value == 'male'">
+                                            <i class="fa fa-mars text-primary" title="Male" />
+                                        </t>
+                                        <t t-if="record.gender.raw_value == 'female'">
+                                            <i class="fa fa-venus text-pink" title="Female" />
+                                        </t>
+                                        <t t-if="record.gender.raw_value == 'others'">
+                                            <i class="fa fa-genderless text-secondary" title="Other" />
+                                        </t>
+                                        <strong>
+                                            <field name="lastname" />
+                                            <field name="firstname" />
+                                            (<t t-esc="record.year_of_birth.value" />)
+                                        </strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="o_kanban_details">
+                                <div>
+                                    Birthdate:
+                                    <strong><field name="birthdate_date" /></strong>
+                                </div>
+                                <div>
+                                    Waiting since <strong><t t-esc="record.state_daysstate_days_in_state.value" /></strong> days:
+                                    <strong><field name="state_date_start" /></strong>
+                                </div>
+                                <div>
+                                    Gender:
+                                    <strong><field name="gender" /></strong>
+                                </div>
+                                <div>
+                                    City:
+                                    <strong><field name="city" /></strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+    
+        <record id="club_member_waiting_list_view" model="ir.ui.view">
+            <field name="name">club.member.waiting.list</field>
+            <field name="model">club.member</field>
+            <field name="arch" type="xml">
+                <list string="Waiting Members" default_order="lastname">
+                    <field name="id"/>
+                    <field name="lastname"/>
+                    <field name="firstname"/>
+                    <field name="birthdate_date"/>
+                    <field name="nationality_id"/>
+                    <field name="city"/>
+                    <field name="months_in_club"/>
+                    <field name="state_date_start"/>
+                    <field name="state_days_in_state" string="Days Waiting"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_member_waiting_list_action" model="ir.actions.act_window">
+            <field name="name">Club Member: Waiting List</field>
+            <field name="res_model">club.member</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_member_waiting_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_waiting_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
+            ]"/>
+            <field name="domain">[('current_state_id.state_type', '=', 'pending')]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>New Club Members currently waiting to be accepted.</p>
+            </field>
+        </record>
+
+        <menuitem
+            id="club_member_waiting_list_menu"
+            name="Waiting List"
+            action="club_member_waiting_list_action"
+            groups="clubmanagement.group_clubmanagement_user"
+            parent="club_member_main_menu"
+            sequence="20"/>
+    
+    </data>
+    
+
+</odoo>

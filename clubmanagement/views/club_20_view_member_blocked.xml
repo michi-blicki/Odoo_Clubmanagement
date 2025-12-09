@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_member_blocked_kanban_view" model="ir.ui.view">
+            <field name="name">club.member.blocked.kanban</field>
+            <field name="model">club.member</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <!-- Header -->
+                            <div t-attf-class="o_kanban_record_top {{ state_header_color }}">
+                                <strong>
+                                    <field name="lastname"/>
+                                    <field name="firstname"/>
+                                </strong>
+                                <span class="ml-2 text-secondary">
+                                    <i class="fa fa-clock-o" title="Days in state"/>
+                                    <t t-esc="record.state_days_in_state.value"/>
+                                </span>
+                            </div>
+                            <div class="o_kanban_details">
+                                <!-- 1. State -->
+                                <table class="o_kanban_table table-sm" width="100%">
+                                    <tr>
+                                        <th>State</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <td><field name="current_state_id" options="{'no_open': True}" /></td>
+                                        <td><field name="state_date_start"/></td>
+                                    </tr>
+                                </table>
+                                <!-- 2. Geburt, Alter, Club-Dauer -->
+                                <table class="o_kanban_table table-sm" width="100%">
+                                    <tr>
+                                        <th>Birthdate</th>
+                                        <th>Age</th>
+                                        <th>Years in Club</th>
+                                    </tr>
+                                    <tr>
+                                        <td><field name="birthdate_date"/></td>
+                                        <td><field name="age"/></td>
+                                        <td><field name="years_in_club"/></td>
+                                    </tr>
+                                </table>
+                                <!-- 3. Departments (alle anzeigen, falls mehrere?) -->
+                                <table class="o_kanban_table table-sm" width="100%">
+                                    <tr>
+                                        <th>Department(s)</th>
+                                    </tr>
+                                    <tr>
+                                        <td><field name="department_ids"/></td>
+                                    </tr>
+                                </table>
+                                <!-- 4. Rollen -->
+                                <t t-if="record.role_ids.raw_value">
+                                    <table class="o_kanban_table table-sm" width="100%">
+                                        <tr>
+                                            <th>Role</th>
+                                            <th>Scope</th>
+                                            <th>Type</th>
+                                        </tr>
+                                        <t t-foreach="record.role_ids.raw_value" t-as="role">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="role.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="role.scope_type"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="role.role_type"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </t>
+                                <!-- 5. Mitarbeiter-Status -->
+                                <table class="o_kanban_table table-sm" width="100%">
+                                    <tr>
+                                        <th>Is Employee</th>
+                                        <th>Employee</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <t t-if="record.is_employee.value">✔</t>
+                                            <t t-if="!record.is_employee.value">✖</t>
+                                        </td>
+                                        <td>
+                                            <field name="employee_id"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="club_member_blocked_list_view" model="ir.ui.view">
+            <field name="name">club.member.blocked.list</field>
+            <field name="model">club.member</field>
+            <field name="arch" type="xml">
+                <list string="Blocked Members" default_order="lastname">
+                    <!-- Header-Infos -->
+                    <field name="lastname"/>
+                    <field name="firstname"/>
+                    <field name="state_days_in_state" string="Days in State"/>
+                    <!-- 1. State -->
+                    <field name="current_state_id"/>
+                    <field name="state_date_start"/>
+                    <!-- 2. Birth, age, duration -->
+                    <field name="birthdate_date"/>
+                    <field name="age"/>
+                    <field name="years_in_club"/>
+                    <!-- 3. Departments -->
+                    <field name="department_ids" widget="many2many_tags"/>
+                    <!-- 4. Rollen (siehe unten: Widget oder pro Feld falls Many2many) -->
+                    <field name="role_ids" widget="one2many_list"/>
+                    <!-- 5. Mitarbeiter -->
+                    <field name="is_employee"/>
+                    <field name="employee_id"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="club_member_blocked_list_action" model="ir.actions.act_window">
+            <field name="name">Club Member: Blocked List</field>
+            <field name="res_model">club.member</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_member_blocked_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_blocked_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
+            ]"/>
+            <field name="domain">[('current_state_id.state_type', '=', 'blocked')]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>Blocked members by the club or any other instance.</p>
+            </field>
+        </record>
+    
+        <menuitem
+            id="club_member_blocked_list_menu"
+            name="Blocked Members"
+            action="club_member_blocked_list_action"
+            groups="clubmanagement.group_clubmanagement_user"
+            parent="club_member_main_menu"
+            sequence="30"/>
+            
+    </data>
+    
+
+</odoo>

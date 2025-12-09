@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_member_form_view" model="ir.ui.view">
+            <field name="name">club.member.form</field>
+            <field name="model">club.member</field>
+            <field name="arch" type="xml">
+                <form string="Member">
+                    <sheet string="Member Details">
+                        <!-- HEADER (Avatar, Name, State) -->
+                        <div class="oe_title oe_clearfix">
+                            <div style="float:left; margin-right:32px;">
+                                <field name="photo" widget="image" class="oe_avatar"
+                                    options="{'size':[272, 384]}" style="height:272px;width:384px;"/>
+                            </div>
+                            <div class="oe_member_header">
+                                <h1>
+                                    <field name="firstname" readonly="1"/>
+                                    <field name="lastname" readonly="1"/>
+                                    <span class="ml-2 text-primary" invisible="current_state_id == False">
+                                        <field name="current_state_id" widget="badge"/>
+                                    </span>
+                                </h1>
+                            </div>
+                        </div>
+
+                        <notebook>
+
+                            <!-- Tab 1: Personal Details -->
+                            <page string="Personal">
+                                <group>
+                                    <group>
+                                        <field name="birthdate_date"/>
+                                        <field name="year_of_birth" readonly="1"/>
+                                        <field name="age" readonly="1"/>
+                                        <field name="gender"/>
+                                        <field name="nationality_id"/>
+                                        <field name="city" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="photo" widget="image" style="height:272px;width:384px;"/>
+                                        <div>
+                                            <label for="years_in_club" string="Years in Club"/>
+                                            <field name="years_in_club" readonly="1"/>
+                                            <label for="months_in_club" string="Months"/>
+                                            <field name="months_in_club" readonly="1"/>
+                                            <label for="days_in_club" string="Days"/>
+                                            <field name="days_in_club" readonly="1"/>
+                                        </div>
+                                    </group>
+                                </group>
+                            </page>
+                            
+                            <!-- Tab 2: Membership & State -->
+                            <page string="Membership">
+                                <group>
+                                    <group>
+                                        <field name="current_membership_id" readonly="1"/>
+                                        <field name="membership_date_start" readonly="1"/>
+                                        <field name="membership_date_end" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="membership_history_ids" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Member State">
+                                <separator string="Status History"/>
+                                <group>
+                                    <group>
+                                        <field name="current_state_id" readonly="1"/>
+                                        <field name="state_date_start" string="State Start"/>
+                                        <field name="state_days_in_state" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="state_history_ids" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Tab 3: Club Structure -->
+                            <page string="Club Involvement">
+                                <group>
+                                    <group>
+                                        <field name="subclub_ids" widget="many2many_tags"/>
+                                        <field name="department_ids" widget="many2many_tags"/>
+                                    </group>
+                                    <group>
+                                        <field name="pool_ids" widget="many2many_tags"/>
+                                        <field name="team_ids" widget="many2many_tags"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Tab 4: Roles & Functions -->
+                            <page string="Roles / Functions">
+                                <field name="role_ids">
+                                    <list string="Roles / Functions">
+                                        <field name="role_type"/>
+                                        <field name="scope_type"/>
+                                        <field name="perm_read"/>
+                                        <field name="perm_write"/>
+                                        <field name="perm_create"/>
+                                        <field name="perm_unlink"/>
+                                        <field name="perm_mail"/>
+                                    </list>
+                                </field>
+                            </page>
+                            
+                            <!-- Tab 5: Extra/Debug (nur für Admins sichtbar) -->
+                            <page string="Advanced" groups="clubmanagement.group_clubmanagement_administrator">
+                                <group>
+                                    <field name="active"/>
+                                </group>
+                                <group>
+                                    <label for="partner_id"/>
+                                    <field name="partner_id" readonly="1" required="1"/>
+                                </group>
+                                <group>
+                                    <field name="is_employee"/>
+                                    <span invisible="is_employee == False" >
+                                        <field name="employee_id"/>
+                                    </span>
+                                </group>                            
+                                <group>
+                                    <label for="id" string="Member ID"/>
+                                    <field name="id" readonly="1"/>
+                                </group>
+                            </page>
+                            
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

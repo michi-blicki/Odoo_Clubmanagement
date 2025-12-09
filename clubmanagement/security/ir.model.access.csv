@@ -1,48 +1,76 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_club_user,club.club user,model_club_club,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_subclub_user,club.subclub user,model_club_subclub,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_board_user,club.board user,model_club_board,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_department_user,club.department user,model_club_department,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_pool_user,club.pool user,model_club_pool,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_team_user,club.team user,model_club_team,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_member_user,club.member user,model_club_member,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_role_user,club.role user,model_club_role,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_membership_user,club.membership user,model_club_membership,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_member_membership_user,club.member.membership user,model_club_member_membership,clubmanagement.group_clubmanagement_user,1,0,0,0
-access_member_state_user,club.member.state user,model_club_member_state,clubmanagement.group_clubmanagement_user,1,0,0,0
 
-access_club_keyuser,club.club key user,model_club_club,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_subclub_keyuser,club.subclub key user,model_club_subclub,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_board_keyuser,club.board key user,model_club_board,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_department_keyuser,club.department key user,model_club_department,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_pool_keyuser,club.pool key user,model_club_pool,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_team_keyuser,club.team key user,model_club_team,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_member_keyuser,club.member key user,model_club_member,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_role_keyuser,club.role key user,model_club_role,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_membership_keyuser,club.membership key user,model_club_membership,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_member_membership_keyuser,club.member.membership key user,model_club_member_membership,clubmanagement.group_clubmanagement_key_user,1,0,0,0
-access_member_state_keyuser,club.member.state key user,model_club_member_state,clubmanagement.group_clubmanagement_key_user,1,0,0,0
+access_club_club_user,access.club.club.user,model_club_club,group_clubmanagement_user,1,0,0,0
+access_club_club_key_user,access.club.club.key.user,model_club_club,group_clubmanagement_key_user,1,0,0,0
+access_club_club_master_user,access.club.club.master.user,model_club_club,group_clubmanagement_master_user,1,0,0,0
+access_club_club_admin,access.club.club.administrator,model_club_club,group_clubmanagement_administrator,1,1,1,1
 
-access_club_master,club.club master,model_club_club,clubmanagement.group_clubmanagement_master_user,1,0,0,0
-access_subclub_master,club.subclub master,model_club_subclub,clubmanagement.group_clubmanagement_master_user,1,0,0,0
-access_board_master,club.board master,model_club_board,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_department_master,club.department master,model_club_department,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_pool_master,club.pool master,model_club_pool,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_team_master,club.team master,model_club_team,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_member_master,club.member master,model_club_member,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_role_master,club.role master,model_club_role,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_membership_master,club.membership master,model_club_membership,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_member_membership_master,club.member.membership master,model_club_member_membership,clubmanagement.group_clubmanagement_master_user,1,1,1,1
-access_member_state_master,club.member.state master,model_club_member_state,clubmanagement.group_clubmanagement_master_user,1,1,1,1
+access_club_board_user,access.club.board.user,model_club_board,group_clubmanagement_user,1,0,0,0
+access_club_board_key_user,access.club.board.key.user,model_club_board,group_clubmanagement_key_user,1,0,0,0
+access_club_board_master_user,access.club.board.master.user,model_club_board,group_clubmanagement_master_user,1,1,1,1
+access_club_board_admin,access.club.board.administrator,model_club_board,group_clubmanagement_administrator,1,1,1,1
 
-access_club_admin,club.club admin,model_club_club,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_subclub_admin,club.subclub admin,model_club_subclub,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_board_admin,club.board admin,model_club_board,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_department_admin,club.department admin,model_club_department,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_pool_admin,club.pool admin,model_club_pool,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_team_admin,club.team admin,model_club_team,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_member_admin,club.member admin,model_club_member,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_role_admin,club.role admin,model_club_role,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_membership_admin,club.membership admin,model_club_membership,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_member_membership_admin,club.member.membership admin,model_club_member_membership,clubmanagement.group_clubmanagement_administrator,1,1,1,1
-access_member_state_admin,club.member.state admin,model_club_member_state,clubmanagement.group_clubmanagement_administrator,1,1,1,1
+access_custom_field_user,access.club.custom.field.user,model_club_custom_field,group_clubmanagement_user,1,0,0,0
+access_custom_field_key_user,access.club.custom.field.key.user,model_club_custom_field,group_clubmanagement_key_user,1,0,0,0
+access_custom_field_master_user,access.club.custom.field.master.user,model_club_custom_field,group_clubmanagement_master_user,1,0,0,0
+access_custom_field_admin,access.club.custom.field.administrator,model_club_custom_field,group_clubmanagement_administrator,1,1,1,1
+
+access_custom_field_value_user,access.club.custom.field.value.user,model_club_custom_field_value,group_clubmanagement_user,1,1,1,1
+access_custom_field_value_key_user,access.club.custom.field.value.key.user,model_club_custom_field_value,group_clubmanagement_key_user,1,1,1,1
+access_custom_field_value_master_user,access.club.custom.field.value.master.user,model_club_custom_field_value,group_clubmanagement_master_user,1,1,1,1
+access_custom_field_value_admin,access.club.custom.field.value.administrator,model_club_custom_field_value,group_clubmanagement_administrator,1,1,1,1
+
+access_club_department_user,access.club.department.user,model_club_department,group_clubmanagement_user,1,0,0,0
+access_club_department_key_user,access.club.department.key.user,model_club_department,group_clubmanagement_key_user,1,1,1,1
+access_club_department_master_user,access.club.department.master.user,model_club_department,group_clubmanagement_master_user,1,1,1,1
+access_club_department_admin,access.club.department.administrator,model_club_department,group_clubmanagement_administrator,1,1,1,1
+
+access_club_log_user,access.club.log.user,model_club_log,group_clubmanagement_user,1,1,1,0
+access_club_log_key_user,access.club.log.key.user,model_club_log,group_clubmanagement_key_user,1,1,1,0
+access_club_log_master_user,access.club.log.master.user,model_club_log,group_clubmanagement_master_user,1,1,1,0
+access_club_log_admin,access.club.log.administrator,model_club_log,group_clubmanagement_administrator,1,1,1,0
+
+access_club_membership_history_user,access.club.membership.history.user,model_club_member_membership_history,group_clubmanagement_user,1,0,0,0
+access_club_membership_history_key_user,access.club.membership.history.key.user,model_club_member_membership_history,group_clubmanagement_key_user,1,1,1,0
+access_club_membership_history_master_user,access.club.membership.history.master.user,model_club_member_membership_history,group_clubmanagement_master_user,1,1,1,0
+access_club_membership_history_admin,access.club.membership.history.administrator,model_club_member_membership_history,group_clubmanagement_administrator,1,1,1,0
+
+access_club_membership_user,access.club.membership.user,model_club_member_membership,group_clubmanagement_user,1,0,0,0
+access_club_membership_key_user,access.club.membership.key.user,model_club_member_membership,group_clubmanagement_key_user,1,0,0,0
+access_club_membership_master_user,access.club.membership.master.user,model_club_member_membership,group_clubmanagement_master_user,1,1,1,1
+access_club_membership_admin,access.club.membership.administrator,model_club_member_membership,group_clubmanagement_administrator,1,1,1,1
+
+access_club_state_history_user,access.club.state.history.user,model_club_member_state_history,group_clubmanagement_user,1,0,0,0
+access_club_state_history_key_user,access.club.state.history.key.user,model_club_member_state_history,group_clubmanagement_key_user,1,0,0,0
+access_club_state_history_master_user,access.club.state.history.master.user,model_club_member_state_history,group_clubmanagement_master_user,1,1,1,1
+access_club_state_history_admin,access.club.state.history.administrator,model_club_member_state_history,group_clubmanagement_administrator,1,1,1,1
+
+access_club_state_user,access.club.state.user,model_club_member_state,group_clubmanagement_user,1,0,0,0
+access_club_state_key_user,access.club.state.key.user,model_club_member_state,group_clubmanagement_key_user,1,0,0,0
+access_club_state_master_user,access.club.state.master.user,model_club_member_state,group_clubmanagement_master_user,1,0,0,0
+access_club_state_admin,access.club.state.administrator,model_club_member_state,group_clubmanagement_administrator,1,1,1,1
+
+access_club_member_user,access.club.member.user,model_club_member,group_clubmanagement_user,1,1,1,0
+access_club_member_key_user,access.club.member.key.user,model_club_member,group_clubmanagement_key_user,1,1,1,0
+access_club_member_master_user,access.club.member.master.user,model_club_member,group_clubmanagement_master_user,1,1,1,0
+access_club_member_admin,access.club.member.administrator,model_club_member,group_clubmanagement_administrator,1,1,1,0
+
+access_club_pool_user,access.club.pool.user,model_club_pool,group_clubmanagement_user,1,1,1,1
+access_club_pool_key_user,access.club.pool.key.user,model_club_pool,group_clubmanagement_key_user,1,1,1,1
+access_club_pool_master_user,access.club.pool.master.user,model_club_pool,group_clubmanagement_master_user,1,1,1,1
+access_club_pool_admin,access.club.pool.administrator,model_club_pool,group_clubmanagement_administrator,1,1,1,1
+
+access_club_role_user,access.club.role.user,model_club_role,group_clubmanagement_user,1,0,0,0
+access_club_role_key_user,access.club.role.key.user,model_club_role,group_clubmanagement_key_user,1,0,0,0
+access_club_role_master_user,access.club.role.master.user,model_club_role,group_clubmanagement_master_user,1,1,1,1
+access_club_role_admin,access.club.role.administrator,model_club_role,group_clubmanagement_administrator,1,1,1,1
+
+access_club_subclub_user,access.club.subclub.user,model_club_subclub,group_clubmanagement_user,1,0,0,0
+access_club_subclub_key_user,access.club.subclub.key.user,model_club_subclub,group_clubmanagement_key_user,1,0,0,0
+access_club_subclub_master_user,access.club.subclub.master.user,model_club_subclub,group_clubmanagement_master_user,1,0,0,0
+access_club_subclub_admin,access.club.subclub.administrator,model_club_subclub,group_clubmanagement_administrator,1,1,1,1
+
+access_club_team_user,access.club.team.user,model_club_team,group_clubmanagement_user,1,1,1,0
+access_club_team_key_user,access.club.team.key.user,model_club_team,group_clubmanagement_key_user,1,1,1,1
+access_club_team_master_user,access.club.team.master.user,model_club_team,group_clubmanagement_master_user,1,1,1,1
+access_club_team_admin,access.club.team.administrator,model_club_team,group_clubmanagement_administrator,1,1,1,1

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_member_deleted_list_view" model="ir.ui.view">
+            <field name="name">Club Member: Archived List</field>
+            <field name="model">club.member</field>
+            <field name="arch" type="xml">
+                <list string="Archived Members" default_order="lastname asc, firstname asc">
+                    <field name="id" />
+                    <field name="lastname" />
+                    <field name="firstname" />
+                    <field name="birthdate_date" />
+                    <field name="current_membership_id" />
+                    <field name="membership_date_end" />
+                    <field name="state_date_start" string="Deleted at"/>
+                </list>
+            </field>
+        </record>
+    
+        <record id="club_member_deleted_list_action" model="ir.actions.act_window">
+            <field name="name">Club Member: List of deleted members</field>
+            <field name="res_model">club.member</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_deleted_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
+            ]"/>
+            <field name="domain">[('current_state_id.state_type', '=', 'deleted')]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    <strong>Administrator List</strong>
+                </p>
+                <p>
+                    This list is only available to Administrators. It shall be used by the Administrator as review list.<br />
+                    We will not finally remove members as invoices could be assigned to this member and as members are
+                    not shown in normal contact list, these contacts and their associated invoices would be orphanized.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="club_member_deleted_list_menu"
+            name="Deleted Members"
+            action="club_member_deleted_list_action"
+            groups="clubmanagement.group_clubmanagement_administrator"
+            parent="club_member_main_menu"
+            sequence="80"/>
+    
+    </data>
+    
+
+</odoo>

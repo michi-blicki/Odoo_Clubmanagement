@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_team_form_view" model="ir.ui.view">
+            <field name="name">club.team.form</field>
+            <field name="model">club.team</field>
+            <field name="arch" type="xml">
+                <form string="Team">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                                <span class="ml-2" invisible="active == True">(<span style="color:red;">Archived</span>)</span>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="active"/>
+                                <field name="sequence"/>
+                                <field name="club_id" readonly="1"/>
+                                <field name="department_id"/>
+                                <field name="pool_id"/>
+                                <field name="hr_department_id"/>
+                            </group>
+                            <group>
+                                <field name="member_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Members">
+                                <field name="member_ids">
+                                    <list>
+                                        <field name="partner_id"/>
+                                        <field name="firstname"/>
+                                        <field name="lastname"/>
+                                        <field name="membership_date_start"/>
+                                        <field name="current_state_id"/>
+                                        <field name="active"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Roles / Functions">
+                                <field name="role_ids" context="{'default_team_id': id}">
+                                    <list>
+                                        <field name="role_type"/>
+                                        <field name="scope_type"/>
+                                        <field name="member_id"/>
+                                        <field name="perm_read"/>
+                                        <field name="perm_write"/>
+                                        <field name="perm_create"/>
+                                        <field name="perm_unlink"/>
+                                        <field name="perm_mail"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="club_team_kanban_view" model="ir.ui.view">
+            <field name="name">club.team.kanban</field>
+            <field name="model">club.team</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column" string="Teams">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_tab">
+                                <div class="oe_kanban_header">
+                                    <span class="badge bg-primary o_kanban_badge"
+                                        t-att-title="record.shortname.value">
+                                        <t t-esc="record.shortname.value or ''"/>
+                                    </span>
+                                    <span class="float-end text-muted" style="font-size: 13px;">
+                                        <i class="fa fa-users"/> 
+                                        <t t-esc="record.member_count.value"/>
+                                    </span>
+                                </div>
+                                <div class="mt8 mb8">
+                                    <strong>
+                                        <t t-esc="record.name.value"/>
+                                    </strong>
+                                </div>
+                                <div>
+                                    <field name="active"/>
+                                </div>
+                                <div class="o_kanban_list_item">
+                                    <small class="text-muted">
+                                        <t t-esc="record.department_id.value and record.department_id.value[1]"/>
+                                        <t t-if="record.pool_id.value"> • 
+                                            <t t-esc="record.pool_id.value[1]"/>
+                                        </t>
+                                    </small>
+                                </div>
+                                <div>
+                                    <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="club_team_list_view" model="ir.ui.view">
+            <field name="name">club.team.list</field>
+            <field name="model">club.team</field>
+            <field name="arch" type="xml">
+                <list string="Teams" default_order="sequence, name">
+                    <field name="active" widget="boolean_button"/>
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="club_id"/>
+                    <field name="department_id"/>
+                    <field name="pool_id"/>
+                    <field name="hr_department_id"/>
+                    <field name="member_ids_display" widget="many2many_tags" string="Members"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_team_search_view" model="ir.ui.view">
+            <field name="name">club.team.search</field>
+            <field name="model">club.team</field>
+            <field name="arch" type="xml">
+                <search string="Search Teams">
+                    <field name="name"/>
+                    <field name="club_id"/>
+                    <field name="department_id"/>
+                    <field name="pool_id"/>
+                    <field name="hr_department_id"/>
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>        
+
+    
+        <record id="club_team_list_action" model="ir.actions.act_window">
+            <field name="name">Teams</field>
+            <field name="res_model">club.team</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_team_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_team_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_team_form_view')}),
+            ]"/>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="club_team_search_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create the first team for your club!
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="club_team_list_menu"
+            name="Teams"
+            action="club_team_list_action"
+            groups="clubmanagement.group_clubmanagement_user"
+            parent="club_organisation_main_menu"
+            sequence="10"/>
+    
+    </data>
+    
+
+</odoo>

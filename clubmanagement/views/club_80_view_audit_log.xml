@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_log_form_view" model="ir.ui.view">
+            <field name="name">club.log.form</field>
+            <field name="model">club.log</field>
+            <field name="arch" type="xml">
+                <form string="Audit Log Entry" create="false" edit="false" delete="false">
+                    <sheet>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="create_date" readonly="1"/>
+                            <field name="user_id" readonly="1"/>
+                        </group>
+                        <group string="Scope and Model">
+                            <field name="scope_type" readonly="1"/>
+                            <field name="activity_type" readonly="1"/>
+                            <field name="model" readonly="1"/>
+                            <field name="res_id" readonly="1"/>
+                            <field name="res_name" readonly="1"/>
+                        </group>
+                        <group string="Description">
+                            <field name="description" readonly="1"/>
+                        </group>
+                        <group string="Values">
+                            <field name="old_value" readonly="1" widget="text"/>
+                            <field name="new_value" readonly="1" widget="text"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="club_log_list_view" model="ir.ui.view">
+            <field name="name">club.log.list</field>
+            <field name="model">club.log</field>
+            <field name="arch" type="xml">
+                <list string="Audit Log" decoration-danger="activity_type=='unlink'"
+                        decoration-success="activity_type=='create'"
+                        decoration-info="activity_type=='update'"
+                        decoration-warning="activity_type=='state_change'"
+                        decoration-muted="activity_type=='system_action'"
+                        default_order="create_date DESC">
+                    <field name="create_date"/>
+                    <field name="user_id"/>
+                    <field name="scope_type"/>
+                    <field name="activity_type"/>
+                    <field name="model"/>
+                    <field name="res_id"/>
+                    <field name="res_name"/>
+                    <field name="description"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_log_list_action" model="ir.actions.act_window">
+            <field name="name">Audit Log</field>
+            <field name="res_model">club.log</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_log_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_log_form_view')}),
+            ]"/>
+            <field name="help" type="html">
+                <p>
+                    <span>This is the exhaustive audit log. Entries are immutable and cannot be deleted or modified.</span>
+                </p>
+            </field>
+        </record>
+    
+        <menuitem
+            id="club_audit_log_list_menu"
+            name="Audit Log"
+            action="club_log_list_action"
+            groups="clubmanagement.group_clubmanagement_master_user"
+            parent="club_administration_root_menu"
+            sequence="90"/>
+    
+    </data>
+    
+
+</odoo>

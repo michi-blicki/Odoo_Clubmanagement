@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_board_form_view" model="ir.ui.view">
+            <field name="name">club.board.form</field>
+            <field name="model">club.board</field>
+            <field name="arch" type="xml">
+                <form string="Board / Working Group">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="group_type"/>
+                            <field name="scope_type"/>
+                        </group>
+                        <group>
+                            <field name="club_id"/>
+                            <field name="subclub_id"/>
+                            <field name="department_id"/>
+                            <field name="pool_id"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                        <group string="Roles / Functions">
+                            <field name="role_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="club_board_kanban_view" model="ir.ui.view">
+            <field name="name">club.board.kanban</field>
+            <field name="model">club.board</field>
+            <field name="arch" type="xml">
+                <kanban 
+                        string="Boards &amp; Work Groups" 
+                        default_order="name asc"
+                        default_group_by="group_type"
+                        create="False" 
+                        group_create="False" 
+                        group_delete="False" 
+                        group_edit="False" 
+                        groups_draggable="False" 
+                        records_draggable="False"
+                >
+                    <templates>
+                        <field name="group_type"/>
+                        <field name="scope_type"/>
+                        <field name="club_id"/>
+                        <field name="subclub_id"/>
+                        <field name="department_id"/>
+                        <field name="pool_id"/>
+                        <field name="active"/>                    
+                        <t t-name="card">
+                            <div class="oe_kanban_card">
+                                <div class="o_kanban_primary">
+                                    <div class="o_kanban_primary d-flex align-items-center justify-content-between">
+                                        <h3><field name="name"/></h3>
+                                        <span 
+                                            t-if="record.active.raw_value"
+                                            class="fa fa-check-square-o text-success ms-2"
+                                            style="font-size: 1.4em;"
+                                            title="Active"
+                                        />
+                                        <span
+                                            t-if="!record.active.raw_value"
+                                            class="fa fa-square-o text-danger ms-2"
+                                            style="font-size: 1.4em;"
+                                            title="Inactive"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="o_kanban_secondary">
+                                    <span t-if="record.scope_type.raw_value == 'club'">
+                                        Club: <field name="club_id"/>
+                                    </span>
+                                    <span t-if="record.scope_type.raw_value == 'subclub'">
+                                        Subclub: <field name="subclub_id"/>
+                                    </span>
+                                    <span t-if="record.scope_type.raw_value == 'department'">
+                                        Department: <field name="department_id"/>
+                                    </span>
+                                    <span t-if="record.scope_type.raw_value == 'pool'">
+                                        Pool: <field name="pool_id"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="club_board_list_view" model="ir.ui.view">
+            <field name="name">club.board.tree</field>
+            <field name="model">club.board</field>
+            <field name="arch" type="xml">
+                <list string="Boards &amp; Working Groups" decoration-danger="not active" default_order="name asc" create="False">
+                    <field name="name"/>
+                    <field name="group_type"/>
+                    <field name="scope_type"/>
+                    <field name="club_id"/>
+                    <field name="subclub_id"/>
+                    <field name="department_id"/>
+                    <field name="pool_id"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+
+        <record id="club_board_list_action" model="ir.actions.act_window">
+            <field name="name">Boards &amp; Working Groups</field>
+            <field name="res_model">club.board</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_board_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_board_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_board_form_view')}),
+            ]"/>
+            <field name="help" type="html">
+                <p>
+                    <span>Boards and working groups in your club. You can manage their assignments and roles here.</span>
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem
+            id="club_board_list_menu"
+            name="Club Boards"
+            action="club_board_list_action"
+            groups="clubmanagement.group_clubmanagement_master_user"
+            parent="club_administration_root_menu"
+            sequence="10"/>
+
+    
+    </data>
+    
+
+</odoo>

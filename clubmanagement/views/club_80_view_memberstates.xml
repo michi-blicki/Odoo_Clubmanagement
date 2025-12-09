@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_member_state_form_view" model="ir.ui.view">
+            <field name="name">club.member.state.form</field>
+            <field name="model">club.member.state</field>
+            <field name="arch" type="xml">
+                <form string="Member State">
+                    <header>
+                        <field name="active"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <field name="name"/>
+                            <field name="code"/>
+                        </div>
+                        <group>
+                            <field name="state_type"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="club_member_state_kanban_view" model="ir.ui.view">
+            <field name="name">club.member.state.kanban</field>
+            <field name="model">club.member.state</field>
+            <field name="arch" type="xml">
+                <kanban string="Member States">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <strong>
+                                        <t t-esc="record.name.value"/>
+                                        <span class="ms-2 text-muted">(<t t-esc="record.code.value"/>)</span>
+                                    </strong>
+                                    <span class="badge bg-info">
+                                        <t t-esc="dict(record.state_type.selection).get(record.state_type.value, '')"/>
+                                    </span>
+                                </div>
+                                <div class="mt8 mb8" t-if="record.description.value">
+                                    <t t-esc="record.description.value"/>
+                                </div>
+                                <div class="mt8">
+                                    <field name="active"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="club_member_state_list_view" model="ir.ui.view">
+            <field name="name">club.member.state.list</field>
+            <field name="model">club.member.state</field>
+            <field name="arch" type="xml">
+                <list string="Member States" default_order="sequence">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="state_type"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_member_state_list_action" model="ir.actions.act_window">
+            <field name="name">Member States</field>
+            <field name="res_model">club.member.state</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_member_state_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_state_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_state_form_view')}),
+            ]"/>
+        </record>
+
+    
+        <menuitem
+            id="club_memberstates_list_menu"
+            name="Member States"
+            action="club_member_state_list_action"
+            groups="clubmanagement.group_clubmanagement_administrator"
+            parent="club_administration_root_menu"
+            sequence="40"/>
+    
+    </data>
+    
+
+</odoo>

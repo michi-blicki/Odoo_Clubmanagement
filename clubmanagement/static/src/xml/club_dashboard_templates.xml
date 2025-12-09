@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="club.club.dashboard">
+        <t t-if="state.loading">
+            <div class="o_control_panel">
+                <span>Loading...</span>
+            </div>
+        </t>
+        <t t-if="!state.loading">
+            <div class="row">
+                <div class="col-lg-9">
+                    <h1>
+                        <t t-esc="state.name"/>
+                        <img t-if="state.company_id and state.company_id.id"
+                             t-att-src="'/web/image/res.company/' + state.company_id.id + '/image_128'"
+                             style="max-height:40px;"/>
+                    </h1>
+                    <div class="d-flex mb-4">
+                        <div class="p-2">
+                            <span class="h4"><t t-esc="state.member_ids_display.length"/></span>
+                            <small class="text-muted">Total Members</small>
+                        </div>
+                        <div class="p-2">
+                            <span class="h4">
+                                <t t-esc="state.member_ids_display.filter(m => m.state_type === 'active').length"/>
+                            </span>
+                            <small class="text-success">Active</small>
+                        </div>
+                        <div class="p-2">
+                            <span class="h4">
+                                <t t-esc="state.member_ids_display.filter(m => m.state_type === 'pending').length"/>
+                            </span>
+                            <small class="text-warning">Pending</small>
+                        </div>
+                        <div class="p-2">
+                            <span class="h4">
+                                <t t-esc="state.member_ids_display.filter(m => m.state_type === 'blocked').length"/>
+                            </span>
+                            <small class="text-danger">Blocked</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-right">
+                    <a href="#" class="btn btn-primary"><i class="fa fa-user"></i> Actual Members</a>
+                    <a href="#" class="btn btn-success"><i class="fa fa-user"></i> Waiting List</a>
+                    <a href="#" class="btn btn-danger"><i class="fa fa-user"></i> Blocked Members</a>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">Departments</div>
+                        <div class="card-body">
+                            <span><t t-esc="state.department_ids.length"/></span>
+                            <a href="#" class="btn btn-light btn-sm">Manage</a>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-header">Pools</div>
+                        <div class="card-body">
+                            <span><t t-esc="state.pool_ids.length"/></span>
+                            <a href="#" class="btn btn-light btn-sm">Manage</a>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-header">Teams</div>
+                        <div class="card-body">
+                            <span>
+                                <t t-esc="state.department_ids.reduce((sum, d) => sum + (d.team_ids ? d.team_ids.length : 0), 0)"/>
+                            </span>
+                            <a href="#" class="btn btn-light btn-sm">Manage</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card mb-4">
+                        <div class="card-header">Upcoming Birthdays</div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <t t-foreach="state.upcoming_birthdays" t-as="bd" t-key="bd.id">
+                                    <li class="mb-2 d-flex align-items-center">
+                                        <div>
+                                            <strong>
+                                                <t t-esc="bd.firstname"/> <t t-esc="bd.lastname"/>
+                                            </strong>
+                                            <span>
+                                                – <t t-esc="(new Date(bd.birthdate)).toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit'})"/>
+                                                (<strong><t t-esc="bd.next_age"/></strong>)
+                                            </span>
+                                        </div>
+                                    </li>
+                                </t>
+                            </ul>
+                            <t t-if="!state.upcoming_birthdays || state.upcoming_birthdays.length===0">
+                                <div class="text-muted">
+                                    No upcoming birthdays within the next <t t-esc="state.days"/> days.
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <h4>New Members This Month</h4>
+                    <div class="card">
+                        <div class="card-header">New Members</div>
+                        <div class="card-body">
+                            <ul>
+                                <t t-foreach="state.new_members" t-as="nm" t-key="nm.id">
+                                    <li>
+                                        <strong><t t-esc="nm.firstname"/> <t t-esc="nm.lastname"/></strong>
+                                        (<t t-esc="nm.age"/>), <t t-esc="nm.club_id"/>
+                                        <t t-if="nm.department_ids and nm.department_ids.length">
+                                            <span>Departments: <t t-esc="nm.department_ids.join(', ')"/></span>
+                                        </t>
+                                        <t t-if="nm.current_state">
+                                            <span>Status: <t t-esc="nm.current_state"/></span>
+                                        </t>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</templates>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- Dashboard Client Action -->
+        <record id="club_dashboard_action" model="ir.actions.client">
+            <field name="name">Club Dashboard</field>
+            <field name="tag">club.club.dashboard</field>
+            <field name="target">main</field>
+        </record>
+
+        <menuitem
+            id="club_dashboard_menu"
+            name="Dashboard"
+            action="club_dashboard_action"
+            groups="clubmanagement.group_clubmanagement_user"
+            parent="clubmanagement_root_menu"
+            sequence="10"/>
+    </data>
+    
+
+</odoo>

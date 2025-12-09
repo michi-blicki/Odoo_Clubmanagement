@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_custom_field_form_view" model="ir.ui.view">
+            <field name="name">club.custom.field.form</field>
+            <field name="model">club.custom.field</field>
+            <field name="arch" type="xml">
+                <form string="Custom Field">
+                    <sheet>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="model"/>
+                        </group>
+                        <group>
+                            <field name="technical_name"/>
+                            <field name="label"/>
+                        </group>
+                        <group>
+                            <field name="field_type"/>
+                            <field name="required"/>
+                            <field name="selection_values" invisible='field_type == "selection"'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="club_custom_field_list_view" model="ir.ui.view">
+            <field name="name">club.custom.field.list</field>
+            <field name="model">club.custom.field</field>
+            <field name="arch" type="xml">
+                <list string="Custom Fields" default_order="sequence">
+                    <field name="sequence"/>
+                    <field name="model"/>
+                    <field name="technical_name"/>
+                    <field name="label"/>
+                    <field name="field_type"/>
+                    <field name="required"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_custom_field_list_action" model="ir.actions.act_window">
+            <field name="name">Custom Fields</field>
+            <field name="res_model">club.custom.field</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_custom_field_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_custom_field_form_view')}),
+            ]"/>
+        </record>
+
+    
+        <menuitem
+            id="club_custom_fields_list_menu"
+            name="Custom Fields"
+            action="club_custom_field_list_action"
+            groups="clubmanagement.group_clubmanagement_administrator"
+            parent="club_administration_root_menu"
+            sequence="40"/>
+
+    
+    </data>
+    
+
+</odoo>

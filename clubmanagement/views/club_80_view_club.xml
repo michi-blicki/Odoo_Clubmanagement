@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_club_form_view" model="ir.ui.view">
+            <field name="name">club.club.form</field>
+            <field name="model">club.club</field>
+            <field name="arch" type="xml">
+                <form string="Club">
+                    <sheet>
+                        <div class="oe_title">
+                            <h2><field name="name"/></h2>
+                        </div>
+
+                        <header>
+                            <button
+                                name="action_create_default_roles_and_boards"
+                                type="object"
+                                string="Create Default Roles and Boards"
+                                class="btn btn-primary"
+                                invisible="id == False"
+                            />
+                        </header>
+                        
+                        <group>
+                            <field name="company_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Subclubs &amp; Departments">
+                            <field name="subclub_ids" widget="one2many_list" readonly="1"/>
+                            <field name="department_ids" widget="one2many_list" readonly="1"/>
+                        </group>
+                        <group string="Boards &amp; Roles">
+                            <field name="board_ids" widget="one2many_list" readonly="1"/>
+                            <field name="role_ids" widget="one2many_list"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="club_club_form_action_server" model="ir.actions.server">
+            <field name="name">club.club.form.action.server</field>
+            <field name="model_id" ref="model_club_club"/>
+            <field name="state">code</field>
+            <field name="code">
+result = env['club.club'].search([], limit=1)
+action = False
+if result:
+    action = {
+        'type': 'ir.actions.act_window',
+        'res_model': 'club.club',
+        'view_mode': 'form',
+        'res_id': result.id,
+        'target': 'current',
+    }
+else:
+    action = {
+        'type': 'ir.actions.act_window',
+        'res_model': 'club.club',
+        'view_mode': 'form',
+        'target': 'current',
+    }
+            </field>
+        </record>
+    
+        <menuitem
+            id="club_club_form_menu"
+            name="Club"
+            action="club_club_form_action_server"
+            groups="clubmanagement.group_clubmanagement_administrator"
+            parent="club_administration_root_menu"
+            sequence="70"/>
+    
+    </data>
+    
+
+</odoo>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_subclub_form_view" model="ir.ui.view">
+            <field name="name">club.subclub.form</field>
+            <field name="model">club.subclub</field>
+            <field name="arch" type="xml">
+                <form string="Subclub">
+                    <header>
+                        <field name="active"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <field name="name"/>
+                        </div>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="club_id"/>
+                            <field name="company_id"/>
+                            <field name="hr_department_id"/>
+                        </group>
+                        <group>
+                            <field name="board_ids" widget="one2many_list"/>
+                            <field name="department_ids" widget="one2many_list"/>
+                        </group>
+                        <group>
+                            <field name="role_ids" widget="one2many_list"/>
+                        </group>
+                        <group>
+                            <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                            <field name="member_ids_display" widget="many2many_tags" string="All Members" options="{'no_open': True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="club_subclub_kanban_view" model="ir.ui.view">
+            <field name="name">club.subclub.kanban</field>
+            <field name="model">club.subclub</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_w_100" default_order="sequence">
+                    <templates>
+                        <field name="sequence" invisible="1"/>
+                        <field name="name"/>
+                        <field name="active"/>
+                        <field name="company_id"/>
+                        <field name="hr_department_id"/>
+                        <field name="board_ids"/>
+                        <field name="department_ids"/>
+                        <field name="role_ids"/>
+                        <field name="member_ids_display"/>
+                        <t t-name="card">
+                            <div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                    <field name="active"/>
+                                </div>
+                                <div class="mt-1 small text-muted">
+                                    <field name="company_id"/>
+                                    |
+                                    <field name="hr_department_id"/>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge rounded-pill bg-info me-1">
+                                        <i class="fa fa-users me-1" title="Boards"/>
+                                        <field name="boards_count"/>
+                                    </span>
+                                    <span class="badge rounded-pill bg-secondary me-1" title="Departments">
+                                        <i class="fa fa-sitemap me-1"/>
+                                        <field name="departments_count"/>
+                                    </span>
+                                    <span class="badge rounded-pill bg-warning me-1 text-dark" title="Roles">
+                                        <i class="fa fa-id-badge me-1"/>
+                                        <field name="roles_count"/>
+                                    </span>
+                                    <span class="badge rounded-pill bg-success text-white" title="Members">
+                                        <i class="fa fa-user me-1"/>
+                                        <field name="members_count"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="club_subclub_list_view" model="ir.ui.view">
+            <field name="name">club.subclub.list</field>
+            <field name="model">club.subclub</field>
+            <field name="arch" type="xml">
+                <list string="Subclubs" default_order="sequence">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="club_id"/>
+                    <field name="hr_department_id"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="club_subclub_list_action" model="ir.actions.act_window">
+            <field name="name">Subclubs</field>
+            <field name="res_model">club.subclub</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_subclub_kanban_view')}),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_subclub_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_subclub_form_view')}),
+            ]"/>
+            <field name="help" type="html">
+                <p>
+                    <strong>Sub Clubs are dedicated entities in your club.</strong>
+                </p>
+                <p>
+                    Sub Clubs require a Multi Company Setup within your Odoo environment.<br />
+                    Every Sub Club must be assigned to a dedicated Company with own Company ID.
+                </p>
+            </field>
+        </record>
+    
+        <menuitem
+            id="club_subclub_list_menu"
+            name="Sub Clubs"
+            action="club_subclub_list_action"
+            groups="clubmanagement.group_clubmanagement_administrator"
+            parent="club_administration_root_menu"
+            sequence="60"/>
+    
+    </data>
+    
+
+</odoo>
