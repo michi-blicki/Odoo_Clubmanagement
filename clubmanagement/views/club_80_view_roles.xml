@@ -26,7 +26,11 @@
                                 <field name="name_extension"/>
                             </group>
                             <group>
-                                <field name="club_id"/>
+                                <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
+                                <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
+                            </group>
+                            <group>
+                                <field name="club_id" readonly="True" invisible="True"/>
                                 <field name="subclub_id"/>
                                 <field name="department_id"/>
                                 <field name="team_id"/>
@@ -61,7 +65,6 @@
                     <field name="code"/>
                     <field name="name"/>
                     <field name="member_id"/>
-                    <field name="club_id"/>
                     <field name="department_id"/>
                     <field name="team_id"/>
                     <field name="board_id"/>
@@ -86,7 +89,6 @@
                     <field name="scope_type"/>
                     <field name="member_id"/>
                     <field name="code"/>
-                    <field name="club_id"/>
                     <field name="department_id"/>
                     <field name="team_id"/>
                     <field name="board_id"/>
@@ -114,8 +116,7 @@
                 </p>
             </field>
         </record>
-
-
+        
         <menuitem
             id="club_roles_list_menu"
             name="Roles / Functions"

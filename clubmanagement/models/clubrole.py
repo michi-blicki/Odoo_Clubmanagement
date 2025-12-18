@@ -1,6 +1,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class ClubRole(models.Model):
     _name = 'club.role'
     _description = 'Team/Club Function or Role'
@@ -11,8 +14,9 @@ class ClubRole(models.Model):
     
     name = fields.Char(required=True, compute='_compute_name', store=True)
     name_extension = fields.Char(_('Name Extenseion'), required=False, tracking=True)
-    code = fields.Char(required=True, tracking=True)
-    description = fields.Text('Description', required=False)
+    code = fields.Char(string=_("Code"), required=True, tracking=True)
+    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    description = fields.Text(string=_('Description'), required=False)
     role_type = fields.Selection([
         ('lead', _('Leader')),
         ('assistant', _('Assistant')),
@@ -20,7 +24,7 @@ class ClubRole(models.Model):
         ('admin', _('Administrator')),
         ('member', _('Member')),
         ('other', _('other'))
-    ], default='member', tracking=True)
+    ], string=_("Role Type"), default='member', tracking=True)
 
     scope_type = fields.Selection([
         ('club', _('Club')),
@@ -29,7 +33,7 @@ class ClubRole(models.Model):
         ('department', _('Department')),
         ('pool', _('Pool')),
         ('team', _('Team'))
-    ], required=True, readonly=True)
+    ], string=_("Scope Type"), required=True, readonly=True)
 
     club_id = fields.Many2one(comodel_name='club.club', string=_('Club'), tracking=True)
     board_id = fields.Many2one(comodel_name='club.board', string=_('Board'), tracking=True)
@@ -47,6 +51,11 @@ class ClubRole(models.Model):
     member_id = fields.Many2one(string=_('Member'), comodel_name='club.member', required=False, tracking=True)
 
     active = fields.Boolean(default=True, tracking=True)
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
     @api.depends('role_type', 'scope_type', 'club_id', 'subclub_id', 'department_id', 'pool_id', 'team_id', 'board_id', 'name_extension')
     def _compute_name(self):

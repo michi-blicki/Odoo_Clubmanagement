@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <!-- Main Company: Manchester Nebula FC -->
+        <record id="manchester_nebula_fc_main" model="res.company">
+            <field name="name">Manchester Nebula FC</field>
+            <field name="logo" type="base64" file="clubmanagement_demo/static/src/img/logo.png"/>
+            <field name="street">1 Cosmic Avenue</field>
+            <field name="city">Manchester</field>
+            <field name="zip">M1 1NF</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="state_id" ref="base.state_uk_42"/> <!-- Greater Manchester -->
+            <field name="email">info@manchesternebula.fc</field>
+            <field name="phone">+44 161 123 4567</field>
+            <field name="website">https://manchesternebula.fc</field>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+
+        <!-- Subcompany: Manchester Nebula FC, Main Club -->
+        <record id="manchester_nebula_fc_main_club" model="res.company">
+            <field name="name">Manchester Nebula FC, Main Club</field>
+            <field name="logo" type="base64" file="clubmanagement_demo/static/src/img/logo.png"/>
+            <field name="parent_id" ref="manchester_nebula_fc_main"/>
+            <field name="street">1 Cosmic Avenue</field>
+            <field name="city">Manchester</field>
+            <field name="zip">M1 1NF</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="state_id" ref="base.state_uk_42"/> <!-- Greater Manchester -->
+            <field name="email">mainclub@manchesternebula.fc</field>
+            <field name="phone">+44 161 123 4568</field>
+            <field name="website">https://manchesternebula.fc</field>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+
+        <!-- Subcompany: Manchester Nebula FC, Junior Division -->
+        <record id="manchester_nebula_fc_junior" model="res.company">
+            <field name="name">Manchester Nebula FC, Junior Division</field>
+            <field name="logo" type="base64" file="clubmanagement_demo/static/src/img/logo.png"/>
+            <field name="parent_id" ref="manchester_nebula_fc_main"/>
+            <field name="street">2 Star Street</field>
+            <field name="city">Manchester</field>
+            <field name="zip">M1 2NF</field>
+            <field name="country_id" ref="base.uk"/>
+            <field name="state_id" ref="base.state_uk_42"/> <!-- Greater Manchester -->
+            <field name="email">junior@manchesternebula.fc</field>
+            <field name="phone">+44 161 123 4569</field>
+            <field name="website">https://manchesternebula.fc</field>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+
+        <!-- Subcompany: Nebula FC, Lucerne Chapter -->
+        <record id="nebula_fc_lucerne" model="res.company">
+            <field name="name">Nebula FC, Lucerne Chapter</field>
+            <field name="logo" type="base64" file="clubmanagement_demo/static/src/img/logo.png"/>
+            <field name="parent_id" ref="manchester_nebula_fc_main"/>
+            <field name="street">Sternengasse 1</field>
+            <field name="city">Lucerne</field>
+            <field name="zip">6003</field>
+            <field name="country_id" ref="base.ch"/>
+            <field name="state_id" ref="base.state_ch_lu"/> <!-- Luzern -->
+            <field name="email">lucerne@manchesternebula.fc</field>
+            <field name="phone">+41 41 123 45 67</field>
+            <field name="website">https://manchesternebula.fc</field>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
+    
+    </data>
+
+</odoo>

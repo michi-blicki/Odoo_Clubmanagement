@@ -53,14 +53,9 @@ Usage
 6. If your organization has multiple Subclubs, like within a group company, create these now and associate them with the according companies
 7. Create the **Departments** and associate them with **HR Departments** if in use
 8. Create the **Roles** required by your association.
+
 more to follow... It will be a long list once finished ;)
 
-Configuration
-=============
-
-1. Go to **Configuration > Clubs** and create the main club entity.
-2. For multi-company setup: Assign company per subclub.
-3. Customize fields via **Configuration > Custom Fields**.
 
 Screenshots
 ===========
@@ -87,15 +82,17 @@ Known Issues / Roadmap
 Bug Tracker & Support
 =====================
 
-If you encounter problems, please use the [issues tracker](https://github.com/DEIN-USER/DEIN-REPO/issues) on GitHub.
+If you encounter problems, please use the [issues tracker]https://github.com/michi-blicki/Odoo_Clubmanagement/) on GitHub.
 
 **For enterprise support:** There is currently no enterprise support.
 
 Maintainer
 ==========
 
-This module is maintained by **Michael Blickenstorfer**,  
+This module is maintained by **Michael Blickenstorfer**
+
 contact: michi@blicki.ch
+
 GitHub: https://github.com/michi-blicki/Odoo_Clubmanagement.git
 
 License

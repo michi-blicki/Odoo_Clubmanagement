@@ -1,0 +1,66 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Registered State -->
+        <record id="member_state_registered" model="club.member.state">
+            <field name="name">Registered</field>
+            <field name="code">REG</field>
+            <field name="sequence">10</field>
+            <field name="state_type">registered</field>
+            <field name="description">Member has registered but not yet been processed.</field>
+        </record>
+
+        <!-- Pending State -->
+        <record id="member_state_pending" model="club.member.state">
+            <field name="name">Pending</field>
+            <field name="code">PEN</field>
+            <field name="sequence">20</field>
+            <field name="state_type">pending</field>
+            <field name="description">Member registration is being processed.</field>
+        </record>
+
+        <!-- Active State -->
+        <record id="member_state_active" model="club.member.state">
+            <field name="name">Active</field>
+            <field name="code">ACT</field>
+            <field name="sequence">30</field>
+            <field name="state_type">active</field>
+            <field name="description">Member is active and in good standing.</field>
+        </record>
+
+        <!-- Inactive State -->
+        <record id="member_state_inactive" model="club.member.state">
+            <field name="name">Inactive</field>
+            <field name="code">INA</field>
+            <field name="sequence">40</field>
+            <field name="state_type">inactive</field>
+            <field name="description">Member is currently inactive.</field>
+        </record>
+
+        <!-- Blocked State -->
+        <record id="member_state_blocked" model="club.member.state">
+            <field name="name">Blocked</field>
+            <field name="code">BLK</field>
+            <field name="sequence">50</field>
+            <field name="state_type">blocked</field>
+            <field name="description">Member is blocked from club activities.</field>
+        </record>
+
+        <!-- Archived State -->
+        <record id="member_state_archived" model="club.member.state">
+            <field name="name">Archived</field>
+            <field name="code">ARC</field>
+            <field name="sequence">60</field>
+            <field name="state_type">archived</field>
+            <field name="description">Member record has been archived.</field>
+        </record>
+
+        <!-- Deleted State -->
+        <record id="member_state_deleted" model="club.member.state">
+            <field name="name">Deleted</field>
+            <field name="code">DEL</field>
+            <field name="sequence">70</field>
+            <field name="state_type">deleted</field>
+            <field name="description">Member record has been marked for deletion.</field>
+        </record>
+    </data>
+</odoo>

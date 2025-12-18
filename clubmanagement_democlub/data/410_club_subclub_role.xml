@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Roles for subclub_main_club -->
+        <record id="role_president_main" model="club.role">
+            <field name="code">PRES</field>
+            <field name="name_extension">President</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_vice_president_main" model="club.role">
+            <field name="code">VPRES</field>
+            <field name="name_extension">Vice President</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_chief_backoffice_main" model="club.role">
+            <field name="code">CBO</field>
+            <field name="name_extension">Chief Backoffice</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_chief_finance_main" model="club.role">
+            <field name="code">CFO</field>
+            <field name="name_extension">Chief Finance</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Roles for subclub_junior -->
+        <record id="role_president_junior" model="club.role">
+            <field name="code">PRES</field>
+            <field name="name_extension">President</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_vice_president_junior" model="club.role">
+            <field name="code">VPRES</field>
+            <field name="name_extension">Vice President</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_chief_backoffice_junior" model="club.role">
+            <field name="code">CBO</field>
+            <field name="name_extension">Chief Backoffice</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_chief_finance_junior" model="club.role">
+            <field name="code">CFO</field>
+            <field name="name_extension">Chief Finance</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Roles for subclub_lucerne -->
+        <record id="role_president_lucerne" model="club.role">
+            <field name="code">PRES</field>
+            <field name="name_extension">President</field>
+            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_vice_president_lucerne" model="club.role">
+            <field name="code">VPRES</field>
+            <field name="name_extension">Vice President</field>
+            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_chief_backoffice_lucerne" model="club.role">
+            <field name="code">CBO</field>
+            <field name="name_extension">Chief Backoffice</field>
+            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_chief_finance_lucerne" model="club.role">
+            <field name="code">CFO</field>
+            <field name="name_extension">Chief Finance</field>
+            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

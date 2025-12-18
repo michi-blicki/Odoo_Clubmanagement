@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <!-- Department Leader Boards -->
+        <record id="board_leader_active_man" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_man"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_leader_active_woman" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_woman"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_leader_youth_football_boys" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_leader_youth_football_girls" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_youth_football_girls"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_leader_kids_football_boys" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_leader_kids_football_girls" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_kids_football_girls"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_leader_active_football_lucerne" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_football_lucerne"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_leader_youth_football_lucerne" model="club.board">
+            <field name="name">Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">department</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_youth_football_lucerne"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+
+</odoo>

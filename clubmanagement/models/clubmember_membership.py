@@ -1,6 +1,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class ClubMemberMembership(models.Model):
     _name = 'club.member.membership'
     _description = 'Club Member Membership'
@@ -11,7 +14,9 @@ class ClubMemberMembership(models.Model):
 
     name = fields.Char(string=_("Membership Name"), required=True)
     code = fields.Char(string=_("Membership Code"), required=True)
-    price = fields.Float(string=_("Price"), compute="_compute_price", store=True)
+    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    price = fields.Monetary(string=_("Price"), compute="_compute_price", store=True, currency_field='currency_id')
+    currency_id = fields.Many2one(string=_("Currency"), comodel_name='res.currency', related='company_id.currency_id', readonly=True)
     sequence = fields.Integer(string=_("Sequence"), required=True, default=10)
     member_ids = fields.Many2many(string=_("Current Members"), comodel_name="club.member", compute="_compute_member_ids", store=False, readonly=True)
     member_count = fields.Integer(string=_("Member Count"), compute="_compute_member_ids", store=False, readonly=True)
@@ -22,7 +27,14 @@ class ClubMemberMembership(models.Model):
     active = fields.Boolean(default=True)
 
     main_product_id = fields.Many2one(string=_("Main Product"), comodel_name="product.product", required=True)
-    additional_product_ids = fields.Many2one(string=_("Additional Products"), comodel_name="product.product", required=False)
+    main_product_price = fields.Monetary(string=_("Main Product Price"), compute="_compute_main_product_price", store=False, currency_field='currency_id')
+
+    additional_product_ids = fields.One2many(string=_("Additional Products"), comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
     @api.depends('member_ids')
     def _compute_member_ids(self):
@@ -33,6 +45,23 @@ class ClubMemberMembership(models.Model):
             ])
             membership.member_ids = members
             membership.member_count = len(members)
+
+    @api.depends('main_product_id')
+    def _compute_main_product_price(self):
+        for record in self:
+            record.main_product_price = record.main_product_id.list_price if record.main_product_id else 0.0
+
+
+    @api.depends('main_product_id', 'additional_product_ids', 'additional_product_ids.product_id')
+    def _compute_price(self):
+        for membership in self:
+            total_price = 0.0
+            if membership.main_product_id:
+                total_price += membership.main_product_id.list_price
+            if membership.additional_product_ids:
+                total_price += sum(additional.product_id.list_price for additional in membership.additional_product_ids)
+            membership.price = total_price
+
 
     def action_show_members(self):
         self.ensure_one()

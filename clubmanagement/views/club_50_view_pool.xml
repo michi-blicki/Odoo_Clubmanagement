@@ -12,14 +12,28 @@
                         <div class="oe_title">
                             <h1>
                                 <field name="name"/>
-                                <span class="ml-2" invisible="active == True">(<span style="color:red;">Archived</span>)</span>
+                                <span class="ml-2" invisible="active == True">
+                                    (<span style="color:red;">Archived</span>)
+                                </span>
                             </h1>
                         </div>
+                        <header>
+                            <button
+                                name="action_create_default_roles"
+                                type="object"
+                                string="Create Default Roles"
+                                class="btn btn-primary"
+                                invisible="id == False"
+                            />
+                            <field name="active" />
+                        </header>
                         <group>
                             <group>
                                 <field name="active"/>
                                 <field name="sequence"/>
-                                <field name="club_id" readonly="1"/>
+                                <field name="club_id" readonly="1" invisible="True"/>
+                                <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
+                                <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
                                 <field name="department_id"/>
                                 <field name="hr_department_id"/>
                             </group>
@@ -29,7 +43,7 @@
                         </group>
                         <notebook>
                             <page string="Teams">
-                                <field name="team_ids" mode="tree,form">
+                                <field name="team_ids" mode="list,form">
                                     <list>
                                         <field name="name"/>
                                         <field name="department_id"/>
@@ -62,45 +76,45 @@
             <field name="name">club.pool.kanban</field>
             <field name="model">club.pool</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="department_id" class="o_kanban_small_column" string="Pools">
+                <kanban default_group_by="department_id" 
+                        class="o_kanban_small_column" 
+                        on_create="quick_create" 
+                        group_create="false" 
+                        group_delete="false" 
+                        group_edit="false">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="department_id"/>
+                    <field name="hr_department_id"/>
+                    <field name="team_count"/>
+                    <field name="member_count"/>
+                    <field name="active"/>
                     <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_tab">
-                                <div class="oe_kanban_header">
-                                    <strong>
-                                        <t t-esc="record.name.value"/>
-                                    </strong>
-                                    <span class="float-end text-muted" style="font-size:13px;">
-                                        <i class="fa fa-users"/> 
-                                        <t t-esc="record.member_ids.value ? len(record.member_ids.value) : 0"/>
-                                    </span>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_top mb-0">
+                                        <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                        <field name="active" widget="boolean_toggle"/>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <div><label for="company_id" class="me-1">Company:</label><field name="company_id"/></div>
+                                            <div t-if="record.hr_department_id.raw_value">
+                                                <label for="hr_department_id" class="me-1">HR Department:</label>
+                                                <field name="hr_department_id"/>
+                                            </div>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <button class="btn btn-secondary btn-sm" type="object" name="action_view_teams">
+                                                <span class="badge text-bg-info"><t t-esc="record.team_count.raw_value"/> Teams</span>
+                                            </button>
+                                            <button class="btn btn-secondary btn-sm ms-1" type="object" name="action_view_members">
+                                                <span class="badge text-bg-primary"><t t-esc="record.member_count.raw_value"/> Members</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <small>
-                                        <t t-esc="record.sequence.value"/>
-                                        <t t-if="record.active.value"> • 
-                                            <t t-esc="'Active'"/>
-                                        </t>
-                                    </small>
-                                </div>
-                                <div>
-                                    <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
-                                </div>
-                                <div>
-                                    <t t-if="record.hr_department_id.value">
-                                        <small class="text-muted">
-                                            <t t-esc="record.hr_department_id.value[1]"/>
-                                        </small>
-                                    </t>
-                                </div>
-                            </div>
-                        </t>
-                        <!-- Lane Header Template (Department) -->
-                        <t t-name="kanban-group-header">
-                            <div class="oe_kanban_group_header">
-                                <span>
-                                    <t t-esc="group.department_id ? group.department_id[1] : _('No Department')"/>
-                                </span>
                             </div>
                         </t>
                     </templates>
@@ -117,10 +131,10 @@
                     <field name="active" widget="boolean_button"/>
                     <field name="sequence"/>
                     <field name="name"/>
-                    <field name="club_id"/>
                     <field name="department_id"/>
                     <field name="hr_department_id"/>
-                    <field name="member_ids_display" widget="many2many_tags" string="Members"/>
+                    <field name="team_count" />
+                    <field name="member_count" />
                 </list>
             </field>
         </record>
@@ -131,7 +145,6 @@
             <field name="arch" type="xml">
                 <search string="Search Pools">
                     <field name="name"/>
-                    <field name="club_id"/>
                     <field name="department_id"/>
                     <field name="hr_department_id"/>
                     <filter name="active" string="Active" domain="[('active', '=', True)]"/>

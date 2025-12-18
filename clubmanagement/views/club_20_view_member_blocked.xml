@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <kanban class="o_kanban_small_column">
                     <templates>
-                        <t t-name="kanban-box">
+                        <t t-name="card">
                             <!-- Header -->
                             <div t-attf-class="o_kanban_record_top {{ state_header_color }}">
                                 <strong>

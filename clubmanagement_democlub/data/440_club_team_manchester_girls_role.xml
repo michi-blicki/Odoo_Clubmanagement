@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Roles for Girls Teams -->
+
+        <!-- team_girls_u18 -->
+        <record id="role_trainer_girls_u18" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u18"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u18" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u18"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_girls_u16 -->
+        <record id="role_trainer_girls_u16" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u16"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u16" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u16"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_girls_u13 -->
+        <record id="role_trainer_girls_u13" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u13"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u13" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u13"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_girls_u12a -->
+        <record id="role_trainer_girls_u12a" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u12a"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u12a" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u12a"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_girls_u12b -->
+        <record id="role_trainer_girls_u12b" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u12b"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u12b" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u12b"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_girls_u10a -->
+        <record id="role_trainer_girls_u10a" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u10a"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u10a" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u10a"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_girls_u10b -->
+        <record id="role_trainer_girls_u10b" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u10b"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u10b" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u10b"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_girls_u10c -->
+        <record id="role_trainer_girls_u10c" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u10c"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_girls_u10c" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_girls_u10c"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+         <!-- Manchester Nebula FC Club Record -->
+        <record id="manchester_nebula_fc_club" model="club.club">
+            <field name="name">Manchester Nebula FC</field>
+            <field name="company_id" ref="manchester_nebula_fc_main"/>
+            <field name="active" eval="True"/>
+        </record>
+    
+    </data>
+    
+
+</odoo>

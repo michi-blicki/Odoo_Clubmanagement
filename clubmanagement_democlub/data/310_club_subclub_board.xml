@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <!-- Main Club Boards -->
+        <record id="board_executive_main" model="club.board">
+            <field name="name">Executive Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_player_management_main" model="club.board">
+            <field name="name">Player Management Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_team_leader_main" model="club.board">
+            <field name="name">Team Leader Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Junior Club Boards -->
+        <record id="board_executive_junior" model="club.board">
+            <field name="name">Executive Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_player_management_junior" model="club.board">
+            <field name="name">Player Management Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Lucerne Subclub Boards and Working Group -->
+        <record id="board_vorstand_lucerne" model="club.board">
+            <field name="name">Vorstand</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="board_spielermanagement_lucerne" model="club.board">
+            <field name="name">Spielermanagement</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="workgroup_trainer_lucerne" model="club.board">
+            <field name="name">Trainer</field>
+            <field name="group_type">working</field>
+            <field name="scope_type">subclub</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    
+    </data>
+    
+
+</odoo>

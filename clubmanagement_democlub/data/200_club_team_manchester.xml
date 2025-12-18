@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Teams for club_dept_active_man -->
+        
+        <!-- Football League Championship Team -->
+        <record id="team_championship" model="club.team">
+            <field name="name">Manchester Nebula FC Championship</field>
+            <field name="shortname">MNFC</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_man"/>
+            <field name="hr_department_id" ref="dept_active_man"/>
+            <field name="sequence">10</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Football League Two Team -->
+        <record id="team_league_two" model="club.team">
+            <field name="name">Manchester Nebula FC League Two</field>
+            <field name="shortname">MNFL2</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_man"/>
+            <field name="hr_department_id" ref="dept_active_man"/>
+            <field name="sequence">20</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- National League North Team -->
+        <record id="team_national_north" model="club.team">
+            <field name="name">Manchester Nebula FC National North</field>
+            <field name="shortname">MNNN</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_man"/>
+            <field name="hr_department_id" ref="dept_active_man"/>
+            <field name="sequence">30</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Northern Premier League Team -->
+        <record id="team_northern_premier" model="club.team">
+            <field name="name">Manchester Nebula FC Northern Premier</field>
+            <field name="shortname">MNNP</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_man"/>
+            <field name="hr_department_id" ref="dept_active_man"/>
+            <field name="sequence">40</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- FA Women's Super League Team -->
+        <record id="team_womens_super_league" model="club.team">
+            <field name="name">Manchester Nebula FC Women's Super League</field>
+            <field name="shortname">MNWSL</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_woman"/>
+            <field name="hr_department_id" ref="dept_active_woman"/>
+            <field name="sequence">10</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- FA Women's National League - Division One Team -->
+        <record id="team_womens_national_league_div_one" model="club.team">
+            <field name="name">Manchester Nebula FC Women's National League Div 1</field>
+            <field name="shortname">MNWN1</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="department_id" ref="club_dept_active_woman"/>
+            <field name="hr_department_id" ref="dept_active_woman"/>
+            <field name="sequence">20</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

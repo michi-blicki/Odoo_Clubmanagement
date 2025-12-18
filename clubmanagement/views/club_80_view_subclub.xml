@@ -8,16 +8,28 @@
             <field name="model">club.subclub</field>
             <field name="arch" type="xml">
                 <form string="Subclub">
-                    <header>
-                        <field name="active"/>
-                    </header>
                     <sheet>
                         <div class="oe_title">
-                            <field name="name"/>
+                            <h1>
+                                <field name="name"/>
+                                <span class="ml-2" invisible="active == True">
+                                    (<span style="color:red;">Archived</span>)
+                                </span>
+                            </h1>
                         </div>
+                        <header>
+                            <button
+                                name="action_create_default_roles_and_boards"
+                                type="object"
+                                string="Create Default Roles and Boards"
+                                class="btn btn-primary"
+                                invisible="id == False"
+                            />
+                            <field name="active" />
+                        </header>
                         <group>
                             <field name="sequence"/>
-                            <field name="club_id"/>
+                            <field name="club_id" readonly="True" invisible="True" />
                             <field name="company_id"/>
                             <field name="hr_department_id"/>
                         </group>
@@ -61,10 +73,16 @@
                                     <field name="active"/>
                                 </div>
                                 <div class="mt-1 small text-muted">
+                                    <label for="company_id" string="Company" />
+                                    |
                                     <field name="company_id"/>
+                                </div>
+                                <div class="mt-1 small text-muted">
+                                    <label for="hr_department_id" string="HR Department" />
                                     |
                                     <field name="hr_department_id"/>
                                 </div>
+                                
                                 <div class="mt-2">
                                     <span class="badge rounded-pill bg-info me-1">
                                         <i class="fa fa-users me-1" title="Boards"/>
@@ -98,7 +116,6 @@
                 <list string="Subclubs" default_order="sequence">
                     <field name="sequence"/>
                     <field name="name"/>
-                    <field name="club_id"/>
                     <field name="hr_department_id"/>
                     <field name="active"/>
                 </list>
@@ -115,6 +132,7 @@
                 (0, 0, {'view_mode': 'list', 'view_id': ref('club_subclub_list_view')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('club_subclub_form_view')}),
             ]"/>
+            <field name="domain">[]</field>
             <field name="help" type="html">
                 <p>
                     <strong>Sub Clubs are dedicated entities in your club.</strong>
@@ -125,7 +143,7 @@
                 </p>
             </field>
         </record>
-    
+            
         <menuitem
             id="club_subclub_list_menu"
             name="Sub Clubs"

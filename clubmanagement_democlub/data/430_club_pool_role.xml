@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Role for pool_boys_u10 -->
+        <record id="role_lead_boys_u10" model="club.role">
+            <field name="code">LEAD</field>
+            <field name="name_extension">Pool Leader</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">pool</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="pool_id" ref="pool_boys_u10"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Role for pool_boys_u12 -->
+        <record id="role_lead_boys_u12" model="club.role">
+            <field name="code">LEAD</field>
+            <field name="name_extension">Pool Leader</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">pool</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="pool_id" ref="pool_boys_u12"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Role for pool_boys_u14 -->
+        <record id="role_lead_boys_u14" model="club.role">
+            <field name="code">LEAD</field>
+            <field name="name_extension">Pool Leader</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">pool</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="pool_id" ref="pool_boys_u14"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Role for pool_girls_gu10 -->
+        <record id="role_lead_girls_gu10" model="club.role">
+            <field name="code">LEAD</field>
+            <field name="name_extension">Pool Leader</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">pool</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="pool_id" ref="pool_girls_gu10"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Role for pool_girls_gu12 -->
+        <record id="role_lead_girls_gu12" model="club.role">
+            <field name="code">LEAD</field>
+            <field name="name_extension">Pool Leader</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">pool</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="pool_id" ref="pool_girls_gu12"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

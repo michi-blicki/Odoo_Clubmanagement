@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Departments for manchester_nebula_fc_main -->
+        <record id="dept_executive_board_main" model="hr.department">
+            <field name="name">Executive Board</field>
+            <field name="company_id" ref="manchester_nebula_fc_main"/>
+        </record>
+
+        <record id="dept_administration_main" model="hr.department">
+            <field name="name">Administration</field>
+            <field name="company_id" ref="manchester_nebula_fc_main"/>
+        </record>
+
+        <!-- Departments for manchester_nebula_fc_main_club -->
+        <record id="dept_executive_board_main_club" model="hr.department">
+            <field name="name">Executive Board</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+        </record>
+
+        <record id="dept_active_man" model="hr.department">
+            <field name="name">Active Man</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+        </record>
+
+        <record id="dept_active_woman" model="hr.department">
+            <field name="name">Active Woman</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+        </record>
+
+        <!-- Departments for manchester_nebula_fc_junior -->
+        <record id="dept_executive_board_junior" model="hr.department">
+            <field name="name">Executive Board</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+        </record>
+
+        <record id="dept_youth_football_boys" model="hr.department">
+            <field name="name">Youth Football Boys</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+        </record>
+
+        <record id="dept_youth_football_girls" model="hr.department">
+            <field name="name">Youth Football Girls</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+        </record>
+
+        <record id="dept_kids_football_boys" model="hr.department">
+            <field name="name">Kids Football Boys</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+        </record>
+
+        <record id="dept_kids_football_girls" model="hr.department">
+            <field name="name">Kids Football Girls</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+        </record>
+
+        <!-- Departments for nebula_fc_lucerne -->
+        <record id="dept_executive_board_lucerne" model="hr.department">
+            <field name="name">Executive Board</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+        </record>
+
+        <record id="dept_administration_lucerne" model="hr.department">
+            <field name="name">Administration</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+        </record>
+
+        <record id="dept_active_football_lucerne" model="hr.department">
+            <field name="name">Active Football</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+        </record>
+
+        <record id="dept_youth_football_lucerne" model="hr.department">
+            <field name="name">Youth Football</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+        </record>
+
+    </data>
+</odoo>

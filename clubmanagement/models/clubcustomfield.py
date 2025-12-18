@@ -1,11 +1,14 @@
 from odoo import fields, models, api, _
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class ClubCustomField(models.Model):
     _name = 'club.custom.field'
     _description = 'Configurable additional fields for clubs'
     _order = 'sequence, label'
 
-    club_id = fields.Many2one(comodel_name='club.club', required=True, ondelete='cascade')
+    club_id = fields.Many2one(string=_("Club"), comodel_name='club.club', required=True, ondelete='cascade')
 
     model = fields.Selection([
         ('club.member', _('Club Member')),
@@ -14,7 +17,7 @@ class ClubCustomField(models.Model):
         ('club.department', _('Department')),
         ('club.subclub', _('Subclub')),
         ('club.club', _('Club'))
-    ], required=True)
+    ], string=_('Model'), required=True)
 
     technical_name = fields.Char(string=_('Technical field name'), required=True)
     label = fields.Char(string=_('Label'), required=True)
@@ -27,10 +30,10 @@ class ClubCustomField(models.Model):
         ('datetime', _('Date/Time')),
         ('selection', _('Selection')),
         ('boolean', _('Checkbox'))
-    ], required=True)
+    ], string=_('Field Type'), required=True)
 
-    required = fields.Boolean(default=False)
-    sequence = fields.Integer(default=10)
+    required = fields.Boolean(string=_("Required"), default=False)
+    sequence = fields.Integer(string=_("Sequence"), default=10)
     selection_values = fields.Char(string=_('For Selection Lists only, as comma-separated list'))
 
     _sql_constraints = [
@@ -40,3 +43,8 @@ class ClubCustomField(models.Model):
             'Technical name of custom field must be unique within clubs'
         )
     ]
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()

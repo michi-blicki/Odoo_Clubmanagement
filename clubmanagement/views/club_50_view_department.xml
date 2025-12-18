@@ -17,11 +17,22 @@
                                 </span>
                             </h1>
                         </div>
+                        <header>
+                            <button
+                                name="action_create_default_roles_and_boards"
+                                type="object"
+                                string="Create Default Roles and Boards"
+                                class="btn btn-primary"
+                                invisible="id == False"
+                            />
+                            <field name="active" />
+                        </header>
                         <group>
                             <group>
-                                <field name="active"/>
                                 <field name="sequence"/>
-                                <field name="club_id" readonly="1"/>
+                                <field name="club_id" readonly="1" invisible="True" />
+                                <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
+                                <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>                                
                                 <field name="subclub_id"/>
                                 <field name="hr_department_id"/>
                             </group>
@@ -31,29 +42,29 @@
                         </group>
                         <notebook>
                             <page string="Boards">
-                                <field name="board_ids" mode="tree,form">
-                                    <tree>
+                                <field name="board_ids" mode="list,form">
+                                    <list>
                                         <field name="name"/>
                                         <field name="role_ids" widget="many2many_tags"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                             <page string="Pools">
-                                <field name="pool_ids" mode="tree,form">
-                                    <tree>
+                                <field name="pool_ids" mode="list,form">
+                                    <list>
                                         <field name="name"/>
                                         <field name="sequence"/>
                                         <field name="team_ids" widget="many2many_tags"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                             <page string="Teams">
-                                <field name="team_ids" mode="tree,form">
-                                    <tree>
+                                <field name="team_ids" mode="list,form">
+                                    <list>
                                         <field name="name"/>
                                         <field name="sequence"/>
                                         <field name="member_ids_display" widget="many2many_tags"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                             <page string="Roles / Functions">
@@ -82,39 +93,47 @@
             <field name="arch" type="xml">
                 <kanban class="o_kanban_small_column" string="Departments">
                     <templates>
-                        <t t-name="kanban-box">
+                        <field name="name" />
+                        <field name="company_id" />
+                        <field name="subclub_id" />
+                        <field name="hr_department_id" />
+                        <field name="sequence" invisible="True" />
+                        <field name="member_count" />
+                        <field name="team_ids" />
+                        <field name="pool_ids" />
+                        <t t-name="card">
                             <div class="oe_kanban_global_tab">
                                 <div class="oe_kanban_header" style="display: flex; justify-content: space-between;">
                                     <strong>
-                                        <t t-esc="record.name.value"/>
+                                        <field name="name" />
                                     </strong>
-                                    <span class="badge bg-primary" title="Member Count">
-                                        <i class="fa fa-users"/> 
-                                        <t t-esc="record.member_count.value or 0"/>
-                                    </span>
-                                </div>
-                                <div class="mt8 mb8">
-                                    <small class="text-muted">
-                                        <t t-if="record.subclub_id.value">
-                                            <t t-esc="record.subclub_id.value[1]"/> • 
-                                        </t>
-                                        <t t-if="record.hr_department_id.value">
-                                            <t t-esc="record.hr_department_id.value[1]"/>
-                                        </t>
-                                    </small>
-                                </div>
-                                <div>
                                     <field name="active"/>
                                 </div>
-                                <div>
-                                    <field name="member_ids_display" widget="many2many_tags" options="{'no_open': True}" string="Members"/>
+                                <div class="mt-1 small text-muted">
+                                    <label for="company_id" string="Company">Company</label>
+                                    |
+                                    <field name="company_id" />
+                                </div>
+                                <div class="mt-1 small text-muted" t-if="subclub_id">
+                                    <label for="subclub_id" string="Subclub">Subclub</label>
+                                    |
+                                    <field name="subclub_id" />
+                                </div>
+                                <div class="mt-1 small text-mutet" t-if="hr_department_id">
+                                    <label for="hr_department_id" string="HR Department">HR Department</label>
+                                    |
+                                    <field name="hr_department_id" />
                                 </div>
                                 <div class="o_kanban_list_item mt8">
+                                    <span class="badge bg-primary" title="Members">
+                                        <i class="fa fa-users"/> 
+                                        <field name="member_count" />
+                                    </span>
                                     <span class="badge bg-info" title="Teams">
-                                        <i class="fa fa-users"/> <t t-esc="len(record.team_ids.value or [])"/>
+                                        <i class="fa fa-users"/> <field name="team_count" />
                                     </span>
                                     <span class="badge bg-success ml-2" title="Pools">
-                                        <i class="fa fa-layer-group"/> <t t-esc="len(record.pool_ids.value or [])"/>
+                                        <i class="fa fa-layer-group"/> <field name="pool_count" />
                                     </span>
                                 </div>
                             </div>
@@ -133,7 +152,6 @@
                     <field name="active" widget="boolean_button"/>
                     <field name="sequence"/>
                     <field name="name"/>
-                    <field name="club_id"/>
                     <field name="subclub_id"/>
                     <field name="hr_department_id"/>
                     <field name="member_ids_display" widget="many2many_tags" string="Members"/>
@@ -147,7 +165,6 @@
             <field name="arch" type="xml">
                 <search string="Search Departments">
                     <field name="name"/>
-                    <field name="club_id"/>
                     <field name="subclub_id"/>
                     <field name="hr_department_id"/>
                     <filter name="active" string="Active" domain="[('active','=',True)]"/>

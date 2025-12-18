@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Roles for Lucerne Teams -->
+
+        <!-- team_lucerne_2liga -->
+        <record id="role_trainer_lucerne_2liga" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_2liga"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_2liga" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_2liga"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_3liga -->
+        <record id="role_trainer_lucerne_3liga" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_3liga"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_3liga" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_3liga"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_4liga -->
+        <record id="role_trainer_lucerne_4liga" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_4liga"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_4liga" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_4liga"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_bjunioren -->
+        <record id="role_trainer_lucerne_bjunioren" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_bjunioren"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_bjunioren" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_bjunioren"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_cjunioren -->
+        <record id="role_trainer_lucerne_cjunioren" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_cjunioren"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_cjunioren" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_cjunioren"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_d9a -->
+        <record id="role_trainer_lucerne_d9a" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_d9a"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_d9a" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_d9a"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_d9b -->
+        <record id="role_trainer_lucerne_d9b" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_d9b"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_d9b" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_d9b"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_ea -->
+        <record id="role_trainer_lucerne_ea" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_ea"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_ea" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_ea"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_eb -->
+        <record id="role_trainer_lucerne_eb" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_eb"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_eb" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_eb"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- team_lucerne_ec -->
+        <record id="role_trainer_lucerne_ec" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_ec"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_lucerne_ec" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="team_id" ref="team_lucerne_ec"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

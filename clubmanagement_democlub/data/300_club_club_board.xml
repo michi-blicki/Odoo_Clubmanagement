@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+    
+        <!-- Club Level Board -->
+        <record id="board_executive_club" model="club.board">
+            <field name="name">Executive Board</field>
+            <field name="group_type">board</field>
+            <field name="scope_type">club</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="active" eval="True"/>
+        </record>
+    
+    </data>
+    
+
+</odoo>

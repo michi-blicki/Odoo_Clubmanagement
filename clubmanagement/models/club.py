@@ -2,6 +2,9 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 from datetime import datetime, date, timedelta
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class Club(models.Model):
     _name = 'club.club'
     _description = 'Club'
@@ -11,16 +14,21 @@ class Club(models.Model):
         'club.log.mixin'
     ]
 
-    name = fields.Char(required=True, tracking=True)
-    company_id = fields.Many2one(comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    subclub_ids = fields.One2many(comodel_name='club.subclub', inverse_name='club_id', string='Sub Club')
-    board_ids = fields.One2many(comodel_name='club.board', inverse_name='club_id', string="Board")
-    department_ids = fields.One2many(comodel_name='club.department', inverse_name='club_id', string='Departments')
+    name = fields.Char(string=_("Name"), required=True, tracking=True)
+    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    subclub_ids = fields.One2many(string=_('Subclubs'), comodel_name='club.subclub', inverse_name='club_id')
+    board_ids = fields.One2many(string=_('Boards'), comodel_name='club.board', inverse_name='club_id')
+    department_ids = fields.One2many(string=_("Departments"), comodel_name='club.department', inverse_name='club_id')
     pool_ids = fields.One2many(string=_("Pools"), comodel_name='club.pool', inverse_name='club_id')
-    role_ids = fields.One2many(comodel_name='club.role', inverse_name='club_id', string=_("Roles / Functions"))
-    member_ids = fields.Many2many(comodel_name='club.member', relation='club_club_member_rel', column1='club_id', column2='member_id', string=_('Members'))
+    role_ids = fields.One2many(string=_("Roles / Functions"), comodel_name='club.role', inverse_name='club_id')
+    member_ids = fields.Many2many(string=_('Members'), comodel_name='club.member', relation='club_club_member_rel', column1='club_id', column2='member_id')
     member_ids_display = fields.Many2many(string=_('All Members'), comodel_name='club.member', compute='_compute_member_ids', store=False)
     active = fields.Boolean(default=True)
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
     @api.depends('member_ids', 'subclub_ids.member_ids_display', 'department_ids.member_ids_display')
     def _compute_member_ids(self):

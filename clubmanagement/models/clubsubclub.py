@@ -2,6 +2,8 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
 
 class SubClub(models.Model):
     _name = 'club.subclub'
@@ -12,12 +14,12 @@ class SubClub(models.Model):
         'club.log.mixin',
     ]
 
-    name = fields.Char(required=True, tracking=True)
-    company_id = fields.Many2one(comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    club_id = fields.Many2one(comodel_name='club.club', string=_("Parent Club / Association"), required=True)
+    name = fields.Char(string=_("Name"), required=True, tracking=True)
+    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    club_id = fields.Many2one(comodel_name='club.club', string=_("Parent Club / Association"), required=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
     hr_department_id = fields.Many2one(comodel_name='hr.department', string=_("HR Department"), required=True, help=_("Optional HR department mapping for HR processes"), tracking=True)
     sequence = fields.Integer(string=_("Sequence"), required=True, default=10)
-    board_ids = fields.One2many(comodel_name='club.board', inverse_name='subclub_id', string="Board", tracking=True)
+    board_ids = fields.One2many(comodel_name='club.board', inverse_name='subclub_id', string=_("Board"), tracking=True)
     department_ids = fields.One2many(comodel_name='club.department', inverse_name='subclub_id', string=_("Departments"), tracking=True)
     role_ids = fields.One2many(comodel_name='club.role', inverse_name='subclub_id', string=_("Roles / Functions"), tracking=True)
     member_ids = fields.Many2many(string=_('Members'), comodel_name='club.member', relation='club_subclub_member_rel', column1='subclub_id', column2='member_id', tracking=True)
@@ -28,6 +30,11 @@ class SubClub(models.Model):
     departments_count = fields.Integer(string=_("No Departments"), compute="_compute_counts")
     roles_count = fields.Integer(string=_("No Roles"), compute="_compute_counts")
     members_count = fields.Integer(string=_("No Members"), compute="_compute_counts")
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
     @api.depends('member_ids', 'department_ids.member_ids_display')
     def _compute_member_ids(self):
@@ -56,11 +63,14 @@ class SubClub(models.Model):
     # CREATION HOOK
     ########################
 
-    def create(self, vals):
-        if not vals.get('club_id'):
-            raise ValidationError(_("Parent Club must be specified when creating a Sub-Club."))
+    def create(self, vals_list):
 
-        new_subclubs = super().create(vals)
+        club = self.env['club.club'].search([], limit=1)
+        if not club:
+            raise ValidationError(_("Club must be created first"))
+
+
+        new_subclubs = super().create(vals_list)
 
         for new_subclub in new_subclubs:
 
@@ -74,6 +84,43 @@ class SubClub(models.Model):
             )
 
         return new_subclubs
+
+    def action_create_default_roles_and_boards(self):
+        self.ensure_one()
+
+        existing_roles = self.env['club.role'].search([('subclub_id', '=', self.id)])
+        new_roles = []
+        role_types = ['lead', 'assistant', 'admin']
+        for rt in role_types:
+            if not existing_roles.filtered(lambda r: r.role_type == rt):
+                role_type_selection = dict(self.env['club.role'].fields_get(allfields=['role_type'])['role_type']['selection'])
+                new_roles.append(self.env['club.role'].create({
+                    'role_type': rt,
+                    'club_id': self.club_id.id,
+                    'scope_type': 'subclub',
+                    'subclub_id': self.id,
+                    'perm_read': True,
+                    'perm_write': True,
+                    'perm_create': True,
+                    'perm_unlink': True,
+                    'perm_mail': True,
+                    'code': f'SUBCLUB_{self.name}_{rt}',
+                    'name': f"{self.name}: {role_type_selection.get(rt, rt)}",
+                }))
+
+        if not self.board_ids:
+            board = self.env['club.board'].create({
+                'name': _("%s - Executive Board") % self.name,
+                'group_type': 'board',
+                'club_id': self.club_id.id,
+                'scope_type': 'subclub',
+                'subclub_id': self.id,
+            })
+
+        return {
+            'type': "ir.actions.client",
+            'tag': 'reload',
+        }
 
 
     ########################

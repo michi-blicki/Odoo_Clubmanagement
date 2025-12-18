@@ -9,89 +9,95 @@
             <field name="arch" type="xml">
                 <form string="Membership">
                     <header>
-                        <field name="active"/>
+                        <field name="active" invisible="1"/>
                         <button string="Archive" type="object" name="action_archive" invisible="active == False" class="btn-secondary"/>
                     </header>
                     <sheet>
-                        <div class="oe_title">
-                            <field name="name"/>
-                            <field name="code"/>
-                        </div>
-                        <group>
-                            <field name="main_product_id"/>
-                            <field name="additional_product_ids"/>
-                            <field name="price"/>
-                            <field name="sequence"/>
-                        </group>
-                        <group>
-                            <field name="description"/>
-                        </group>
-                        <group>
-                            <field name="member_count" readonly="1"/>
-                            <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
-                        </group>
-                        <!-- Smart Button Section -->
-                        <div name="button_box" class="oe_button_box" style="margin-bottom: 16px;">
-                            <button
-                                name="action_show_members"
-                                type="object"
-                                class="oe_stat_button"
-                                icon="fa-users"
-                                string="Members"
-                                invisible="member_count == 0"
-                            >
-                                <span class="o_stat_text" title="'View Members'"/>
-                                <span class="o_stat_value">
-                                    <field name="member_count" widget="statinfo"/>
-                                </span>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_show_members" type="object" class="oe_stat_button" icon="fa-users" invisible="member_count == 0">
+                                <field name="member_count" widget="statinfo" string="Members"/>
                             </button>
                         </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Membership Name"/>
+                            </h1>
+                            <h2>
+                                <field name="code" placeholder="Membership Code"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Products">
+                                <group>
+                                    <field name="main_product_id"/>
+                                    <field name="main_product_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name="additional_product_ids">
+                                    <list editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="price" widget="monetary" options="{'currency_field': 'parent.currency_id'}"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
 
-
         <record id="club_member_membership_kanban_view" model="ir.ui.view">
             <field name="name">club.member.membership.kanban</field>
             <field name="model">club.member.membership</field>
             <field name="arch" type="xml">
-                <kanban string="Memberships">
+                <kanban string="Memberships" default_group_by="company_id" default_order="sequence" class="o_kanban_small_column">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="active"/>
+                    <field name="member_count"/>
+                    <field name="price"/>
+                    <field name="currency_id"/>
+                    <field name="company_id"/>
                     <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_tab">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <strong>
-                                        <t t-esc="record.name.value"/>
-                                        <span class="ms-2 text-muted">(<t t-esc="record.code.value"/>)</span>
-                                    </strong>
-                                    <span class="badge bg-primary" title="Member Count">
-                                        <i class="fa fa-users"/> <t t-esc="record.member_count.value"/>
-                                    </span>
-                                </div>
-                                <div class="mt8 mb8" t-if="record.description.value">
-                                    <t t-esc="record.description.value"/>
-                                </div>
-                                <div>
-                                    <span class="badge bg-info" title="Main Product">
-                                        <t t-esc="record.main_product_id.value and record.main_product_id.value[1] or ''"/>
-                                    </span>
-                                    <t t-if="record.additional_product_ids.value">
-                                        <span class="badge bg-secondary ms-1" title="Additional Products">
-                                            <t t-esc="record.additional_product_ids.value[1]"/>
-                                        </span>
-                                    </t>
-                                </div>
-                                <div class="mt8" t-if="record.price.value">
-                                    <span class="bg-light text-dark px-2 py-1 rounded">
-                                        <t t-esc="format(record.price.value, '.2f')"/> €
-                                    </span>
-                                </div>
-                                <div class="mt8 mb8">
-                                    <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
-                                </div>
-                                <div>
-                                    <field name="active"/>
+                        <t t-name="card">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.active.raw_value ? '' : 'text-muted'}">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top mb-0">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                                <span t-if="!record.active.raw_value" class="text-danger ml-2">
+                                                    (<span t-esc="env._t('Inactive')" />)
+                                                </span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="text-muted">
+                                        <field name="code"/>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <span class="badge rounded-pill text-bg-info">
+                                                <i class="fa fa-users"/> <t t-esc="record.member_count.value"/> <span t-esc="env._t('Members')" />
+                                            </span>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </t>
@@ -128,7 +134,6 @@
                     <field name="birthdate_date"/>
                     <field name="city"/>
                     <field name="nationality_id"/>
-                    <field name="club_id"/>
                     <field name="department_ids"/>
                     <field name="team_ids"/>
                     <field name="membership_date_start"/>

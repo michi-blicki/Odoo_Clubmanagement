@@ -1,6 +1,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError, AccessError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 #####################################
 # Club Log
 #------------------------------------
@@ -26,7 +29,7 @@ class ClubLog(models.Model):
         ('team', _('Team')),
         ('member', _('Member')),
         ('role', _('Role / Function'))
-    ], required=True)
+    ], string=_("Scope Type"), required=True)
 
     activity_type = fields.Selection([
         ('create', _('USer Create')),
@@ -35,7 +38,7 @@ class ClubLog(models.Model):
         ('state_change', _('State Change')),
         ('system_action', _('System Action')),
         ('other', _('Other'))
-    ], required=True)
+    ], string=_("Activity Type"), required=True)
 
     model = fields.Char(string=_('Model'), readonly=True)
     res_id = fields.Integer(string=_('Resource ID'), readonly=True)
@@ -44,6 +47,11 @@ class ClubLog(models.Model):
     description = fields.Text(string=_('Description'), readonly=True)
     old_value = fields.Text(string=_('Old Value'), readonly=True)
     new_value = fields.Text(string=_('New Value'), readonly=True)
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
     @api.depends('scope_type', 'activity_type', 'model', 'res_name')
     def _compute_name(self):

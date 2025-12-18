@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="res_config_settings_view_form_clubmanagement" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.clubmanagement</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="80"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Club Management" string="Club Management" name="club_management" groups="clubmanagement.group_clubmanagement_administrator">
+                        <block title="General" name="clubgeneral_setting_container">
+                            <setting id="majority_setting" title="Legal Majority Age">
+                                <field name="club_age_of_majority"/>
+                                <field name="start_member_id" readonly='start_member_id_set'/>
+                                <field name="start_member_id_set" invisible="True" />
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="clubmanagement_config_settings_action" model="ir.actions.act_window">
+            <field name="name">Club Management Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'clubmanagement', 'bin_size': False}</field>
+        </record>
+
+        <menuitem id="menu_clubmanagement_settings"
+                name="Settings"
+                parent="base.menu_administration"
+                sequence="80"
+                action="clubmanagement_config_settings_action"
+                groups="clubmanagement.group_clubmanagement_administrator"/>
+
+        <menuitem id="menu_clubmanagement_admin_settings"
+                name="Settings"
+                parent="club_administration_root_menu"
+                sequence="1000"
+                action="clubmanagement_config_settings_action"
+                groups="clubmanagement.group_clubmanagement_administrator"/>
+
+    </data>
+
+</odoo>

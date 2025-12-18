@@ -15,11 +15,23 @@
                                 <span class="ml-2" invisible="active == True">(<span style="color:red;">Archived</span>)</span>
                             </h1>
                         </div>
+                        <header>
+                            <button
+                                name="action_create_default_roles"
+                                type="object"
+                                string="Create Default Roles"
+                                class="btn btn-primary"
+                                invisible="id == False"
+                            />
+                            <field name="active" />
+                        </header>
                         <group>
                             <group>
                                 <field name="active"/>
                                 <field name="sequence"/>
-                                <field name="club_id" readonly="1"/>
+                                <field name="club_id" readonly="1" invisible="True"/>
+                                <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
+                                <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
                                 <field name="department_id"/>
                                 <field name="pool_id"/>
                                 <field name="hr_department_id"/>
@@ -65,38 +77,59 @@
             <field name="name">club.team.kanban</field>
             <field name="model">club.team</field>
             <field name="arch" type="xml">
-                <kanban class="o_kanban_small_column" string="Teams">
+                <kanban default_group_by="department_id" 
+                        class="o_kanban_small_column" 
+                        on_create="clubmanagement.club_team_form_view" 
+                        group_create="false"
+                        group_delete="false"
+                        group_edit="false">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="shortname"/>
+                    <field name="department_id"/>
+                    <field name="pool_id"/>
+                    <field name="hr_department_id"/>
+                    <field name="members_count"/>
+                    <field name="price"/>
+                    <field name="currency_id"/>
+                    <field name="company_id"/>
                     <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_global_tab">
-                                <div class="oe_kanban_header">
-                                    <span class="badge bg-primary o_kanban_badge"
-                                        t-att-title="record.shortname.value">
-                                        <t t-esc="record.shortname.value or ''"/>
-                                    </span>
-                                    <span class="float-end text-muted" style="font-size: 13px;">
-                                        <i class="fa fa-users"/> 
-                                        <t t-esc="record.member_count.value"/>
-                                    </span>
-                                </div>
-                                <div class="mt8 mb8">
-                                    <strong>
-                                        <t t-esc="record.name.value"/>
-                                    </strong>
-                                </div>
-                                <div>
-                                    <field name="active"/>
-                                </div>
-                                <div class="o_kanban_list_item">
-                                    <small class="text-muted">
-                                        <t t-esc="record.department_id.value and record.department_id.value[1]"/>
-                                        <t t-if="record.pool_id.value"> • 
-                                            <t t-esc="record.pool_id.value[1]"/>
-                                        </t>
-                                    </small>
-                                </div>
-                                <div>
-                                    <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_club_team_kanban">
+                                <div class="oe_kanban_details">
+                                    <table class="o_kanban_card_header_title" width="100%">
+                                        <tr>
+                                            <td><h2><field name="name"/></h2></td>
+                                            <td class="text-right"><strong><field name="members_count"/></strong></td>
+                                        </tr>
+                                    </table>
+                                    <hr class="mb-3 mt-2"/>
+                                    <table class="o_kanban_card_content" width="100%">
+                                        <tr t-if="record.shortname.raw_value">
+                                            <td>Short Name:</td>
+                                            <td><field name="shortname"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department:</td>
+                                            <td><field name="department_id"/></td>
+                                        </tr>
+                                        <tr t-if="record.pool_id.raw_value">
+                                            <td>Pool:</td>
+                                            <td><field name="pool_id"/></td>
+                                        </tr>
+                                        <tr t-if="record.hr_department_id.raw_value">
+                                            <td>HR Department:</td>
+                                            <td><field name="hr_department_id"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Roles:</td>
+                                            <td><field name="role_ids" widget="many2many_tags"/></td>
+                                        </tr>
+                                        <tr t-if="record.price.raw_value != 0">
+                                            <td>Price:</td>
+                                            <td><field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </t>
@@ -104,6 +137,7 @@
                 </kanban>
             </field>
         </record>
+
 
         <record id="club_team_list_view" model="ir.ui.view">
             <field name="name">club.team.list</field>
@@ -113,7 +147,6 @@
                     <field name="active" widget="boolean_button"/>
                     <field name="sequence"/>
                     <field name="name"/>
-                    <field name="club_id"/>
                     <field name="department_id"/>
                     <field name="pool_id"/>
                     <field name="hr_department_id"/>
@@ -128,12 +161,14 @@
             <field name="arch" type="xml">
                 <search string="Search Teams">
                     <field name="name"/>
-                    <field name="club_id"/>
+                    <field name="shortname" />
                     <field name="department_id"/>
                     <field name="pool_id"/>
                     <field name="hr_department_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                     <filter string="Active" name="active" domain="[('active', '=', True)]"/>
                     <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                    <filter string="My Company" name="my_company" domain="[('company_id', '=', allowed_company_ids[0])]"/>
                 </search>
             </field>
         </record>        
@@ -149,7 +184,6 @@
                 (0, 0, {'view_mode': 'list', 'view_id': ref('club_team_list_view')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('club_team_form_view')}),
             ]"/>
-            <field name="context">{}</field>
             <field name="search_view_id" ref="club_team_search_view"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">

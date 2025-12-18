@@ -1,6 +1,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 #
 # For Club Boards and Working Groups
 #
@@ -28,6 +31,7 @@ class ClubBoard(models.Model):
     ], readonly=True)
 
     club_id = fields.Many2one(comodel_name='club.club', string=_('Club'), required=True, readonly=True)
+    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
     subclub_id = fields.Many2one(comodel_name='club.subclub', string=_('Subclub'), tracking=True)
     department_id = fields.Many2one(comodel_name='club.department', string=_('Department'), tracking=True)
     pool_id = fields.Many2one(comodel_name='club.pool', string=_('Pool'), tracking=True)
@@ -36,11 +40,20 @@ class ClubBoard(models.Model):
 
     active = fields.Boolean(default=True, tracking=True)
 
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
+
     @api.constrains('scope_type', 'club_id', 'subclub_id', 'department_id', 'pool_id')
     def _check_scope(self):
         for board in self:
+            # Check, if club_id is set if club is scope_type
+            if board.scope_type == 'club' and not board.club_id:
+                raise ValidationError(_("For scope type 'club', you must select a club."))
+
+            # Check other scope types than club
             types = {
-                'club': board.club_id,
                 'subclub': board.subclub_id,
                 'department': board.department_id,
                 'pool': board.pool_id
@@ -50,7 +63,12 @@ class ClubBoard(models.Model):
                 if board.scope_type == t and not value:
                     raise ValidationError(_("For scope type '%s', you must select the corresponding %s.") % (t, t))
                 if board.scope_type != t and value:
-                    raise ValidationError(_("For scope type '%s', only the corresponding field should be filled.") % (board.scope_type,))
+                    raise ValidationError(_("For scope type '%s', only the corresponding field should be filled.") % board.scope_type)
+
+            # club_id must be set anyway.
+            if not board.club_id:
+                raise ValidationError(_("Club must be set for all board records."))
+
         return True
 
     ########################

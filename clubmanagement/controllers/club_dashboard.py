@@ -8,7 +8,16 @@ class ClubDashboardController(http.Controller):
         # Hole den "single" Club
         club = request.env['club.club'].sudo().search([], limit=1)
         if not club:
-            return {}
+            return {
+                'name': '',
+                'company_id': {'id': False},
+                'member_ids_display': [],
+                'department_ids': [],
+                'pool_ids': [],
+                'upcoming_birthdays': [],
+                'days': 30,
+                'new_members': [],
+            }
 
         # Member States
         member_ids_display = []

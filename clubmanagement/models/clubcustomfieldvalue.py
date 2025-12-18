@@ -1,11 +1,14 @@
 from odoo import models, fields, api, _
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class ClubCustomFieldValue(models.Model):
     _name = 'club.custom.field.value'
     _description = 'Value of custom field'
     _rec_name = 'field_id'
 
-    field_id = fields.Many2one(comodel_name='club.custom.field', required=True, ondelete='cascade')
+    field_id = fields.Many2one(string=_("Field"), comodel_name='club.custom.field', required=True, ondelete='cascade')
     model = fields.Selection([
         ('club.club', _('Club')),
         ('club.subclub', _('Subclub')),
@@ -13,7 +16,7 @@ class ClubCustomFieldValue(models.Model):
         ('club.pool', _('Pool')),
         ('club.team', _('Team')),
         ('club.member', _('Member'))
-    ], required=True)
+    ], string=_("Model"), required=True)
     res_id = fields.Integer(string=_('Record ID'), required=True, index=True)
     value_char = fields.Char()
     value_text = fields.Text()
@@ -31,6 +34,11 @@ class ClubCustomFieldValue(models.Model):
             'Each field can only be used once for an entity'
         )
     ]
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
 def _post_init_hook(env):
     env.cr.execute("""

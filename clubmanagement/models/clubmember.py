@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, ValidationError, UserError
 
 from dateutil.relativedelta import relativedelta
 import base64
@@ -7,6 +7,9 @@ from io import BytesIO
 from datetime import date
 
 from PIL import Image
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class ClubMember(models.Model):
@@ -19,6 +22,7 @@ class ClubMember(models.Model):
     ]
 
     partner_id = fields.Many2one(comodel_name='res.partner', required=True, string=_('Contact'), readonly=True)
+    member_id = fields.Integer(string=_("Member ID"), required=True, readonly=True)
     firstname = fields.Char(related='partner_id.firstname', store=True, string=_('Firstname'), readonly=True)
     lastname = fields.Char(related='partner_id.lastname', store=True, string=_('Lastname'), readonly=True)
     birthdate_date = fields.Date(related='partner_id.birthdate_date', store=True, string=_('Birthdate'), readonly=False)
@@ -27,7 +31,7 @@ class ClubMember(models.Model):
     nationality_id = fields.Many2one(comodel_name='res.country', related='partner_id.nationality_id', store=True, string=_('Nationality'), readonly=False)
     city = fields.Char(related='partner_id.city', store=True, string=_('City'), readonly=True)
 
-    club_id = fields.Many2one(string=_('Club'), comodel_name='club.club', readonly=True)
+    club_id = fields.Many2one(string=_('Club'), comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
     subclub_ids = fields.Many2many(string=_('Subclubs'), comodel_name='club.subclub', relation='club_subclub_member_rel', column1='member_id', column2='subclub_id')
     department_ids = fields.Many2many(string=_('Departments'), comodel_name='club.department', relation='club_department_member_rel', column1='member_id', column2='department_id')
     pool_ids = fields.Many2many(string=_('Pools'), comodel_name='club.pool', relation='club_pool_member_rel', column1='member_id', column2='pool_id')
@@ -56,6 +60,11 @@ class ClubMember(models.Model):
     years_in_club = fields.Float(string=_('Years in Club'), compute='_compute_membership_duration', store=True)
     months_in_club = fields.Integer(string=_('Months in Club'), compute='_compute_membership_duration', store=True)
     days_in_club = fields.Integer(string=_('Days in Club'), compute='_compute_membership_duration', store=True)
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
     @api.depends('birthdate_date')
     def _compute_year_of_birth(self):
@@ -86,6 +95,68 @@ class ClubMember(models.Model):
                     raise ValidationError(
                         _("Could not verify the member photo. Please upload a valid image file")
                     )
+
+    #######################################
+    # CREATE HOOK
+    #######################################
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            # Suche nach existierendem Partner
+            partner = self._find_or_create_partner(vals)
+            vals['partner_id'] = partner.id
+
+            # Generiere Member ID
+            vals['member_id'] = self._generate_member_id()
+
+        members = super(ClubMember, self).create(vals_list)
+
+        for member in members:
+            self.env['club.log'].log_event(
+                scope_type='member',
+                activity_type='create',
+                model=self._name,
+                res_id=member.id,
+                res_name=member.display_name,
+                description=_("Member created: %s") % member.name
+            )
+
+        return members
+
+    def _find_or_create_partner(self, vals):
+        Partner = self.env['res.partner']
+        domain = [
+            ('firstname', '=', vals.get('firstname')),
+            ('lastname', '=', vals.get('lastname')),
+        ]
+
+        if vals.get('birthdate_date'):
+            domain.append(('birthdate_date', '=', vals.get('birthdate_date')))
+        elif vals.get('ssnid'):
+            domain.append(('ssnid', '=', vals.get('ssnid')))
+
+        partner = Partner.search(domain, limit=1)
+
+        if not partner:
+            partner_vals = {
+                'firstname': vals.get('firstname'),
+                'lastname': vals.get('lastname'),
+                'birthdate_date': vals.get('birthdate_date'),
+                'gender': vals.get('gender'),
+                'nationality_id': vals.get('nationality_id'),
+                'ssnid': vals.get('ssnid'),
+            }
+            partner_vals = {k: v for k, v in partner_vals.items() if v}
+            partner = Partner.create(partner_vals)
+
+        return partner
+
+    def _generate_member_id(self):
+        last_member = self.search([], order='member_id desc', limit=1)
+        if last_member:
+            return last_member.member_id + 1
+        return 1
+
 
     ###################################
     # MEMBER STATES - Functionalities

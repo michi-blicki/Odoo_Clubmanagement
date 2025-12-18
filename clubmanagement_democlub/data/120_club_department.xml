@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Club Departments for manchester_nebula_fc_main_club -->
+        <record id="club_dept_active_man" model="club.department">
+            <field name="name">Active Man</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="hr_department_id" ref="dept_active_man"/>
+            <field name="sequence">10</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="club_dept_active_woman" model="club.department">
+            <field name="name">Active Woman</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_main_club"/>
+            <field name="hr_department_id" ref="dept_active_woman"/>
+            <field name="sequence">20</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Club Departments for manchester_nebula_fc_junior -->
+        <record id="club_dept_youth_football_boys" model="club.department">
+            <field name="name">Youth Football Boys</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="sequence">30</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="club_dept_youth_football_girls" model="club.department">
+            <field name="name">Youth Football Girls</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="hr_department_id" ref="dept_youth_football_girls"/>
+            <field name="sequence">40</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="club_dept_kids_football_boys" model="club.department">
+            <field name="name">Kids Football Boys</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="hr_department_id" ref="dept_kids_football_boys"/>
+            <field name="sequence">50</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="club_dept_kids_football_girls" model="club.department">
+            <field name="name">Kids Football Girls</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_junior"/>
+            <field name="hr_department_id" ref="dept_kids_football_girls"/>
+            <field name="sequence">60</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Club Departments for nebula_fc_lucerne -->
+        <record id="club_dept_active_football_lucerne" model="club.department">
+            <field name="name">Active Football</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="hr_department_id" ref="dept_active_football_lucerne"/>
+            <field name="sequence">70</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="club_dept_youth_football_lucerne" model="club.department">
+            <field name="name">Youth Football</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="subclub_id" ref="subclub_lucerne"/>
+            <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="sequence">80</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

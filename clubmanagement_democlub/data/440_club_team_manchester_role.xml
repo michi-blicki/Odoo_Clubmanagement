@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Roles for team_national_north -->
+        <record id="role_trainer_national_north" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_national_north"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_national_north" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_national_north"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Roles for team_northern_premier -->
+        <record id="role_trainer_northern_premier" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_northern_premier"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_northern_premier" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_northern_premier"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Roles for team_womens_super_league -->
+        <record id="role_trainer_womens_super_league" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_womens_super_league"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_womens_super_league" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_womens_super_league"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- Roles for team_womens_national_league_div_one -->
+        <record id="role_trainer_womens_national_league_div_one" model="club.role">
+            <field name="code">TRAIN</field>
+            <field name="name_extension">Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">lead</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_womens_national_league_div_one"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="role_assistant_trainer_womens_national_league_div_one" model="club.role">
+            <field name="code">ASSTR</field>
+            <field name="name_extension">Assistant Trainer</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="role_type">assistant</field>
+            <field name="scope_type">team</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="team_id" ref="team_womens_national_league_div_one"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="perm_mail" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

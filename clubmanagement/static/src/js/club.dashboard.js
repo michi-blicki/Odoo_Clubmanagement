@@ -11,8 +11,8 @@ export class ClubDashboard extends Component {
         this.load();
     }
     async load() {
-        const data = await this.http.post('/clubmanagement/dashboard/data', {});
-        this.state = Object.assign({ loading: false }, data || {});
+        const response = await this.http.post('/clubmanagement/dashboard/data', {});
+        this.state = Object.assign({ loading: false }, response.result || {});
     }
 }
 ClubDashboard.template = "club.club.dashboard";

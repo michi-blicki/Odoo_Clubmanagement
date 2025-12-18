@@ -1,6 +1,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class ClubMemberMembershipHistory(models.Model):
     _name = 'club.member.membership.history'
     _description = 'Club Member Membership History'
@@ -12,6 +15,11 @@ class ClubMemberMembershipHistory(models.Model):
     date_end = fields.Date(string=_("End Date"), required=False)
     active = fields.Boolean(default=True)
     notes = fields.Text(string=_('Notes'))
+
+    @api.model
+    def init(self):
+        _logger.info('Initializing model: %s', self._name)
+        super().init()
 
     @api.constrains('date_start', 'date_end')
     def _check_dates(self):
