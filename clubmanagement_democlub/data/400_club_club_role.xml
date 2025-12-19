@@ -6,6 +6,8 @@
         
         <record id="role_president" model="club.role">
             <field name="code">PRES</field>
+            <field name="name">Manchester Nebula FC (Club): President</field>
+            <field name="auto_name" eval="True" />
             <field name="name_extension">President</field>
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
@@ -22,6 +24,8 @@
         <record id="role_vice_president" model="club.role">
             <field name="code">VPRES</field>
             <field name="name_extension">Vice President</field>
+            <field name="name">Manchester Nebula FC (Club): Vice President</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">club</field>
@@ -37,6 +41,8 @@
         <record id="role_cfo" model="club.role">
             <field name="code">CFO</field>
             <field name="name_extension">CFO</field>
+            <field name="name">Manchester Nebula FC (Club): CFO</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">club</field>
@@ -52,6 +58,8 @@
         <record id="role_cao" model="club.role">
             <field name="code">CAO</field>
             <field name="name_extension">Chief Administration Officer</field>
+            <field name="name">Manchester Nebula FC (Club): Chief Administration Officer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">club</field>
@@ -67,6 +75,8 @@
         <record id="role_ctio" model="club.role">
             <field name="code">CTIO</field>
             <field name="name_extension">Chief Technology and Information Officer</field>
+            <field name="name">Manchester Nebula FC (Club): Chief Technology and Information Officer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">club</field>

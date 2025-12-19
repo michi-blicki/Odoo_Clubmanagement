@@ -8,10 +8,11 @@
         <record id="role_trainer_lucerne_2liga" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_2liga"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -24,10 +25,11 @@
         <record id="role_assistant_trainer_lucerne_2liga" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_2liga"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -41,10 +43,11 @@
         <record id="role_trainer_lucerne_3liga" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_3liga"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -57,10 +60,11 @@
         <record id="role_assistant_trainer_lucerne_3liga" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_3liga"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -74,10 +78,11 @@
         <record id="role_trainer_lucerne_4liga" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_4liga"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -90,10 +95,11 @@
         <record id="role_assistant_trainer_lucerne_4liga" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_main_club"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_4liga"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -107,10 +113,11 @@
         <record id="role_trainer_lucerne_bjunioren" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_bjunioren"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -123,10 +130,11 @@
         <record id="role_assistant_trainer_lucerne_bjunioren" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_bjunioren"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -140,10 +148,11 @@
         <record id="role_trainer_lucerne_cjunioren" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_cjunioren"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -156,10 +165,11 @@
         <record id="role_assistant_trainer_lucerne_cjunioren" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_cjunioren"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -173,10 +183,11 @@
         <record id="role_trainer_lucerne_d9a" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_d9a"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -189,10 +200,11 @@
         <record id="role_assistant_trainer_lucerne_d9a" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_d9a"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -206,10 +218,11 @@
         <record id="role_trainer_lucerne_d9b" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_d9b"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -222,10 +235,11 @@
         <record id="role_assistant_trainer_lucerne_d9b" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_d9b"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -239,10 +253,11 @@
         <record id="role_trainer_lucerne_ea" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_ea"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -255,10 +270,11 @@
         <record id="role_assistant_trainer_lucerne_ea" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_ea"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -272,10 +288,11 @@
         <record id="role_trainer_lucerne_eb" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_eb"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -288,10 +305,11 @@
         <record id="role_assistant_trainer_lucerne_eb" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_eb"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -305,10 +323,11 @@
         <record id="role_trainer_lucerne_ec" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_ec"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -321,10 +340,11 @@
         <record id="role_assistant_trainer_lucerne_ec" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
-            <field name="company_id" ref="fc_luzern_junior"/>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
-            <field name="club_id" ref="fc_luzern_club"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="team_id" ref="team_lucerne_ec"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>

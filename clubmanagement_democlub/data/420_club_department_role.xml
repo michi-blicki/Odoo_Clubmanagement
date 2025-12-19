@@ -6,6 +6,8 @@
         <record id="role_leader_active_man" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
+            <field name="name">Active Man (Department): Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
@@ -22,6 +24,8 @@
         <record id="role_assistant_active_man" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
+            <field name="name">Active Man (Department): Assistant</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
@@ -39,6 +43,8 @@
         <record id="role_leader_active_woman" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
+            <field name="name">Active Woman (Department): Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
@@ -55,6 +61,8 @@
         <record id="role_assistant_active_woman" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
+            <field name="name">Active Woman (Department): Assistant</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
@@ -72,6 +80,8 @@
         <record id="role_leader_youth_football_boys" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
+            <field name="name">Youth Football Boys (Department): Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
@@ -88,6 +98,8 @@
         <record id="role_assistant_youth_football_boys" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
+            <field name="name">Youth Football Boys (Department): Assistant</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
@@ -105,6 +117,8 @@
         <record id="role_leader_youth_football_girls" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
+            <field name="name">Youth Football Girls (Department): Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
@@ -121,6 +135,8 @@
         <record id="role_assistant_youth_football_girls" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
+            <field name="name">Youth Football Girls (Department): Assistant</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
@@ -138,6 +154,8 @@
         <record id="role_leader_kids_football_boys" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
+            <field name="name">Kids Football Boys (Department): Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
@@ -154,6 +172,8 @@
         <record id="role_assistant_kids_football_boys" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
+            <field name="name">Kids Football Boys (Department): Assistant</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
@@ -171,6 +191,8 @@
         <record id="role_leader_kids_football_girls" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
+            <field name="name">Kids Football Girls (Department): Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
@@ -187,6 +209,8 @@
         <record id="role_assistant_kids_football_girls" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
+            <field name="name">Kids Football Girls (Department): Assistant</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
@@ -204,7 +228,9 @@
         <record id="role_leader_active_football_lucerne" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name">Luzern - Aktive (Department): Leiter</field>
+            <field name="auto_name" eval="False" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
@@ -220,7 +246,9 @@
         <record id="role_assistant_active_football_lucerne" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name">Luzern - Aktive (Department): Vize-Leiter</field>
+            <field name="auto_name" eval="False" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
@@ -237,7 +265,9 @@
         <record id="role_leader_youth_football_lucerne" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Leader</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name">Luzern - Juioren (Department): Leiter</field>
+            <field name="auto_name" eval="False" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">department</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
@@ -253,7 +283,9 @@
         <record id="role_assistant_youth_football_lucerne" model="club.role">
             <field name="code">ASST</field>
             <field name="name_extension">Assistant</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name">Luzern - Junioren (Department): Vize-Leiter</field>
+            <field name="auto_name" eval="False" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">department</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>

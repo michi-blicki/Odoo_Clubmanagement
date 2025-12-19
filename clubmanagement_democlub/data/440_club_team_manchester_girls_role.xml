@@ -8,6 +8,7 @@
         <record id="role_trainer_girls_u18" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -24,6 +25,7 @@
         <record id="role_assistant_trainer_girls_u18" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -41,6 +43,7 @@
         <record id="role_trainer_girls_u16" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -57,6 +60,7 @@
         <record id="role_assistant_trainer_girls_u16" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -74,6 +78,7 @@
         <record id="role_trainer_girls_u13" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -90,6 +95,7 @@
         <record id="role_assistant_trainer_girls_u13" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -107,6 +113,7 @@
         <record id="role_trainer_girls_u12a" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -123,6 +130,7 @@
         <record id="role_assistant_trainer_girls_u12a" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -140,6 +148,7 @@
         <record id="role_trainer_girls_u12b" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -156,6 +165,7 @@
         <record id="role_assistant_trainer_girls_u12b" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -173,6 +183,7 @@
         <record id="role_trainer_girls_u10a" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -189,6 +200,7 @@
         <record id="role_assistant_trainer_girls_u10a" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -206,6 +218,7 @@
         <record id="role_trainer_girls_u10b" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -222,6 +235,7 @@
         <record id="role_assistant_trainer_girls_u10b" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -239,6 +253,7 @@
         <record id="role_trainer_girls_u10c" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -255,6 +270,7 @@
         <record id="role_assistant_trainer_girls_u10c" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>

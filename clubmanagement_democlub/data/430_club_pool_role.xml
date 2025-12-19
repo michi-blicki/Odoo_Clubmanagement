@@ -6,6 +6,8 @@
         <record id="role_lead_boys_u10" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Pool Leader</field>
+            <field name="name">Kids Football Boys - U10 Boys (Pool): Pool Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">pool</field>
@@ -23,6 +25,8 @@
         <record id="role_lead_boys_u12" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Pool Leader</field>
+            <field name="name">Kids Football Boys - U12 Boys (Pool): Pool Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">pool</field>
@@ -40,6 +44,8 @@
         <record id="role_lead_boys_u14" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Pool Leader</field>
+            <field name="name">Kids Football Boys - U14 Boys (Pool): Pool Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">pool</field>
@@ -57,6 +63,8 @@
         <record id="role_lead_girls_gu10" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Pool Leader</field>
+            <field name="name">Kids Football Girls - GU10 Girls (Pool): Pool Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">pool</field>
@@ -74,6 +82,8 @@
         <record id="role_lead_girls_gu12" model="club.role">
             <field name="code">LEAD</field>
             <field name="name_extension">Pool Leader</field>
+            <field name="name">Kids Football Girls - GU12 Girls (Pool): Pool Leader</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">pool</field>

@@ -6,6 +6,8 @@
         <record id="role_president_main" model="club.role">
             <field name="code">PRES</field>
             <field name="name_extension">President</field>
+            <field name="name">Manchester Nebula FC, Main Club (Subclub): President</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -22,6 +24,8 @@
         <record id="role_vice_president_main" model="club.role">
             <field name="code">VPRES</field>
             <field name="name_extension">Vice President</field>
+            <field name="name">Manchester Nebula FC, Main Club (Subclub): Vice President</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -38,6 +42,8 @@
         <record id="role_chief_backoffice_main" model="club.role">
             <field name="code">CBO</field>
             <field name="name_extension">Chief Backoffice</field>
+            <field name="name">Manchester Nebula FC, Main Club (Subclub): Chief Backoffice</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -54,6 +60,8 @@
         <record id="role_chief_finance_main" model="club.role">
             <field name="code">CFO</field>
             <field name="name_extension">Chief Finance</field>
+            <field name="name">Manchester Nebula FC, Main Club (Subclub): Chief Finance</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -71,6 +79,8 @@
         <record id="role_president_junior" model="club.role">
             <field name="code">PRES</field>
             <field name="name_extension">President</field>
+            <field name="name">Manchester Nebula FC, Junior Division (Subclub): President</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -87,6 +97,8 @@
         <record id="role_vice_president_junior" model="club.role">
             <field name="code">VPRES</field>
             <field name="name_extension">Vice President</field>
+            <field name="name">Manchester Nebula FC, Junior Division (Subclub): Vice President</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -103,6 +115,8 @@
         <record id="role_chief_backoffice_junior" model="club.role">
             <field name="code">CBO</field>
             <field name="name_extension">Chief Backoffice</field>
+            <field name="name">Manchester Nebula FC, Junior Division (Subclub): Chief Backoffice</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -119,6 +133,8 @@
         <record id="role_chief_finance_junior" model="club.role">
             <field name="code">CFO</field>
             <field name="name_extension">Chief Finance</field>
+            <field name="name">Manchester Nebula FC, Junior Division (Subclub): Chief Finance</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
@@ -135,8 +151,10 @@
         <!-- Roles for subclub_lucerne -->
         <record id="role_president_lucerne" model="club.role">
             <field name="code">PRES</field>
-            <field name="name_extension">President</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name_extension">Präsident</field>
+            <field name="name">Nebula FC, Lucerne Chapter (Subclub): Präsident</field>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
@@ -151,8 +169,10 @@
 
         <record id="role_vice_president_lucerne" model="club.role">
             <field name="code">VPRES</field>
-            <field name="name_extension">Vice President</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name_extension">Vizepräsident</field>
+            <field name="name">Nebula FC, Lucerne Chapter (Subclub): Vizepräsident</field>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
@@ -167,8 +187,10 @@
 
         <record id="role_chief_backoffice_lucerne" model="club.role">
             <field name="code">CBO</field>
-            <field name="name_extension">Chief Backoffice</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name_extension">Leiter Backoffice</field>
+            <field name="name">Nebula FC, Lucerne Chapter (Subclub): Leiter Backoffice</field>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
@@ -183,8 +205,10 @@
 
         <record id="role_chief_finance_lucerne" model="club.role">
             <field name="code">CFO</field>
-            <field name="name_extension">Chief Finance</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
+            <field name="name_extension">Leiter Finanzen</field>
+            <field name="name">Nebula FC, Lucerne Chapter (Subclub): Leiter Finanzen</field>
+            <field name="auto_name" eval="True" />
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="role_type">lead</field>
             <field name="scope_type">subclub</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>

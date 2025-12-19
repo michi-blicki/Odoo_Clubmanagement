@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data noupdate="1">
+    <data>
     
         <record id="base.user_admin" model="res.users">
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_administrator'))]"/>
+            <field name="groups_id" eval="[(4, ref('clubmanagement.group_clubmanagement_administrator'))]"/>
         </record>
 
         <!-- manchester_nebula_fc_main -->
@@ -12,9 +12,13 @@
             <field name="name">Oliver Greenwood</field>
             <field name="login">oliver</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_main'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_master_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_master_user'))
+            ]"/>
         </record>
 
         <!-- manchester_nebula_fc_main_club -->
@@ -22,13 +26,15 @@
             <field name="name">Emily Thompson</field>
             <field name="login">emily</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="company_ids" eval="[
                 (4, ref('manchester_nebula_fc_main_club')),
                 (4, ref('manchester_nebula_fc_junior'))
             ]"/>
             <field name="groups_id" eval="[
-                (4, ref('group_clubmanagement_master_user'))
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_master_user'))
             ]"/>
         </record>
 
@@ -36,27 +42,39 @@
             <field name="name">James Harrison</field>
             <field name="login">james</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_main_club'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_key_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_key_user'))
+            ]"/>
         </record>
 
         <record id="user_main_club_user1" model="res.users">
             <field name="name">Sarah Parker</field>
             <field name="login">sarah</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_main_club'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_user'))
+            ]"/>
         </record>
 
         <record id="user_main_club_user2" model="res.users">
             <field name="name">Michael Collins</field>
             <field name="login">michael</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_main_club'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_user'))
+            ]"/>
         </record>
 
         <!-- manchester_nebula_fc_junior -->
@@ -64,36 +82,52 @@
             <field name="name">Rebecca Foster</field>
             <field name="login">rebecca</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_junior'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_master_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_master_user'))
+            ]"/>
         </record>
 
         <record id="user_junior_key" model="res.users">
             <field name="name">Daniel Roberts</field>
             <field name="login">daniel</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_junior'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_key_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_key_user'))
+            ]"/>
         </record>
 
         <record id="user_junior_user1" model="res.users">
             <field name="name">Laura Wilson</field>
             <field name="login">laura</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_junior'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_user'))
+            ]"/>
         </record>
 
         <record id="user_junior_user2" model="res.users">
             <field name="name">Thomas Brown</field>
             <field name="login">thomas</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_junior'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_user'))
+            ]"/>
         </record>
 
         <!-- nebula_fc_lucerne -->
@@ -101,27 +135,39 @@
             <field name="name">Markus Weber</field>
             <field name="login">markus</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="company_ids" eval="[(4, ref('nebula_fc_lucerne'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_master_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_master_user'))
+            ]"/>
         </record>
 
         <record id="user_lucerne_key" model="res.users">
             <field name="name">Anna Müller</field>
             <field name="login">anna</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="company_ids" eval="[(4, ref('nebula_fc_lucerne'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_key_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_key_user'))
+            ]"/>
         </record>
 
         <record id="user_lucerne_user" model="res.users">
             <field name="name">Stefan Keller</field>
             <field name="login">stefan</field>
             <field name="password">Start100</field>
+            <field name="active" eval="True" />
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="company_ids" eval="[(4, ref('nebula_fc_lucerne'))]"/>
-            <field name="groups_id" eval="[(4, ref('group_clubmanagement_user'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_user'))
+            ]"/>
         </record>
 
     </data>

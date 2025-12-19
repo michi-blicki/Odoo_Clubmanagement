@@ -6,6 +6,7 @@
         <record id="role_trainer_national_north" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -22,6 +23,7 @@
         <record id="role_assistant_trainer_national_north" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -39,6 +41,7 @@
         <record id="role_trainer_northern_premier" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -55,6 +58,7 @@
         <record id="role_assistant_trainer_northern_premier" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -72,6 +76,7 @@
         <record id="role_trainer_womens_super_league" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -88,6 +93,7 @@
         <record id="role_assistant_trainer_womens_super_league" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>
@@ -105,6 +111,7 @@
         <record id="role_trainer_womens_national_league_div_one" model="club.role">
             <field name="code">TRAIN</field>
             <field name="name_extension">Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">lead</field>
             <field name="scope_type">team</field>
@@ -121,6 +128,7 @@
         <record id="role_assistant_trainer_womens_national_league_div_one" model="club.role">
             <field name="code">ASSTR</field>
             <field name="name_extension">Assistant Trainer</field>
+            <field name="auto_name" eval="True" />
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="role_type">assistant</field>
             <field name="scope_type">team</field>

@@ -8,6 +8,7 @@
             <field name="name">Executive Board</field>
             <field name="group_type">board</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_main_club"/>
             <field name="active" eval="True"/>
@@ -17,6 +18,7 @@
             <field name="name">Player Management Board</field>
             <field name="group_type">board</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_main_club"/>
             <field name="active" eval="True"/>
@@ -26,6 +28,7 @@
             <field name="name">Team Leader Board</field>
             <field name="group_type">board</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_main_club"/>
             <field name="active" eval="True"/>
@@ -36,6 +39,7 @@
             <field name="name">Executive Board</field>
             <field name="group_type">board</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="active" eval="True"/>
@@ -45,6 +49,7 @@
             <field name="name">Player Management Board</field>
             <field name="group_type">board</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="active" eval="True"/>
@@ -55,6 +60,7 @@
             <field name="name">Vorstand</field>
             <field name="group_type">board</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="nebula_fc_lucerne" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_lucerne"/>
             <field name="active" eval="True"/>
@@ -64,6 +70,8 @@
             <field name="name">Spielermanagement</field>
             <field name="group_type">board</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="nebula_fc_lucerne" />
+            <field name="company_id" ref="manchester_nebula_fc_junior" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_lucerne"/>
             <field name="active" eval="True"/>
@@ -73,6 +81,7 @@
             <field name="name">Trainer</field>
             <field name="group_type">working</field>
             <field name="scope_type">subclub</field>
+            <field name="company_id" ref="nebula_fc_lucerne" />
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_lucerne"/>
             <field name="active" eval="True"/>

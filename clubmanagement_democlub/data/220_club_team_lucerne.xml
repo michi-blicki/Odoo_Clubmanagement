@@ -7,8 +7,8 @@
         <record id="team_lucerne_2liga" model="club.team">
             <field name="name">Herren 2. Liga Regional</field>
             <field name="shortname">H2LR</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_active_football_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
             <field name="sequence">10</field>
@@ -18,8 +18,8 @@
         <record id="team_lucerne_3liga" model="club.team">
             <field name="name">Herren 3. Liga</field>
             <field name="shortname">H3L</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_active_football_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
             <field name="sequence">20</field>
@@ -29,8 +29,8 @@
         <record id="team_lucerne_4liga" model="club.team">
             <field name="name">Herren 4. Liga</field>
             <field name="shortname">H4L</field>
-            <field name="company_id" ref="lucerne_fc_main"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_active_football_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
             <field name="sequence">30</field>
@@ -42,8 +42,8 @@
         <record id="team_lucerne_bjunioren" model="club.team">
             <field name="name">B-Junioren</field>
             <field name="shortname">B-JUN</field>
-            <field name="company_id" ref="lucerne_fc_junior"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="sequence">10</field>
@@ -53,8 +53,8 @@
         <record id="team_lucerne_cjunioren" model="club.team">
             <field name="name">C-Junioren</field>
             <field name="shortname">C-JUN</field>
-            <field name="company_id" ref="lucerne_fc_junior"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="sequence">20</field>
@@ -64,8 +64,8 @@
         <record id="team_lucerne_d9a" model="club.team">
             <field name="name">D/9a-Junioren</field>
             <field name="shortname">D9A</field>
-            <field name="company_id" ref="lucerne_fc_junior"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="sequence">30</field>
@@ -75,8 +75,8 @@
         <record id="team_lucerne_d9b" model="club.team">
             <field name="name">D/9b-Junioren</field>
             <field name="shortname">D9B</field>
-            <field name="company_id" ref="lucerne_fc_junior"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="sequence">40</field>
@@ -86,8 +86,8 @@
         <record id="team_lucerne_ea" model="club.team">
             <field name="name">Ea-Junioren</field>
             <field name="shortname">EA</field>
-            <field name="company_id" ref="lucerne_fc_junior"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="sequence">50</field>
@@ -97,8 +97,8 @@
         <record id="team_lucerne_eb" model="club.team">
             <field name="name">Eb-Junioren</field>
             <field name="shortname">EB</field>
-            <field name="company_id" ref="lucerne_fc_junior"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="sequence">60</field>
@@ -108,8 +108,8 @@
         <record id="team_lucerne_ec" model="club.team">
             <field name="name">Ec-Junioren</field>
             <field name="shortname">EC</field>
-            <field name="company_id" ref="lucerne_fc_junior"/>
-            <field name="club_id" ref="lucerne_fc_club"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="sequence">70</field>
