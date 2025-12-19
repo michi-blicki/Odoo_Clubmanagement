@@ -12,7 +12,8 @@ class ClubRole(models.Model):
         'mail.activity.mixin',
     ]
     
-    name = fields.Char(required=True, compute='_compute_name', store=True)
+    name = fields.Char(string=_("Name"), required=True, store=True)
+    auto_name = fields.Boolean(string=_("Auto-generate Name"), required=True, default=True, help=_("If checked, the name will be automatically generated."))
     name_extension = fields.Char(_('Name Extenseion'), required=False, tracking=True)
     code = fields.Char(string=_("Code"), required=True, tracking=True)
     company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
@@ -57,25 +58,45 @@ class ClubRole(models.Model):
         _logger.info('Initializing model: %s', self._name)
         super().init()
 
-    @api.depends('role_type', 'scope_type', 'club_id', 'subclub_id', 'department_id', 'pool_id', 'team_id', 'board_id', 'name_extension')
-    def _compute_name(self):
-        for record in self:
-            scope_obj = None
-            if record.scope_type == 'club':
-                scope_obj = record.club_id
-            elif record.scope_type == 'board':
-                scope_obj = record.board_id
-            elif record.scope_type == 'subclub':
-                scope_obj = record.subclub_id
-            elif record.scope_type == 'department':
-                scope_obj = record.department_id
-            elif record.scope_type == 'pool':
-                scope_obj = record.pool_id
-            elif record.scope_type == 'team':
-                scope_obj = record.team_id
+    @api.model
+    def _generate_name(self, vals):
+        #
+        # This procedure generates the name based on given values
+        scope_type = vals.get('scope_type')
+        role_type = dict(self._fields['role_type'].selection).get(vals.get('role_type'), '')
+        name_extension = vals.get('name_extension', '')
 
-            scope_name = scope_obj.name if scope_obj else '???'
-            role_type = dict(self._fields['role_type'].selection).get(record.role_type, record.role_type)
+        scope_name = ''
+        if scope_type == 'club' and vals.get('club_id'):
+            club = self.env['club.club'].browse(vals.get('club_id'))
+            scope_name = f"{club.name} (Club)"
+        elif scope_type == 'board' and vals.get('board_id'):
+            board = self.env['club.board'].browse(vals.get('board_id'))
+            scope_name = f"{board.name} ({_("Board")})"
+        elif scope_type == 'subclub' and vals.get('subclub_id'):
+            subclub = self.env['club.subclub'].browse(vals.get('subclub_id'))
+            scope_name = f"{subclub.name} ({_("Subclub")})"
+        elif scope_type == 'department' and vals.get('department_id'):
+            dep = self.env['club.department'].browse(vals.get('department_id'))
+            scope_name = f"{dep.name} ({_("Department")})"
+        elif scope_type == 'pool' and vals.get('pool_id'):
+            pool = self.env['club.pool'].browse(vals.get('pool_id'))
+            scope_name = f"{pool.department_id.name} - {pool.name} ({_("Pool")})"
+        elif scope_type == 'team' and vals.get('team_id'):
+            team = self.env['club.team'].browse(vals.get('team_id'))
+            scope_name = f"{team.department_id.name} - {team.name} ({_("Team")})"
+
+        generated_name = scope_name
+        if name_extension:
+            generated_name += f": {name_extension}"
+
+        return generated_name
+
+    @api.depends('auto_name', 'role_type', 'scope_type', 'club_id', 'subclub_id', 'department_id', 'pool_id', 'team_id', 'board_id', 'name_extension')
+    def _on_change_name_fields(self):
+
+        if self.auto_name:
+            self.name = self._generate_name(self._convert_to_write(self.read(['scope_type', 'role_type', 'club_id', 'board_id', 'subclub_id', 'department_id', 'pool_id', 'team_id', 'name_extension'])[0]))
 
             self.env['club.log'].log_event(
                 scope_type='role',
@@ -118,6 +139,10 @@ class ClubRole(models.Model):
     ########################
     @api.model_create_multi
     def create(self, vals_list):
+
+        for vals in vals_list:
+            if vals.get('auto_name', True):
+                vals['name'] = self._generate_name(vals)
         
         # Create the role first
         roles = super(ClubRole, self).create(vals_list)
@@ -136,6 +161,18 @@ class ClubRole(models.Model):
 
         return roles
 
+    ########################
+    # WRITE HOOK
+    ########################
+    def write(self, vals):
+        if 'auto_name' in vals or (vals.get('auto_name', True) and any(field in vals for field in ['scope_type', 'role_type', 'club_id', 'team_id', 'name_extension'])):
+            for record in self:
+                if record.auto_name:
+                    new_vals = record.copy_data()[0]
+                    new_vals.update(vals)
+                    vals['name'] = self._generate_name(new_vals)
+        
+        return super(ClubRole, self).write(vals)
 
     ########################
     # UNLINK HOOK
