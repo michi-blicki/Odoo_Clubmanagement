@@ -66,7 +66,7 @@
 
         <!-- Club Departments for nebula_fc_lucerne -->
         <record id="club_dept_active_football_lucerne" model="club.department">
-            <field name="name">Active Football</field>
+            <field name="name">Aktive</field>
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_lucerne"/>
@@ -76,7 +76,7 @@
         </record>
 
         <record id="club_dept_youth_football_lucerne" model="club.department">
-            <field name="name">Youth Football</field>
+            <field name="name">Junioren</field>
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_lucerne"/>

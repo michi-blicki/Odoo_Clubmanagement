@@ -16,6 +16,9 @@ from . import clubmember_membership
 from . import clubmember_membership_history
 from . import clubmember_state
 from . import clubmember_state_history
+from . import clubmember_state_rule
+from . import clubmember_guardian
 from . import clubrole
 from . import clubcustomfield
 from . import clubcustomfieldvalue
+from . import clubapiconfig

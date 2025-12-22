@@ -40,7 +40,8 @@ Long description of module's purpose
         'partner_contact_gender',
         'partner_contact_nationality',
         'partner_multi_company',
-        'partner_firstname'
+        'partner_firstname',
+        'payroll',
     ],
 
     # always loaded
@@ -61,6 +62,7 @@ Long description of module's purpose
         'views/club_20_view_member_blocked.xml',
         'views/club_20_view_member_deleted.xml',
         'views/club_20_view_member_waiting.xml',
+        'views/club_20_view_member_all.xml',
         'views/club_30_menu_memberships.xml',
         'views/club_50_menu_organisation.xml',
         'views/club_50_view_department.xml',
@@ -73,10 +75,18 @@ Long description of module's purpose
         'views/club_80_view_custom_field.xml',
         'views/club_80_view_memberships.xml',
         'views/club_80_view_memberstates.xml',
+        'views/club_80_view_memberstate_rules.xml',
         'views/club_80_view_roles.xml',
         'views/club_80_view_subclub.xml',
         'views/club_10_menu_dashboard.xml',
         'views/res_config_settings_view.xml',
+    ],
+
+    'translation_files': [
+        'i18n/de_CH.po',
+        'i18n/de_DE.po',
+        'i18n/fr_FR.po',
+        'i18n/it_IT.po',
     ],
 
     'assets': {

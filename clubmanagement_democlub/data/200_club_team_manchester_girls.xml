@@ -46,7 +46,7 @@
             <field name="shortname">MNG12A</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_girls"/>
+            <field name="department_id" ref="club_dept_kids_football_girls"/>
             <field name="pool_id" ref="pool_girls_gu12"/>
             <field name="hr_department_id" ref="dept_youth_football_girls"/>
             <field name="sequence">40</field>
@@ -58,7 +58,7 @@
             <field name="shortname">MNG12B</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_girls"/>
+            <field name="department_id" ref="club_dept_kids_football_girls"/>
             <field name="pool_id" ref="pool_girls_gu12"/>
             <field name="hr_department_id" ref="dept_youth_football_girls"/>
             <field name="sequence">50</field>
@@ -71,7 +71,7 @@
             <field name="shortname">MNG10A</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_girls"/>
+            <field name="department_id" ref="club_dept_kids_football_girls"/>
             <field name="pool_id" ref="pool_girls_gu10"/>
             <field name="hr_department_id" ref="dept_youth_football_girls"/>
             <field name="sequence">60</field>
@@ -83,7 +83,7 @@
             <field name="shortname">MNG10B</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_girls"/>
+            <field name="department_id" ref="club_dept_kids_football_girls"/>
             <field name="pool_id" ref="pool_girls_gu10"/>
             <field name="hr_department_id" ref="dept_youth_football_girls"/>
             <field name="sequence">70</field>
@@ -95,7 +95,7 @@
             <field name="shortname">MNG10C</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_girls"/>
+            <field name="department_id" ref="club_dept_kids_football_girls"/>
             <field name="pool_id" ref="pool_girls_gu10"/>
             <field name="hr_department_id" ref="dept_youth_football_girls"/>
             <field name="sequence">80</field>

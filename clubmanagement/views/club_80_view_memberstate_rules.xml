@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="view_club_member_state_rule_form" model="ir.ui.view">
+            <field name="name">club.member.state.rule.form</field>
+            <field name="model">club.member.state.rule</field>
+            <field name="arch" type="xml">
+                <form string="Member State Rule">
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h2><field name="name" placeholder="State Rule"/></h2>
+                        </div>
+                        <group>
+                            <field name="new_state_id" />
+                        </group>
+                        <group>
+                            <field name="sequence" />
+                            <field name="apply_on" />
+                            <field name="cron_id" />
+                        </group>
+                        <group>
+                            <field name="condition" />
+                        </group>
+                        <group>
+                            <field name="reason" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record id="view_club_member_state_rule_list" model="ir.ui.view">
+            <field name="name">club.member.state.rule.list</field>
+            <field name="model">club.member.state.rule</field>
+            <field name="arch" type="xml">
+                <list default_order="sequence,id">
+                    <field name="name"/>
+                    <field name="sequence"/>
+                    <field name="apply_on"/>
+                    <field name="active"/>
+                    <field name="cron_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_club_member_state_rule_search" model="ir.ui.view">
+            <field name="name">club.member.state.rule.search</field>
+            <field name="model">club.member.state.rule</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="apply_on"/>
+                    <field name="new_state_id"/>
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <filter string="With Cron Job" name="with_cron" domain="[('cron_id', '!=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Apply On" name="group_by_apply_on" context="{'group_by': 'apply_on'}"/>
+                        <filter string="New State" name="group_by_new_state" context="{'group_by': 'new_state_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    
+        <record id="club_member_state_rule_list_action" model="ir.actions.act_window">
+            <field name="name">Member State Rules</field>
+            <field name="res_model">club.member.state.rule</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('view_club_member_state_rule_list')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('view_club_member_state_rule_form')}),
+            ]"/>
+            <field name="search_view_id" ref="view_club_member_state_rule_search"/>
+            <field name="context">{'search_default_active': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Member State Rule.
+                </p>
+            </field>
+        </record>
+
+    
+        <menuitem
+            id="club_memberstate_rules_list_menu"
+            name="Member State Rules"
+            action="club_member_state_rule_list_action"
+            groups="clubmanagement.group_clubmanagement_administrator"
+            parent="club_administration_root_menu"
+            sequence="42"/>
+    
+    </data>
+
+</odoo>

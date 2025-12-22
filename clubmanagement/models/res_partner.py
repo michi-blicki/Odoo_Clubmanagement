@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    ssnid = fields.Char(string=_('SSN No'), help='Social Security Number', groups="base.group_user", copy=False, tracking=True)
+    ssnid = fields.Char(string='SSN No', help='Social Security Number', groups="base.group_user", copy=False, tracking=True)
 
     @api.model
     def init(self):

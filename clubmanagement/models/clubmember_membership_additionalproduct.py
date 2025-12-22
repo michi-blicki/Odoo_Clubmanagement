@@ -7,10 +7,10 @@ class ClubMemberMembershipAdditionalProduct(models.Model):
     _name = 'club.member.membership.additional.product'
     _description = 'Additional Product for Membership'
 
-    membership_id = fields.Many2one(string=_("Membership"), comodel_name="club.member.membership", required=True)
-    product_id = fields.Many2one(string=_("Product"), comodel_name="product.product", required=True)
-    price = fields.Monetary(string=_("Price"), compute='_compute_price', readonly=True, store=True, currency_field='currency_id')
-    currency_id = fields.Many2one(string=_("Currency"), comodel_name="res.currency", related='membership_id.currency_id')
+    membership_id   = fields.Many2one(string='Membership', comodel_name="club.member.membership", required=True)
+    product_id      = fields.Many2one(string='Product', comodel_name="product.product", required=True)
+    price           = fields.Monetary(string='Price', compute='_compute_price', readonly=True, store=True, currency_field='currency_id')
+    currency_id     = fields.Many2one(string='Currency', comodel_name="res.currency", related='membership_id.currency_id')
 
     @api.model
     def init(self):

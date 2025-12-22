@@ -9,9 +9,18 @@
             <field name="arch" type="xml">
                 <kanban class="o_kanban_small_column">
                     <templates>
+                        <field name="gender" />
+                        <field name="lastname" />
+                        <field name="firstname" />
+                        <field name="year_of_birth" />
+                        <field name="birthdate_date" />
+                        <field name="state_days_in_state" />
+                        <field name="state_date_start" />
+                        <field name="city" />
                         <t t-name="card">
                             <div t-attf-class="o_kanban_record_top {{ state_header_color }}">
                                 <div class="o_kanban_primary_left">
+                                    
                                     <span>
                                         <t t-if="record.gender.raw_value == 'male'">
                                             <i class="fa fa-mars text-primary" title="Male" />
@@ -36,12 +45,8 @@
                                     <strong><field name="birthdate_date" /></strong>
                                 </div>
                                 <div>
-                                    Waiting since <strong><t t-esc="record.state_daysstate_days_in_state.value" /></strong> days:
+                                    Waiting since <strong><t t-esc="record.state_days_in_state.value" /></strong> days:
                                     <strong><field name="state_date_start" /></strong>
-                                </div>
-                                <div>
-                                    Gender:
-                                    <strong><field name="gender" /></strong>
                                 </div>
                                 <div>
                                     City:
@@ -82,7 +87,11 @@
                 (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_waiting_list_view')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
             ]"/>
-            <field name="domain">[('current_state_id.state_type', '=', 'pending')]</field>
+            <field name="domain">[
+                "|",
+                ('current_state_id.state_type', '=', 'pending'),
+                ('current_state_id.state_type', '=', 'registered')
+            ]</field>
             <field name="context">{}</field>
             <field name="help" type="html">
                 <p>New Club Members currently waiting to be accepted.</p>

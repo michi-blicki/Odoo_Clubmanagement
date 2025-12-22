@@ -7,13 +7,13 @@ _logger = logging.getLogger(__name__)
 class ClubMemberStateHistory(models.Model):
     _name = 'club.member.state.history'
     _description = 'Member State History'
-    _order = 'date desc, id desc'
+    _order = 'start_date desc, end_date desc, id desc'
 
-    member_id = fields.Many2one(string=_("Member"), comodel_name='club.member', required=True, ondelete='cascade')
-    state_id = fields.Many2one(string=_("State"), comodel_name='club.member.state', required=True)
-    start_date = fields.Datetime(string=_("Start Date"), required=True, default=fields.Datetime.now)
-    end_date = fields.Datetime(string=_("End Date"), required=False)
-    reason = fields.Text(string=_("Reason"), required=False)
+    member_id   = fields.Many2one(string='Member', comodel_name='club.member', required=True, ondelete='cascade')
+    state_id    = fields.Many2one(string='State', comodel_name='club.member.state', required=True)
+    start_date  = fields.Datetime(string='Start Date', required=True, default=fields.Datetime.now)
+    end_date    = fields.Datetime(string='End Date', required=False)
+    reason      = fields.Text(string='Reason', required=False)
 
     @api.model
     def init(self):

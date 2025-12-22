@@ -121,10 +121,6 @@
                                             <td>HR Department:</td>
                                             <td><field name="hr_department_id"/></td>
                                         </tr>
-                                        <tr>
-                                            <td>Roles:</td>
-                                            <td><field name="role_ids" widget="many2many_tags"/></td>
-                                        </tr>
                                         <tr t-if="record.price.raw_value != 0">
                                             <td>Price:</td>
                                             <td><field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/></td>
@@ -168,7 +164,7 @@
                     <field name="company_id" groups="base.group_multi_company"/>
                     <filter string="Active" name="active" domain="[('active', '=', True)]"/>
                     <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
-                    <filter string="My Company" name="my_company" domain="[('company_id', '=', allowed_company_ids[0])]"/>
+                    <filter string="My Company" name="my_company" domain="[('company_id', '=', allowed_company_ids)]"/>
                 </search>
             </field>
         </record>        
@@ -185,6 +181,7 @@
                 (0, 0, {'view_mode': 'form', 'view_id': ref('club_team_form_view')}),
             ]"/>
             <field name="search_view_id" ref="club_team_search_view"/>
+            <field name="context">{'search_default_my_company': 1}</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create the first team for your club!
@@ -201,6 +198,5 @@
             sequence="10"/>
     
     </data>
-    
 
 </odoo>

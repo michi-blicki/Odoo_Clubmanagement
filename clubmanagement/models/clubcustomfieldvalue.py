@@ -8,25 +8,6 @@ class ClubCustomFieldValue(models.Model):
     _description = 'Value of custom field'
     _rec_name = 'field_id'
 
-    field_id = fields.Many2one(string=_("Field"), comodel_name='club.custom.field', required=True, ondelete='cascade')
-    model = fields.Selection([
-        ('club.club', _('Club')),
-        ('club.subclub', _('Subclub')),
-        ('club.department', _('Department')),
-        ('club.pool', _('Pool')),
-        ('club.team', _('Team')),
-        ('club.member', _('Member'))
-    ], string=_("Model"), required=True)
-    res_id = fields.Integer(string=_('Record ID'), required=True, index=True)
-    value_char = fields.Char()
-    value_text = fields.Text()
-    value_integer = fields.Integer()
-    value_float = fields.Float()
-    value_date = fields.Date()
-    value_datetime = fields.Datetime()
-    value_selection = fields.Char()
-    value_boolean = fields.Boolean()
-
     _sql_constraints = [
         (
             'unique_field_per_entity',
@@ -34,6 +15,27 @@ class ClubCustomFieldValue(models.Model):
             'Each field can only be used once for an entity'
         )
     ]
+
+    field_id            = fields.Many2one(string="Field", comodel_name='club.custom.field', required=True, ondelete='cascade')
+    model               = fields.Selection([
+                            ('club.club', 'Club'),
+                            ('club.subclub', 'Subclub'),
+                            ('club.department', 'Department'),
+                            ('club.pool', 'Pool'),
+                            ('club.team', 'Team'),
+                            ('club.member', 'Member'),
+                        ], string="Model", required=True)
+    res_id              = fields.Integer(string="Record", required=True, index=True)
+    value_char          = fields.Char()
+    value_text          = fields.Text()
+    value_integer       = fields.Integer()
+    value_float         = fields.Float()
+    value_date          = fields.Date()
+    value_datetime      = fields.Datetime()
+    value_selection     = fields.Char()
+    value_boolean       = fields.Boolean()
+
+
 
     @api.model
     def init(self):

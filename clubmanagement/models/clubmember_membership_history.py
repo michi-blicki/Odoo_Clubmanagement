@@ -9,12 +9,12 @@ class ClubMemberMembershipHistory(models.Model):
     _description = 'Club Member Membership History'
     _order = 'date_start DESC, id DESC'
 
-    member_id = fields.Many2one(string=_("Member"), comodel_name="club.member", required=True, ondelete='cascade')
-    membership_id = fields.Many2one(string=_("Membership"), comodel_name="club.member.membership", required=True, ondelete='restrict')
-    date_start = fields.Date(string=_("Start Date"), required=True, default=fields.Date.context_today)
-    date_end = fields.Date(string=_("End Date"), required=False)
-    active = fields.Boolean(default=True)
-    notes = fields.Text(string=_('Notes'))
+    member_id       = fields.Many2one(string='Member', comodel_name="club.member", required=True, ondelete='cascade')
+    membership_id   = fields.Many2one(string='Membership', comodel_name="club.member.membership", required=True, ondelete='restrict')
+    date_start      = fields.Date(string='Start Date', required=True, default=fields.Date.context_today)
+    date_end        = fields.Date(string='End Date', required=False)
+    active          = fields.Boolean(default=True)
+    notes           = fields.Text(string='Notes')
 
     @api.model
     def init(self):

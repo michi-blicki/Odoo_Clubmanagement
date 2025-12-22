@@ -55,6 +55,11 @@ access_club_state_history_key_user,access.club.state.history.key.user,model_club
 access_club_state_history_master_user,access.club.state.history.master.user,model_club_member_state_history,group_clubmanagement_master_user,1,1,1,1
 access_club_state_history_admin,access.club.state.history.administrator,model_club_member_state_history,group_clubmanagement_administrator,1,1,1,1
 
+access_club_state_rule_user,access.club.state.rule.user,model_club_member_state_rule,group_clubmanagement_user,1,0,0,0
+access_club_state_rule_key_user,access.club.state.rule.key.user,model_club_member_state_rule,group_clubmanagement_key_user,1,0,0,0
+access_club_state_rule_master_user,access.club.state.rule.master.user,model_club_member_state_rule,group_clubmanagement_master_user,1,1,1,1
+access_club_state_rule_admin,access.club.state.rule.administrator,model_club_member_state_rule,group_clubmanagement_administrator,1,1,1,1
+
 access_club_state_user,access.club.state.user,model_club_member_state,group_clubmanagement_user,1,0,0,0
 access_club_state_key_user,access.club.state.key.user,model_club_member_state,group_clubmanagement_key_user,1,0,0,0
 access_club_state_master_user,access.club.state.master.user,model_club_member_state,group_clubmanagement_master_user,1,0,0,0
@@ -64,6 +69,11 @@ access_club_member_user,access.club.member.user,model_club_member,group_clubmana
 access_club_member_key_user,access.club.member.key.user,model_club_member,group_clubmanagement_key_user,1,1,1,0
 access_club_member_master_user,access.club.member.master.user,model_club_member,group_clubmanagement_master_user,1,1,1,0
 access_club_member_admin,access.club.member.administrator,model_club_member,group_clubmanagement_administrator,1,1,1,0
+
+access_club_member_guardian_user,access.club.member.guardian.user,model_club_member_guardian,group_clubmanagement_user,1,0,0,0
+access_club_member_guardian_key_user,access.club.member.guardian.key.user,model_club_member_guardian,group_clubmanagement_key_user,1,1,1,0
+access_club_member_guardian_master_user,access.club.member.guardian.master.user,model_club_member_guardian,group_clubmanagement_master_user,1,1,1,1
+access_club_member_guardian_admin,access.club.member.guardian.administrator,model_club_member_guardian,group_clubmanagement_administrator,1,1,1,1
 
 access_club_pool_user,access.club.pool.user,model_club_pool,group_clubmanagement_user,1,1,1,1
 access_club_pool_key_user,access.club.pool.key.user,model_club_pool,group_clubmanagement_key_user,1,1,1,1

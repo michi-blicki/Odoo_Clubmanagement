@@ -12,46 +12,46 @@ class ClubRole(models.Model):
         'mail.activity.mixin',
     ]
     
-    name = fields.Char(string=_("Name"), required=True, store=True)
-    auto_name = fields.Boolean(string=_("Auto-generate Name"), required=True, default=True, help=_("If checked, the name will be automatically generated."))
-    name_extension = fields.Char(_('Name Extenseion'), required=False, tracking=True)
-    code = fields.Char(string=_("Code"), required=True, tracking=True)
-    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    description = fields.Text(string=_('Description'), required=False)
-    role_type = fields.Selection([
-        ('lead', _('Leader')),
-        ('assistant', _('Assistant')),
-        ('special', _('Special')),
-        ('admin', _('Administrator')),
-        ('member', _('Member')),
-        ('other', _('other'))
-    ], string=_("Role Type"), default='member', tracking=True)
+    name            = fields.Char(string='Name', required=True, store=True)
+    auto_name       = fields.Boolean(string='Auto-generate Name', required=True, default=True, help="If checked, the name will be automatically generated.")
+    name_extension  = fields.Char('Name Extenseion', required=False, tracking=True)
+    code            = fields.Char(string='Code', required=True, tracking=True)
+    company_id      = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    description     = fields.Text(string='Description', required=False)
+    role_type       = fields.Selection([
+                        ('lead', 'Leader'),
+                        ('assistant', 'Assistant'),
+                        ('special', 'Special'),
+                        ('admin', 'Administrator'),
+                        ('member', 'Member'),
+                        ('other', 'other')
+                    ], string='Role Type', default='member', tracking=True)
 
-    scope_type = fields.Selection([
-        ('club', _('Club')),
-        ('board', _('Board')),
-        ('subclub', _('Subclub')),
-        ('department', _('Department')),
-        ('pool', _('Pool')),
-        ('team', _('Team'))
-    ], string=_("Scope Type"), required=True, readonly=True)
+    scope_type      = fields.Selection([
+                        ('club', 'Club'),
+                        ('board', 'Board'),
+                        ('subclub', 'Subclub'),
+                        ('department', 'Department'),
+                        ('pool', 'Pool'),
+                        ('team', 'Team')
+                    ], string='Scope Type', required=True, readonly=True)
 
-    club_id = fields.Many2one(comodel_name='club.club', string=_('Club'), tracking=True)
-    board_id = fields.Many2one(comodel_name='club.board', string=_('Board'), tracking=True)
-    subclub_id = fields.Many2one(comodel_name='club.subclub', string=_('Subclub'), tracking=True)
-    department_id = fields.Many2one(comodel_name='club.department', string=_('Department'), tracking=True)
-    pool_id = fields.Many2one(comodel_name='club.pool', string=_('Pool'), tracking=True)
-    team_id = fields.Many2one(comodel_name='club.team', string=_('Team'), tracking=True)
+    club_id         = fields.Many2one(string='Club', comodel_name='club.club', tracking=True)
+    board_id        = fields.Many2one(string='Board', comodel_name='club.board', tracking=True)
+    subclub_id      = fields.Many2one(string='Subclub', comodel_name='club.subclub', tracking=True)
+    department_id   = fields.Many2one(string='Department', comodel_name='club.department', tracking=True)
+    pool_id         = fields.Many2one(string='Pool', comodel_name='club.pool', tracking=True)
+    team_id         = fields.Many2one(string='Team', comodel_name='club.team', tracking=True)
 
-    perm_read   = fields.Boolean(string=_('Read Permission'), required=True, default=False, tracking=True)
-    perm_write  = fields.Boolean(string=_('Write Permission'), required=True, default=False, tracking=True)
-    perm_create = fields.Boolean(string=_('Create Permission'), required=True, default=False, tracking=True)
-    perm_unlink = fields.Boolean(string=_('Unlink Permission'), required=True, default=False, tracking=True)
-    perm_mail   = fields.Boolean(string=_('Send Mail Permission'), required=True, default=False, tracking=True)
+    perm_read       = fields.Boolean(string='Read Permission', required=True, default=False, tracking=True)
+    perm_write      = fields.Boolean(string='Write Permission', required=True, default=False, tracking=True)
+    perm_create     = fields.Boolean(string='Create Permission', required=True, default=False, tracking=True)
+    perm_unlink     = fields.Boolean(string='Unlink Permission', required=True, default=False, tracking=True)
+    perm_mail       = fields.Boolean(string='Send Mail Permission', required=True, default=False, tracking=True)
 
-    member_id = fields.Many2one(string=_('Member'), comodel_name='club.member', required=False, tracking=True)
+    member_id       = fields.Many2one(string='Member', comodel_name='club.member', required=False, tracking=True)
 
-    active = fields.Boolean(default=True, tracking=True)
+    active          = fields.Boolean(default=True, tracking=True)
 
     @api.model
     def init(self):

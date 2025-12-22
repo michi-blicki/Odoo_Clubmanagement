@@ -9,27 +9,27 @@ class ClubMemberMembership(models.Model):
     _description = 'Club Member Membership'
     _order = 'sequence, id'
     _sql_constraints = [
-        ('unique_code', 'UNIQUE(code)', _('Membership Code must be unique!'))
+        ('unique_code', 'UNIQUE(code)', 'Membership Code must be unique!')
     ]
 
-    name = fields.Char(string=_("Membership Name"), required=True)
-    code = fields.Char(string=_("Membership Code"), required=True)
-    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    price = fields.Monetary(string=_("Price"), compute="_compute_price", store=True, currency_field='currency_id')
-    currency_id = fields.Many2one(string=_("Currency"), comodel_name='res.currency', related='company_id.currency_id', readonly=True)
-    sequence = fields.Integer(string=_("Sequence"), required=True, default=10)
-    member_ids = fields.Many2many(string=_("Current Members"), comodel_name="club.member", compute="_compute_member_ids", store=False, readonly=True)
-    member_count = fields.Integer(string=_("Member Count"), compute="_compute_member_ids", store=False, readonly=True)
-    description = fields.Html(string=_("Description"), help="Description of Membership - can be HTML or Markdown Code")
+    name                    = fields.Char(string='Membership Name', required=True)
+    code                    = fields.Char(string='Membership Code', required=True)
+    company_id              = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    price                   = fields.Monetary(string='Price', compute="_compute_price", store=True, currency_field='currency_id')
+    currency_id             = fields.Many2one(string='Currency', comodel_name='res.currency', related='company_id.currency_id', readonly=True)
+    sequence                = fields.Integer(string='Sequence', required=True, default=10)
+    member_ids              = fields.Many2many(string='Current Members', comodel_name="club.member", compute="_compute_member_ids", store=False, readonly=True)
+    member_count            = fields.Integer(string='Member Count', compute="_compute_member_ids", store=False, readonly=True)
+    description             = fields.Html(string='Description', help="Description of Membership - can be HTML or Markdown Code")
 
-    membership_history_ids = fields.One2many(string=_("Membership History"), comodel_name="club.member.membership.history", inverse_name="membership_id")
+    membership_history_ids  = fields.One2many(string='Membership History', comodel_name="club.member.membership.history", inverse_name="membership_id")
     
-    active = fields.Boolean(default=True)
+    active                  = fields.Boolean(default=True)
 
-    main_product_id = fields.Many2one(string=_("Main Product"), comodel_name="product.product", required=True)
-    main_product_price = fields.Monetary(string=_("Main Product Price"), compute="_compute_main_product_price", store=False, currency_field='currency_id')
+    main_product_id         = fields.Many2one(string='Main Product', comodel_name="product.product", required=True)
+    main_product_price      = fields.Monetary(string='Main Product Price', compute="_compute_main_product_price", store=False, currency_field='currency_id')
 
-    additional_product_ids = fields.One2many(string=_("Additional Products"), comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
+    additional_product_ids  = fields.One2many(string='Additional Products', comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
 
     @api.model
     def init(self):

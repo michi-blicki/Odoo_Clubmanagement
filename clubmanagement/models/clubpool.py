@@ -13,21 +13,21 @@ class ClubPool(models.Model):
         'club.log.mixin',
     ]
 
-    name = fields.Char(string=_("Name"), required=True, tracking=True)
-    club_id = fields.Many2one(string=_('Club'), comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
-    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    department_id = fields.Many2one(string=_('Department'), comodel_name='club.department', required=True, tracking=True)
-    hr_department_id = fields.Many2one(string=_("HR Department"), comodel_name='hr.department', help=_("Optional HR department mapping for HR processes"), tracking=True)
-    sequence = fields.Integer(string=_("Sequence"), required=True, default=10)
-    team_ids = fields.One2many(string=_("Teams"), comodel_name='club.team', inverse_name='pool_id')
-    team_count = fields.Integer(string=_("Team Count"), compute="_compute_team_count", store=True)
-    role_ids = fields.One2many(string=_("Roles / Functions"), comodel_name='club.role', inverse_name='pool_id')
-    member_ids = fields.Many2many(string=_('Members'), comodel_name='club.member', relation='club_pool_member_rel', column1='pool_id', column2='member_id', tracking=True)
-    member_ids_display = fields.Many2many(string=_('All Members'), comodel_name='club.member', compute='_compute_member_ids', store=True)
-    member_count = fields.Integer(string=_("Member Count"), compute="_compute_member_ids", store=True)
-    active = fields.Boolean(default=True, tracking=True)
+    name                = fields.Char(string='Name', required=True, tracking=True)
+    club_id             = fields.Many2one(string='Club', comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
+    company_id          = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    department_id       = fields.Many2one(string='Department', comodel_name='club.department', required=True, tracking=True)
+    hr_department_id    = fields.Many2one(string='HR Department', comodel_name='hr.department', help='Optional HR department mapping for HR processes', tracking=True)
+    sequence            = fields.Integer(string='Sequence', required=True, default=10)
+    team_ids            = fields.One2many(string='Teams', comodel_name='club.team', inverse_name='pool_id')
+    team_count          = fields.Integer(string='Team Count', compute="_compute_team_count", store=True)
+    role_ids            = fields.One2many(string='Roles / Functions', comodel_name='club.role', inverse_name='pool_id')
+    member_ids          = fields.Many2many(string='Members', comodel_name='club.member', relation='club_pool_member_rel', column1='pool_id', column2='member_id', tracking=True)
+    member_ids_display  = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids', store=True)
+    member_count        = fields.Integer(string='Member Count', compute="_compute_member_ids", store=True)
+    active              = fields.Boolean(default=True, tracking=True)
 
-    _group_by_full = {'department_id': lambda self, *args, **kwargs: self._read_group_department_id(*args, **kwargs), }
+    _group_by_full      = {'department_id': lambda self, *args, **kwargs: self._read_group_department_id(*args, **kwargs), }
 
     @api.model
     def init(self):

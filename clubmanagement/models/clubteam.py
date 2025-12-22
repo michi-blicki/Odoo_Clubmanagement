@@ -16,25 +16,25 @@ class ClubTeam(models.Model):
         'department_id': lambda self, departments, domain, order: self._read_group_department_id(departments, domain, order),
     }
 
-    name = fields.Char(required=True, tracking=True)
-    shortname = fields.Char(string=_("Short Name"), required=False, size=5, help=_("Short code, max 5 characters"), tracking=True)
-    company_id = fields.Many2one(string=_("Company"), comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    club_id = fields.Many2one(string=_('Club'), comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
-    department_id = fields.Many2one(string=_('Department'), comodel_name='club.department', required=True, tracking=True)
-    pool_id = fields.Many2one(string=_('Pool'), comodel_name='club.pool', required=False, tracking=True)
-    hr_department_id = fields.Many2one(comodel_name='hr.department', string=_("HR Department"), help=_("Optional HR department mapping for HR processes"), tracking=True)
-    sequence = fields.Integer(string=_("Sequence"), required=True, default=10)
-    role_ids = fields.One2many(comodel_name='club.role', inverse_name='team_id', string=_("Roles / Functions"))
-    member_ids = fields.Many2many(string=_('Members'), comodel_name='club.member', relation='club_team_member_rel', column1='team_id', column2='member_id', tracking=True)
-    member_ids_display = fields.Many2many(string=_('All Members'), comodel_name='club.member', compute='_compute_member_ids', store=True)
-    members_count = fields.Integer(string=_("Member Cound"), compute="_compute_member_ids", store=True)
-    active = fields.Boolean(default=True, tracking=True)
+    name                    = fields.Char(required=True, tracking=True)
+    shortname               = fields.Char(string='Short Name', required=False, size=5, help='Short code, max 5 characters', tracking=True)
+    company_id              = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    club_id                 = fields.Many2one(string='Club', comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
+    department_id           = fields.Many2one(string='Department', comodel_name='club.department', required=True, tracking=True)
+    pool_id                 = fields.Many2one(string='Pool', comodel_name='club.pool', required=False, tracking=True)
+    hr_department_id        = fields.Many2one(string='HR Department', comodel_name='hr.department', help='Optional HR department mapping for HR processes', tracking=True)
+    sequence                = fields.Integer(string='Sequence', required=True, default=10)
+    role_ids                = fields.One2many(string='Roles / Functions', comodel_name='club.role', inverse_name='team_id')
+    member_ids              = fields.Many2many(string='Members', comodel_name='club.member', relation='club_team_member_rel', column1='team_id', column2='member_id', tracking=True)
+    member_ids_display      = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids', store=True)
+    members_count           = fields.Integer(string='Member Cound', compute="_compute_member_ids", store=True)
+    active                  = fields.Boolean(default=True, tracking=True)
 
-    price = fields.Monetary(string=_("Price"), compute="_compute_price", store=True, currency_field='currency_id')
-    currency_id = fields.Many2one(string=_("Currency"), comodel_name='res.currency', related='company_id.currency_id', readonly=True)
-    main_product_id = fields.Many2one(string=_("Main Product"), comodel_name="product.product", required=False)
-    main_product_price = fields.Monetary(string=_("Main Product Price"), compute="_compute_main_product_price", store=False, currency_field='currency_id')
-    additional_product_ids = fields.One2many(string=_("Additional Products"), comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
+    price                   = fields.Monetary(string='Price', compute="_compute_price", store=True, currency_field='currency_id')
+    currency_id             = fields.Many2one(string='Currency', comodel_name='res.currency', related='company_id.currency_id', readonly=True)
+    main_product_id         = fields.Many2one(string='Main Product', comodel_name="product.product", required=False)
+    main_product_price      = fields.Monetary(string='Main Product Price', compute="_compute_main_product_price", store=False, currency_field='currency_id')
+    additional_product_ids  = fields.One2many(string='Additional Products', comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
 
     @api.model
     def init(self):

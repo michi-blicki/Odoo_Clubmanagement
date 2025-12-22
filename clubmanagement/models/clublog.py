@@ -16,37 +16,37 @@ class ClubLog(models.Model):
     _description = 'Club Logfile'
     _order = 'create_date DESC, id DESC'
 
-    name = fields.Char(string=_("Log Entry"), compute='_compute_name', store=True)
-    user_id = fields.Many2one(string=_('User'), comodel_name='res.users', default=lambda self: self.env.user, readonly=True)
-    create_date = fields.Datetime(string=_('Date'), readonly=True)
+    name            = fields.Char(string='Log Entry', compute='_compute_name', store=True)
+    user_id         = fields.Many2one(string='User', comodel_name='res.users', default=lambda self: self.env.user, readonly=True)
+    create_date     = fields.Datetime(string='Date', readonly=True)
 
-    scope_type = fields.Selection([
-        ('club', _('Club')),
-        ('board', _('Board')),
-        ('subclub', _('Subclub')),
-        ('department', _('Department')),
-        ('pool', _('Pool')),
-        ('team', _('Team')),
-        ('member', _('Member')),
-        ('role', _('Role / Function'))
-    ], string=_("Scope Type"), required=True)
+    scope_type      = fields.Selection([
+                            ('club', 'Club'),
+                            ('board', 'Board'),
+                            ('subclub', 'Subclub'),
+                            ('department', 'Department'),
+                            ('pool', 'Pool'),
+                            ('team', 'Team'),
+                            ('member', 'Member'),
+                            ('role', 'Role / Function')
+                        ], string="Scope Type", required=True)
 
-    activity_type = fields.Selection([
-        ('create', _('USer Create')),
-        ('update', _('User Update')),
-        ('unlink', _('User Unlink')),
-        ('state_change', _('State Change')),
-        ('system_action', _('System Action')),
-        ('other', _('Other'))
-    ], string=_("Activity Type"), required=True)
+    activity_type   = fields.Selection([
+                            ('create', 'User Create'),
+                            ('update', 'User Update'),
+                            ('unlink', 'User Unlink'),
+                            ('state_change', 'State Change'),
+                            ('system_action', 'System Action'),
+                            ('other', 'Other')
+                        ], string="Activity Type", required=True)
 
-    model = fields.Char(string=_('Model'), readonly=True)
-    res_id = fields.Integer(string=_('Resource ID'), readonly=True)
-    res_name = fields.Char(string=_('Resource Name'), readonly=True)
+    model           = fields.Char(string='Model', readonly=True)
+    res_id          = fields.Integer(string='Resource ID', readonly=True)
+    res_name        = fields.Char(string='Resource Name', readonly=True)
 
-    description = fields.Text(string=_('Description'), readonly=True)
-    old_value = fields.Text(string=_('Old Value'), readonly=True)
-    new_value = fields.Text(string=_('New Value'), readonly=True)
+    description     = fields.Text(string='Description', readonly=True)
+    old_value       = fields.Text(string='Old Value', readonly=True)
+    new_value       = fields.Text(string='New Value', readonly=True)
 
     @api.model
     def init(self):

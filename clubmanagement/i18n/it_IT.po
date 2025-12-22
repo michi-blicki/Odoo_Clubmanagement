@@ -1,0 +1,3217 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* clubmanagement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-20 07:18+0000\n"
+"PO-Revision-Date: 2025-12-20 07:18+0000\n"
+"Last-Translator: DeepL (automatisch)\n"
+"Language-Team: it_IT Team\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"X-Generator: translate_po_deepl.py\n"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+msgid "%s - Executive Board"
+msgstr "%s - Consiglio Direttivo"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "<i class=\"fa fa-clock-o\" title=\"Days in state\"/>"
+msgstr "<i class=\"fa-clock-o\" title=\"Giorni nello stato\"/>"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "<i class=\"fa fa-genderless text-secondary\" title=\"Other\"/>"
+msgstr "<i class=\"fa fa-genderless text-secondary\" title=\"Other\"/>"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "<i class=\"fa fa-mars text-primary\" title=\"Male\"/>"
+msgstr "<i class=\"fa fa-mars text-primary\" title=\"Maschio\"/>"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_kanban_view
+msgid "<i class=\"fa fa-users me-1\" title=\"Boards\"/>"
+msgstr "<i class=\"fa-users me-1\" title=\"Boards\"/>"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "<i class=\"fa fa-venus text-pink\" title=\"Female\"/>"
+msgstr "<i class=\"fa fa-venus text-pink\" title=\"Femmina\"/>"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_club_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_form_view
+msgid ""
+"<span class=\"ml-2\" invisible=\"active == True\">\n"
+"                                    (<span style=\"color:red;\">Archived</span>)\n"
+"                                </span>"
+msgstr ""
+"<span class=\"ml-2\" invisible=\"active == True\">\n"
+"                                    (<span style=\"color:red;\">Archiviato</span>)\n"
+"                                </span>"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_form_view
+msgid ""
+"<span class=\"ml-2\" invisible=\"active == True\">(<span "
+"style=\"color:red;\">Archived</span>)</span>"
+msgstr ""
+"<span class=\"ml-2\" invisible=\"active == True\">(<span "
+"style=\"color:red;\">Archiviato</span>)</span>"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_board_list_action
+msgid ""
+"<span>Boards and working groups in your club. You can manage their "
+"assignments and roles here.</span>"
+msgstr ""
+"<span>Consigli e gruppi di lavoro del club. Qui potete gestire i loro "
+"incarichi e ruoli.</span>"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_log_list_action
+msgid ""
+"<span>This is the exhaustive audit log. Entries are immutable and cannot be "
+"deleted or modified.</span>"
+msgstr ""
+"<span>Questo è il registro di controllo esaustivo. Le voci sono immutabili e"
+" non possono essere cancellate o modificate."
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_deleted_list_action
+msgid "<strong>Administrator List</strong>"
+msgstr "<strong>Elenco degli amministratori</strong>"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_subclub_list_action
+msgid "<strong>Sub Clubs are dedicated entities in your club.</strong>"
+msgstr "<strong>I club secondari sono entità dedicate all'interno del club."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+msgid "A subclub exists and must be assigned when creating a new department"
+msgstr ""
+"Un sottoclub esiste e deve essere assegnato quando si crea un nuovo reparto."
+
+#. module: clubmanagement
+#: model:ir.module.category,description:clubmanagement.module_category_clubmanagement
+msgid "Access Permissions for Clubmanagement Suite"
+msgstr "Permessi di accesso per Clubmanagement Suite"
+
+#. module: clubmanagement
+#: model:res.groups,comment:clubmanagement.group_clubmanagement_user
+msgid "Access to given organisational"
+msgstr "Accesso a dati organizzativi"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__action_id
+msgid "Action"
+msgstr "Azione"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_needaction
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_needaction
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_needaction
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_needaction
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_needaction
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_needaction
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_needaction
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_needaction
+msgid "Action Needed"
+msgstr "Azione necessaria"
+
+#. module: clubmanagement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__active
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__active
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__active
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_search
+msgid "Active"
+msgstr "Attivo"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_member_active_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_active_list_view
+msgid "Active Members"
+msgstr "Membri attivi"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_ids
+msgid "Activities"
+msgstr "Attività"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_exception_decoration
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_exception_decoration
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_exception_decoration
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_exception_decoration
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_exception_decoration
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_exception_decoration
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_exception_decoration
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Attività Eccezione Decorazione"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_state
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_state
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_state
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_state
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_state
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_state
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_state
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_state
+msgid "Activity State"
+msgstr "Stato di attività"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__activity_type
+msgid "Activity Type"
+msgstr "Tipo di attività"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_type_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_type_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_type_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_type_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_type_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_type_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_type_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icona Tipo di attività"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "Actual Members"
+msgstr "Membri effettivi"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_membership_additional_product
+msgid "Additional Product for Membership"
+msgstr "Prodotto aggiuntivo per l'iscrizione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__additional_product_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__additional_product_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__additional_product_ids
+msgid "Additional Products"
+msgstr "Prodotti aggiuntivi"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_administration_root_menu
+msgid "Administration"
+msgstr "Amministrazione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__admin
+#: model:res.groups,name:clubmanagement.group_clubmanagement_administrator
+msgid "Administrator"
+msgstr "Amministratore"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Advanced"
+msgstr "Avanzato"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__age
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Age"
+msgstr "Età"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_res_config_settings__club_age_of_majority
+msgid "Age of Majority"
+msgstr "Età della maggioranza"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__member_ids_display
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__member_ids_display
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__member_ids_display
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__member_ids_display
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__member_ids_display
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_form_view
+msgid "All Members"
+msgstr "Tutti i membri"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
+msgid "Apply On"
+msgstr "Candidati su"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__apply_on
+msgid "Apply Rule on"
+msgstr "Applicare la regola su"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
+msgid "Archive"
+msgstr "Archivio"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__archived
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_form
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_search
+msgid "Archived"
+msgstr "Archiviato"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_archived_list_view
+msgid "Archived Date"
+msgstr "Data di archiviazione"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_member_archived_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_archived_list_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_deleted_list_view
+msgid "Archived Members"
+msgstr "Membri archiviati"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__assistant
+msgid "Assistant"
+msgstr "Assistente"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__cron_id
+msgid "Associated Cron Job"
+msgstr "Lavoro Cron associato"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_attachment_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_attachment_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_attachment_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_attachment_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_attachment_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_attachment_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_attachment_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteggio degli allegati"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_log_list_action
+#: model:ir.ui.menu,name:clubmanagement.club_audit_log_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_log_list_view
+msgid "Audit Log"
+msgstr "Registro di controllo"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_log_form_view
+msgid "Audit Log Entry"
+msgstr "Inserimento del registro di audit"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__auto_name
+msgid "Auto-generate Name"
+msgstr "Generazione automatica del nome"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__birthdate_date
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Birthdate"
+msgstr "Data di nascita"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "Birthdate:"
+msgstr "Data di nascita:"
+
+#. module: clubmanagement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__blocked
+msgid "Blocked"
+msgstr "Bloccato"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.ui.menu,name:clubmanagement.club_member_blocked_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_list_view
+msgid "Blocked Members"
+msgstr "Membri bloccati"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_blocked_list_action
+msgid "Blocked members by the club or any other instance."
+msgstr "Membri bloccati dal club o da qualsiasi altra istanza."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__board_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__board_ids
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_board__group_type__board
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__board
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__board
+msgid "Board"
+msgstr "Consiglio di amministrazione"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_form_view
+msgid "Board / Working Group"
+msgstr "Consiglio / Gruppo di lavoro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+msgid "Board created: %s"
+msgstr "Scheda creata: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+msgid "Board deleted: %s"
+msgstr "Scheda cancellata: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+msgid ""
+"Board has assigned Roles. Cannot delete board! Consider deactivating it "
+"instead."
+msgstr ""
+"Alla scheda sono stati assegnati dei ruoli. Non è possibile eliminare la "
+"scheda! Considerare invece la disattivazione."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Board-Role needs to be assigned to a board"
+msgstr "Consiglio: il ruolo deve essere assegnato a un consiglio."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__board_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__board_ids
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
+msgid "Boards"
+msgstr "Schede"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_club_form_view
+msgid "Boards & Roles"
+msgstr "Consigli e ruoli"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_kanban_view
+msgid "Boards & Work Groups"
+msgstr "Consigli e gruppi di lavoro"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_board_list_action
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_list_view
+msgid "Boards & Working Groups"
+msgstr "Consigli e gruppi di lavoro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+msgid "Boards associated to club. Club cannot be deleted!"
+msgstr "Schede associate al club. Il club non può essere cancellato!"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__boolean
+msgid "Checkbox"
+msgstr "Casella di controllo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__city
+msgid "City"
+msgstr "Città"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "City:"
+msgstr "Città:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model,name:clubmanagement.model_club_club
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__club_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__club_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__club_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__club_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__club_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__club_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__club_id
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_board__scope_type__club
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__model__club_club
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field_value__model__club_club
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__club
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__club
+#: model:ir.ui.menu,name:clubmanagement.club_club_form_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_club_form_view
+msgid "Club"
+msgstr "Club"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_board
+msgid "Club Board / Working Group"
+msgstr "Consiglio di club/gruppo di lavoro"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_board_list_menu
+msgid "Club Boards"
+msgstr "Schede di club"
+
+#. module: clubmanagement
+#: model:ir.actions.client,name:clubmanagement.club_dashboard_action
+msgid "Club Dashboard"
+msgstr "Cruscotto del club"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Club Involvement"
+msgstr "Partecipazione al club"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_log_mixin
+msgid "Club Log Mixin"
+msgstr "Miscelatore di log di club"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_log
+msgid "Club Logfile"
+msgstr "Profilo del club"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
+msgid "Club Management"
+msgstr "Gestione del club"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.clubmanagement_config_settings_action
+msgid "Club Management Settings"
+msgstr "Impostazioni di gestione del club"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model,name:clubmanagement.model_club_member
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__model__club_member
+msgid "Club Member"
+msgstr "Socio del club"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_membership
+msgid "Club Member Membership"
+msgstr "Socio del club Socio del club"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_membership_history
+msgid "Club Member Membership History"
+msgstr "Storia dell'affiliazione dei soci del club"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_active_list_action
+msgid "Club Member: Active List"
+msgstr "Socio del club: Elenco attivo"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_archived_list_action
+msgid "Club Member: Archived List"
+msgstr "Socio del club: Elenco archiviato"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_blocked_list_action
+msgid "Club Member: Blocked List"
+msgstr "Socio del club: Elenco bloccato"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_deleted_list_action
+msgid "Club Member: List of deleted members"
+msgstr "Socio del club: Elenco dei soci cancellati"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_waiting_list_action
+msgid "Club Member: Waiting List"
+msgstr "Socio del club: Lista d'attesa"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_member_main_menu
+msgid "Club Members"
+msgstr "Soci del Club"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+msgid "Club created: %s"
+msgstr "Club creato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+msgid "Club deleted: %s"
+msgstr "Club cancellato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+msgid "Club must be created first"
+msgstr "Il club deve essere creato prima"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+msgid "Club must be set for all board records."
+msgstr "Il club deve essere impostato per tutti i record del consiglio."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Club-Role needs to be assigned to a club"
+msgstr "Club: il ruolo deve essere assegnato a un club."
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_kanban_view
+msgid "Club:"
+msgstr "Club:"
+
+#. module: clubmanagement
+#: model:ir.module.category,name:clubmanagement.module_category_clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.clubmanagement_root_menu
+msgid "Clubmanagement"
+msgstr "Gestione del club"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__code
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__code
+msgid "Code"
+msgstr "Codice"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_kanban
+msgid "Code:"
+msgstr "Codice:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__color
+msgid "Color"
+msgstr "Colore"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__company_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__company_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__company_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__company_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__company_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__company_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__company_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__company_id
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_kanban_view
+msgid "Company"
+msgstr "Azienda"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_kanban_view
+msgid "Company:"
+msgstr "Azienda:"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni di configurazione"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_custom_field
+msgid "Configurable additional fields for clubs"
+msgstr "Campi aggiuntivi configurabili per i club"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model,name:clubmanagement.model_res_partner
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__partner_id
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Could not verify the member photo. Please upload a valid image file"
+msgstr ""
+"Impossibile verificare la foto del membro. Si prega di caricare un file "
+"immagine valido"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_form_view
+msgid "Create Default Roles"
+msgstr "Creare ruoli predefiniti"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_club_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_form_view
+msgid "Create Default Roles and Boards"
+msgstr "Creare ruoli e schede predefiniti"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_create
+msgid "Create Permission"
+msgstr "Creare l'autorizzazione"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_team_list_action
+msgid "Create the first team for your club!"
+msgstr "Crea la prima squadra del tuo club!"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_state_rule_list_action
+msgid "Create your first Member State Rule."
+msgstr "Creare la prima regola dello Stato membro."
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_department_list_action
+msgid "Create your first department for the club!"
+msgstr "Create il vostro primo reparto per il club!"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_membership_list_action
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_roles_list_action
+msgid "Create your first membership type for your club!"
+msgstr "Create il primo tipo di affiliazione per il vostro club!"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_pool_list_action
+msgid "Create your first pool for the club!"
+msgstr "Create la vostra prima piscina per il club!"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+msgid "Created %s"
+msgstr "Creato %s"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubmember_membership_additionalproduct.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__currency_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__currency_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__currency_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__current_state_id
+msgid "Current Member State"
+msgstr "Stato membro attuale"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__member_ids
+msgid "Current Members"
+msgstr "Membri attuali"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__current_membership_id
+msgid "Current Membership"
+msgstr "Soci attuali"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_custom_field_form_view
+msgid "Custom Field"
+msgstr "Campo personalizzato"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_custom_field_list_action
+#: model:ir.ui.menu,name:clubmanagement.club_custom_fields_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_custom_field_list_view
+msgid "Custom Fields"
+msgstr "Campi personalizzati"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_dashboard_menu
+msgid "Dashboard"
+msgstr "Cruscotto"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__create_date
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__date
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Date"
+msgstr "Data"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__datetime
+msgid "Date/Time"
+msgstr "Data/Ora"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Days"
+msgstr "Giorni"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_list_view
+msgid "Days Waiting"
+msgstr "Giorni di attesa"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__days_in_club
+msgid "Days in Club"
+msgstr "Giorni nel Club"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_list_view
+msgid "Days in State"
+msgstr "Giorni nello Stato"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__state_days_in_state
+msgid "Days in current state"
+msgstr "Giorni nello stato attuale"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__deleted
+msgid "Deleted"
+msgstr "Soppresso"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+msgid "Deleted %s"
+msgstr "Eliminato %s"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_member_deleted_list_menu
+msgid "Deleted Members"
+msgstr "Membri cancellati"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_deleted_list_view
+msgid "Deleted at"
+msgstr "Soppresso a"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model,name:clubmanagement.model_club_department
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__department_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__department_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__department_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__department_id
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_board__scope_type__department
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__model__club_department
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field_value__model__club_department
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__department
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__department
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
+msgid "Department"
+msgstr "Dipartimento"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+msgid "Department created: %s"
+msgstr "Reparto creato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+msgid "Department deleted: %s"
+msgstr "Reparto cancellato: %s"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Department(s)"
+msgstr "Dipartimento/i"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Department-Role needs to be assigned to a department"
+msgstr "Reparto: il ruolo deve essere assegnato a un reparto."
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_kanban_view
+msgid "Department:"
+msgstr "Dipartimento:"
+
+#. module: clubmanagement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.actions.act_window,name:clubmanagement.club_department_list_action
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__department_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__department_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__department_ids
+#: model:ir.ui.menu,name:clubmanagement.club_department_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_list_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_kanban_view
+msgid "Departments"
+msgstr "Dipartimenti"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+msgid ""
+"Departments associated to club. Club cannot be deleted! Deactivate Club "
+"instead."
+msgstr ""
+"Dipartimenti associati al club. Il club non può essere cancellato! "
+"Disattivare il club."
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "Departments:"
+msgstr "Dipartimenti:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__description
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__description
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__description
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__description
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_log_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_member_membership__description
+msgid "Description of Membership - can be HTML or Markdown Code"
+msgstr "Descrizione dell'iscrizione - può essere un codice HTML o Markdown"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: clubmanagement
+#: model:ir.model.constraint,message:clubmanagement.constraint_club_custom_field_value_unique_field_per_entity
+msgid "Each field can only be used once for an entity"
+msgstr "Ogni campo può essere utilizzato una sola volta per un'entità."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model,name:clubmanagement.model_hr_employee
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__employee_id
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Employee"
+msgstr "Dipendente"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership_history.py:0
+#: code:addons/clubmanagement/models/clubmember_state_history.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__date_end
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__end_date
+msgid "End Date"
+msgstr "Data di fine"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_history.py:0
+msgid "End Date must be after Start Date."
+msgstr "La data di fine deve essere successiva alla data di inizio."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership_history.py:0
+msgid "End Date must be after start date."
+msgstr "La data di fine deve essere successiva alla data di inizio."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__field_id
+msgid "Field"
+msgstr "Campo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__field_type
+msgid "Field Type"
+msgstr "Tipo di campo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__firstname
+msgid "Firstname"
+msgstr "Nome"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__float
+msgid "Float"
+msgstr "Galleggiante"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_follower_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_follower_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_follower_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_follower_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_follower_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_follower_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_follower_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_follower_ids
+msgid "Followers"
+msgstr "Seguaci"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_partner_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_partner_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_partner_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_partner_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_partner_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_partner_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_partner_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguaci (Partner)"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__activity_type_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_club__activity_type_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_department__activity_type_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_member__activity_type_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__activity_type_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_role__activity_type_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__activity_type_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_team__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icona font awesome, ad es. fa-tasks"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__selection_values
+msgid "For Selection Lists only, as comma-separated list"
+msgstr ""
+"Solo per gli elenchi di selezione, come elenco separato da una virgola."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+msgid "For scope type '%s', only the corresponding field should be filled."
+msgstr ""
+"Per il tipo di ambito \"%s\", deve essere compilato solo il campo "
+"corrispondente."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+msgid "For scope type '%s', you must select the corresponding %s."
+msgstr ""
+"Per il tipo di ambito \"%s\", è necessario selezionare il corrispondente %s."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+msgid "For scope type 'club', you must select a club."
+msgstr "Per il tipo di ambito \"club\", è necessario selezionare un club."
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_archived_list_action
+msgid ""
+"Former Members, that left the club. Their contact is archived for further "
+"reference."
+msgstr ""
+"Ex soci che hanno lasciato il club. I loro contatti sono archiviati per "
+"ulteriori riferimenti."
+
+#. module: clubmanagement
+#: model:res.groups,comment:clubmanagement.group_clubmanagement_master_user
+msgid ""
+"Full access permission to Clubmanagaement Suite including organisation "
+"configuration"
+msgstr ""
+"Accesso completo alla Suite Clubmanagaement, compresa la configurazione "
+"dell'organizzazione."
+
+#. module: clubmanagement
+#: model:res.groups,comment:clubmanagement.group_clubmanagement_key_user
+msgid "Full access permission to Clubmanagement Suite W/o configuration"
+msgstr ""
+"Permesso di accesso completo alla Suite di gestione del club senza "
+"configurazione"
+
+#. module: clubmanagement
+#: model:res.groups,comment:clubmanagement.group_clubmanagement_administrator
+msgid "Full access permission to Clubmanagement Suite including configuration"
+msgstr ""
+"Permesso di accesso completo alla Clubmanagement Suite, compresa la "
+"configurazione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__gender
+msgid "Gender"
+msgstr "Genere"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "Gender:"
+msgstr "Genere:"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
+msgid "General"
+msgstr "Generale"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
+msgid "Group By"
+msgstr "Gruppo da"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__group_type
+msgid "Group Type"
+msgstr "Tipo di gruppo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__hr_department_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__hr_department_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__hr_department_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__hr_department_id
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_kanban_view
+msgid "HR Department"
+msgstr "Dipartimento Risorse Umane"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_kanban_view
+msgid "HR Department:"
+msgstr "Dipartimento Risorse Umane:"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__has_message
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__has_message
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__has_message
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__has_message
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__has_message
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__has_message
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__has_message
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__has_message
+msgid "Has Message"
+msgstr "Ha un messaggio"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__id
+msgid "ID"
+msgstr "ID"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_exception_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_exception_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_exception_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_exception_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_exception_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_exception_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_exception_icon
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_exception_icon
+msgid "Icon"
+msgstr "Icona"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__activity_exception_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_club__activity_exception_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_department__activity_exception_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_member__activity_exception_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__activity_exception_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_role__activity_exception_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__activity_exception_icon
+#: model:ir.model.fields,help:clubmanagement.field_club_team__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icona per indicare un'attività di eccezione."
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__message_needaction
+#: model:ir.model.fields,help:clubmanagement.field_club_club__message_needaction
+#: model:ir.model.fields,help:clubmanagement.field_club_department__message_needaction
+#: model:ir.model.fields,help:clubmanagement.field_club_member__message_needaction
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__message_needaction
+#: model:ir.model.fields,help:clubmanagement.field_club_role__message_needaction
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__message_needaction
+#: model:ir.model.fields,help:clubmanagement.field_club_team__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se è selezionata, i nuovi messaggi richiedono la vostra attenzione."
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_board__message_has_sms_error
+#: model:ir.model.fields,help:clubmanagement.field_club_club__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_club__message_has_sms_error
+#: model:ir.model.fields,help:clubmanagement.field_club_department__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_department__message_has_sms_error
+#: model:ir.model.fields,help:clubmanagement.field_club_member__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_member__message_has_sms_error
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__message_has_sms_error
+#: model:ir.model.fields,help:clubmanagement.field_club_role__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_role__message_has_sms_error
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__message_has_sms_error
+#: model:ir.model.fields,help:clubmanagement.field_club_team__message_has_error
+#: model:ir.model.fields,help:clubmanagement.field_club_team__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se è selezionata, alcuni messaggi presentano un errore di consegna."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,help:clubmanagement.field_club_role__auto_name
+msgid "If checked, the name will be automatically generated."
+msgstr "Se si seleziona, il nome verrà generato automaticamente."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__inactive
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_search_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_kanban
+msgid "Inactive"
+msgstr "Inattivo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__integer
+msgid "Integer"
+msgstr "Intero"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__is_employee
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Is Employee"
+msgstr "È un dipendente"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_is_follower
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_is_follower
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_is_follower
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_is_follower
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_is_follower
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_is_follower
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_is_follower
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_is_follower
+msgid "Is Follower"
+msgstr "È un seguace"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__state_header_color
+msgid "Kanban Header Color"
+msgstr "Colore intestazione Kanban"
+
+#. module: clubmanagement
+#: model:res.groups,name:clubmanagement.group_clubmanagement_key_user
+msgid "Key User"
+msgstr "Utente chiave"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__label
+msgid "Label"
+msgstr "Etichetta"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento da"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__lastname
+msgid "Lastname"
+msgstr "Cognome"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__lead
+msgid "Leader"
+msgstr "Leader"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
+msgid "Legal Majority Age"
+msgstr "Età della maggiore età"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "Loading..."
+msgstr "Caricamento..."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+msgid "Log Entries cannot be deleted!"
+msgstr "Le voci di registro non possono essere cancellate!"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__name
+msgid "Log Entry"
+msgstr "Registrazione del registro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__main_product_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__main_product_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__main_product_id
+msgid "Main Product"
+msgstr "Prodotto principale"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__main_product_price
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__main_product_price
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__main_product_price
+msgid "Main Product Price"
+msgstr "Prezzo del prodotto principale"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "Manage"
+msgstr "Gestire"
+
+#. module: clubmanagement
+#: model:res.groups,name:clubmanagement.group_clubmanagement_master_user
+msgid "Master User"
+msgstr "Utente principale"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubmember_membership_history.py:0
+#: code:addons/clubmanagement/models/clubmember_state_history.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__member_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__member_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__member_id
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field_value__model__club_member
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__member
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__member
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Member"
+msgstr "Membro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__members_count
+msgid "Member Cound"
+msgstr "Membro Cound"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__member_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__member_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__member_count
+msgid "Member Count"
+msgstr "Conteggio dei membri"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Member Details"
+msgstr "Dettagli del membro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__member_id
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Member ID"
+msgstr "ID membro"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Member State"
+msgstr "Stato membro"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_state_rule
+msgid "Member State Change Rule"
+msgstr "Stato membro Modifica della norma"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model,name:clubmanagement.model_club_member_state_history
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__state_history_ids
+msgid "Member State History"
+msgstr "Storia degli Stati membri"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+msgid "Member State Rule"
+msgstr "Regola dello Stato membro"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_state_rule_list_action
+#: model:ir.ui.menu,name:clubmanagement.club_memberstate_rules_list_menu
+msgid "Member State Rules"
+msgstr "Regole degli Stati membri"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_state_list_action
+#: model:ir.ui.menu,name:clubmanagement.club_memberstates_list_menu
+msgid "Member States"
+msgstr "Stati membri"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_state
+msgid "Member Status"
+msgstr "Stato membro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Member created: %s"
+msgstr "Membro creato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,help:clubmanagement.field_club_member__photo
+msgid "Member photo of size 680x960 or 1360x1920"
+msgstr "Foto membro di dimensioni 680x960 o 1360x1920"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+msgid "Member state changed from '%(old_state)s' to '%(new_state)s'"
+msgstr "Stato membro cambiato da \"%(vecchio_stato)s\" a \"%(nuovo_stato)s\"."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.actions.act_window,name:clubmanagement.action_club_member_list_for_membership
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__member_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__member_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__member_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__member_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__member_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__member_ids
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_list_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_list_view_for_membership
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_list_view
+msgid "Members"
+msgstr "Membri"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_list
+msgid "Members Count"
+msgstr "Conteggio dei membri"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_kanban
+msgid "Members:"
+msgstr "Membri:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership_additionalproduct.py:0
+#: code:addons/clubmanagement/models/clubmember_membership_history.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__membership_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__membership_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__membership_id
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
+msgid "Membership"
+msgstr "Soci"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__code
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
+msgid "Membership Code"
+msgstr "Codice di adesione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: model:ir.model.constraint,message:clubmanagement.constraint_club_member_membership_unique_code
+msgid "Membership Code must be unique!"
+msgstr "Il codice di adesione deve essere unico!"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__membership_date_end
+msgid "Membership End Date"
+msgstr "Data di scadenza dell'adesione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Membership Ended: %s"
+msgstr "Iscrizione terminata: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__membership_history_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__membership_history_ids
+msgid "Membership History"
+msgstr "Storia dei soci"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_membership_menu
+msgid "Membership Menu Entry Helper"
+msgstr "Aiuto per l'inserimento del menu soci"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__name
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
+msgid "Membership Name"
+msgstr "Nome del socio"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__membership_date_start
+msgid "Membership Start Date"
+msgstr "Data di inizio iscrizione"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_membership_list_menu
+msgid "Membership Types"
+msgstr "Tipi di appartenenza"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Membership changed to %s"
+msgstr "L'iscrizione è passata a %s"
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.club_member_membership_list_action
+#: model:ir.ui.menu,name:clubmanagement.club_memberships_root_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_list_view
+msgid "Memberships"
+msgstr "Associazioni"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_menu__menu_id
+msgid "Menu"
+msgstr "Menu"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_has_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_has_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_has_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_has_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_has_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_has_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_has_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_has_error
+msgid "Message Delivery error"
+msgstr "Errore di consegna del messaggio"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_ids
+msgid "Messages"
+msgstr "Messaggi"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__model
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__model
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__model
+msgid "Model"
+msgstr "Modello"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Months"
+msgstr "Mesi"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__months_in_club
+msgid "Months in Club"
+msgstr "Mesi nel Club"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__my_activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__my_activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__my_activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__my_activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__my_activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__my_activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__my_activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "La mia attività Scadenza"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_search_view
+msgid "My Company"
+msgstr "La mia azienda"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__name_extension
+msgid "Name Extenseion"
+msgstr "Estensione del nome"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__nationality_id
+msgid "Nationality"
+msgstr "Nazionalità"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_waiting_list_action
+msgid "New Club Members currently waiting to be accepted."
+msgstr "I nuovi soci del Club sono attualmente in attesa di essere accettati."
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "New Members"
+msgstr "Nuovi membri"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "New Members This Month"
+msgstr "Nuovi membri questo mese"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__new_state_id
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
+msgid "New State"
+msgstr "Nuovo Stato"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__new_value
+msgid "New Value"
+msgstr "Nuovo valore"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_calendar_event_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_calendar_event_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_calendar_event_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_calendar_event_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_calendar_event_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_calendar_event_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_calendar_event_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Prossimo evento del calendario attività"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_date_deadline
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Scadenza della prossima attività"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_summary
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_summary
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_summary
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_summary
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_summary
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_summary
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_summary
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_summary
+msgid "Next Activity Summary"
+msgstr "Riassunto dell'attività successiva"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_type_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_type_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_type_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_type_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_type_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_type_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_type_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo di attività successiva"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__boards_count
+msgid "No Boards"
+msgstr "Nessuna scheda"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__departments_count
+msgid "No Departments"
+msgstr "Nessun dipartimento"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__members_count
+msgid "No Members"
+msgstr "Nessun membro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__roles_count
+msgid "No Roles"
+msgstr "Nessun ruolo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+msgid "No club has been created yes."
+msgstr "Non è stato creato alcun club."
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "No upcoming birthdays within the next"
+msgstr "Non ci sono compleanni nei prossimi"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership_history.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__notes
+msgid "Notes"
+msgstr "Note"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_needaction_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_needaction_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_needaction_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_needaction_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_needaction_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_needaction_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_needaction_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero di azioni"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_has_error_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_has_error_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_has_error_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_has_error_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_has_error_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_has_error_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_has_error_counter
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero di errori"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__message_needaction_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_club__message_needaction_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_department__message_needaction_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_member__message_needaction_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__message_needaction_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_role__message_needaction_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__message_needaction_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_team__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Numero di messaggi che richiedono un intervento"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__message_has_error_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_club__message_has_error_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_department__message_has_error_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_member__message_has_error_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__message_has_error_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_role__message_has_error_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__message_has_error_counter
+#: model:ir.model.fields,help:clubmanagement.field_club_team__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Numero di messaggi con errore di consegna"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__old_value
+msgid "Old Value"
+msgstr "Vecchio valore"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state_rule__apply_on__registration
+msgid "On Registration"
+msgstr "Alla registrazione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+msgid "Only one club can be created in this system."
+msgstr "In questo sistema è possibile creare un solo club."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,help:clubmanagement.field_club_department__hr_department_id
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__hr_department_id
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__hr_department_id
+#: model:ir.model.fields,help:clubmanagement.field_club_team__hr_department_id
+msgid "Optional HR department mapping for HR processes"
+msgstr "Mappatura opzionale del reparto HR per i processi HR"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_organisation_main_menu
+msgid "Organisation"
+msgstr "Organizzazione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__activity_type__other
+msgid "Other"
+msgstr "Altro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__club_id
+msgid "Parent Club / Association"
+msgstr "Club/associazione di genitori"
+
+#. module: clubmanagement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__pending
+msgid "Pending"
+msgstr "In attesa"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state_rule__apply_on__periodic
+msgid "Periodic Check"
+msgstr "Controllo periodico"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_form_view
+msgid "Permissions"
+msgstr "Permessi"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Personal"
+msgstr "Personale"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__photo
+msgid "Photo"
+msgstr "Foto"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+msgid ""
+"Please remove or reassign all Boards linked to this Department before "
+"deletion"
+msgstr ""
+"Rimuovere o riassegnare tutte le schede collegate a questo Dipartimento "
+"prima della cancellazione."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+msgid ""
+"Please remove or reassign all Boards linked to this Department before "
+"deletion."
+msgstr ""
+"Rimuovere o riassegnare tutte le Schede collegate a questo Dipartimento "
+"prima della cancellazione."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+msgid ""
+"Please remove or reassign all Departments linked to this Department before "
+"deletion."
+msgstr ""
+"Rimuovere o riassegnare tutti i dipartimenti collegati a questo dipartimento"
+" prima della cancellazione."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+msgid ""
+"Please remove or reassign all Pools linked to this Department before "
+"deletion."
+msgstr ""
+"Rimuovere o riassegnare tutti i pool collegati a questo reparto prima della "
+"cancellazione."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+msgid ""
+"Please remove or reassign all Teams linked to this Department before "
+"deletion."
+msgstr ""
+"Rimuovere o riassegnare tutte le squadre collegate a questo reparto prima "
+"della cancellazione."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model,name:clubmanagement.model_club_pool
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__pool_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__pool_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__pool_id
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_board__scope_type__pool
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__model__club_pool
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field_value__model__club_pool
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__pool
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__pool
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_form_view
+msgid "Pool"
+msgstr "Piscina"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__pool_count
+msgid "Pool Count"
+msgstr "Conteggio della piscina"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubpool.py:0
+msgid "Pool Members"
+msgstr "Membri della piscina"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubpool.py:0
+msgid "Pool Teams"
+msgstr "Squadre della piscina"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubpool.py:0
+msgid "Pool created: %s"
+msgstr "Piscina creata: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubpool.py:0
+msgid "Pool deleted: %s"
+msgstr "Piscina cancellata: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Pool-Role needs to be assigned to a pool"
+msgstr "Pool: il ruolo deve essere assegnato a un pool."
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_kanban_view
+msgid "Pool:"
+msgstr "Piscina:"
+
+#. module: clubmanagement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.actions.act_window,name:clubmanagement.club_pool_list_action
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__pool_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__pool_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__pool_ids
+#: model:ir.ui.menu,name:clubmanagement.club_pool_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_list_view
+msgid "Pools"
+msgstr "Piscine"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubmember_membership_additionalproduct.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__price
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__price
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__price
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__price
+msgid "Price"
+msgstr "Prezzo"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_kanban_view
+msgid "Price:"
+msgstr "Prezzo:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership_additionalproduct.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__product_id
+msgid "Product"
+msgstr "Prodotto"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
+msgid "Products"
+msgstr "Prodotti"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__condition
+msgid "Python Condition"
+msgstr "Condizione di Python"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_read
+msgid "Read Permission"
+msgstr "Leggere il permesso"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_history.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__reason
+msgid "Reason"
+msgstr "Motivo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__reason
+msgid "Reason for Change"
+msgstr "Motivo della modifica"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__res_id
+msgid "Record ID"
+msgstr "ID record"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__registered
+msgid "Registered"
+msgstr "Registrato"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__required
+msgid "Required"
+msgstr "Richiesto"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__res_id
+msgid "Resource ID"
+msgstr "ID risorsa"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__res_name
+msgid "Resource Name"
+msgstr "Nome della risorsa"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__activity_user_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__activity_user_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__activity_user_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__activity_user_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__activity_user_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__activity_user_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__activity_user_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__activity_user_id
+msgid "Responsible User"
+msgstr "Utente responsabile"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Role"
+msgstr "Ruolo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__role
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_form_view
+msgid "Role / Function"
+msgstr "Ruolo / Funzione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Role Name changed: %s"
+msgstr "Nome del ruolo cambiato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__role_type
+msgid "Role Type"
+msgstr "Tipo di ruolo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Role created: %s"
+msgstr "Ruolo creato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Role deleted: %s"
+msgstr "Ruolo cancellato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Role of type '%s' is not allowed for scope '%s'"
+msgstr "Il ruolo del tipo '%s' non è consentito per l'ambito '%s'."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: model:ir.actions.act_window,name:clubmanagement.club_roles_list_action
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_kanban_view
+msgid "Roles"
+msgstr "Ruoli"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__role_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__role_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__role_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__role_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__role_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__role_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__role_ids
+#: model:ir.ui.menu,name:clubmanagement.club_roles_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_list_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_form_view
+msgid "Roles / Functions"
+msgstr "Ruoli / Funzioni"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_has_sms_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__message_has_sms_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__message_has_sms_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__message_has_sms_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__message_has_sms_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__message_has_sms_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__message_has_sms_error
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Errore di consegna degli SMS"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/hr_employee.py:0
+#: code:addons/clubmanagement/models/res_partner.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_hr_employee__ssnid
+#: model:ir.model.fields,field_description:clubmanagement.field_res_partner__ssnid
+msgid "SSN No"
+msgstr "SSN No"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Scope"
+msgstr "Ambito di applicazione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__scope_type
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__scope_type
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__scope_type
+msgid "Scope Type"
+msgstr "Tipo di ambito"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_log_form_view
+msgid "Scope and Model"
+msgstr "Ambito e modello"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
+msgid "Search"
+msgstr "Ricerca"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_search_view
+msgid "Search Departments"
+msgstr "Ricerca dipartimenti"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_search_view
+msgid "Search Memberships"
+msgstr "Ricerca di soci"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_search_view
+msgid "Search Pools"
+msgstr "Ricerca piscine"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_search_view
+msgid "Search Roles / Functions"
+msgstr "Ricerca di ruoli/funzioni"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_search_view
+msgid "Search Teams"
+msgstr "Squadre di ricerca"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__selection
+msgid "Selection"
+msgstr "Selezione"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_mail
+msgid "Send Mail Permission"
+msgstr "Autorizzazione all'invio di posta elettronica"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__sequence
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__sequence
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__sequence
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__sequence
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__sequence
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__sequence
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__sequence
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_kanban
+msgid "Sequence:"
+msgstr "Sequenza:"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.menu_clubmanagement_admin_settings
+#: model:ir.ui.menu,name:clubmanagement.menu_clubmanagement_settings
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubteam.py:0
+msgid "Short NAme must be at most 5 characters"
+msgstr "Il nome breve deve essere al massimo di 5 caratteri"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__shortname
+msgid "Short Name"
+msgstr "Nome breve"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_kanban_view
+msgid "Short Name:"
+msgstr "Nome breve:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubteam.py:0
+#: model:ir.model.fields,help:clubmanagement.field_club_team__shortname
+msgid "Short code, max 5 characters"
+msgstr "Codice breve, max 5 caratteri"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_active_list_action
+msgid "Show active and inactive members of the club"
+msgstr "Mostra i soci attivi e inattivi del club"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/hr_employee.py:0
+#: model:ir.model.fields,help:clubmanagement.field_hr_employee__ssnid
+#: model:ir.model.fields,help:clubmanagement.field_res_partner__ssnid
+msgid "Social Security Number"
+msgstr "Numero di previdenza sociale"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__special
+msgid "Special"
+msgstr "Speciale"
+
+#. module: clubmanagement
+#: model:res.groups,name:clubmanagement.group_clubmanagement_user
+msgid "Standard User"
+msgstr "Utente standard"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership_history.py:0
+#: code:addons/clubmanagement/models/clubmember_state_history.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__date_start
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__start_date
+msgid "Start Date"
+msgstr "Data di inizio"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_res_config_settings__start_member_id
+msgid "Start Member ID"
+msgstr "Inizio ID membro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+msgid "Start Member ID cannot be changed once set."
+msgstr ""
+"L'ID del membro iniziale non può essere modificato una volta impostato."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_res_config_settings__start_member_id_set
+msgid "Start Member ID set"
+msgstr "Avvio dell'ID membro impostato"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_history.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__state_id
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "State"
+msgstr "Stato"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__activity_type__state_change
+msgid "State Change"
+msgstr "Cambiamento di stato"
+
+#. module: clubmanagement
+#: model:ir.model.constraint,message:clubmanagement.constraint_club_member_state_unique_code
+msgid "State Code must be unique!"
+msgstr "Il codice dello Stato deve essere unico!"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__name
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_form
+msgid "State Name"
+msgstr "Nome dello Stato"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+msgid "State Rule"
+msgstr "Regola dello Stato"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "State Start"
+msgstr "Stato Inizio"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__state_date_start
+msgid "State Start Date"
+msgstr "Stato Data di inizio"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__state_type
+msgid "State Type"
+msgstr "Stato Tipo"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_kanban
+msgid "State Type:"
+msgstr "Tipo di Stato:"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Status History"
+msgstr "Storia dello stato"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__activity_state
+#: model:ir.model.fields,help:clubmanagement.field_club_club__activity_state
+#: model:ir.model.fields,help:clubmanagement.field_club_department__activity_state
+#: model:ir.model.fields,help:clubmanagement.field_club_member__activity_state
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__activity_state
+#: model:ir.model.fields,help:clubmanagement.field_club_role__activity_state
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__activity_state
+#: model:ir.model.fields,help:clubmanagement.field_club_team__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Stato basato sulle attività\n"
+"In ritardo: La data di scadenza è già passata\n"
+"Oggi: La data dell'attività è oggi\n"
+"Pianificato: Attività future."
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "Status:"
+msgstr "Stato:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__subclub_id
+msgid "Sub Club"
+msgstr "Sub Club"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_subclub
+msgid "Sub Club / Sub-Association"
+msgstr "Sub Club / Sub Associazione"
+
+#. module: clubmanagement
+#: model:ir.ui.menu,name:clubmanagement.club_subclub_list_menu
+msgid "Sub Clubs"
+msgstr "Sub Club"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_subclub_list_action
+msgid ""
+"Sub Clubs require a Multi Company Setup within your Odoo environment.<br>\n"
+"                    Every Sub Club must be assigned to a dedicated Company with own Company ID."
+msgstr ""
+"I sub-club richiedono un'impostazione multi-aziendale nell'ambiente Odoo.<br>\n"
+"                    Ogni Sub Club deve essere assegnato a un'azienda dedicata con un proprio ID azienda."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__subclub_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__subclub_id
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_board__scope_type__subclub
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__model__club_subclub
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field_value__model__club_subclub
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__subclub
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__subclub
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_form_view
+msgid "Subclub"
+msgstr "Sottoclub"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+msgid "Subclub created: %s"
+msgstr "Sottoclub creato: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubsubclub.py:0
+msgid "Subclub deleted: %s"
+msgstr "Sottoclub cancellato: %s"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_board_kanban_view
+msgid "Subclub:"
+msgstr "Sottoclub:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.actions.act_window,name:clubmanagement.club_subclub_list_action
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__subclub_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__subclub_ids
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_list_view
+msgid "Subclubs"
+msgstr "Sottoclub"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_club_form_view
+msgid "Subclubs & Departments"
+msgstr "Sottoclub e dipartimenti"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club.py:0
+msgid "Subclubs associated to club. Club cannot be deleted!"
+msgstr "Sottoclub associati al club. Il club non può essere cancellato!"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__activity_type__system_action
+msgid "System Action"
+msgstr "Azione di sistema"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: code:addons/clubmanagement/models/clubcustomfieldvalue.py:0
+#: code:addons/clubmanagement/models/clublog.py:0
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model,name:clubmanagement.model_club_team
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__team_id
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__model__club_team
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field_value__model__club_team
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__team
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__team
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_form_view
+msgid "Team"
+msgstr "Squadra"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__team_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__team_count
+msgid "Team Count"
+msgstr "Conteggio della squadra"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubteam.py:0
+msgid "Team created: %s"
+msgstr "Squadra creata: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubteam.py:0
+msgid "Team deleted: %s"
+msgstr "Squadra cancellata: %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubteam.py:0
+msgid ""
+"Team members assigned. Team cannot be deleted! Deactivate team instead."
+msgstr ""
+"Membri del team assegnati. Il team non può essere cancellato! Disattivare "
+"invece il team."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+msgid "Team-Role needs to be assigned to a team"
+msgstr "Team: il ruolo deve essere assegnato a un team."
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_role
+msgid "Team/Club Function or Role"
+msgstr "Funzione o ruolo del team/club"
+
+#. module: clubmanagement
+#. odoo-javascript
+#. odoo-python
+#: code:addons/clubmanagement/models/clubdepartment.py:0
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: code:addons/clubmanagement/models/clubpool.py:0
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.actions.act_window,name:clubmanagement.club_team_list_action
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__team_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__team_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__team_ids
+#: model:ir.ui.menu,name:clubmanagement.club_team_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_list_view
+msgid "Teams"
+msgstr "Squadre"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__technical_name
+msgid "Technical field name"
+msgstr "Nome del campo tecnico"
+
+#. module: clubmanagement
+#: model:ir.model.constraint,message:clubmanagement.constraint_club_custom_field_unique_club_model_techname
+msgid "Technical name of custom field must be unique within clubs"
+msgstr ""
+"Il nome tecnico del campo personalizzato deve essere unico all'interno dei "
+"club."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__text
+msgid "Textarea"
+msgstr "Area di testo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubcustomfield.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__char
+msgid "Textline"
+msgstr "Linea di testo"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid ""
+"The member photo must be exactly 680x960 or 1360x1920 pixels. Your photo is:"
+" %sx%s"
+msgstr ""
+"La foto del membro deve essere esattamente di 680x960 o 1360x1920 pixel. La "
+"tua foto è: %sx%s"
+
+#. module: clubmanagement
+#: model_terms:ir.actions.act_window,help:clubmanagement.club_member_deleted_list_action
+msgid ""
+"This list is only available to Administrators. It shall be used by the Administrator as review list.<br>\n"
+"                    We will not finally remove members as invoices could be assigned to this member and as members are\n"
+"                    not shown in normal contact list, these contacts and their associated invoices would be orphanized."
+msgstr ""
+"Questo elenco è disponibile solo per gli Amministratori. Sarà utilizzato dall'amministratore come elenco di revisione.\n"
+"                    Non rimuoveremo definitivamente i membri, poiché le fatture potrebbero essere assegnate a questo membro e poiché i membri non sono visualizzati nel normale elenco dei contatti, questi contatti e le loro fatture associate verrebbero orfanizzati.\n"
+"                    non vengono visualizzati nel normale elenco dei contatti, questi contatti e le fatture ad essi associate verrebbero orfanizzati."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_membership.py:0
+msgid ""
+"This membership is present in the history of at least one member. It has "
+"been deactivated instead of deleted."
+msgstr ""
+"Questa iscrizione è presente nella cronologia di almeno un membro. È stata "
+"disattivata anziché cancellata."
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "Total Members"
+msgstr "Totale membri"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+msgid "Type"
+msgstr "Tipo"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__activity_exception_decoration
+#: model:ir.model.fields,help:clubmanagement.field_club_club__activity_exception_decoration
+#: model:ir.model.fields,help:clubmanagement.field_club_department__activity_exception_decoration
+#: model:ir.model.fields,help:clubmanagement.field_club_member__activity_exception_decoration
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__activity_exception_decoration
+#: model:ir.model.fields,help:clubmanagement.field_club_role__activity_exception_decoration
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__activity_exception_decoration
+#: model:ir.model.fields,help:clubmanagement.field_club_team__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo di attività di eccezione registrata."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__activity_type__create
+msgid "USer Create"
+msgstr "Creazione utente"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_unlink
+msgid "Unlink Permission"
+msgstr "Permesso di disconnessione"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "Upcoming Birthdays"
+msgstr "Compleanni imminenti"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+msgid "Updated %s"
+msgstr "Aggiornato %s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_log__user_id
+msgid "User"
+msgstr "Utente"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__activity_type__unlink
+msgid "User Unlink"
+msgstr "Sblocco dell'utente"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clublog.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__activity_type__update
+msgid "User Update"
+msgstr "Aggiornamento utente"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_boolean
+msgid "Value Boolean"
+msgstr "Valore Booleano"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_char
+msgid "Value Char"
+msgstr "Valore Char"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_date
+msgid "Value Date"
+msgstr "Valore Data"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_datetime
+msgid "Value Datetime"
+msgstr "Valore Data e ora"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_float
+msgid "Value Float"
+msgstr "Valore Galleggiante"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_integer
+msgid "Value Integer"
+msgstr "Valore Intero"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_selection
+msgid "Value Selection"
+msgstr "Selezione del valore"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__value_text
+msgid "Value Text"
+msgstr "Valore Testo"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_custom_field_value
+msgid "Value of custom field"
+msgstr "Valore del campo personalizzato"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_log_form_view
+msgid "Values"
+msgstr "Valori"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+#: model:ir.ui.menu,name:clubmanagement.club_member_waiting_list_menu
+msgid "Waiting List"
+msgstr "Lista d'attesa"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_list_view
+msgid "Waiting Members"
+msgstr "Membri in attesa"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "Waiting since"
+msgstr "In attesa da"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_board__website_message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_club__website_message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_department__website_message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__website_message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_pool__website_message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__website_message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__website_message_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_team__website_message_ids
+msgid "Website Messages"
+msgstr "Messaggi del sito web"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_board__website_message_ids
+#: model:ir.model.fields,help:clubmanagement.field_club_club__website_message_ids
+#: model:ir.model.fields,help:clubmanagement.field_club_department__website_message_ids
+#: model:ir.model.fields,help:clubmanagement.field_club_member__website_message_ids
+#: model:ir.model.fields,help:clubmanagement.field_club_pool__website_message_ids
+#: model:ir.model.fields,help:clubmanagement.field_club_role__website_message_ids
+#: model:ir.model.fields,help:clubmanagement.field_club_subclub__website_message_ids
+#: model:ir.model.fields,help:clubmanagement.field_club_team__website_message_ids
+msgid "Website communication history"
+msgstr "Storia della comunicazione del sito web"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
+msgid "With Cron Job"
+msgstr "Con Cron Job"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubboard.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_board__group_type__working
+msgid "Working Group"
+msgstr "Gruppo di lavoro"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_write
+msgid "Write Permission"
+msgstr "Permesso di scrittura"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__year_of_birth
+msgid "Year of Birth"
+msgstr "Anno di nascita"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__years_in_club
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_kanban_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Years in Club"
+msgstr "Anni nel Club"
+
+#. module: clubmanagement
+#: model:ir.actions.server,name:clubmanagement.club_club_form_action_server
+msgid "club.club.form.action.server"
+msgstr "club.club.form.action.server"
+
+#. module: clubmanagement
+#. odoo-javascript
+#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
+msgid "days."
+msgstr "giorni."
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_waiting_kanban_view
+msgid "days:"
+msgstr "giorni:"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubrole.py:0
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__other
+msgid "other"
+msgstr "altro"

@@ -79,6 +79,14 @@ Known Issues / Roadmap
 - Automations support coming soon
 - Member import/export improvements planned
 
+Languages
+=========
+
+- English: development language
+- German: automatically translated and manually checked
+- French: automatically translated
+- Italian: automatically translated
+
 Bug Tracker & Support
 =====================
 

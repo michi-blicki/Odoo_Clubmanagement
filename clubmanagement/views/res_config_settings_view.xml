@@ -14,6 +14,8 @@
                         <block title="General" name="clubgeneral_setting_container">
                             <setting id="majority_setting" title="Legal Majority Age">
                                 <field name="club_age_of_majority"/>
+                            </setting>
+                            <setting id="start_member_id_setting" title="Start Member ID">
                                 <field name="start_member_id" readonly='start_member_id_set'/>
                                 <field name="start_member_id_set" invisible="True" />
                             </setting>

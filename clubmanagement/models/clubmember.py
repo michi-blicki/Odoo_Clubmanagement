@@ -15,51 +15,59 @@ _logger = logging.getLogger(__name__)
 class ClubMember(models.Model):
     _name = 'club.member'
     _description = 'Club Member'
+    _inherits = {'res.partner': 'partner_id'}
     _inherit = [
         'mail.thread',
         'mail.activity.mixin',
         'club.log.mixin',
     ]
 
-    partner_id = fields.Many2one(comodel_name='res.partner', required=True, string=_('Contact'), readonly=True)
-    member_id = fields.Integer(string=_("Member ID"), required=True, readonly=True)
-    firstname = fields.Char(related='partner_id.firstname', store=True, string=_('Firstname'), readonly=True)
-    lastname = fields.Char(related='partner_id.lastname', store=True, string=_('Lastname'), readonly=True)
-    birthdate_date = fields.Date(related='partner_id.birthdate_date', store=True, string=_('Birthdate'), readonly=False)
-    gender = fields.Selection(related='partner_id.gender', store=True, string=_('Gender'), readonly=False)
-    photo = fields.Binary(string=_("Photo"), attachment=True, help=_("Member photo of size 680x960 or 1360x1920"))
-    nationality_id = fields.Many2one(comodel_name='res.country', related='partner_id.nationality_id', store=True, string=_('Nationality'), readonly=False)
-    city = fields.Char(related='partner_id.city', store=True, string=_('City'), readonly=True)
+    #
+    # Personal Identification Fields
+    partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True, readonly=True, ondelete='cascade')
+    member_id               = fields.Integer(string="Member ID", required=True, readonly=True)
+    photo                   = fields.Binary(string="Photo", attachment=True, help="Member photo of size 680x960 or 1360x1920")
 
-    club_id = fields.Many2one(string=_('Club'), comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
-    subclub_ids = fields.Many2many(string=_('Subclubs'), comodel_name='club.subclub', relation='club_subclub_member_rel', column1='member_id', column2='subclub_id')
-    department_ids = fields.Many2many(string=_('Departments'), comodel_name='club.department', relation='club_department_member_rel', column1='member_id', column2='department_id')
-    pool_ids = fields.Many2many(string=_('Pools'), comodel_name='club.pool', relation='club_pool_member_rel', column1='member_id', column2='pool_id')
-    team_ids = fields.Many2many(string=_('Teams'), comodel_name='club.team', relation='club_team_member_rel', column1='member_id', column2='team_id')
-    
-    is_employee = fields.Boolean(string=_('Is Employee'), default=False)
-    employee_id = fields.Many2one(comodel_name='hr.employee', string=_('Employee'), tracking=True)
+    #
+    # Under-Age specialities
+    guardian_ids            = fields.One2many(string='Guardians', comodel_name='club.member.guardian', inverse_name='member_id', required=False)
+    primary_guardian_id     = fields.Many2one(string='Primary Guardian', comodel_name='res.partner', compute='_compute_primary_guardian', store=True)
+    requires_guardian       = fields.Boolean(string='Requires Guardian', compute='_compute_age', store=True)
 
-    role_ids = fields.One2many(comodel_name='club.role', inverse_name='member_id', string=_('Roles / Functions'))
+    #
+    # HR Special Fields
+    is_employee             = fields.Boolean(string="Is Employee", default=False)
+    employee_id             = fields.Many2one(string="Employee", comodel_name="hr.employee", tracking=True)
 
-    current_membership_id  = fields.Many2one(string=_("Current Membership"), comodel_name="club.member.membership", compute="_compute_current_membership", store=True)
-    membership_history_ids = fields.One2many(string=_("Membership History"), comodel_name="club.member.membership.history", inverse_name="member_id")
-    membership_date_start  = fields.Date(string=_("Membership Start Date"), compute="_compute_current_membership", store=True)
-    membership_date_end    = fields.Date(string=_("Membership End Date"), compute="_compute_current_membership", store=True)
+    #
+    # Clubmanagement Special Fields
+    club_id                 = fields.Many2one(string="Club", comodel_name="club.club", store=True, readonly=True, default=lambda self: self.env["club.club"].search([], limit=1).id)
+    subclub_ids             = fields.Many2many(string="Subclubs", comodel_name="club.subclub", relation="club_subclub_member_rel", column1="member_id", column2="subclub_id")
+    department_ids          = fields.Many2many(string="Departments", comodel_name="club.department", relation="club_department_member_rel", column1="member_id", column2="department_id")
+    pool_ids                = fields.Many2many(string="Pools", comodel_name="club.pool", relation="club_pool_member_rel", column1="member_id", column2="pool_id")
+    team_ids                = fields.Many2many(string="Teams", comodel_name="club.team", relation="club_team_member_rel", column1="member_id", column2="team_id")
 
-    current_state_id = fields.Many2one(string=_("Current Member State"), comodel_name="club.member.state", compute="_compute_current_state", store=True)
-    state_history_ids = fields.One2many(string=_("Member State History"), comodel_name="club.member.state.history", inverse_name="member_id")
-    state_date_start = fields.Date(string=_("State Start Date"), compute="_compute_current_state", store=True)
-    state_days_in_state = fields.Integer(string=_("Days in current state"), compute="_compute_state_days_since_start", store=False)
-    state_header_color = fields.Char(string=_("Kanban Header Color"), compute="_compute_state_days_since_start", store=False)
+    role_ids                = fields.One2many(string="Roles / Functions", comodel_name="club.role", inverse_name="member_id")
 
-    active = fields.Boolean(default=True, tracking=True)
+    current_membership_id  = fields.Many2one(string="Current Membership", comodel_name="club.member.membership", compute="_compute_current_membership", store=True)
+    membership_history_ids = fields.One2many(string="Membership History", comodel_name="club.member.membership.history", inverse_name="member_id")
+    membership_date_start  = fields.Date(string="Membership Start Date", compute="_compute_current_membership", store=True)
+    membership_date_end    = fields.Date(string="Membership End Date", compute="_compute_current_membership", store=True)
 
-    year_of_birth = fields.Integer(string=_("Year of Birth"), compute='_compute_year_of_birth', store=True)
-    age = fields.Integer(string=_("Age"), compute='_compute_age', store=True)
-    years_in_club = fields.Float(string=_('Years in Club'), compute='_compute_membership_duration', store=True)
-    months_in_club = fields.Integer(string=_('Months in Club'), compute='_compute_membership_duration', store=True)
-    days_in_club = fields.Integer(string=_('Days in Club'), compute='_compute_membership_duration', store=True)
+    current_state_id       = fields.Many2one(string="Current Member State", comodel_name="club.member.state", compute="_compute_current_state", store=True)
+    state_history_ids      = fields.One2many(string="Member State History", comodel_name="club.member.state.history", inverse_name="member_id")
+    state_date_start       = fields.Date(string="State Start Date", compute="_compute_current_state", store=True)
+    state_days_in_state    = fields.Integer(string="Days in current state", compute="_compute_state_days_since_start", store=False)
+    state_header_color     = fields.Char(string="Kanban Header Color", compute="_compute_state_days_since_start", store=False)
+
+    active                 = fields.Boolean(default=True, tracking=True)
+
+    year_of_birth          = fields.Integer(string="Year of Birth", compute="_compute_year_of_birth", store=True)
+    age                    = fields.Integer(string="Age", compute="_compute_age", store=True)
+    years_in_club          = fields.Float(string="Years in Club", compute="_compute_membership_duration", store=True)
+    months_in_club         = fields.Integer(string="Months in Club", compute="_compute_membership_duration", store=True)
+    days_in_club           = fields.Integer(string="Days in Club", compute="_compute_membership_duration", store=True)
+
 
     @api.model
     def init(self):
@@ -73,12 +81,15 @@ class ClubMember(models.Model):
 
     @api.depends('birthdate_date')
     def _compute_age(self):
-        today = fields.Date.context_today(self)
-        for mem in self:
-            if mem.birthdate_date:
-                mem.age = relativedelta(today, mem.birthdate_date).years
+        age_of_majority = int(self.env['ir.config_parameter'].sudo().get_param('clubmanagement.age_of_majority', 18))
+        today = fields.Date.today()
+        for member in self:
+            if member.birthdate_date:
+                member.age = relativedelta(today, member.birthdate_date).years
+                member.requires_guardian = member.age < age_of_majority
             else:
-                mem.age = False
+                member.age = False
+                member.requires_guardian = False
 
     @api.depends('photo')
     def _check_photo_size(self):
@@ -96,20 +107,49 @@ class ClubMember(models.Model):
                         _("Could not verify the member photo. Please upload a valid image file")
                     )
 
+    @api.depends('guardian_ids', 'guardian_ids.is_primary')
+    def _compute_primary_guardian(self):
+        for member in self:
+            primary = member.guardian_ids.filtered(lambda g: g.is_primary)
+            member.primary_guardian_id = primary.guardian_id if primary else False
+
+    @api.constrains('requires_guardian', 'guardian_ids')
+    def _check_guardian_required(self):
+        for member in self:
+            if member.requires_guardian and not member.guardian_ids:
+                raise ValidationError(_('A guardian is required for members under the age of majority.'))
+
+    def add_or_update_guardian(self, guardian_data):
+        self.ensure_one()
+        Guardian = self.env['club.member.guardian']
+        existing = Guardian.search({
+            ('member_id', '=', self.id),
+            ('guardian_id', '=', guardian_data['guardian_id'])
+        })
+
+        if existing:
+            existing.write(guardian_data)
+        else:
+            guardian_data['member_id'] = self.id
+            Guardian.create(guardian_data)
+
+
     #######################################
     # CREATE HOOK
     #######################################
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            # Suche nach existierendem Partner
-            partner = self._find_or_create_partner(vals)
-            vals['partner_id'] = partner.id
-
             # Generiere Member ID
             vals['member_id'] = self._generate_member_id()
 
         members = super(ClubMember, self).create(vals_list)
+
+        for member in members:
+            if member.requires_guardian and not member.guardian_ids:
+                pass
+
+        self.env['club.member.state.rule']._apply_registratoin_rules(members)
 
         for member in members:
             self.env['club.log'].log_event(
@@ -122,34 +162,6 @@ class ClubMember(models.Model):
             )
 
         return members
-
-    def _find_or_create_partner(self, vals):
-        Partner = self.env['res.partner']
-        domain = [
-            ('firstname', '=', vals.get('firstname')),
-            ('lastname', '=', vals.get('lastname')),
-        ]
-
-        if vals.get('birthdate_date'):
-            domain.append(('birthdate_date', '=', vals.get('birthdate_date')))
-        elif vals.get('ssnid'):
-            domain.append(('ssnid', '=', vals.get('ssnid')))
-
-        partner = Partner.search(domain, limit=1)
-
-        if not partner:
-            partner_vals = {
-                'firstname': vals.get('firstname'),
-                'lastname': vals.get('lastname'),
-                'birthdate_date': vals.get('birthdate_date'),
-                'gender': vals.get('gender'),
-                'nationality_id': vals.get('nationality_id'),
-                'ssnid': vals.get('ssnid'),
-            }
-            partner_vals = {k: v for k, v in partner_vals.items() if v}
-            partner = Partner.create(partner_vals)
-
-        return partner
 
     def _generate_member_id(self):
         last_member = self.search([], order='member_id desc', limit=1)
@@ -168,7 +180,7 @@ class ClubMember(models.Model):
                 ('member_id', '=', member.id),
                 ('start_date', '<=', fields.Datetime.now()),
                 '|', ('end_date', '=', False), ('end_date', '>', fields.Datetime.now())
-            ], order='date desc, id desc', limit=1)
+            ], order='start_date desc, id desc', limit=1)
             member.current_state_id = current_state.state_id if current_state else False
             member.state_date_start = current_state.start_date if current_state else False
 

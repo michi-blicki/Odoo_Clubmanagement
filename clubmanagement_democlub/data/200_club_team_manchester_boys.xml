@@ -59,7 +59,7 @@
             <field name="shortname">MNU12A</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u12"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">50</field>
@@ -71,7 +71,7 @@
             <field name="shortname">MNU12B</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u12"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">60</field>
@@ -83,7 +83,7 @@
             <field name="shortname">MNU12C</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u12"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">70</field>
@@ -96,7 +96,7 @@
             <field name="shortname">MNU10A</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">80</field>
@@ -108,7 +108,7 @@
             <field name="shortname">MNU10B</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">90</field>
@@ -120,7 +120,7 @@
             <field name="shortname">MNU10C</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">100</field>
@@ -132,7 +132,7 @@
             <field name="shortname">MNU10D</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">110</field>
@@ -144,7 +144,7 @@
             <field name="shortname">MNU10E</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_youth_football_boys"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="sequence">120</field>
