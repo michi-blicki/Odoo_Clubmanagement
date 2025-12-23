@@ -5,6 +5,14 @@
     
         <record id="base.user_admin" model="res.users">
             <field name="groups_id" eval="[(4, ref('clubmanagement.group_clubmanagement_administrator'))]"/>
+            <field name="company_id" ref="manchester_nebula_fc_main" />
+            <field name="company_ids" eval="[(6, 0, [
+                ref('manchester_nebula_fc_main'),
+                ref('manchester_nebula_fc_main_club'),
+                ref('manchester_nebula_fc_junior'),
+                ref('nebula_fc_lucerne'),
+                ref('main_company'),
+            ])]" />
         </record>
 
         <!-- manchester_nebula_fc_main -->
