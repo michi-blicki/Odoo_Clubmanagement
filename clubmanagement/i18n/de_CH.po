@@ -262,7 +262,7 @@ msgstr "Administration"
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__admin
 #: model:res.groups,name:clubmanagement.group_clubmanagement_administrator
 msgid "Administrator"
-msgstr "Verwalter"
+msgstr "Administrator"
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view

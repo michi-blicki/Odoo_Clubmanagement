@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="club_field_mixin_list_view" model="ir.ui.view">
+            <field name="name">club.field.mixin.list.view</field>
+            <field name="model">club.field.mixin</field>
+            <field name="arch" type="xml">
+                <list string="Available Fields">
+                    <field name="id" />
+                    <field name="label" />
+                    <field name="model" />
+                    <field name="technical_name" />
+                    <field name="field_type" />
+                    <field name="required" />
+                </list>
+            </field>
+        </record>
+
+        <record id="club_api_config_form_view" model="ir.ui.view">
+            <field name="name">club.api.config.form.view</field>
+            <field name="model">club.api.config</field>
+            <field name="arch" type="xml">
+                <form string="Club API Configuration">
+                    <sheet>
+                        <group>
+                            <field name="club_id" readonly="1"/>
+                            <field name="company_ids" />
+                            <field name="name"/>
+                            <field name="active"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Security">
+                                <group>
+                                    <field name="api_name"/>
+                                    <field name="api_key" readonly="1" help="Automatically generated unique API key for this configuration." />
+                                    <field name="user_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                </group>
+                                <group>
+                                    <field name="cors_allow_origin" />
+                                    <field name="enforce_https" />
+                                </group>
+                                <group>
+                                    <field name="rate_limit_enabled" />
+                                    <field name="rate_limit_per_minute" />
+                                </group>
+                            </page>
+                            <page string="Allowed API Fields">
+                                <group>
+                                    <field name="allowed_fields" mode="list" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="label" string="Label"/>
+                                            <field name="technical_name" string="Technical Name"/>
+                                            <field name="field_type" string="Field Type" />
+                                            <field name="model" string="Model" />
+                                            <field name="required" readonly="1"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <separator string="Automatically included required fields"/>
+                                <label for="allowed_fields" string="Required fields are automatically included and cannot be deselected."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="club_api_config_list_view" model="ir.ui.view">
+            <field name="name">club.api.config.list.view</field>
+            <field name="model">club.api.config</field>
+            <field name="arch" type="xml">
+                <list string="Club Management API Configurations">
+                    <field name="name"/>
+                    <field name="api_key"/>
+                    <field name="company_ids" widget="many2many_tags"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="clubmanagement_config_api_action" model="ir.actions.act_window">
+            <field name="name">Club Management API Configuration</field>
+            <field name="res_model">club.api.config</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[
+                (5,0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('club_api_config_list_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('club_api_config_form_view')}),
+            ]"/>
+        </record>
+
+        <menuitem id="menu_clubmanagement_admin_api"
+                  name="API Configuration"
+                  parent="club_administration_root_menu"
+                  sequence="900"
+                  action="clubmanagement_config_api_action"
+                  groups="clubmanagement.group_clubmanagement_administrator"/>
+    </data>
+
+</odoo>

@@ -21,4 +21,5 @@ from . import clubmember_guardian
 from . import clubrole
 from . import clubcustomfield
 from . import clubcustomfieldvalue
+from . import clubfield_mixin
 from . import clubapiconfig

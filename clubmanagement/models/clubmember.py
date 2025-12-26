@@ -164,9 +164,31 @@ class ClubMember(models.Model):
         return members
 
     def _generate_member_id(self):
-        last_member = self.search([], order='member_id desc', limit=1)
+        """Generiert fortlaufende Member ID.
+        Nutzt Startwert aus den Systemeinstellungen, wenn gesetzt.
+        """
+        # 1️⃣ Letzten Member bestimmen
+        last_member = self.search([], order="member_id desc", limit=1)
+
+        # 2️⃣ Wenn schon Mitglieder vorhanden → normal weiterzählen
         if last_member:
             return last_member.member_id + 1
+
+        # 3️⃣ Sonst Startwert aus ResConfigSettings (Systemparameter) laden
+        IrConfig = self.env["ir.config_parameter"].sudo()
+        start_id_set = IrConfig.get_param("clubmanagement.start_member_id_set")
+        start_id_val = IrConfig.get_param("clubmanagement.start_member_id")
+
+        try:
+            start_id_val = int(start_id_val) if start_id_val else 1
+        except ValueError:
+            start_id_val = 1
+
+        # Wenn Startwert explizit aktiviert wurde und vorhanden ist
+        if start_id_set in ("True", True) and start_id_val > 0:
+            return start_id_val
+
+        # 4️⃣ Standard-Fallback
         return 1
 
 

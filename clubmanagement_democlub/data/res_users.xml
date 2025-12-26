@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data>
+    <data noupdate="1">
     
         <record id="base.user_admin" model="res.users">
             <field name="groups_id" eval="[(4, ref('clubmanagement.group_clubmanagement_administrator'))]"/>
@@ -11,7 +11,7 @@
                 ref('manchester_nebula_fc_main_club'),
                 ref('manchester_nebula_fc_junior'),
                 ref('nebula_fc_lucerne'),
-                ref('main_company'),
+                ref('base.main_company'),
             ])]" />
         </record>
 

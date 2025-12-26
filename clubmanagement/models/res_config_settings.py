@@ -11,6 +11,20 @@ class ResConfigSettings(models.TransientModel):
     start_member_id         = fields.Integer(string='Start Member ID', config_parameter="clubmanagement.start_member_id")
     start_member_id_set     = fields.Boolean(string='Start Member ID set', compute='_compute_start_member_id_set')
 
+    club_api_rate_limit_enabled = fields.Boolean(
+        string="Enable API Rate Limit",
+        config_parameter="club.api.rate_limit_enabled",
+        help="Activate basic per-IP rate limiting for public and JSON API routes"
+    )
+
+    club_api_rate_limit_count = fields.Integer(
+        string="Limit per IP per Minute",
+        config_parameter="club.api.rate_limit_count",
+        default=60,
+        help="Maximum number of allowed requests per IP address per minute"
+    )
+
+
     @api.depends('start_member_id')
     def _compute_start_member_id_set(self):
         param = self.env['ir.config_parameter'].sudo().get_param('clubmanagement.start_member_id')

@@ -10,7 +10,8 @@
             <field name="inherit_id" ref="base.res_config_settings_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form" position="inside">
-                    <app data-string="Club Management" string="Club Management" name="club_management" groups="clubmanagement.group_clubmanagement_administrator">
+                    <app data-string="Club Management" string="Club Management" name="club_management"
+                        groups="clubmanagement.group_clubmanagement_administrator">
                         <block title="General" name="clubgeneral_setting_container">
                             <setting id="majority_setting" title="Legal Majority Age">
                                 <field name="club_age_of_majority"/>
@@ -18,6 +19,15 @@
                             <setting id="start_member_id_setting" title="Start Member ID">
                                 <field name="start_member_id" readonly='start_member_id_set'/>
                                 <field name="start_member_id_set" invisible="True" />
+                            </setting>
+                        </block>
+
+                        <block title="API Security" name="clubapi_setting_container">
+                            <setting id="api_rate_limit_enable" title="Enable API Rate Limit">
+                                <field name="club_api_rate_limit_enabled"/>
+                            </setting>
+                            <setting id="api_rate_limit_count" title="Requests per IP per Minute">
+                                <field name="club_api_rate_limit_count" invisible="club_api_rate_limit_enabled == False"/>
                             </setting>
                         </block>
                     </app>

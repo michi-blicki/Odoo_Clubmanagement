@@ -14,13 +14,16 @@
                             <field name="model"/>
                         </group>
                         <group>
+                            <field name="company_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
                             <field name="technical_name"/>
                             <field name="label"/>
                         </group>
-                        <group>
+                        <group name="field_config">
                             <field name="field_type"/>
                             <field name="required"/>
-                            <field name="selection_values" invisible='field_type == "selection"'/>
+                            <field name="selection_values" invisible="field_type != 'selection'"/>
                         </group>
                     </sheet>
                 </form>
@@ -37,6 +40,7 @@
                     <field name="technical_name"/>
                     <field name="label"/>
                     <field name="field_type"/>
+                    <field name="company_ids" widget="many2many_tags"/>
                     <field name="required"/>
                 </list>
             </field>
