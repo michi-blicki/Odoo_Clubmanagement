@@ -35,7 +35,7 @@
                                 </group>
                             </div>
 
-                            <field name="company_id.logo"
+                            <field name="logo"
                                 widget="image"
                                 class="oe_avatar"
                                 options="{'preview_image': 'logo', 'size': [128, 128]}"

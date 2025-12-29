@@ -16,6 +16,7 @@ class Club(models.Model):
 
     name                = fields.Char(string="Name", required=True, tracking=True)
     company_id          = fields.Many2one(string="Company", comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    logo                = fields.Binary(string="Logo", related='company_id.logo', readonly=True, store=False)
     subclub_ids         = fields.One2many(string="Subclubs", comodel_name='club.subclub', inverse_name='club_id')
     board_ids           = fields.One2many(string="Boards", comodel_name='club.board', inverse_name='club_id')
     department_ids      = fields.One2many(string="Departments", comodel_name='club.department', inverse_name='club_id')
