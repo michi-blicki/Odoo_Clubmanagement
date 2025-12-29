@@ -81,12 +81,14 @@ class ClubMember(models.Model):
 
     @api.depends('birthdate_date')
     def _compute_age(self):
+        force_guardian_requirement = bool(self.env['ir.config_parameter'].sudo().get_param('clubmanagement.force_guardian_requirement', False))
         age_of_majority = int(self.env['ir.config_parameter'].sudo().get_param('clubmanagement.age_of_majority', 18))
         today = fields.Date.today()
         for member in self:
             if member.birthdate_date:
                 member.age = relativedelta(today, member.birthdate_date).years
-                member.requires_guardian = member.age < age_of_majority
+                if force_guardian_requirement:
+                    member.requires_guardian = member.age < age_of_majority
             else:
                 member.age = False
                 member.requires_guardian = False

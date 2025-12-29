@@ -14,7 +14,8 @@
                         groups="clubmanagement.group_clubmanagement_administrator">
                         <block title="General" name="clubgeneral_setting_container">
                             <setting id="majority_setting" title="Legal Majority Age">
-                                <field name="club_age_of_majority"/>
+                                <field name="force_guardian_requirement" />
+                                <field name="club_age_of_majority" invisible='force_guardian_requirement == False'/>
                             </setting>
                             <setting id="start_member_id_setting" title="Start Member ID">
                                 <field name="start_member_id" readonly='start_member_id_set'/>

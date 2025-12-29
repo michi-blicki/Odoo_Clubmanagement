@@ -7,9 +7,10 @@ _logger = logging.getLogger(__name__)
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    club_age_of_majority    = fields.Integer(string='Age of Majority', config_parameter="clubmanagement.age_of_majority")
-    start_member_id         = fields.Integer(string='Start Member ID', config_parameter="clubmanagement.start_member_id")
-    start_member_id_set     = fields.Boolean(string='Start Member ID set', compute='_compute_start_member_id_set')
+    club_age_of_majority        = fields.Integer(string='Age of Majority', config_parameter="clubmanagement.age_of_majority")
+    force_guardian_requirement  = fields.Boolean(string='Force Requirement for Guardian Contact', config_parameter='clubmanagement.force_guardian_requirement')
+    start_member_id             = fields.Integer(string='Start Member ID', config_parameter="clubmanagement.start_member_id")
+    start_member_id_set         = fields.Boolean(string='Start Member ID set', compute='_compute_start_member_id_set')
 
     club_api_rate_limit_enabled = fields.Boolean(
         string="Enable API Rate Limit",
