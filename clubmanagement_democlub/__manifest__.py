@@ -76,6 +76,7 @@ and system testing. Experience the future of football management with Manchester
         'data/440_club_team_manchester_girls_role.xml',
         'data/440_club_team_lucerne_role.xml',
         'data/500_club_member_states.xml',
+        'data/510_club_memberships.xml',
         'data/res_users.xml',
     ],
 

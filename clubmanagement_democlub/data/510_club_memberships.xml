@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+
+        <record id="membership_manchester_main_fc_active" model="club.member.membership">
+            <field name="name">Main FC - Active Membership</field>
+            <field name="code">MAIN-ACT</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club" />
+            <field name="main_product_id" ref="product_active_member_manchester" />
+        </record>
+
+        <record id="membership_manchester_main_fc_passive" model="club.member.membership">
+            <field name="name">Main FC - Passive Membership</field>
+            <field name="code">MAIN-PAS</field>
+            <field name="company_id" ref="manchester_nebula_fc_main_club" />
+            <field name="main_product_id" ref="product_passive_member_manchester" />
+        </record>
+        
+        <record id="membership_manchester_junior_division_youth_boys" model="club.member.membership">
+            <field name="name">Junior Division - Youth Boys Membership</field>
+            <field name="code">JD-YB-MEM</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior" />
+            <field name="main_product_id" ref="product_member_manchester_youth_football_boys" />
+        </record>
+
+        <record id="membership_manchester_junior_division_youth_girls" model="club.member.membership">
+            <field name="name">Junior Division - Youth Girls Membership</field>
+            <field name="code">JD-YG-MEM</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior" />
+            <field name="main_product_id" ref="product_member_manchester_youth_football_girls" />
+        </record>
+        
+        <record id="membership_manchester_junior_division_kids_boys" model="club.member.membership">
+            <field name="name">Junior Division - Kids Boys Membership</field>
+            <field name="code">JD-KB-MEM</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior" />
+            <field name="main_product_id" ref="product_member_manchester_kids_football_boys" />
+        </record>
+
+        <record id="membership_manchester_junior_division_kids_girls" model="club.member.membership">
+            <field name="name">Junior Division - Kids Girls Membership</field>
+            <field name="code">JD-KG-MEM</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior" />
+            <field name="main_product_id" ref="product_member_manchester_kids_football_girls" />
+        </record>
+
+        <record id="membership_lucerne_active" model="club.member.membership">
+            <field name="name">Luzern Chapter - Aktivmitglieder</field>
+            <field name="code">LU-ACT</field>
+            <field name="company_id" ref="nebula_fc_lucerne" />
+            <field name="main_product_id" ref="product_aktivmitglied_luzern" />
+        </record>
+
+        <record id="membership_lucerne_passiv" model="club.member.membership">
+            <field name="name">Luzern Chapter - Passivmitglied</field>
+            <field name="code">LU-PAS</field>
+            <field name="company_id" ref="nebula_fc_lucerne" />
+            <field name="main_product_id" ref="product_passivmitglied_luzern" />
+        </record>
+
+        <record id="membership_lucerne_junior" model="club.member.membership">
+            <field name="name">Luzern Chapter - Juniorenmitglied</field>
+            <field name="code">LU-JUN</field>
+            <field name="company_id" ref="nebula_fc_lucerne" />
+            <field name="main_product_id" ref="product_juniorenmitglied_luzern" />
+        </record>
+    
+    </data>
+    
+
+</odoo>

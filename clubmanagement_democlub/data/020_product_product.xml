@@ -28,6 +28,62 @@
             <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
         </record>
 
+        <!-- Junior Division: Youth Football Boys - Member Manchester -->
+        <record id="product_member_manchester_youth_football_boys" model="product.product">
+            <field name="name">Member Manchester: Youth Football Boys</field>
+            <field name="type">service</field>
+            <field name="list_price">400</field>
+            <field name="standard_price">400</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">JD-YF_BOYS-PLAYER</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
+        </record>
+
+        <!-- Junior Division: Youth Football Girls - Member Manchester -->
+        <record id="product_member_manchester_youth_football_girls" model="product.product">
+            <field name="name">Member Manchester: Youth Football Girls</field>
+            <field name="type">service</field>
+            <field name="list_price">350</field>
+            <field name="standard_price">350</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">JD-YF_GIRLS-PLAYER</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
+        </record>
+
+        <!-- Junior Division: Kids Football Boys - Member Manchester -->
+        <record id="product_member_manchester_kids_football_boys" model="product.product">
+            <field name="name">Member Manchester: Kids Football Boys</field>
+            <field name="type">service</field>
+            <field name="list_price">300</field>
+            <field name="standard_price">300</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">JD-KF_BOYS-PLAYER</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
+        </record>
+
+        <!-- Junior Division: Kids Football Girls - Member Manchester -->
+        <record id="product_member_manchester_kids_football_girls" model="product.product">
+            <field name="name">Member Manchester: Kids Football Girls</field>
+            <field name="type">service</field>
+            <field name="list_price">300</field>
+            <field name="standard_price">300</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">JD-KF_GIRLS-PLAYER</field>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+            <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
+        </record>
+
         <!-- Aktivmitglied Luzern -->
         <record id="product_aktivmitglied_luzern" model="product.product">
             <field name="name">Aktivmitglied Luzern</field>
@@ -37,6 +93,20 @@
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="uom_po_id" ref="uom.product_uom_unit"/>
             <field name="default_code">AKT-MIT-LUZ</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+            <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
+        </record>
+
+            <!-- Passivmitglied Luzern -->
+        <record id="product_passivmitglied_luzern" model="product.product">
+            <field name="name">Passivmitglied Luzern</field>
+            <field name="type">service</field>
+            <field name="list_price">100</field>
+            <field name="standard_price">100</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">PAS-MIT-LUZ</field>
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="currency_id" ref="base.CHF"/>
             <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
