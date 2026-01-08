@@ -11,7 +11,8 @@ class Club(models.Model):
     _inherit = [
         'mail.thread',
         'mail.activity.mixin',
-        'club.log.mixin'
+        'club.log.mixin',
+        'club.custom.field.mixin'
     ]
 
     name                = fields.Char(string="Name", required=True, tracking=True)
@@ -25,6 +26,9 @@ class Club(models.Model):
     role_ids            = fields.One2many(string="Roles / Functions", comodel_name='club.role', inverse_name='club_id')
     member_ids          = fields.Many2many(string="Members", comodel_name='club.member', relation='club_club_member_rel', column1='club_id', column2='member_id')
     member_ids_display  = fields.Many2many(string="All Members", comodel_name='club.member', compute='_compute_member_ids', store=False)
+
+    custom_field_lines  = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
+    
     active              = fields.Boolean(default=True)
 
     @api.model
@@ -187,5 +191,3 @@ class Club(models.Model):
             )
 
         return super(Club, self).unlink()
-        
-

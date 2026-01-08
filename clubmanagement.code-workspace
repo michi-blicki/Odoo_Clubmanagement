@@ -2,6 +2,15 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../l10n_ch_clubmanagement"
+		},
+		{
+			"path": "../l10n_ch_clubmanagement_sfv"
+		},
+		{
+			"path": "../fcthalwil"
 		}
 	],
 	"settings": {}

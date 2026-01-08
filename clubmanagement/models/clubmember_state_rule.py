@@ -181,20 +181,40 @@ return True, None, None
 
     @api.model
     def _apply_registratoin_rules(self, members):
-        rules = self.search([('active', '=', True), ('apply_on', '=', 'registration')])
+        """
+        Initialize club.member.state.history for given members:
+        1. Ensure that a 'registered' state exists.
+        2. Create missing 'registered' history entries.
+        3. Apply active rules that apply_on='registration'.
+        """
+        State = self.env['club.member.state']
+        StateHistory = self.env['club.member.state.history']
 
-        if rules:
-            for rule in rules:
-                rule._apply_rule(members)
+        # 1️⃣ Ensure, that at least one state with type 'registered' exists
+        registered_state = State.search([('state_type', '=', 'registered')], limit=1)
+        if not registered_state:
+            raise UserError(_("No Club Member State of type 'registered' configured. Please inform Administrator"))
 
-        else:
-            registered_state = self.env['club.member.state'].search([('state_type', '=', 'registered')], limit=1)
-            if registered_state:
-                for member in members:
-                    self.env['club.member.state.history'].create({
-                        'member_id': member.id,
-                        'state_id': registered_state.id,
-                        'start_date': fields.Date.today(),
-                    })
-            else:
-                raise UserError(_('Club Member State not configured. Please configure at least one state with type "registered"'))
+        # 2️⃣ Search for existing member histories
+        existing_histories = StateHistory.search([
+            ('member_id', 'in', members.ids),
+            ('state_id.state_type', '=', 'registered')
+        ])
+        existing_member_ids = set(existing_histories.mapped('member_id').ids)
+
+        # 3️⃣ Create member state history entities for missings
+        for member in members:
+            if member.id not in existing_member_ids:
+                StateHistory.create({
+                    'member_id': member.id,
+                    'state_id': registered_state.id,
+                    'start_date': fields.Date.today(),
+                })
+
+        # 4️⃣ Apply rules, if existing
+        rules = self.search([
+            ('active', '=', True),
+            ('apply_on', '=', 'registration')
+        ])
+        for rule in rules:
+            rule._apply_rule(members)

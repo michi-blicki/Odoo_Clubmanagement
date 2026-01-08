@@ -7,6 +7,10 @@ class ClubCustomField(models.Model):
     _name = 'club.custom.field'
     _description = 'Configurable additional fields for clubs'
     _order = 'sequence, label'
+    _inherit = [
+        'mail.thread',
+        'mail.activity.mixin',
+    ]
 
     _sql_constraints = [
         (
@@ -44,6 +48,10 @@ class ClubCustomField(models.Model):
     required            = fields.Boolean(string='Required', default=False)
     sequence            = fields.Integer(string='Sequence', default=10)
     selection_values    = fields.Char(string='For Selection Lists only, as comma-separated list')
+
+    help                = fields.Text(string="Help", help="Hint or description for this custom field")
+
+    active              = fields.Boolean(default=True, tracking=True)
 
 
     @api.model

@@ -11,6 +11,7 @@ class ClubTeam(models.Model):
         'mail.thread',
         'mail.activity.mixin',
         'club.log.mixin',
+        'club.custom.field.mixin',
     ]
     _group_by_full = {
         'department_id': lambda self, departments, domain, order: self._read_group_department_id(departments, domain, order),
@@ -35,6 +36,8 @@ class ClubTeam(models.Model):
     main_product_id         = fields.Many2one(string='Main Product', comodel_name="product.product", required=False)
     main_product_price      = fields.Monetary(string='Main Product Price', compute="_compute_main_product_price", store=False, currency_field='currency_id')
     additional_product_ids  = fields.One2many(string='Additional Products', comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
+
+    custom_field_lines     = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
     @api.model
     def init(self):

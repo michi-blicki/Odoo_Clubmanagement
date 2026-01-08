@@ -4,6 +4,9 @@ from . import res_partner
 from . import hr_employee
 from . import res_config_settings
 from . import clublog
+from . import clubcustomfield
+from . import clubcustomfieldvalue
+from . import clubcustomfield_mixin
 from . import club
 from . import clubsubclub
 from . import clubboard
@@ -19,7 +22,5 @@ from . import clubmember_state_history
 from . import clubmember_state_rule
 from . import clubmember_guardian
 from . import clubrole
-from . import clubcustomfield
-from . import clubcustomfieldvalue
 from . import clubfield_mixin
 from . import clubapiconfig

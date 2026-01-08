@@ -41,6 +41,9 @@
                             </group>
                         </group>
                         <notebook>
+                            <page string="Additional Information">
+                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                            </page>
                             <page string="Members">
                                 <field name="member_ids">
                                     <list>

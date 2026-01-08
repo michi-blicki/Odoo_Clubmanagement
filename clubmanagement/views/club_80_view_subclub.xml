@@ -44,6 +44,8 @@
                             <field name="member_ids" widget="many2many_tags" options="{'no_open': True}"/>
                             <field name="member_ids_display" widget="many2many_tags" string="All Members" options="{'no_open': True}"/>
                         </group>
+                        <separator string="Additional Information" />
+                        <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
                     </sheet>
                 </form>
             </field>

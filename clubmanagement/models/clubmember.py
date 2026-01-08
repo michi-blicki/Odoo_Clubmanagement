@@ -20,6 +20,7 @@ class ClubMember(models.Model):
         'mail.thread',
         'mail.activity.mixin',
         'club.log.mixin',
+        'club.custom.field.mixin',
     ]
 
     #
@@ -67,6 +68,8 @@ class ClubMember(models.Model):
     years_in_club          = fields.Float(string="Years in Club", compute="_compute_membership_duration", store=True)
     months_in_club         = fields.Integer(string="Months in Club", compute="_compute_membership_duration", store=True)
     days_in_club           = fields.Integer(string="Days in Club", compute="_compute_membership_duration", store=True)
+
+    custom_field_lines     = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
 
     @api.model
@@ -151,6 +154,11 @@ class ClubMember(models.Model):
             if member.requires_guardian and not member.guardian_ids:
                 pass
 
+        for member, vals in zip(members, vals_list):
+            custom_data = vals.get('custom_field_lines')
+            if custom_data:
+                member.write_custom_fields(custom_data)
+
         self.env['club.member.state.rule']._apply_registratoin_rules(members)
 
         for member in members:
@@ -193,6 +201,15 @@ class ClubMember(models.Model):
         # 4️⃣ Standard-Fallback
         return 1
 
+    #######################################
+    # WRITE HOOK
+    #######################################
+    def write(self, vals):
+        res = super(ClubMember, self).write(vals)
+        if 'custom_field_lines' in vals:
+            for member in self:
+                member.write_custom_fields(vals['custom_field_lines'])
+        return res
 
     ###################################
     # MEMBER STATES - Functionalities
@@ -207,6 +224,23 @@ class ClubMember(models.Model):
             ], order='start_date desc, id desc', limit=1)
             member.current_state_id = current_state.state_id if current_state else False
             member.state_date_start = current_state.start_date if current_state else False
+
+    @api.depends('state_history_ids.start_date', 'state_history_ids.end_date')
+    def _compute_membership_duration(self):
+        today = fields.Date.context_today(self)
+        for member in self:
+            # Ältesten State-History-Eintrag suchen
+            oldest_state = member.state_history_ids.sorted('start_date')[:1]
+            if oldest_state:
+                start_date = fields.Date.to_date(oldest_state.start_date)
+                delta = relativedelta(today, start_date)
+                member.years_in_club = delta.years + (delta.months / 12.0)
+                member.months_in_club = (delta.years * 12) + delta.months
+                member.days_in_club = (today - start_date).days
+            else:
+                member.years_in_club = 0.0
+                member.months_in_club = 0
+                member.days_in_club = 0
 
     @api.depends('state_date_start')
     def _compute_state_days_since_start(self):

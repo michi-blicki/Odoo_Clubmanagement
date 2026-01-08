@@ -55,6 +55,7 @@ Long description of module's purpose
         'security/club_team.ir_rule.xml',
         'security/club_role.ir_rule.xml',
         'security/club_api_config.ir_rule.xml',
+        'security/club_custom_field.ir_rule.xml',
         'security/res_partner.ir_rule.xml',
         'views/contacts_contacts.xml',
         'views/club_00_menu_root.xml',
@@ -86,20 +87,22 @@ Long description of module's purpose
         'views/res_config_settings_view.xml',
     ],
 
+    'assets': {
+        'web.assets_backend': [
+            'clubmanagement/static/src/scss/club_kanban.scss',
+            'clubmanagement/static/src/js/club.dashboard.js',
+            'clubmanagement/static/src/xml/club_dashboard_templates.xml',
+            'clubmanagement/static/src/components/custom_fields_widget/custom_fields_widget.js',
+            'clubmanagement/static/src/components/custom_fields_widget/custom_fields_widget.xml',
+        ],
+    },
+
     'translation_files': [
         'i18n/de_CH.po',
         'i18n/de_DE.po',
         'i18n/fr_FR.po',
         'i18n/it_IT.po',
     ],
-
-    'assets': {
-        'web.assets_backend': [
-            'clubmanagement/static/src/scss/club_kanban.scss',
-            'clubmanagement/static/src/js/club.dashboard.js',
-            'clubmanagement/static/src/xml/club_dashboard_templates.xml'
-        ],
-    },
 
     # only loaded in demonstration mode
     'demo': [

@@ -11,6 +11,7 @@ class ClubPool(models.Model):
         'mail.thread',
         'mail.activity.mixin',
         'club.log.mixin',
+        'club.custom.field.mixin',
     ]
 
     name                = fields.Char(string='Name', required=True, tracking=True)
@@ -26,6 +27,8 @@ class ClubPool(models.Model):
     member_ids_display  = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids', store=True)
     member_count        = fields.Integer(string='Member Count', compute="_compute_member_ids", store=True)
     active              = fields.Boolean(default=True, tracking=True)
+
+    custom_field_lines     = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
     _group_by_full      = {'department_id': lambda self, *args, **kwargs: self._read_group_department_id(*args, **kwargs), }
 

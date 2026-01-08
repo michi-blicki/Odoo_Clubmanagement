@@ -45,6 +45,10 @@
                         </div>
 
                         <notebook>
+                            <page string="Additional Information">
+                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                            </page>
+                            
                             <page string="Subclubs &amp; Departments">
                                 <group string="Subclubs &amp; Departments">
                                     <field name="subclub_ids" widget="one2many_list" readonly="1"/>
@@ -109,6 +113,13 @@
                                         </group>
                                     </form>
                                 </field>
+                            </page>
+                            <page string="Messages">
+                                <div class="oe_chatter">
+                                    <field name="message_follower_ids" widget="mail_followers"/>
+                                    <field name="activity_ids" widget="mail_activity"/>
+                                    <field name="message_ids" widget="mail_thread"/>
+                                </div>
                             </page>
                         </notebook>
                     </sheet>

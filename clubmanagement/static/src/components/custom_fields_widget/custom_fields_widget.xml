@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<templates xml:space="preserve">
+  <t t-name="clubmanagement.CustomFieldsWidget" owl="1">
+    <div t-if="fields &amp;&amp; fields.length" class="o_group o_custom_fields_group">
+      <div t-foreach="fields" t-as="fld" t-key="fld.id" class="o_row o_custom_field_row">
+        <label class="o_field_label">
+          <t t-esc="fld.label"/> <t t-if="fld.required">*</t>
+        </label>
+
+        <t t-if="fld.type === 'char'">
+          <input type="text" class="o_input"
+                 t-att-value="fld.value || ''"
+                 t-on-input="(ev) => onValueChange(fld, ev)"/>
+        </t>
+
+        <t t-if="fld.type === 'text'">
+          <textarea class="o_input"
+                    t-on-input="(ev) => onValueChange(fld, ev)">
+            <t t-esc="fld.value || ''"/>
+          </textarea>
+        </t>
+
+        <t t-if="fld.type === 'integer'">
+          <input type="number" class="o_input"
+                 t-att-value="fld.value || ''"
+                 t-on-input="(ev) => onValueChange(fld, ev)"/>
+        </t>
+
+        <t t-if="fld.type === 'float'">
+          <input type="number" step="any" class="o_input"
+                 t-att-value="fld.value || ''"
+                 t-on-input="(ev) => onValueChange(fld, ev)"/>
+        </t>
+
+        <t t-if="fld.type === 'boolean'">
+          <input type="checkbox"
+                 class="o_input"
+                 t-att-checked="fld.value"
+                 t-on-change="(ev) => onValueChange(fld, ev)"/>
+        </t>
+
+        <t t-if="fld.type === 'date'">
+          <input type="date" class="o_input"
+                 t-att-value="fld.value || ''"
+                 t-on-change="(ev) => onValueChange(fld, ev)"/>
+        </t>
+
+        <t t-if="fld.type === 'datetime'">
+          <input type="datetime-local" class="o_input"
+                 t-att-value="fld.value || ''"
+                 t-on-change="(ev) => onValueChange(fld, ev)"/>
+        </t>
+
+        <t t-if="fld.type === 'selection'">
+          <select class="o_input" t-on-change="(ev) => onValueChange(fld, ev)">
+            <t t-foreach="fld.selection_values" t-as="opt" t-key="opt">
+              <option t-att-value="opt" t-att-selected="fld.value === opt">
+                <t t-esc="opt"/>
+              </option>
+            </t>
+          </select>
+        </t>
+      </div>
+    </div>
+
+    <div t-if="!fields || !fields.length" class="text-muted">
+      <em>No custom fields defined.</em>
+    </div>
+  </t>
+</templates>

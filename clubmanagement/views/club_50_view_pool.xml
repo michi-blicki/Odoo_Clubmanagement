@@ -42,6 +42,9 @@
                             </group>
                         </group>
                         <notebook>
+                            <page string="Additional Information">
+                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                            </page>
                             <page string="Teams">
                                 <field name="team_ids" mode="list,form">
                                     <list>

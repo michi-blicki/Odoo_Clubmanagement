@@ -27,30 +27,33 @@
                         </group>
                         <group>
                             <group>
+                                <field name="partner_id" readonly="True" />
                                 <field name="gender" options="{'no_create': True}"/>
                                 <field name="nationality_id" options="{'no_create': True}"/>
                                 <field name="birthdate_date"/>
                                 <field name="ssnid"/>
                             </group>
                             <group>
-                                <field name="is_employee"/>
-                                <field name="employee_id" invisible='not is_employee' required='is_employee' options="{'no_create': True}"/>
+                                <field name="member_id" />
                                 <label for="age" string="Age"/>
                                 <div>
                                     <field name="age" class="oe_inline"/> years old
                                 </div>
+                                <label for="year_of_birth" string="Year of Birth"/>
+                                <div>
+                                    <field name="year_of_birth" class="oe_inline" />
+                                </div>
                                 <label for="years_in_club" string="Club Membership"/>
                                 <div>
                                     <field name="years_in_club" class="oe_inline"/> years,
-                                    <field name="months_in_club" class="oe_inline"/> months,
-                                    <field name="days_in_club" class="oe_inline"/> days
                                 </div>
-                                <field name="year_of_birth"/>
+
+                                <field name="is_employee"/>
+                                <field name="employee_id" invisible='not is_employee' required='is_employee' options="{'no_create': True}"/>
                             </group>
                         </group>
                         <group>
                             <group string="Address">
-                                <label for="street" string="Address"/>
                                 <div class="o_address_format">
                                     <field name="street" placeholder="Street..." class="o_address_street"/>
                                     <field name="street2" placeholder="Street 2..." class="o_address_street"/>
@@ -67,6 +70,9 @@
                             </group>
                         </group>
                         <notebook>
+                            <page string="Additional Information">
+                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                            </page>
                             <page string="Guardians" invisible='not requires_guardian'>
                                 <field name="guardian_ids">
                                     <list editable="bottom">
@@ -111,13 +117,14 @@
                                     </list>
                                 </field>
                             </page>
+                            <page string="Messages">
+                                <div class="oe_chatter">
+                                    <field name="message_follower_ids" widget="mail_followers"/>
+                                    <field name="activity_ids" widget="mail_activity"/>
+                                    <field name="message_ids" widget="mail_thread"/>
+                                </div>
+                            </page>
                         </notebook>
-                        <separator string="Messages"/>
-                        <div class="oe_chatter">
-                            <field name="message_follower_ids" widget="mail_followers"/>
-                            <field name="activity_ids" widget="mail_activity"/>
-                            <field name="message_ids" widget="mail_thread"/>
-                        </div>
                     </sheet>
                 </form>
 

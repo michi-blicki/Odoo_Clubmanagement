@@ -12,6 +12,7 @@ class SubClub(models.Model):
         'mail.thread',
         'mail.activity.mixin',
         'club.log.mixin',
+        'club.custom.field.mixin',
     ]
 
     name                = fields.Char(string='Name', required=True, tracking=True)
@@ -30,6 +31,8 @@ class SubClub(models.Model):
     departments_count   = fields.Integer(string='No Departments', compute="_compute_counts")
     roles_count         = fields.Integer(string='No Roles', compute="_compute_counts")
     members_count       = fields.Integer(string='No Members', compute="_compute_counts")
+
+    custom_field_lines     = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
     @api.model
     def init(self):
