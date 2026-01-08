@@ -15,24 +15,25 @@ class SubClub(models.Model):
         'club.custom.field.mixin',
     ]
 
-    name                = fields.Char(string='Name', required=True, tracking=True)
-    company_id          = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    club_id             = fields.Many2one(string='Parent Club / Association',comodel_name='club.club', required=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
-    hr_department_id    = fields.Many2one(string='HR Department', comodel_name='hr.department', required=True, help='Optional HR department mapping for HR processes', tracking=True)
-    sequence            = fields.Integer(string='Sequence', required=True, default=10)
-    board_ids           = fields.One2many(string='Board', comodel_name='club.board', inverse_name='subclub_id', tracking=True)
-    department_ids      = fields.One2many(string='Departments', comodel_name='club.department', inverse_name='subclub_id', tracking=True)
-    role_ids            = fields.One2many(string='Roles / Functions', comodel_name='club.role', inverse_name='subclub_id', tracking=True)
-    member_ids          = fields.Many2many(string='Members', comodel_name='club.member', relation='club_subclub_member_rel', column1='subclub_id', column2='member_id', tracking=True)
-    member_ids_display  = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids')
-    active              = fields.Boolean(default=True, tracking=True)
+    name                        = fields.Char(string='Name', required=True, tracking=True)
+    company_id                  = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    club_id                     = fields.Many2one(string='Parent Club / Association',comodel_name='club.club', required=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
+    hr_department_id            = fields.Many2one(string='HR Department', comodel_name='hr.department', required=True, help='Optional HR department mapping for HR processes', tracking=True)
+    account_analytic_account_id = fields.Many2one(string="Account Analytic Account", comodel_name="account.analytic.account")
+    sequence                    = fields.Integer(string='Sequence', required=True, default=10)
+    board_ids                   = fields.One2many(string='Board', comodel_name='club.board', inverse_name='subclub_id', tracking=True)
+    department_ids              = fields.One2many(string='Departments', comodel_name='club.department', inverse_name='subclub_id', tracking=True)
+    role_ids                    = fields.One2many(string='Roles / Functions', comodel_name='club.role', inverse_name='subclub_id', tracking=True)
+    member_ids                  = fields.Many2many(string='Members', comodel_name='club.member', relation='club_subclub_member_rel', column1='subclub_id', column2='member_id', tracking=True)
+    member_ids_display          = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids')
+    active                      = fields.Boolean(default=True, tracking=True)
 
-    boards_count        = fields.Integer(string='No Boards', compute="_compute_counts")
-    departments_count   = fields.Integer(string='No Departments', compute="_compute_counts")
-    roles_count         = fields.Integer(string='No Roles', compute="_compute_counts")
-    members_count       = fields.Integer(string='No Members', compute="_compute_counts")
+    boards_count                = fields.Integer(string='No Boards', compute="_compute_counts")
+    departments_count           = fields.Integer(string='No Departments', compute="_compute_counts")
+    roles_count                 = fields.Integer(string='No Roles', compute="_compute_counts")
+    members_count               = fields.Integer(string='No Members', compute="_compute_counts")
 
-    custom_field_lines     = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
+    custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
     @api.model
     def init(self):

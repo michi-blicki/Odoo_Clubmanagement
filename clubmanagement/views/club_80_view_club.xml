@@ -31,6 +31,7 @@
 
                                 <group>
                                     <field name="company_id"/>
+                                    <field name="account_analytic_account_id"/>
                                     <field name="active"/>
                                 </group>
                             </div>

@@ -15,21 +15,22 @@ class Club(models.Model):
         'club.custom.field.mixin'
     ]
 
-    name                = fields.Char(string="Name", required=True, tracking=True)
-    company_id          = fields.Many2one(string="Company", comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    logo                = fields.Binary(string="Logo", related='company_id.logo', readonly=True, store=False)
-    subclub_ids         = fields.One2many(string="Subclubs", comodel_name='club.subclub', inverse_name='club_id')
-    board_ids           = fields.One2many(string="Boards", comodel_name='club.board', inverse_name='club_id')
-    department_ids      = fields.One2many(string="Departments", comodel_name='club.department', inverse_name='club_id')
-    pool_ids            = fields.One2many(string="Pools", comodel_name='club.pool', inverse_name='club_id')
-    team_ids            = fields.One2many(string="Teams", comodel_name='club.team', inverse_name='club_id')
-    role_ids            = fields.One2many(string="Roles / Functions", comodel_name='club.role', inverse_name='club_id')
-    member_ids          = fields.Many2many(string="Members", comodel_name='club.member', relation='club_club_member_rel', column1='club_id', column2='member_id')
-    member_ids_display  = fields.Many2many(string="All Members", comodel_name='club.member', compute='_compute_member_ids', store=False)
+    name                        = fields.Char(string="Name", required=True, tracking=True)
+    company_id                  = fields.Many2one(string="Company", comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    logo                        = fields.Binary(string="Logo", related='company_id.logo', readonly=True, store=False)
+    account_analytic_account_id = fields.Many2one(string="Account Analytic Account", comodel_name="account.analytic.account")
+    subclub_ids                 = fields.One2many(string="Subclubs", comodel_name='club.subclub', inverse_name='club_id')
+    board_ids                   = fields.One2many(string="Boards", comodel_name='club.board', inverse_name='club_id')
+    department_ids              = fields.One2many(string="Departments", comodel_name='club.department', inverse_name='club_id')
+    pool_ids                    = fields.One2many(string="Pools", comodel_name='club.pool', inverse_name='club_id')
+    team_ids                    = fields.One2many(string="Teams", comodel_name='club.team', inverse_name='club_id')
+    role_ids                    = fields.One2many(string="Roles / Functions", comodel_name='club.role', inverse_name='club_id')
+    member_ids                  = fields.Many2many(string="Members", comodel_name='club.member', relation='club_club_member_rel', column1='club_id', column2='member_id')
+    member_ids_display          = fields.Many2many(string="All Members", comodel_name='club.member', compute='_compute_member_ids', store=False)
 
-    custom_field_lines  = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
+    custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
     
-    active              = fields.Boolean(default=True)
+    active                      = fields.Boolean(default=True)
 
     @api.model
     def init(self):

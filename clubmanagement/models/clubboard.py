@@ -16,29 +16,30 @@ class ClubBoard(models.Model):
         'club.log.mixin',
     ]
 
-    name            = fields.Char(required=True, tracking=True)
+    name                        = fields.Char(required=True, tracking=True)
+    account_analytic_account_id = fields.Many2one(string="Account Analytic Account", comodel_name="account.analytic.account")
 
-    group_type      = fields.Selection([
-                        ('board', "Board"),
-                        ('working', "Working Group")
-                    ], default='board', tracking=True)
+    group_type                  = fields.Selection([
+                                    ('board', "Board"),
+                                    ('working', "Working Group")
+                                ], default='board', tracking=True)
 
-    scope_type      = fields.Selection([
-                        ('club', "Club"),
-                        ('subclub', "Subclub"),
-                        ('department', "Department"),
-                        ('pool', "Pool")
-                    ], readonly=True)
+    scope_type                  = fields.Selection([
+                                    ('club', "Club"),
+                                    ('subclub', "Subclub"),
+                                    ('department', "Department"),
+                                    ('pool', "Pool")
+                                ], readonly=True)
 
-    club_id         = fields.Many2one(comodel_name='club.club', string='Club', required=True, readonly=True)
-    company_id      = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    subclub_id      = fields.Many2one(comodel_name='club.subclub', string='Subclub', tracking=True)
-    department_id   = fields.Many2one(comodel_name='club.department', string='Department', tracking=True)
-    pool_id         = fields.Many2one(comodel_name='club.pool', string='Pool', tracking=True)
+    club_id                     = fields.Many2one(comodel_name='club.club', string='Club', required=True, readonly=True)
+    company_id                  = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    subclub_id                  = fields.Many2one(comodel_name='club.subclub', string='Subclub', tracking=True)
+    department_id               = fields.Many2one(comodel_name='club.department', string='Department', tracking=True)
+    pool_id                     = fields.Many2one(comodel_name='club.pool', string='Pool', tracking=True)
 
-    role_ids        = fields.One2many(comodel_name='club.role', inverse_name='board_id', string='Roles / Functions', tracking=True)
+    role_ids                    = fields.One2many(comodel_name='club.role', inverse_name='board_id', string='Roles / Functions', tracking=True)
 
-    active          = fields.Boolean(default=True, tracking=True)
+    active                      = fields.Boolean(default=True, tracking=True)
 
     @api.model
     def init(self):

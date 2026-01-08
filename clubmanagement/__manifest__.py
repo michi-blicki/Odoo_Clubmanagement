@@ -20,7 +20,7 @@ Long description of module's purpose
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Association',
-    'version': '18.0.0.2.0',
+    'version': '18.0.0.3.0',
     'application': True,
     'auto_install': False,
     'installable': True,
@@ -29,6 +29,8 @@ Long description of module's purpose
     'depends': [
         'base',
         'account',
+        'analytic',
+        'account_analytic_parent',
         'contacts',
         'hr',
         'hr_contract',

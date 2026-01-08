@@ -35,6 +35,7 @@
                                 <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
                                 <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
                                 <field name="department_id"/>
+                                <field name="account_analytic_account_id"/>
                                 <field name="hr_department_id"/>
                             </group>
                             <group>

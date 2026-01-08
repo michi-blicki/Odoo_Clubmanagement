@@ -31,6 +31,7 @@
                             <field name="sequence"/>
                             <field name="club_id" readonly="True" invisible="True" />
                             <field name="company_id"/>
+                            <field name="account_analytic_account_id"/>
                             <field name="hr_department_id"/>
                         </group>
                         <group>

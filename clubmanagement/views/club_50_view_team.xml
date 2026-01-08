@@ -34,10 +34,8 @@
                                 <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
                                 <field name="department_id"/>
                                 <field name="pool_id"/>
+                                <field name="account_analytic_account_id"/>
                                 <field name="hr_department_id"/>
-                            </group>
-                            <group>
-                                <field name="member_ids" widget="many2many_tags"/>
                             </group>
                         </group>
                         <notebook>
