@@ -3,31 +3,76 @@
     <data noupdate="1">
 
         <!-- Subclub for manchester_nebula_fc_main_club -->
+        <record id="ac_plan_main_club" model="account.analytic.plan">
+            <field name="name">Main Club</field>
+            <field name="parent_id" ref="ac_plan_manchester_nebula_fc_master" />
+            <field name="default_applicability">mandatory</field>
+        </record>
+
+        <record id="ac_main_club" model="account.analytic.account">
+            <field name="name">Main Club</field>
+            <field name="code">200000</field>
+            <field name="plan_id" ref="ac_plan_main_club" />
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+
         <record id="subclub_main_club" model="club.subclub">
             <field name="name">Manchester Nebula FC, Main Club</field>
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="hr_department_id" ref="dept_executive_board_main_club"/>
+            <field name="account_analytic_account_id" ref="ac_main_club"/>
             <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- Subclub for manchester_nebula_fc_junior -->
+        <record id="ac_plan_junior_division" model="account.analytic.plan">
+            <field name="name">Junior Division</field>
+            <field name="parent_id" ref="ac_plan_manchester_nebula_fc_master" />
+            <field name="default_applicability">mandatory</field>
+        </record>
+
+        <record id="ac_junior_division" model="account.analytic.account">
+            <field name="name">Junior Division</field>
+            <field name="code">300000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+
         <record id="subclub_junior" model="club.subclub">
             <field name="name">Manchester Nebula FC, Junior Division</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="hr_department_id" ref="dept_executive_board_junior"/>
+            <field name="account_analytic_account_id" ref="ac_junior_division"/>
             <field name="sequence">20</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- Subclub for nebula_fc_lucerne -->
+        <record id="ac_plan_lucerne" model="account.analytic.plan">
+            <field name="name">Lucerne Chapter</field>
+            <field name="parent_id" ref="ac_plan_manchester_nebula_fc_master" />
+            <field name="default_applicability">mandatory</field>
+        </record>
+
+        <record id="ac_lucerne" model="account.analytic.account">
+            <field name="name">Lucerne Chapter</field>
+            <field name="code">400000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
+
         <record id="subclub_lucerne" model="club.subclub">
             <field name="name">Nebula FC, Lucerne Chapter</field>
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="hr_department_id" ref="dept_executive_board_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_lucerne"/>
             <field name="sequence">30</field>
             <field name="active" eval="True"/>
         </record>

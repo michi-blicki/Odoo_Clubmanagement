@@ -9,10 +9,12 @@ _logger = logging.getLogger(__name__)
 
 def generate_club_members(env, team_config):
     """Generates club.members based on a configuration array."""
+    MODULE = 'clubmanagement_democlub'
     ClubMember = env['club.member']
+    MemberState = env['club.member.state']
 
     # Fix reference for Club - as there can't be more than one
-    Club = env.ref('manchester_nebula_fc_club')
+    Club = env.ref(f'{MODULE}.manchester_nebula_fc_club')
 
     # List of names
     male_firstnames = [
@@ -53,11 +55,16 @@ def generate_club_members(env, team_config):
 
     used_combinations = set()
 
+    registered_state = MemberState.search([('state_type', '=', 'registered'), ('active', '=', True)], limit=1)
+    if not registered_state:
+        _logger.error("No Club Member State of type 'registered' found. This should not happen here")
+        return
+
     for team in team_config:
         try:
-            Team = env.ref(team['team_ref'])
-            MemberState = env.ref(team['state_ref'])
-            Membership = env.ref(team['membership_ref'])
+            Team = env.ref(f"{MODULE}.{team['team_ref']}")
+            MemberState = env.ref(f"{MODULE}.{team['state_ref']}")
+            Membership = env.ref(f"{MODULE}.{team['membership_ref']}")
         except ValueError as e:
             _logger.error("Missing reference in team config: %s", e)
             continue
@@ -94,6 +101,8 @@ def generate_club_members(env, team_config):
                 email_safe = f"{fname.lower()}.{lname.lower()}.{suffix}@nebulafc.co.uk"
                 suffix += 1
 
+            date_start = date(random.randint(2019, 2025), random.randint(1, 12), random.randint(1, 28))
+
             vals = {
                 'firstname': fname,
                 'lastname': lname,
@@ -107,12 +116,14 @@ def generate_club_members(env, team_config):
                 'team_ids': [(6, 0, [Team.id])],
                 'membership_history_ids': [(0, 0, {
                     'membership_id': Membership.id,
-                    'date_start': date(random.randint(2019, 2025), random.randint(1, 12), random.randint(1, 28)),
+                    'date_start': date_start,
                 })],
-                'state_history_ids': [(0, 0, {
-                    'state_id': MemberState.id,
-                    'start_date': fields.Datetime.now(),
-                })],
+                'state_history_ids': [
+                    (0, 0, {'state_id': registered_state.id, 'start_date': date_start, 'end_date': date_start}),
+                    (0, 0, {'state_id': MemberState.id, 'start_date': date_start, }),
+                ],
+                'is_club_member': True,
+                'email': email_safe,
             }
 
             ClubMember.create(vals)

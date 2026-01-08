@@ -4,9 +4,19 @@
     <data noupdate="1">
     
          <!-- Manchester Nebula FC Club Record -->
+
+        <record id="ac_manchester_nebula_fc" model="account.analytic.account">
+            <field name="name">Manchester Nebula FC</field>
+            <field name="code">100000</field>
+            <field name="plan_id" ref="ac_plan_manchester_nebula_fc_master" />
+            <field name="company_id" ref="manchester_nebula_fc_main"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+
         <record id="manchester_nebula_fc_club" model="club.club">
             <field name="name">Manchester Nebula FC</field>
             <field name="company_id" ref="manchester_nebula_fc_main"/>
+            <field name="account_analytic_account_id" ref="ac_manchester_nebula_fc"/>
             <field name="active" eval="True"/>
         </record>
     

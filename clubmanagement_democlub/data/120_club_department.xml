@@ -3,91 +3,163 @@
     <data noupdate="1">
 
         <!-- Club Departments for manchester_nebula_fc_main_club -->
-        <record id="club_dept_active_man" model="club.department">
+        <record id="ac_dept_main_active_man" model="account.analytic.account">
+            <field name="name">Main Club - Active Man</field>
+            <field name="code">210000</field>
+            <field name="plan_id" ref="ac_plan_main_club"/>
+            <field name="parent_id" ref="ac_main_club"/>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+        <record id="club_dept_main_active_man" model="club.department">
             <field name="name">Active Man</field>
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_main_club"/>
             <field name="hr_department_id" ref="dept_active_man"/>
+            <field name="account_analytic_account_id" ref="ac_dept_main_active_man"/>
             <field name="main_product_id" ref="product_active_member_manchester" />
             <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
 
-        <record id="club_dept_active_woman" model="club.department">
+        <record id="ac_dept_main_active_momen" model="account.analytic.account">
+            <field name="name">Main Club - Active Woman</field>
+            <field name="code">220000</field>
+            <field name="plan_id" ref="ac_plan_main_club"/>
+            <field name="parent_id" ref="ac_main_club"/>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+        <record id="club_dept_main_active_woman" model="club.department">
             <field name="name">Active Woman</field>
             <field name="company_id" ref="manchester_nebula_fc_main_club"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_main_club"/>
             <field name="hr_department_id" ref="dept_active_woman"/>
+            <field name="account_analytic_account_id" ref="ac_dept_main_active_momen"/>
             <field name="main_product_id" ref="product_active_member_manchester" />
             <field name="sequence">20</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- Club Departments for manchester_nebula_fc_junior -->
+        <record id="ac_dept_youth_boys" model="account.analytic.account">
+            <field name="name">Junior Division - Youth Football Boys</field>
+            <field name="code">310000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_junior_division"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="club_dept_youth_football_boys" model="club.department">
             <field name="name">Youth Football Boys</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_dept_youth_boys"/>
             <field name="main_product_id" ref="product_member_manchester_youth_football_boys" />
             <field name="sequence">30</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_dept_youth_girls" model="account.analytic.account">
+            <field name="name">Junior Division - Youth Football Girls</field>
+            <field name="code">320000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_junior_division"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="club_dept_youth_football_girls" model="club.department">
             <field name="name">Youth Football Girls</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_youth_football_girls"/>
+            <field name="account_analytic_account_id" ref="ac_dept_youth_girls"/>
             <field name="main_product_id" ref="product_member_manchester_youth_football_girls" />
             <field name="sequence">40</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_dept_kids_boys" model="account.analytic.account">
+            <field name="name">Junior Division - Kids Football Boys</field>
+            <field name="code">330000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_junior_division"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="club_dept_kids_football_boys" model="club.department">
             <field name="name">Kids Football Boys</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_kids_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_dept_kids_boys"/>
             <field name="main_product_id" ref="product_member_manchester_kids_football_boys" />
             <field name="sequence">50</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_dept_kids_girls" model="account.analytic.account">
+            <field name="name">Junior Division - Kids Football Girls</field>
+            <field name="code">340000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_junior_division"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="club_dept_kids_football_girls" model="club.department">
             <field name="name">Kids Football Girls</field>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_kids_football_girls"/>
+            <field name="account_analytic_account_id" ref="ac_dept_kids_girls"/>
             <field name="main_product_id" ref="product_member_manchester_kids_football_girls" />
             <field name="sequence">60</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- Club Departments for nebula_fc_lucerne -->
+        <record id="ac_dept_lucerne_aktive" model="account.analytic.account">
+            <field name="name">Luzern - Aktive</field>
+            <field name="code">410000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_lucerne"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="club_dept_active_football_lucerne" model="club.department">
             <field name="name">Aktive</field>
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_dept_lucerne_aktive"/>
             <field name="main_product_id" ref="product_aktivmitglied_luzern" />
             <field name="sequence">70</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_dept_lucerne_junioren" model="account.analytic.account">
+            <field name="name">Luzern - Junioren</field>
+            <field name="code">420000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_lucerne"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="club_dept_youth_football_lucerne" model="club.department">
             <field name="name">Junioren</field>
             <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="subclub_id" ref="subclub_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_dept_lucerne_junioren"/>
             <field name="main_product_id" ref="product_juniorenmitglied_luzern" />
             <field name="sequence">80</field>
             <field name="active" eval="True"/>

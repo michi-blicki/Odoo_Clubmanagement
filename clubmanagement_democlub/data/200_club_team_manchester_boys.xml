@@ -5,6 +5,14 @@
         <!-- Teams for club_dept_youth_football_boys -->
         
         <!-- U18 Team -->
+        <record id="ac_team_boys_u18" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U18</field>
+            <field name="code">311000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_dept_youth_boys"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u18" model="club.team">
             <field name="name">Manchester Nebula FC Boys U18</field>
             <field name="shortname">MNU18</field>
@@ -12,11 +20,20 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_boys"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u18"/>
             <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- U16 Team -->
+        <record id="ac_team_boys_u16" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U16</field>
+            <field name="code">312000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_dept_youth_boys"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u16" model="club.team">
             <field name="name">Manchester Nebula FC Boys U16</field>
             <field name="shortname">MNU16</field>
@@ -24,11 +41,20 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_boys"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u16"/>
             <field name="sequence">20</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- U14 Teams -->
+        <record id="ac_team_boys_u14a" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U14a</field>
+            <field name="code">313100</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u14"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u14a" model="club.team">
             <field name="name">Manchester Nebula FC Boys U14A</field>
             <field name="shortname">MNU14A</field>
@@ -37,10 +63,19 @@
             <field name="department_id" ref="club_dept_youth_football_boys"/>
             <field name="pool_id" ref="pool_boys_u14"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u14a"/>
             <field name="sequence">30</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_boys_u14b" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U14b</field>
+            <field name="code">313200</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u14"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u14b" model="club.team">
             <field name="name">Manchester Nebula FC Boys U14B</field>
             <field name="shortname">MNU14B</field>
@@ -49,11 +84,20 @@
             <field name="department_id" ref="club_dept_youth_football_boys"/>
             <field name="pool_id" ref="pool_boys_u14"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u14b"/>
             <field name="sequence">40</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- U12 Teams -->
+        <record id="ac_team_boys_u12a" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U12a</field>
+            <field name="code">331100</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u12"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u12a" model="club.team">
             <field name="name">Manchester Nebula FC Boys U12A</field>
             <field name="shortname">MNU12A</field>
@@ -62,10 +106,19 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u12"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u12a"/>
             <field name="sequence">50</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_boys_u12b" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U12b</field>
+            <field name="code">331200</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u12"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u12b" model="club.team">
             <field name="name">Manchester Nebula FC Boys U12B</field>
             <field name="shortname">MNU12B</field>
@@ -74,10 +127,19 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u12"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u12b"/>
             <field name="sequence">60</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_boys_u12c" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U12c</field>
+            <field name="code">331300</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u12"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u12c" model="club.team">
             <field name="name">Manchester Nebula FC Boys U12C</field>
             <field name="shortname">MNU12C</field>
@@ -86,11 +148,20 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u12"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u12c"/>
             <field name="sequence">70</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- U10 Teams -->
+        <record id="ac_team_boys_u10a" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U10a</field>
+            <field name="code">332100</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u10"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u10a" model="club.team">
             <field name="name">Manchester Nebula FC Boys U10A</field>
             <field name="shortname">MNU10A</field>
@@ -99,10 +170,19 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u10a"/>
             <field name="sequence">80</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_boys_u10b" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U10b</field>
+            <field name="code">332200</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u10"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u10b" model="club.team">
             <field name="name">Manchester Nebula FC Boys U10B</field>
             <field name="shortname">MNU10B</field>
@@ -111,10 +191,19 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u10b"/>
             <field name="sequence">90</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_boys_u10c" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U10b</field>
+            <field name="code">332300</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u10"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u10c" model="club.team">
             <field name="name">Manchester Nebula FC Boys U10C</field>
             <field name="shortname">MNU10C</field>
@@ -123,10 +212,19 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u10c"/>
             <field name="sequence">100</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_boys_u10d" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U10d</field>
+            <field name="code">332400</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u10"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u10d" model="club.team">
             <field name="name">Manchester Nebula FC Boys U10D</field>
             <field name="shortname">MNU10D</field>
@@ -135,10 +233,19 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u10d"/>
             <field name="sequence">110</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_boys_u10e" model="account.analytic.account">
+            <field name="name">Juniors Division - Team Boys U10e</field>
+            <field name="code">332500</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_pool_boys_u10"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="team_boys_u10e" model="club.team">
             <field name="name">Manchester Nebula FC Boys U10E</field>
             <field name="shortname">MNU10E</field>
@@ -147,6 +254,7 @@
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="pool_id" ref="pool_boys_u10"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_team_boys_u10e"/>
             <field name="sequence">120</field>
             <field name="active" eval="True"/>
         </record>

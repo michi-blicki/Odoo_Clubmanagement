@@ -45,7 +45,6 @@ def _post_init_hook(env):
         you need to add also to the according team
         data xml files.
     """
-    env = api.Environment(cr, SUPERUSER_ID, {})
     today = date.today()
     team_config = [
 
@@ -422,7 +421,7 @@ def _post_init_hook(env):
         },
         
     ]
-    generate_demo_members(env, team_config)
+    generate_club_members(env, team_config)
 
     _logger.info(f"_post_init_hook(): End")
 

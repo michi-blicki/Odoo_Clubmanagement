@@ -3,7 +3,14 @@
     <data noupdate="1">
 
         <!-- Teams for club_dept_active_football_lucerne -->
-        
+        <record id="ac_team_lucerne_2liga" model="account.analytic.account">
+            <field name="name">Herren 2. Liga Regional</field>
+            <field name="code">411000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_aktive"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_2liga" model="club.team">
             <field name="name">Herren 2. Liga Regional</field>
             <field name="shortname">H2LR</field>
@@ -11,10 +18,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_active_football_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_2liga"/>
             <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_3liga" model="account.analytic.account">
+            <field name="name">Herren 3. Liga Regional</field>
+            <field name="code">412000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_aktive"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_3liga" model="club.team">
             <field name="name">Herren 3. Liga</field>
             <field name="shortname">H3L</field>
@@ -22,10 +38,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_active_football_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_3liga"/>
             <field name="sequence">20</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_4liga" model="account.analytic.account">
+            <field name="name">Herren 4. Liga Regional</field>
+            <field name="code">413000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_aktive"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_4liga" model="club.team">
             <field name="name">Herren 4. Liga</field>
             <field name="shortname">H4L</field>
@@ -33,12 +58,21 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_active_football_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_4liga"/>
             <field name="sequence">30</field>
             <field name="active" eval="True"/>
         </record>
 
         <!-- Teams for club_dept_youth_football_lucerne -->
 
+        <record id="ac_team_lucerne_bjunioren" model="account.analytic.account">
+            <field name="name">B-Junioren</field>
+            <field name="code">421000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_junioren"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_bjunioren" model="club.team">
             <field name="name">B-Junioren</field>
             <field name="shortname">B-JUN</field>
@@ -46,10 +80,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_bjunioren"/>
             <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_cjunioren" model="account.analytic.account">
+            <field name="name">C-Junioren</field>
+            <field name="code">422000</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_junioren"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_cjunioren" model="club.team">
             <field name="name">C-Junioren</field>
             <field name="shortname">C-JUN</field>
@@ -57,10 +100,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_cjunioren"/>
             <field name="sequence">20</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_d9a" model="account.analytic.account">
+            <field name="name">D/9a-Junioren</field>
+            <field name="code">423100</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_junioren"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_d9a" model="club.team">
             <field name="name">D/9a-Junioren</field>
             <field name="shortname">D9A</field>
@@ -68,10 +120,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_d9a"/>
             <field name="sequence">30</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_d9b" model="account.analytic.account">
+            <field name="name">D/9b-Junioren</field>
+            <field name="code">423200</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_junioren"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_d9b" model="club.team">
             <field name="name">D/9b-Junioren</field>
             <field name="shortname">D9B</field>
@@ -79,10 +140,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_d9b"/>
             <field name="sequence">40</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_ea" model="account.analytic.account">
+            <field name="name">Ea-Junioren</field>
+            <field name="code">424100</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_junioren"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_ea" model="club.team">
             <field name="name">Ea-Junioren</field>
             <field name="shortname">EA</field>
@@ -90,10 +160,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_ea"/>
             <field name="sequence">50</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_eb" model="account.analytic.account">
+            <field name="name">Eb-Junioren</field>
+            <field name="code">424200</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_junioren"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_eb" model="club.team">
             <field name="name">Eb-Junioren</field>
             <field name="shortname">EB</field>
@@ -101,10 +180,19 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_eb"/>
             <field name="sequence">60</field>
             <field name="active" eval="True"/>
         </record>
 
+        <record id="ac_team_lucerne_ec" model="account.analytic.account">
+            <field name="name">Ec-Junioren</field>
+            <field name="code">424300</field>
+            <field name="plan_id" ref="ac_plan_lucerne"/>
+            <field name="parent_id" ref="ac_dept_lucerne_junioren"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+        </record>
         <record id="team_lucerne_ec" model="club.team">
             <field name="name">Ec-Junioren</field>
             <field name="shortname">EC</field>
@@ -112,6 +200,7 @@
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="department_id" ref="club_dept_youth_football_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
+            <field name="account_analytic_account_id" ref="ac_team_lucerne_ec"/>
             <field name="sequence">70</field>
             <field name="active" eval="True"/>
         </record>

@@ -3,54 +3,100 @@
     <data noupdate="1">
 
         <!-- Pools for club_dept_kids_football_boys -->
-        <record id="pool_boys_u10" model="club.pool">
-            <field name="name">U10 Boys</field>
-            <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="company_id" ref="manchester_nebula_fc_junior"/>
-            <field name="department_id" ref="club_dept_kids_football_boys"/>
-            <field name="hr_department_id" ref="dept_kids_football_boys"/>
-            <field name="sequence">10</field>
-            <field name="active" eval="True"/>
-        </record>
 
-        <record id="pool_boys_u12" model="club.pool">
-            <field name="name">U12 Boys</field>
-            <field name="club_id" ref="manchester_nebula_fc_club"/>
+        <record id="ac_pool_boys_u14" model="account.analytic.account">
+            <field name="name">Juniors Division - Pool U14 Boys</field>
+            <field name="code">313000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_dept_kids_boys"/>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
-            <field name="department_id" ref="club_dept_kids_football_boys"/>
-            <field name="hr_department_id" ref="dept_kids_football_boys"/>
-            <field name="sequence">20</field>
-            <field name="active" eval="True"/>
+            <field name="currency_id" ref="base.GBP"/>
         </record>
-
         <record id="pool_boys_u14" model="club.pool">
             <field name="name">U14 Boys</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="department_id" ref="club_dept_kids_football_boys"/>
             <field name="hr_department_id" ref="dept_kids_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_pool_boys_u14"/>
             <field name="sequence">30</field>
             <field name="active" eval="True"/>
         </record>
 
-        <!-- Pools for club_dept_kids_football_girls -->
-        <record id="pool_girls_gu10" model="club.pool">
-            <field name="name">GU10 Girls</field>
+        <record id="ac_pool_boys_u12" model="account.analytic.account">
+            <field name="name">Juniors Division - Pool U12 Boys</field>
+            <field name="code">331000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_dept_kids_boys"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+        <record id="pool_boys_u12" model="club.pool">
+            <field name="name">U12 Boys</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
-            <field name="department_id" ref="club_dept_kids_football_girls"/>
-            <field name="hr_department_id" ref="dept_kids_football_girls"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
+            <field name="hr_department_id" ref="dept_kids_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_pool_boys_u12"/>
+            <field name="sequence">20</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="ac_pool_boys_u10" model="account.analytic.account">
+            <field name="name">Juniors Division - Pool U10 Boys</field>
+            <field name="code">332000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_dept_kids_boys"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+        <record id="pool_boys_u10" model="club.pool">
+            <field name="name">U10 Boys</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="department_id" ref="club_dept_kids_football_boys"/>
+            <field name="hr_department_id" ref="dept_kids_football_boys"/>
+            <field name="account_analytic_account_id" ref="ac_pool_boys_u10"/>
             <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
 
+        <!-- Pools for club_dept_kids_football_girls -->
+        <record id="ac_pool_girls_gu12" model="account.analytic.account">
+            <field name="name">Juniors Division - Pool U12 Girls</field>
+            <field name="code">341000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_dept_kids_girls"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
         <record id="pool_girls_gu12" model="club.pool">
             <field name="name">GU12 Girls</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
             <field name="company_id" ref="manchester_nebula_fc_junior"/>
             <field name="department_id" ref="club_dept_kids_football_girls"/>
             <field name="hr_department_id" ref="dept_kids_football_girls"/>
+            <field name="account_analytic_account_id" ref="ac_pool_girls_gu12"/>
             <field name="sequence">20</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="ac_pool_girls_gu10" model="account.analytic.account">
+            <field name="name">Juniors Division - Pool U10 Girls</field>
+            <field name="code">342000</field>
+            <field name="plan_id" ref="ac_plan_junior_division"/>
+            <field name="parent_id" ref="ac_dept_kids_girls"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="currency_id" ref="base.GBP"/>
+        </record>
+        <record id="pool_girls_gu10" model="club.pool">
+            <field name="name">GU10 Girls</field>
+            <field name="club_id" ref="manchester_nebula_fc_club"/>
+            <field name="company_id" ref="manchester_nebula_fc_junior"/>
+            <field name="department_id" ref="club_dept_kids_football_girls"/>
+            <field name="hr_department_id" ref="dept_kids_football_girls"/>
+            <field name="account_analytic_account_id" ref="ac_pool_girls_gu10"/>
+            <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
 

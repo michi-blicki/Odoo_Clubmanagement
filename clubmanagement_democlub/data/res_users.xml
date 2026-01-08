@@ -4,7 +4,12 @@
     <data noupdate="1">
     
         <record id="base.user_admin" model="res.users">
-            <field name="groups_id" eval="[(4, ref('clubmanagement.group_clubmanagement_administrator'))]"/>
+            <field name="groups_id" eval="[
+                (4, ref('clubmanagement.group_clubmanagement_administrator')),
+                (4, ref('account.group_account_user')),
+                (4, ref('account.group_account_manager')),
+                (4, ref('analytic.group_analytic_accounting'))
+            ]"/>
             <field name="company_id" ref="manchester_nebula_fc_main" />
             <field name="company_ids" eval="[(6, 0, [
                 ref('manchester_nebula_fc_main'),
@@ -25,7 +30,8 @@
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_main'))]"/>
             <field name="groups_id" eval="[
                 (4, ref('base.group_user')),
-                (4, ref('clubmanagement.group_clubmanagement_master_user'))
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('account.group_account_user')),
             ]"/>
         </record>
 
@@ -42,7 +48,8 @@
             ]"/>
             <field name="groups_id" eval="[
                 (4, ref('base.group_user')),
-                (4, ref('clubmanagement.group_clubmanagement_master_user'))
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('account.group_account_user')),
             ]"/>
         </record>
 
@@ -95,7 +102,8 @@
             <field name="company_ids" eval="[(4, ref('manchester_nebula_fc_junior'))]"/>
             <field name="groups_id" eval="[
                 (4, ref('base.group_user')),
-                (4, ref('clubmanagement.group_clubmanagement_master_user'))
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('account.group_account_user')),
             ]"/>
         </record>
 
@@ -148,7 +156,8 @@
             <field name="company_ids" eval="[(4, ref('nebula_fc_lucerne'))]"/>
             <field name="groups_id" eval="[
                 (4, ref('base.group_user')),
-                (4, ref('clubmanagement.group_clubmanagement_master_user'))
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('account.group_account_user')),
             ]"/>
         </record>
 

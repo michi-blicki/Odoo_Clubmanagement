@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="ac_plan_manchester_nebula_fc_master" model="account.analytic.plan">
+            <field name="name">Manchester Nebula FC Master Plan</field>
+            <field name="default_applicability">mandatory</field>
+        </record>
+
+    </data>
+    
+</odoo>

@@ -9,7 +9,7 @@
             <field name="group_type">board</field>
             <field name="scope_type">department</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_active_man"/>
+            <field name="department_id" ref="club_dept_main_active_man"/>
             <field name="active" eval="True"/>
         </record>
 
@@ -18,7 +18,7 @@
             <field name="group_type">board</field>
             <field name="scope_type">department</field>
             <field name="club_id" ref="manchester_nebula_fc_club"/>
-            <field name="department_id" ref="club_dept_active_woman"/>
+            <field name="department_id" ref="club_dept_main_active_woman"/>
             <field name="active" eval="True"/>
         </record>
 
