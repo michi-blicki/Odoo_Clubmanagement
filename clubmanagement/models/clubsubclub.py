@@ -13,6 +13,7 @@ class SubClub(models.Model):
         'mail.activity.mixin',
         'club.log.mixin',
         'club.custom.field.mixin',
+        'club.security.mixin',
     ]
 
     name                        = fields.Char(string='Name', required=True, tracking=True)
@@ -56,15 +57,9 @@ class SubClub(models.Model):
             subclub.roles_count = len(subclub.role_ids)
             subclub.members_count = len(subclub.member_ids_display)
 
-    ########################
-    # PERMISSION CHECK
-    ########################
-
-
-
 
     ########################
-    # CREATION HOOK
+    # CREATE HOOK
     ########################
 
     def create(self, vals_list):
@@ -73,7 +68,7 @@ class SubClub(models.Model):
         if not club:
             raise ValidationError(_("Club must be created first"))
 
-
+        self._check_user_action_permissions('create', record=self.env['club.subclub'])
         new_subclubs = super().create(vals_list)
 
         for new_subclub in new_subclubs:
@@ -126,13 +121,28 @@ class SubClub(models.Model):
             'tag': 'reload',
         }
 
+    #######################################
+    # WRITE HOOK
+    #######################################
+    def write(self, vals):
+        for rec in self:
+            rec._check_user_action_permissions('write', record=rec)
+
+        res = super().write(vals)
+
+        # Update custom fields, if available and required
+        if 'custom_field_lines' in vals:
+            for rec in self:
+                rec.write_custom_fields(vals['custom_field_lines'])
+
+        return res
 
     ########################
-    # DELETION HOOKS
+    # UNLINK HOOKS
     ########################
-
     def unlink(self):
         for subclub in self:
+            # 1. Perform Security Checks
             if subclub.board_ids:
                 raise ValidationError(
                     _("Please remove or reassign all Boards linked to this Department before deletion")
@@ -141,7 +151,11 @@ class SubClub(models.Model):
                 raise ValidationError(
                     _("Please remove or reassign all Departments linked to this Department before deletion.")
                 )
-            # 2. Delete ClubRole (scope_type=subclub and subclub_id=id)
+
+            # 2. Perform Security Check
+            self._check_user_action_permissions('unlink', record=subclub)
+
+            # 3. Delete ClubRole (scope_type=subclub and subclub_id=id)
             if subclub.role_ids:
                 subclub.role_ids.unlink()
             
@@ -155,3 +169,14 @@ class SubClub(models.Model):
             )
 
         return super(SubClub, self).unlink()
+
+    ########################
+    # SECURITY MIXIN
+    ########################
+    @api.model
+    def search(self, args, **kwargs):
+        user = self.env.user
+        if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
+            scopes = self._get_user_scope_entities(user)
+            args = [('id', 'in', scopes['subclub_ids'].ids)] + list(args)
+        return super().search(args, **kwargs)

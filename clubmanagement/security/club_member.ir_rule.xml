@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="club_member_need_to_know_rule" model="ir.rule">
+            <field name="name">ClubMember: Need‑to‑Know Filter</field>
+            <field name="model_id" ref="model_club_member"/>
+            <field name="domain_force">
+                [('team_ids.role_ids.member_id.partner_id.user_ids', 'in', [user.id])]
+            </field>
+            <field name="groups" eval="[(4, ref('clubmanagement.group_clubmanagement_user'))]"/>
+        </record>
+    
+        <record id="club_member_admin_rule" model="ir.rule">
+            <field name="name">ClubMember: Administrator override</field>
+            <field name="model_id" ref="model_club_member"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('clubmanagement.group_clubmanagement_administrator'))
+            ]"/>
+        </record>
+    </data>
+    
+
+</odoo>

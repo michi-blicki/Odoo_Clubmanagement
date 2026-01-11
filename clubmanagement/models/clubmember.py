@@ -21,6 +21,7 @@ class ClubMember(models.Model):
         'mail.activity.mixin',
         'club.log.mixin',
         'club.custom.field.mixin',
+        'club.security.mixin',
     ]
 
     #
@@ -148,6 +149,7 @@ class ClubMember(models.Model):
             # Generiere Member ID
             vals['member_id'] = self._generate_member_id()
 
+        self._check_user_action_permissions('create', record=self.env['club.member'])
         members = super(ClubMember, self).create(vals_list)
 
         for member in members:
@@ -205,11 +207,25 @@ class ClubMember(models.Model):
     # WRITE HOOK
     #######################################
     def write(self, vals):
-        res = super(ClubMember, self).write(vals)
+        for rec in self:
+            rec._check_user_action_permissions('write', record=rec)
+
+        res = super().write(vals)
+
+        # Update custom fields, if available and required
         if 'custom_field_lines' in vals:
-            for member in self:
-                member.write_custom_fields(vals['custom_field_lines'])
+            for rec in self:
+                rec.write_custom_fields(vals['custom_field_lines'])
+
         return res
+
+    #######################################
+    # UNLINK HOOK
+    #######################################
+    def unlink(self):
+        for member in self:
+            self._check_user_action_permissions('unlink', record=member)
+        return super(ClubMember, self).unlink()
 
     ###################################
     # MEMBER STATES - Functionalities
@@ -344,3 +360,21 @@ class ClubMember(models.Model):
             )
 
         self._compute_current_membership()
+
+    #######################################
+    # CLUB SECURITY MIXIN
+    #######################################
+    @api.model
+    def search(self, args, **kwargs):
+        if self.env.su or self._context.get('club_security_internal'):
+            return super().search(args, **kwargs)
+
+        user = self.env.user
+        
+        if not (
+            user.has_group('clubmanagement.group_clubmanagement_administrator') or
+            user.has_group('clubmanagement.group_clubmanagement_master_user')
+        ):
+            visible_members = self._get_visible_member_ids(user)
+            args = [('id', 'in', visible_members.ids)] + list(args)
+        return super().search(args, **kwargs)

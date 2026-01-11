@@ -7,6 +7,7 @@ from . import clublog
 from . import clubcustomfield
 from . import clubcustomfieldvalue
 from . import clubcustomfield_mixin
+from . import club_security_mixin
 from . import club
 from . import clubsubclub
 from . import clubboard

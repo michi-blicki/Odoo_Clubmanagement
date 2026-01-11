@@ -3,9 +3,24 @@
 
     <data>
     
-        
+        <record id="rule_club_club_need_to_know" model="ir.rule">
+            <field name="name">Club: Need-to-Know Filter</field>
+            <field name="model_id" ref="model_club_club"/>
+            <field name="domain_force">
+                [('role_ids.member_id.partner_id.user_ids', 'in', [user.id])]
+            </field>
+            <field name="groups" eval="[(4, ref('clubmanagement.group_clubmanagement_user'))]"/>
+        </record>
+
+        <record id="club_club_admin_role" model="ir.rule">
+            <field name="name">Club: Administrator</field>
+            <field name="model_id" ref="model_club_club" />
+            <field name="domain_force">
+                [(1, '=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('clubmanagement.group_clubmanagement_administrator'))]" />
+        </record>
     
     </data>
-    
 
 </odoo>

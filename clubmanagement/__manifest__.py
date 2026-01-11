@@ -20,7 +20,7 @@ Long description of module's purpose
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Association',
-    'version': '18.0.0.3.0',
+    'version': '18.0.0.4.0',
     'application': True,
     'auto_install': False,
     'installable': True,
@@ -55,6 +55,7 @@ Long description of module's purpose
         'security/club_department.ir_rule.xml',
         'security/club_pool.ir_rule.xml',
         'security/club_team.ir_rule.xml',
+        'security/club_member.ir_rule.xml',
         'security/club_role.ir_rule.xml',
         'security/club_api_config.ir_rule.xml',
         'security/club_custom_field.ir_rule.xml',

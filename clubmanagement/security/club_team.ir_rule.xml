@@ -9,6 +9,15 @@
             <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
             <field name="groups" eval="[(4, ref('clubmanagement.group_clubmanagement_user'))]"/>
         </record>
+
+        <record id="rule_club_team_need_to_know" model="ir.rule">
+            <field name="name">Team: Need-to-Know Filter</field>
+            <field name="model_id" ref="model_club_team"/>
+            <field name="domain_force">
+                [('role_ids.member_id.partner_id.user_ids', 'in', [user.id])]
+            </field>
+            <field name="groups" eval="[(4, ref('clubmanagement.group_clubmanagement_user'))]"/>
+        </record>
         
         <record id="club_team_admin_rule" model="ir.rule">
             <field name="name">Team: All rights for Club Administrators</field>

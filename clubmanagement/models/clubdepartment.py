@@ -12,6 +12,7 @@ class ClubDepartment(models.Model):
         'mail.activity.mixin',
         'club.log.mixin',
         'club.custom.field.mixin',
+        'club.security.mixin',
     ]
 
     name                        = fields.Char(string='Name', required=True, tracking=True)
@@ -100,6 +101,8 @@ class ClubDepartment(models.Model):
                     raise ValidationError(_('A subclub exists and must be assigned when creating a new department'))
                 else:
                     vals['subclub_id'] = False
+        
+        self._check_user_action_permissions('create', record=self.env['club.department'])
         departments = super(ClubDepartment, self).create(vals_list)
 
         for department in departments:
@@ -151,10 +154,25 @@ class ClubDepartment(models.Model):
             'tag': 'reload',
         }
 
+    #######################################
+    # WRITE HOOK
+    #######################################
+    def write(self, vals):
+        for rec in self:
+            rec._check_user_action_permissions('write', record=rec)
+
+        res = super().write(vals)
+
+        # Update custom fields, if available and required
+        if 'custom_field_lines' in vals:
+            for rec in self:
+                rec.write_custom_fields(vals['custom_field_lines'])
+
+        return res
+
     ########################
     # UNLINK HOOK
     ########################
-
     def unlink(self):
         for department in self:
             # 1. if pools under this department exists, do not delete this department
@@ -171,6 +189,10 @@ class ClubDepartment(models.Model):
                     _("Please remove or reassign all Boards linked to this Department before deletion.")
                 )
 
+            # 2. Perform security permission check
+            self._check_user_action_permissions('unlink', record=department)
+
+            # 3. Delete assigned roles
             if department.role_ids:
                 department.role_ids.unlink()
 
@@ -184,3 +206,18 @@ class ClubDepartment(models.Model):
             )
 
         return super(ClubDepartment, self).unlink()
+
+    ########################
+    # SECURITY MIXIN
+    ########################
+    @api.model
+    def search(self, args, **kwargs):
+        user = self.env.user
+        if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
+            scopes = self._get_user_scope_entities(user)
+            dept_ids = scopes['department_ids']
+            # Additionally include departments of visible subclubs
+            visible_subclubs = scopes['subclub_ids']
+            dept_of_subclubs = self.env['club.department'].search([('subclub_id', 'in', visible_subclubs.ids)])
+            args = [('id', 'in', (dept_ids | dept_of_subclubs).ids)] + list(args)
+        return super().search(args, **kwargs)

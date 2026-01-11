@@ -70,19 +70,7 @@
                             </group>
                         </group>
                         <notebook>
-                            <page string="Additional Information">
-                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
-                            </page>
-                            <page string="Guardians" invisible='not requires_guardian'>
-                                <field name="guardian_ids">
-                                    <list editable="bottom">
-                                        <field name="guardian_id"/>
-                                        <field name="relation"/>
-                                        <field name="is_primary"/>
-                                    </list>
-                                </field>
-                            </page>
-                            <page string="Club Member">
+                            <page string="Club Member" name="page_club_member">
                                 <group>
                                     <field name="club_id" readonly="1"/>
                                     <field name="subclub_ids" widget="many2many_tags" readonly="1" />
@@ -90,7 +78,7 @@
                                     <field name="team_ids" widget="many2many_tags" />
                                 </group>
                             </page>
-                            <page string="Club Status">
+                            <page string="Club Status" name="page_club_status">
                                 <field name="state_history_ids">
                                     <list>
                                         <field name="state_id"/>
@@ -99,7 +87,7 @@
                                     </list>
                                 </field>
                             </page>
-                            <page string="Memberships">
+                            <page string="Memberships" name="page_memberships">
                                 <field name="membership_history_ids">
                                     <list>
                                         <field name="membership_id"/>
@@ -108,7 +96,7 @@
                                     </list>
                                 </field>
                             </page>
-                            <page string="Club Roles">
+                            <page string="Club Roles" name="page_club_roles">
                                 <field name="role_ids" readonly="1">
                                     <list>
                                         <field name="name"/>
@@ -116,6 +104,18 @@
                                         <field name="code"/>
                                     </list>
                                 </field>
+                            </page>
+                            <page string="Guardians" name="page_guargians" invisible='not requires_guardian'>
+                                <field name="guardian_ids">
+                                    <list editable="bottom">
+                                        <field name="guardian_id"/>
+                                        <field name="relation"/>
+                                        <field name="is_primary"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Additional Information" name="page_additional_information">
+                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
                             </page>
                             <page string="Messages">
                                 <div class="oe_chatter">

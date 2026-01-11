@@ -12,6 +12,7 @@ class ClubPool(models.Model):
         'mail.activity.mixin',
         'club.log.mixin',
         'club.custom.field.mixin',
+        'club.security.mixin',
     ]
 
     name                        = fields.Char(string='Name', required=True, tracking=True)
@@ -67,6 +68,7 @@ class ClubPool(models.Model):
         if not club:
             raise ValidationError(_("Club must be created first"))
 
+        self._check_user_action_permissions('create', record=self.env['club.pool'])
         pools = super(ClubPool, self).create(vals_list)
 
         for pool in pools:
@@ -110,17 +112,37 @@ class ClubPool(models.Model):
             'tag': 'reload',
         }
 
+    #######################################
+    # WRITE HOOK
+    #######################################
+    def write(self, vals):
+        for rec in self:
+            rec._check_user_action_permissions('write', record=rec)
+
+        res = super().write(vals)
+
+        # Update custom fields, if available and required
+        if 'custom_field_lines' in vals:
+            for rec in self:
+                rec.write_custom_fields(vals['custom_field_lines'])
+
+        return res
+
     ########################
     # UNLINK HOOK
     ########################
-
     def unlink(self):
         for pool in self:
+            # 1. Check associated teams to pool
             if pool.team_ids:
                 raise ValidationError(
                     "Teams associated with pool. Pool cannot be deleted!"
                 )
 
+            # 2. Perform Security Check
+            self._check_user_action_permissions('unlink', record=pool)
+
+            # 3. Delete assigned roles
             if pool.role_ids:
                 pool.role_ids.unlink()
                 
@@ -156,3 +178,16 @@ class ClubPool(models.Model):
             'view_mode': 'list,form',
             'domain': [('pool_id', '=', self.member_ids_display.ids)]
         }
+
+    ########################
+    # SECURITY MIXIN
+    ########################
+    @api.model
+    def search(self, args, **kwargs):
+        user = self.env.user
+        if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
+            scopes = self._get_user_scope_entities(user)
+            pool_ids = scopes['pool_ids']
+            dept_pools = self.env['club.pool'].search([('department_id', 'in', scopes['department_ids'].ids)])
+            args = [('id', 'in', (pool_ids | dept_pools).ids)] + list(args)
+        return super().search(args, **kwargs)

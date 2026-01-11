@@ -12,7 +12,8 @@ class Club(models.Model):
         'mail.thread',
         'mail.activity.mixin',
         'club.log.mixin',
-        'club.custom.field.mixin'
+        'club.custom.field.mixin',
+        'club.security.mixin',
     ]
 
     name                        = fields.Char(string="Name", required=True, tracking=True)
@@ -158,6 +159,22 @@ class Club(models.Model):
             'type': "ir.actions.client",
             'tag': 'reload',
         }
+
+    #######################################
+    # WRITE HOOK
+    #######################################
+    def write(self, vals):
+        for rec in self:
+            rec._check_user_action_permissions('write', record=rec)
+
+        res = super().write(vals)
+
+        # Update custom fields, if available and required
+        if 'custom_field_lines' in vals:
+            for rec in self:
+                rec.write_custom_fields(vals['custom_field_lines'])
+
+        return res
     
 
     ########################
@@ -192,3 +209,13 @@ class Club(models.Model):
             )
 
         return super(Club, self).unlink()
+
+    ########################
+    # SECURITY MIXIN
+    ########################
+    def search(self, args, **kwargs):
+        user = self.env.user
+        if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
+            scopes = self._get_user_scope_entities(user)
+            args = [('id', 'in', scopes['club_ids'].ids)] + list(args)
+        return super().search(args, **kwargs)

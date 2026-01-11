@@ -23,7 +23,6 @@
                                 class="btn btn-primary"
                                 invisible="id == False"
                             />
-                            <field name="active" />
                         </header>
                         <group>
                             <group>
@@ -98,33 +97,30 @@
                         <t t-name="card">
                             <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_club_team_kanban">
                                 <div class="oe_kanban_details">
-                                    <table class="o_kanban_card_header_title" width="100%">
-                                        <tr>
-                                            <td><h2><field name="name"/></h2></td>
-                                            <td class="text-right"><strong><field name="members_count"/></strong></td>
-                                        </tr>
-                                    </table>
+                                    <div class="o_kanban_card_header_title" width="100%">
+                                        <h2><field name="name"/></h2>
+                                    </div>
                                     <hr class="mb-3 mt-2"/>
                                     <table class="o_kanban_card_content" width="100%">
+                                        <tr>
+                                            <td>Members:</td>
+                                            <td class="text-right"><strong><field name="members_count"/></strong></td>
+                                        </tr>
                                         <tr t-if="record.shortname.raw_value">
                                             <td>Short Name:</td>
-                                            <td><field name="shortname"/></td>
+                                            <td><strong><field name="shortname"/></strong></td>
                                         </tr>
                                         <tr>
                                             <td>Department:</td>
-                                            <td><field name="department_id"/></td>
+                                            <td><strong><field name="department_id"/></strong></td>
                                         </tr>
                                         <tr t-if="record.pool_id.raw_value">
                                             <td>Pool:</td>
-                                            <td><field name="pool_id"/></td>
-                                        </tr>
-                                        <tr t-if="record.hr_department_id.raw_value">
-                                            <td>HR Department:</td>
-                                            <td><field name="hr_department_id"/></td>
+                                            <td><strong><field name="pool_id"/></strong></td>
                                         </tr>
                                         <tr t-if="record.price.raw_value != 0">
                                             <td>Price:</td>
-                                            <td><field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/></td>
+                                            <td><strong><field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/></strong></td>
                                         </tr>
                                     </table>
                                 </div>

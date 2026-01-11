@@ -12,6 +12,7 @@ class ClubTeam(models.Model):
         'mail.activity.mixin',
         'club.log.mixin',
         'club.custom.field.mixin',
+        'club.security.mixin',
     ]
     _group_by_full = {
         'department_id': lambda self, departments, domain, order: self._read_group_department_id(departments, domain, order),
@@ -67,7 +68,7 @@ class ClubTeam(models.Model):
     def _check_shortname_length(self):
         for record in self:
             if record.shortname and len(record.shortname) > 5:
-                raise ValidationError(_("Short NAme must be at most 5 characters"))
+                raise ValidationError(_("Short Name must be at most 5 characters"))
 
 
     @api.depends('member_ids')
@@ -106,6 +107,7 @@ class ClubTeam(models.Model):
             if not vals.get('club_id'):
                 vals['club_id'] = club.id
 
+        self._check_user_action_permissions('create', record=self.env['club.team'])
         teams = super(ClubTeam, self).create(vals_list)
 
         for team in teams:
@@ -149,16 +151,37 @@ class ClubTeam(models.Model):
             'tag': 'reload',
         }
 
+    #######################################
+    # WRITE HOOK
+    #######################################
+    def write(self, vals):
+        for rec in self:
+            rec._check_user_action_permissions('write', record=rec)
+
+        res = super().write(vals)
+
+        # Update custom fields, if available and required
+        if 'custom_field_lines' in vals:
+            for rec in self:
+                rec.write_custom_fields(vals['custom_field_lines'])
+
+        return res
+
     ########################
     # UNLINK HOOK
     ########################
     def unlink(self):
         for team in self:
+            # 1. Check for assigned members
             if team.member_ids:
                 raise ValidationError(
                     _("Team members assigned. Team cannot be deleted! Deactivate team instead.")
                 )
 
+            # 2. Perform Security Check
+            self._check_user_action_permissions('unlink', record=team)
+
+            # 3. Unlink assigned roles
             if team.role_ids:
                 team.role_ids.unlink()
 
@@ -170,5 +193,15 @@ class ClubTeam(models.Model):
                 res_name=team.name,
                 description=_("Team deleted: %s") % team.name
             )
-
         return super(ClubTeam, self).unlink()
+
+    ########################
+    # CLUB SECURITY MIXIN
+    ########################
+    @api.model
+    def search(self, args, **kwargs):
+        user = self.env.user
+        if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
+            visible_teams = self._get_visible_team_ids(user)
+            args = [('id', 'in', visible_teams.ids)] + list(args)
+        return super().search(args, **kwargs)
