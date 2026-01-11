@@ -423,6 +423,8 @@ def _post_init_hook(env):
     ]
     generate_club_members(env, team_config)
 
+    create_demo_user_members(env)
+
     _logger.info(f"_post_init_hook(): End")
 
 def _uninstall_hook(env):

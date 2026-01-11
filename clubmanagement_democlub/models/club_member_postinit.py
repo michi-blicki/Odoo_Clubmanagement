@@ -134,3 +134,53 @@ def generate_club_members(env, team_config):
             team.get('min_year', team.get('min_age', '?')),
             team.get('max_year', team.get('max_age', '?')),
         )
+    
+def create_demo_user_members(env):
+    """Erzeugt club.member-Einträge für alle bestehenden Benutzer (res.users),
+    sofern sie noch nicht existieren. Jeder Benutzer wird mit seinem Partner
+    verknüpft und erhält alle Subclubs basierend auf seinen company_ids.
+    Da es nur einen club.club gibt, wird dieser global gesetzt.
+    """
+    ClubMember = env['club.member'].sudo()
+    SubClub = env['club.subclub'].sudo()
+    Club = env['club.club'].sudo()
+
+    # Es gibt nur genau einen Club – den holen wir einmalig
+    main_club = Club.search([], limit=1)
+    if not main_club:
+        raise ValueError("Es existiert kein club.club-Datensatz – bitte zuerst den Verein anlegen.")
+
+    # Mapping: Company-ID → zugehörige Subclubs
+    subclubs_by_company = {}
+    for subclub in SubClub.search([]):
+        subclubs_by_company.setdefault(subclub.company_id.id, []).append(subclub.id)
+
+    # Alle Benutzer laden
+    users = env['res.users'].sudo().search([])
+
+    for user in users:
+        if not user.partner_id:
+            continue
+
+        # Überspringe, wenn bereits ein ClubMember mit diesem Partner existiert
+        if ClubMember.search_count([('partner_id', '=', user.partner_id.id)]):
+            continue
+
+        # Sammle alle Firmen, in denen der Benutzer Mitglied ist
+        company_ids = set(user.company_ids.ids)
+        company_ids.add(user.company_id.id)
+
+        # Finde alle Subclubs, die zu diesen Firmen gehören
+        subclub_ids = []
+        for cid in company_ids:
+            subclub_ids.extend(subclubs_by_company.get(cid, []))
+
+        vals = {
+            'partner_id': user.partner_id.id,
+            'club_id': main_club.id,
+        }
+
+        if subclub_ids:
+            vals['subclub_ids'] = [(6, 0, list(set(subclub_ids)))]
+
+        ClubMember.create(vals)

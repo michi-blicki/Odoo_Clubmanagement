@@ -43,7 +43,7 @@ and system testing. Experience the future of football management with Manchester
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Sports/Football',
-    'version': '18.0.1.0.1',
+    'version': '18.0.1.0.2',
     'application': False,
     'auto_install': False,
     'installable': True,

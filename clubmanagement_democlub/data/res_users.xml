@@ -20,6 +20,48 @@
             ])]" />
         </record>
 
+        <record id="user_esther" model="res.users">
+            <field name="name">Esther Rochat</field>
+            <field name="login">esther</field>
+            <field name="password">Demo_2026</field>
+            <field name="active" eval="True" />
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="company_ids" eval="[
+                (4, ref('manchester_nebula_fc_main_club')),
+                (4, ref('manchester_nebula_fc_junior')),
+                (4, ref('nebula_fc_lucerne')),
+            ]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('account.group_account_user')),
+                (4, ref('account.group_account_manager')),
+                (4, ref('analytic.group_analytic_accounting'))
+            ]"/>
+        </record>
+
+        <record id="user_adrian" model="res.users">
+            <field name="name">Adrian Zimmermann</field>
+            <field name="login">adrian</field>
+            <field name="password">Demo_2026</field>
+            <field name="active" eval="True" />
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="company_ids" eval="[
+                (4, ref('manchester_nebula_fc_main_club')),
+                (4, ref('manchester_nebula_fc_junior')),
+                (4, ref('nebula_fc_lucerne')),
+            ]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('account.group_account_user')),
+                (4, ref('account.group_account_manager')),
+                (4, ref('analytic.group_analytic_accounting'))
+            ]"/>
+        </record>
+
+        
+
         <!-- manchester_nebula_fc_main -->
         <record id="user_main_master" model="res.users">
             <field name="name">Oliver Greenwood</field>
@@ -189,5 +231,4 @@
 
     </data>
     
-
 </odoo>
