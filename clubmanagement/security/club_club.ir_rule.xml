@@ -12,6 +12,15 @@
             <field name="groups" eval="[(4, ref('clubmanagement.group_clubmanagement_user'))]"/>
         </record>
 
+        <record id="club_club_master_user_role" model="ir.rule">
+            <field name="name">Club: Administrator</field>
+            <field name="model_id" ref="model_club_club" />
+            <field name="domain_force">
+                [(1, '=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('clubmanagement.group_clubmanagement_master_user'))]" />
+        </record>
+
         <record id="club_club_admin_role" model="ir.rule">
             <field name="name">Club: Administrator</field>
             <field name="model_id" ref="model_club_club" />

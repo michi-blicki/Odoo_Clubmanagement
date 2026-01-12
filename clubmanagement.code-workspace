@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../l10n_ch_clubmanagement_sfv"
+		},
+		{
+			"path": "../Odoo_Docker"
 		}
 	],
 	"settings": {}
