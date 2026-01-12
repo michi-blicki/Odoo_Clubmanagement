@@ -27,7 +27,7 @@
                         </group>
                         <group>
                             <group>
-                                <field name="partner_id" readonly="True" />
+                                <field name="partner_id" readonly="id != False" context="{'default_is_company': False}" help="Existing contact record for this member; select if already exists." />
                                 <field name="gender" options="{'no_create': True}"/>
                                 <field name="nationality_id" options="{'no_create': True}"/>
                                 <field name="birthdate_date"/>

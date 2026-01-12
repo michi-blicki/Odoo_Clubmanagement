@@ -68,6 +68,10 @@ class ClubSecurityMixin(models.AbstractModel):
     def _check_user_action_permissions(self, action: str, user=None, record=None):
         """Check if current user is allowed to perform a write/create/unlink action on given record."""
         user = user or self.env.user
+
+        if user.has_group('clubmanagement.group_clubmanagement_administrator'):
+            return True
+
         member = self._get_user_member(user)
         if not member:
             raise AccessError(_("Action denied: No club.member record linked to user '%s'.") % user.name)

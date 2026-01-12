@@ -26,7 +26,7 @@ class ClubMember(models.Model):
 
     #
     # Personal Identification Fields
-    partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True, readonly=True, ondelete='cascade')
+    partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True, ondelete='cascade')
     member_id               = fields.Integer(string="Member ID", required=True, readonly=True)
     photo                   = fields.Binary(string="Photo", attachment=True, help="Member photo of size 680x960 or 1360x1920")
 
@@ -77,6 +77,16 @@ class ClubMember(models.Model):
     def init(self):
         _logger.info('Initializing model: %s', self._name)
         super().init()
+
+    @api.constrains('partner_id')
+    def _check_unique_member_for_partner(self):
+        for member in self:
+            duplicate = self.search([
+                ('partner_id', '=', member.partner_id),
+                ('id', '!=', member.id)
+            ])
+            if duplicate:
+                raise ValidationError(_("Partner '%s' is already linked to another club member.") % member.partner_id.display_name)
 
     @api.depends('birthdate_date')
     def _compute_year_of_birth(self):
@@ -143,13 +153,50 @@ class ClubMember(models.Model):
     #######################################
     # CREATE HOOK
     #######################################
+    @api.onchange('email')
+    def _onchange_email(self):
+        if self.email:
+            existing_partner = self.env['res.partner'].search([('email', '=', self.email)], limit=1)
+            if existing_partner:
+                return {
+                    'warning': {
+                        'title': _("Existing Contact Found"),
+                        'message': _("A contact '%s' already exists with this email. Please link instead of creating new.") % existing_partner.display_name,
+                    }
+                }
+
+    @api.onchange('firstname', 'lastname')
+    def _onchange_firstname_lastname(self):
+        if self.firstname and self.lastname:
+            duplicates = self.env['res.partner'].search([
+                ('firstname', 'ilike', self.firstname),
+                ('lastname', 'ilike', self.lastname),
+            ])
+            if len(duplicates) > 0:
+                return {
+                    'warning': {
+                        'title': _("Similar Names Found"),
+                        'message': _("There are %s contacts named '%s %s'. Please confirm this is a different person or link to an existing contact.") %
+                                (len(duplicates), self.firstname, self.lastname),
+                    }
+                }
+
     @api.model_create_multi
     def create(self, vals_list):
-        for vals in vals_list:
-            # Generiere Member ID
-            vals['member_id'] = self._generate_member_id()
+        Partner = self.env['res.partner']
 
         self._check_user_action_permissions('create', record=self.env['club.member'])
+
+        for vals in vals_list:
+            # Generiere Partner
+            if not vals.get('partner_id'):
+                partner_vals = {
+                    key: vals[key] for key in vals if key in Partner._fields
+                }
+                new_partner = Partner.create(partner_vals)
+                vals['partner_id'] = new_partner.id
+            # Generiere Member ID
+            vals['member_id'] = self._generate_member_id()
         members = super(ClubMember, self).create(vals_list)
 
         for member in members:
