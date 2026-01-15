@@ -19,7 +19,7 @@ class ClubTeam(models.Model):
     }
 
     name                        = fields.Char(required=True, tracking=True)
-    shortname                   = fields.Char(string='Short Name', required=False, size=5, help='Short code, max 5 characters', tracking=True)
+    shortname                   = fields.Char(string='Short Name', required=False, size=8, help='Short code, max 5 characters', tracking=True)
     company_id                  = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
     club_id                     = fields.Many2one(string='Club', comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
     department_id               = fields.Many2one(string='Department', comodel_name='club.department', required=True, tracking=True)
@@ -27,6 +27,12 @@ class ClubTeam(models.Model):
     hr_department_id            = fields.Many2one(string='HR Department', comodel_name='hr.department', help='Optional HR department mapping for HR processes', tracking=True)
     account_analytic_account_id = fields.Many2one(string="Account Analytic Account", comodel_name="account.analytic.account")
     sequence                    = fields.Integer(string='Sequence', required=True, default=10)
+    gender                      = fields.Selection([
+                                    ('male', 'Male'),
+                                    ('female', 'Female'),
+                                    ('mixed', 'Mixed'),
+                                    ('divers', 'Divers')
+                                ], string="Team Gender", compute="_compute_team_gender")
     role_ids                    = fields.One2many(string='Roles / Functions', comodel_name='club.role', inverse_name='team_id')
     member_ids                  = fields.Many2many(string='Members', comodel_name='club.member', relation='club_team_member_rel', column1='team_id', column2='member_id', tracking=True)
     member_ids_display          = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids', store=True)
@@ -76,6 +82,27 @@ class ClubTeam(models.Model):
         for team in self:
             team.member_ids_display = [(6, 0, team.member_ids.ids)]
             team.members_count = len(team.member_ids)
+
+    @api.depends('member_ids')
+    def _compute_team_gender(self):
+        for team in self:
+            # Evaluate team members
+            has_gender_male = any(member.gender == 'male' for member in team.member_ids)
+            has_gender_female = any(member.gender == 'female' for member in team.member_ids)
+            has_gender_other = any(member.gender == 'other' for member in team.member_ids)
+
+            # Calculate team gender
+            if has_gender_other:
+                team.gender = 'divers'
+            elif has_gender_male and has_gender_female:
+                team.gender = 'mixed'
+            elif has_gender_male:
+                team.gender = 'male'
+            elif has_gender_female:
+                team.gender = 'female'
+            else:
+                # No member within this team
+                team.gender = False
 
     @api.depends('main_product_id')
     def _compute_main_product_price(self):
