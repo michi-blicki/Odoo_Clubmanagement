@@ -64,9 +64,9 @@ class ClubPool(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
 
-        club = self.env['club.club'].search([], limit=1)
-        if not club:
-            raise ValidationError(_("Club must be created first"))
+        #club = self.env['club.club'].search([], limit=1)
+        #if not club:
+        #    raise ValidationError(_("Club must be created first"))
 
         self._check_user_action_permissions('create', record=self.env['club.pool'])
         pools = super(ClubPool, self).create(vals_list)

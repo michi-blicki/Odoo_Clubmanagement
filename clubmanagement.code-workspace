@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "../Odoo_Docker"
+		},
+		{
+			"path": "../Odoo_hr_contract_document"
 		}
 	],
 	"settings": {}

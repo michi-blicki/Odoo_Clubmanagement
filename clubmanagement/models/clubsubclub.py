@@ -18,7 +18,7 @@ class SubClub(models.Model):
 
     name                        = fields.Char(string='Name', required=True, tracking=True)
     company_id                  = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
-    club_id                     = fields.Many2one(string='Parent Club / Association',comodel_name='club.club', required=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
+    club_id                     = fields.Many2one(string='Parent Club / Association',comodel_name='club.club', required=True, readonly=True)
     hr_department_id            = fields.Many2one(string='HR Department', comodel_name='hr.department', required=True, help='Optional HR department mapping for HR processes', tracking=True)
     account_analytic_account_id = fields.Many2one(string="Account Analytic Account", comodel_name="account.analytic.account")
     sequence                    = fields.Integer(string='Sequence', required=True, default=10)
@@ -61,12 +61,14 @@ class SubClub(models.Model):
     ########################
     # CREATE HOOK
     ########################
-
+    @api.model_create_multi
     def create(self, vals_list):
 
-        club = self.env['club.club'].search([], limit=1)
-        if not club:
-            raise ValidationError(_("Club must be created first"))
+        #
+        #self.env.flush_all()
+        #club = self.env['club.club'].search([], limit=1)
+        #if not club:
+        #    raise ValidationError(_("Club must be created first"))
 
         self._check_user_action_permissions('create', record=self.env['club.subclub'])
         new_subclubs = super().create(vals_list)

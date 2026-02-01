@@ -26,7 +26,7 @@ class ClubMember(models.Model):
 
     #
     # Personal Identification Fields
-    partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True, ondelete='cascade')
+    partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True)
     member_id               = fields.Integer(string="Member ID", required=True, readonly=True)
     photo                   = fields.Binary(string="Photo", attachment=True, help="Member photo of size 680x960 or 1360x1920")
 
@@ -82,7 +82,7 @@ class ClubMember(models.Model):
     def _check_unique_member_for_partner(self):
         for member in self:
             duplicate = self.search([
-                ('partner_id', '=', member.partner_id),
+                ('partner_id', '=', member.partner_id.id),
                 ('id', '!=', member.id)
             ])
             if duplicate:
@@ -272,6 +272,10 @@ class ClubMember(models.Model):
     def unlink(self):
         for member in self:
             self._check_user_action_permissions('unlink', record=member)
+
+            partner = member.partner_id
+            partner.is_club_member = False
+            
         return super(ClubMember, self).unlink()
 
     ###################################

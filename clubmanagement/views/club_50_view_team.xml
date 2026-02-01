@@ -103,10 +103,10 @@
                                 <div class="oe_kanban_details">
                                     <div class="o_kanban_card_header_title" width="100%">
                                         <h2>
-                                            <t t-if="record.gender.raw_value == 'male'"><i class="fa fa-mars"/> </t>
-                                            <t t-if="record.gender.raw_value == 'female'"><i class="fa fa-venus"/> </t>
-                                            <t t-if="record.gender.raw_value == 'mixed'"><i class="fa fa-venus-mars"/> </t>
-                                            <t t-if="record.gender.raw_value == 'divers'"><i class="fa fa-transgender"/> </t>
+                                            <t t-if="record.gender.raw_value == 'male'"><i title="Male" class="fa fa-mars"/> </t>
+                                            <t t-if="record.gender.raw_value == 'female'"><i title="Female" class="fa fa-venus"/> </t>
+                                            <t t-if="record.gender.raw_value == 'mixed'"><i title="Mixed" class="fa fa-venus-mars"/> </t>
+                                            <t t-if="record.gender.raw_value == 'divers'"><i title="Divers" class="fa fa-transgender"/> </t>
                                             <field name="name"/>
                                         </h2>
                                     </div>

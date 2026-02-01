@@ -69,6 +69,9 @@ class ClubSecurityMixin(models.AbstractModel):
         """Check if current user is allowed to perform a write/create/unlink action on given record."""
         user = user or self.env.user
 
+        if (user.login == 'admin') or (user.login == '__system__'):
+            return True
+
         if user.has_group('clubmanagement.group_clubmanagement_administrator'):
             return True
 

@@ -112,6 +112,7 @@ class Club(models.Model):
             
         clubs = super(Club, self).create(vals_list)
         self.env.cr.flush()
+        self.env.cr.commit()
 
         for club in clubs:
             self.env['club.log'].log_event(

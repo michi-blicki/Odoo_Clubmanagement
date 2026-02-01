@@ -73,7 +73,7 @@
                             <page string="Club Member" name="page_club_member">
                                 <group>
                                     <field name="club_id" readonly="1"/>
-                                    <field name="subclub_ids" widget="many2many_tags" readonly="1" />
+                                    <field name="subclub_ids" widget="many2many_tags"/>
                                     <field name="department_ids" widget="many2many_tags" />
                                     <field name="team_ids" widget="many2many_tags" />
                                 </group>

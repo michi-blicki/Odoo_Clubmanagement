@@ -126,9 +126,9 @@ class ClubTeam(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
 
-        club = self.env['club.club'].search([], limit=1)
-        if not club:
-            raise ValidationError(_("Club must be created first"))
+        #club = self.env['club.club'].search([], limit=1)
+        #if not club:
+        #    raise ValidationError(_("Club must be created first"))
 
         for vals in vals_list:
             if not vals.get('club_id'):
