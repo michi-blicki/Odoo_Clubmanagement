@@ -10,6 +10,7 @@ _logger = logging.getLogger(__name__)
 
 
 from .models.club_member_postinit import generate_club_members
+from .models.club_member_postinit import create_demo_user_members
 
 def _pre_init_hook(env):
     _logger.info(f"_pre_init_hook(): Start")

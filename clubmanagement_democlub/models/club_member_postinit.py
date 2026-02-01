@@ -9,9 +9,9 @@ _logger = logging.getLogger(__name__)
 
 def generate_club_members(env, team_config):
     """Generates club.members based on a configuration array."""
-    MODULE = 'clubmanagement_democlub'
     ClubMember = env['club.member']
     MemberState = env['club.member.state']
+    MODULE = 'clubmanagement_democlub'
 
     # Fix reference for Club - as there can't be more than one
     Club = env.ref(f'{MODULE}.manchester_nebula_fc_club')
@@ -136,51 +136,40 @@ def generate_club_members(env, team_config):
         )
     
 def create_demo_user_members(env):
-    """Erzeugt club.member-Einträge für alle bestehenden Benutzer (res.users),
-    sofern sie noch nicht existieren. Jeder Benutzer wird mit seinem Partner
-    verknüpft und erhält alle Subclubs basierend auf seinen company_ids.
-    Da es nur einen club.club gibt, wird dieser global gesetzt.
-    """
-    ClubMember = env['club.member'].sudo()
-    SubClub = env['club.subclub'].sudo()
-    Club = env['club.club'].sudo()
+    """Create club.member records for demo users if they don't already exist."""
+    Club = env['club.club']
+    SubClub = env['club.subclub']
+    ClubMember = env['club.member']
 
-    # Es gibt nur genau einen Club – den holen wir einmalig
-    main_club = Club.search([], limit=1)
-    if not main_club:
-        raise ValueError("Es existiert kein club.club-Datensatz – bitte zuerst den Verein anlegen.")
+    _logger.info("Demo: Creating club members for demo users.")
 
-    # Mapping: Company-ID → zugehörige Subclubs
-    subclubs_by_company = {}
-    for subclub in SubClub.search([]):
-        subclubs_by_company.setdefault(subclub.company_id.id, []).append(subclub.id)
+    demo_users = env['res.users'].sudo().search([
+        ('groups_id.name', 'ilike', 'clubmanagement')
+    ])
 
-    # Alle Benutzer laden
-    users = env['res.users'].sudo().search([])
-
-    for user in users:
+    for user in demo_users:
         if not user.partner_id:
             continue
-
-        # Überspringe, wenn bereits ein ClubMember mit diesem Partner existiert
-        if ClubMember.search_count([('partner_id', '=', user.partner_id.id)]):
+        existing_member = ClubMember.sudo().search([
+            ('partner_id', '=', user.partner_id.id)
+        ], limit=1)
+        if existing_member:
             continue
 
-        # Sammle alle Firmen, in denen der Benutzer Mitglied ist
-        company_ids = set(user.company_ids.ids)
-        company_ids.add(user.company_id.id)
+        club = Club.search([], limit=1)
+        subclub = SubClub.search([
+            ('club_id', '=', club.id),
+            ('company_id', '=', user.company_id.id)
+        ], limit=1)
 
-        # Finde alle Subclubs, die zu diesen Firmen gehören
-        subclub_ids = []
-        for cid in company_ids:
-            subclub_ids.extend(subclubs_by_company.get(cid, []))
-
-        vals = {
-            'partner_id': user.partner_id.id,
-            'club_id': main_club.id,
-        }
-
-        if subclub_ids:
-            vals['subclub_ids'] = [(6, 0, list(set(subclub_ids)))]
-
-        ClubMember.create(vals)
+        try:
+            member_vals = {
+                'partner_id': user.partner_id.id,
+                'club_id': club.id,
+                'subclub_id': subclub.id
+            }
+            ClubMember.sudo().create(member_vals)
+        except Exception as e:
+            _logger.error("Failed to create club member for demo user %s: %s", user.login, e)
+            continue
+    _logger.info("Demo: Created club members for demo users.")
