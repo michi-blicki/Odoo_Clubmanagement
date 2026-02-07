@@ -65,6 +65,13 @@
             <field name="company_id" ref="nebula_fc_lucerne" />
             <field name="main_product_id" ref="product_juniorenmitglied_luzern" />
         </record>
+
+        <record id="membership_lucerne_functionary" model="club.member.membership">
+            <field name="name">Luzern Chapter - Funktionäre</field>
+            <field name="code">LU-FUN</field>
+            <field name="company_id" ref="nebula_fc_lucerne" />
+            <field name="main_product_id" ref="product_funktionaersmitglied_luzern" />
+        </record>
     
     </data>
     

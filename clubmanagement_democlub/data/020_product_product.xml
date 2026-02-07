@@ -125,5 +125,19 @@
             <field name="currency_id" ref="base.CHF"/>
             <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
         </record>
+
+        <record id="product_funktionaersmitglied_luzern" model="product.product">
+            <field name="name">Funktionärsmitglied Luzern</field>
+            <field name="type">service</field>
+            <field name="list_price">0</field>
+            <field name="standard_price">0</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="default_code">FUN-MIT-LUZ</field>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="currency_id" ref="base.CHF"/>
+            <field name="taxes_id" eval="[(5, 0, 0)]"/> <!-- No taxes -->
+        </record>
+        
     </data>
 </odoo>

@@ -20,12 +20,50 @@
             ])]" />
         </record>
 
+        <record id="partner_michi" model="res.partner">
+            <field name="name">Michi Blickenstorfer</field>
+            <field name="email">michi@nebulafc.club</field>
+            <field name="phone">+41 79 123 45 67</field>
+            <field name="company_type">person</field>
+            <field name="is_company" eval="False"/>
+        </record>
+
+        <record id="user_michi" model="res.users">
+            <field name="name">Michi Blickenstorfer</field>
+            <field name="login">michi</field>
+            <field name="password">Demo_2026</field>
+            <field name="active" eval="True" />
+            <field name="partner_id" ref="partner_michi"/>
+            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="company_ids" eval="[
+                (4, ref('manchester_nebula_fc_main_club')),
+                (4, ref('manchester_nebula_fc_junior')),
+                (4, ref('nebula_fc_lucerne')),
+            ]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_administrator')),
+                (4, ref('account.group_account_user')),
+                (4, ref('account.group_account_manager')),
+                (4, ref('analytic.group_analytic_accounting'))
+            ]"/>
+        </record>
+
+        <record id="partner_esther" model="res.partner">
+            <field name="name">Esther Rochat</field>
+            <field name="email">esther@nebulafc.club</field>
+            <field name="phone">+41 79 123 45 67</field>
+            <field name="company_type">person</field>
+            <field name="is_company" eval="False"/>
+        </record>
+
         <record id="user_esther" model="res.users">
             <field name="name">Esther Rochat</field>
             <field name="login">esther</field>
             <field name="password">Demo_2026</field>
             <field name="active" eval="True" />
-            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="partner_id" ref="partner_esther"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="company_ids" eval="[
                 (4, ref('manchester_nebula_fc_main_club')),
                 (4, ref('manchester_nebula_fc_junior')),
@@ -38,6 +76,14 @@
                 (4, ref('account.group_account_manager')),
                 (4, ref('analytic.group_analytic_accounting'))
             ]"/>
+        </record>
+        
+        <record id="partner_adrian" model="res.partner">
+            <field name="name">Adrian Zimmermann</field>
+            <field name="email">adrian@nebulafc.club</field>
+            <field name="phone">+41 79 234 56 78</field>
+            <field name="company_type">person</field>
+            <field name="is_company" eval="False"/>
         </record>
 
         <record id="user_adrian" model="res.users">
@@ -45,7 +91,8 @@
             <field name="login">adrian</field>
             <field name="password">Demo_2026</field>
             <field name="active" eval="True" />
-            <field name="company_id" ref="manchester_nebula_fc_main_club"/>
+            <field name="partner_id" ref="partner_adrian"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
             <field name="company_ids" eval="[
                 (4, ref('manchester_nebula_fc_main_club')),
                 (4, ref('manchester_nebula_fc_junior')),
@@ -60,6 +107,34 @@
             ]"/>
         </record>
 
+        <record id="partner_marco" model="res.partner">
+            <field name="name">Marco Brazzoni</field>
+            <field name="email">marco@nebulafc.club</field>
+            <field name="phone">+41 79 345 67 89</field>
+            <field name="company_type">person</field>
+            <field name="is_company" eval="False"/>
+        </record>
+
+        <record id="user_marco" model="res.users">
+            <field name="name">Marco Brazzoni</field>
+            <field name="login">marco</field>
+            <field name="password">Demo_2026</field>
+            <field name="active" eval="True" />
+            <field name="partner_id" ref="partner_marco"/>
+            <field name="company_id" ref="nebula_fc_lucerne"/>
+            <field name="company_ids" eval="[
+                (4, ref('manchester_nebula_fc_main_club')),
+                (4, ref('manchester_nebula_fc_junior')),
+                (4, ref('nebula_fc_lucerne')),
+            ]"/>
+            <field name="groups_id" eval="[
+                (4, ref('base.group_user')),
+                (4, ref('clubmanagement.group_clubmanagement_master_user')),
+                (4, ref('account.group_account_user')),
+                (4, ref('account.group_account_manager')),
+                (4, ref('analytic.group_analytic_accounting'))
+            ]"/>
+        </record>
         
 
         <!-- manchester_nebula_fc_main -->
