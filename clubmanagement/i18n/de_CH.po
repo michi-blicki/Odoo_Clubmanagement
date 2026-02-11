@@ -2146,7 +2146,7 @@ msgstr "Elternverein / Verein"
 #: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__pending
 msgid "Pending"
-msgstr "Anhängig"
+msgstr "Warteliste"
 
 #. module: clubmanagement
 #. odoo-python

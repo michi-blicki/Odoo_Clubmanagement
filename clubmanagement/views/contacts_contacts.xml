@@ -14,20 +14,20 @@
                             class="oe_stat_button" 
                             icon="fa-plus"
                             string="Create Club Member"
-                            invisible="is_club_member == True" />
+                            invisible="club_member_id == False" />
                             
                     <button name="action_remove_club_member" 
                             type="object" 
                             class="oe_stat_button" 
                             icon="fa-minus"
                             string="Remove Club Member"
-                            invisible="is_club_member == False" />
+                            invisible="club_member_id != False" />
                 </xpath>
             </field>
         </record>
     
         <record id="contacts.action_contacts" model="ir.actions.act_window">
-            <field name="domain" eval="[('is_club_member', '=', False)]"/>
+            <field name="domain" eval="[('club_member_id', '=', False)]"/>
         </record>
 
         <record id="contacts.res_partner_menu_config" model="ir.ui.menu">
@@ -38,7 +38,7 @@
             <field name="name">Club Contacts</field>
             <field name="res_model">res.partner</field>
             <field name="view_mode">kanban,list,form</field>
-            <field name="domain" eval="[('is_club_member', '=', True)]" />
+            <field name="domain" eval="[('club_member_id', '!=', False)]" />
         </record>
 
         <menuitem id="clubmanagement.menu_contacts_club"
