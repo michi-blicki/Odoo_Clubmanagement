@@ -200,6 +200,11 @@ class ClubMember(models.Model):
         members = super(ClubMember, self).create(vals_list)
 
         for member in members:
+            if member.partner_id:
+                member.partner_id.is_club_member = True
+                member.partner_id.club_member_id = member.id
+
+        for member in members:
             if member.requires_guardian and not member.guardian_ids:
                 pass
 

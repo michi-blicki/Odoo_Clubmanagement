@@ -25,7 +25,31 @@
                 </xpath>
             </field>
         </record>
-    
+
+        <record id="personal_information_inherit" model="ir.ui.view">
+            <field name="name">partner_contact_personal_information_page.personal_information.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" eval="ref('partner_contact_personal_information_page.personal_information')"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='personal_information_group']" position="replace">
+                    <group name="personal_information_group">
+                        <group string="Personal">
+                            <field name="gender" />
+                            <field name="nationality_id" />
+                        </group>
+                        <group string="Birthdate">
+                            <field name="birthdate_date" />
+                            <field name="age" readonly="1" />
+                        </group>
+                        <group string="Club Membership">
+                            <field name="club_member_id" readonly="1" />
+                            <field name="is_club_member" readonly="1" />
+                        </group>
+                    </group>
+                </xpath>
+            </field>                        
+        </record>
+
         <record id="contacts.action_contacts" model="ir.actions.act_window">
             <field name="domain" eval="[('club_member_id', '=', False)]"/>
         </record>
