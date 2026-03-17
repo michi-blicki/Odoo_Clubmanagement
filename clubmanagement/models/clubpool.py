@@ -27,10 +27,15 @@ class ClubPool(models.Model):
     role_ids                    = fields.One2many(string='Roles / Functions', comodel_name='club.role', inverse_name='pool_id')
     member_ids                  = fields.Many2many(string='Members', comodel_name='club.member', relation='club_pool_member_rel', column1='pool_id', column2='member_id', tracking=True)
     member_ids_display          = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids', store=True)
-    member_count                = fields.Integer(string='Member Count', compute="_compute_member_ids", store=True)
+    members_count               = fields.Integer(string='Members Count', compute="_compute_member_ids", store=True)
     active                      = fields.Boolean(default=True, tracking=True)
 
     custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
+
+    price                       = fields.Monetary(string="Price", compute="_compute_price", store=True, currency_field='currency_id', readonly=True)
+    currency_id                 = fields.Many2one(string="Currency", compute="_compute_price", comodel_name='res.currency', related='company_id.currency_id', readonly=True)
+    membership_id               = fields.Many2one(string="Membership", comodel_name="club.member.membership", store=True)
+    effective_membership_id     = fields.Many2one(string="Effective Membership", comodel_name="club.member.membership", compute="_compute_effective_membership_id", store=True, readonly=True)
 
     _group_by_full              = {'department_id': lambda self, *args, **kwargs: self._read_group_department_id(*args, **kwargs), }
 
@@ -51,11 +56,31 @@ class ClubPool(models.Model):
             team_member = pool.team_ids.mapped('member_ids_display')
             all_members = direct | team_member
             pool.member_ids_display = [(6, 0, all_members.ids)]
-            pool.member_count = len(pool.member_ids_display)
+            pool.members_count = len(pool.member_ids_display)
 
     @api.model
     def _read_group_department_id(self, departments, domain, order):
         return self.env['club.department'].search([])
+    
+    @api.depends('membership_id', 'department_id', 'department_id.effective_membership_id')
+    def _compute_effective_membership_id(self):
+        for pool in self:
+            if pool.membership_id:
+                pool.effective_membership_id = pool.membership_id
+            elif pool.department_id and pool.department_id.effective_membership_id:
+                pool.effective_membership_id = pool.department_id.effective_membership_id
+            else:
+                pool.effective_membership_id = False
+
+    def _compute_price(self):
+        for pool in self:
+            price = 0.0
+            if pool.effective_membership_id:
+                price = pool.effective_membership_id.price
+                currency = pool.effective_membership_id.currency_id
+            pool.price = price
+            pool.currency_id = currency.id if price else False
+
 
 
     ########################

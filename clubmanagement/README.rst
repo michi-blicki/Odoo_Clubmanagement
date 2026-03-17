@@ -106,5 +106,5 @@ GitHub: https://github.com/michi-blicki/Odoo_Clubmanagement.git
 License
 =======
 
-LGPL-3.0; see the `LICENSE` file.
+AGPL-3.0; see the `LICENSE` file.
 

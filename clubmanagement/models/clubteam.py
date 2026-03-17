@@ -39,11 +39,10 @@ class ClubTeam(models.Model):
     members_count               = fields.Integer(string='Member Cound', compute="_compute_member_ids", store=True)
     active                      = fields.Boolean(default=True, tracking=True)
 
-    price                       = fields.Monetary(string='Price', compute="_compute_price", store=True, currency_field='currency_id')
-    currency_id                 = fields.Many2one(string='Currency', comodel_name='res.currency', related='company_id.currency_id', readonly=True)
-    main_product_id             = fields.Many2one(string='Main Product', comodel_name="product.product", required=False)
-    main_product_price          = fields.Monetary(string='Main Product Price', compute="_compute_main_product_price", store=False, currency_field='currency_id')
-    additional_product_ids      = fields.One2many(string='Additional Products', comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
+    price                       = fields.Monetary(string="Price", compute="_compute_price", store=True, currency_field='currency_id', readonly=True)
+    currency_id                 = fields.Many2one(string="Currency", compute="_compute_price", comodel_name='res.currency', related='company_id.currency_id', readonly=True)
+    membership_id               = fields.Many2one(string="Membership", comodel_name="club.member.membership", store=True)
+    effective_membership_id     = fields.Many2one(string="Effective Membership", comodel_name="club.member.membership", compute="_compute_effective_membership_id", store=True, readonly=True)
 
     custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
@@ -104,21 +103,26 @@ class ClubTeam(models.Model):
                 # No member within this team
                 team.gender = False
 
-    @api.depends('main_product_id')
-    def _compute_main_product_price(self):
-        for record in self:
-            record.main_product_price = record.main_product_id.list_price if record.main_product_id else 0.0
+    @api.depends('membership_id', 'pool_id', 'pool_id.effective_membership_id', 'department_id', 'department_id.effective_membership_id')
+    def _compute_effective_membership_id(self):
+        for team in self:
+            team.effective_membership_id = (
+                team.membership_id
+                or team.pool_id.effective_membership_id
+                or team.department_id.effective_membership_id
+            )
 
-
-    @api.depends('main_product_id', 'additional_product_ids')
+    @api.depends('effective_membership_id')
     def _compute_price(self):
         for team in self:
-            total_price = 0.0
-            if team.main_product_id:
-                total_price += team.main_product_id.product_tmpl_id.list_price
-            if team.additional_product_ids:
-                total_price += sum(product.product_tmpl_id.list_price for product in team.additional_product_ids)
-            team.price = total_price
+            price = 0.0
+            if team.effective_membership_id:
+                price = team.effective_membership_id.price
+                currency = team.effective_membership_id.currency_id
+            team.price = price
+            team.currency_id = currency.id if price else False
+
+
 
     ########################
     # CREATE HOOK
@@ -126,12 +130,14 @@ class ClubTeam(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
 
-        #club = self.env['club.club'].search([], limit=1)
-        #if not club:
-        #    raise ValidationError(_("Club must be created first"))
+        club = self.env['club.club'].search([('company_id', '=', self.env.company.id)], limit=1)
+        if not club:
+            club = self.env['club.club'].search([], limit=1)
 
         for vals in vals_list:
             if not vals.get('club_id'):
+                if not club:
+                    raise ValidationError(_("Club must be created first"))
                 vals['club_id'] = club.id
 
         self._check_user_action_permissions('create', record=self.env['club.team'])
@@ -169,7 +175,7 @@ class ClubTeam(models.Model):
                     'perm_create': True,
                     'perm_unlink': True,
                     'perm_mail': True,
-                    'code': f'POOL_{self.name}_{rt}',
+                    'code': f'TEAM_{self.name}_{rt}',
                     'name': f"{self.name}: {role_type_selection.get(rt, rt)}",
                 }))
 

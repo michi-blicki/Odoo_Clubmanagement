@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="club_pool_form_view" model="ir.ui.view">
+        <field name="name">club.pool.form</field>
+        <field name="model">club.pool</field>
+        <field name="arch" type="xml">
+            <form string="Pool">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                            <span class="ml-2" invisible="active == True">
+                                (<span style="color:red;">Archived</span>)
+                            </span>
+                        </h1>
+                    </div>
+                    <header>
+                        <button
+                            name="action_create_default_roles"
+                            type="object"
+                            string="Create Default Roles"
+                            class="btn btn-primary"
+                            invisible="id == False"
+                        />
+                        <field name="active" />
+                    </header>
+                    <group>
+                        <group>
+                            <field name="active"/>
+                            <field name="sequence"/>
+                            <field name="club_id" readonly="1" invisible="True"/>
+                            <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
+                            <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
+                            <field name="department_id"/>
+                            <field name="account_analytic_account_id"/>
+                            <field name="hr_department_id"/>
+                        </group>
+                        <group>
+                            <field name="member_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Additional Information">
+                            <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                        </page>
+                        <page string="Membership">
+                            <group>
+                                <field name="effective_membership_id" readonly="True"/>
+                                <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="True"/>
+                                <field name="currency_id" readonly="True"/>
+                            </group>
+                            <group>
+                                <field name="membership_id" help="Will take effect for this team overwriting upper organisation settings"/>
+                            </group>
+                        </page>
+                        <page string="Teams">
+                            <field name="team_ids" mode="list,form">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="department_id"/>
+                                    <field name="sequence"/>
+                                    <field name="member_ids_display" widget="many2many_tags"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Roles / Functions">
+                            <field name="role_ids" context="{'default_pool_id': id}">
+                                <list>
+                                    <field name="role_type"/>
+                                    <field name="scope_type"/>
+                                    <field name="member_id"/>
+                                    <field name="perm_read"/>
+                                    <field name="perm_write"/>
+                                    <field name="perm_create"/>
+                                    <field name="perm_unlink"/>
+                                    <field name="perm_mail"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="club_pool_kanban_view" model="ir.ui.view">
+        <field name="name">club.pool.kanban</field>
+        <field name="model">club.pool</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="department_id" 
+                    class="o_kanban_small_column" 
+                    on_create="quick_create" 
+                    group_create="false" 
+                    group_delete="false" 
+                    group_edit="false">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="department_id"/>
+                <field name="hr_department_id"/>
+                <field name="team_count"/>
+                <field name="members_count"/>
+                <field name="active"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_top mb-0">
+                                    <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <div><label for="company_id" class="me-1">Company:</label><field name="company_id"/></div>
+                                        <div t-if="record.hr_department_id.raw_value">
+                                            <label for="hr_department_id" class="me-1">HR Department:</label>
+                                            <field name="hr_department_id"/>
+                                        </div>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <button class="btn btn-secondary btn-sm" type="object" name="action_view_teams">
+                                            <span class="badge text-bg-info"><t t-esc="record.team_count.raw_value"/> Teams</span>
+                                        </button>
+                                        <button class="btn btn-secondary btn-sm ms-1" type="object" name="action_view_members">
+                                            <span class="badge text-bg-primary"><t t-esc="record.members_count.raw_value"/> Members</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="club_pool_list_view" model="ir.ui.view">
+        <field name="name">club.pool.list</field>
+        <field name="model">club.pool</field>
+        <field name="arch" type="xml">
+            <list string="Pools" default_order="sequence, name">
+                <field name="active" widget="boolean_button"/>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="hr_department_id"/>
+                <field name="effective_membership_id"/>
+                <field name="team_count" />
+                <field name="members_count" />
+            </list>
+        </field>
+    </record>
+
+    <record id="club_pool_search_view" model="ir.ui.view">
+        <field name="name">club.pool.search</field>
+        <field name="model">club.pool</field>
+        <field name="arch" type="xml">
+            <search string="Search Pools">
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="hr_department_id"/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="club_pool_list_action" model="ir.actions.act_window">
+        <field name="name">Pools</field>
+        <field name="res_model">club.pool</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_ids" eval="[
+            (5,0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_pool_kanban_view')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('club_pool_list_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('club_pool_form_view')}),
+        ]"/>
+        <field name="search_view_id" ref="club_pool_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first pool for the club!
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+        id="club_pool_list_menu"
+        name="Pools"
+        action="club_pool_list_action"
+        groups="clubmanagement.group_clubmanagement_user"
+        parent="club_administration_organisation_menu"
+        sequence="30"/>
+
+</odoo>

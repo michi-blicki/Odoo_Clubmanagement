@@ -26,7 +26,7 @@ class ClubMember(models.Model):
 
     #
     # Personal Identification Fields
-    partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True)
+    partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True, ondelete="restrict", store=True)
     member_id               = fields.Integer(string="Member ID", required=True, readonly=True)
     photo                   = fields.Binary(string="Photo", attachment=True, help="Member photo of size 680x960 or 1360x1920")
 

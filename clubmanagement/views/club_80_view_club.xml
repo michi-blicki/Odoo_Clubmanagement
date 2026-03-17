@@ -1,138 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data>
+    <record id="club_club_form_view" model="ir.ui.view">
+        <field name="name">club.club.form</field>
+        <field name="model">club.club</field>
+        <field name="arch" type="xml">
+            <form string="Club">
+                <sheet>
+                    <!-- Header -->
+                    <div class="oe_title" style="display:flex; align-items:center; justify-content:space-between;">
+                        <div>
+                            <h1>
+                                <field name="name"/>
+                                <span class="ml-2" invisible="active == True">
+                                    (<span style="color:red;">Archived</span>)
+                                </span>
+                            </h1>
 
-        <record id="club_club_form_view" model="ir.ui.view">
-            <field name="name">club.club.form</field>
-            <field name="model">club.club</field>
-            <field name="arch" type="xml">
-                <form string="Club">
-                    <sheet>
-                        <!-- Header -->
-                        <div class="oe_title" style="display:flex; align-items:center; justify-content:space-between;">
-                            <div>
-                                <h1>
-                                    <field name="name"/>
-                                    <span class="ml-2" invisible="active == True">
-                                        (<span style="color:red;">Archived</span>)
-                                    </span>
-                                </h1>
+                            <header>
+                                <button
+                                    name="action_create_default_roles_and_boards"
+                                    type="object"
+                                    string="Create Default Roles and Boards"
+                                    class="btn btn-primary"
+                                    invisible="id == False"
+                                />
+                            </header>
 
-                                <header>
-                                    <button
-                                        name="action_create_default_roles_and_boards"
-                                        type="object"
-                                        string="Create Default Roles and Boards"
-                                        class="btn btn-primary"
-                                        invisible="id == False"
-                                    />
-                                </header>
-
-                                <group>
-                                    <field name="company_id"/>
-                                    <field name="account_analytic_account_id"/>
-                                    <field name="active"/>
-                                </group>
-                            </div>
-
-                            <field name="logo"
-                                widget="image"
-                                class="oe_avatar"
-                                options="{'preview_image': 'logo', 'size': [128, 128]}"
-                                readonly="1"
-                                nolabel="1"
-                                style="max-height: 128px; border-radius:6px; margin-left:16px;"/>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="account_analytic_account_id"/>
+                                <field name="active"/>
+                            </group>
                         </div>
 
-                        <notebook>
-                            <page string="Additional Information">
-                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
-                            </page>
-                            
-                            <page string="Subclubs &amp; Departments">
-                                <group string="Subclubs &amp; Departments">
-                                    <field name="subclub_ids" widget="one2many_list" readonly="1"/>
-                                    <field name="department_ids" widget="one2many_list" readonly="1"/>
-                                </group>
-                            </page>
+                        <field name="logo"
+                            widget="image"
+                            class="oe_avatar"
+                            options="{'preview_image': 'logo', 'size': [128, 128]}"
+                            readonly="1"
+                            nolabel="1"
+                            style="max-height: 128px; border-radius:6px; margin-left:16px;"/>
+                    </div>
 
-                            <page string="Boards">
-                                <field name="board_ids" widget="one2many_list" context="{'default_scope_type': 'club', 'default_club_id': id}">
-                                    <list>
+                    <notebook>
+                        <page string="Additional Information">
+                            <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                        </page>
+                        
+                        <page string="Subclubs &amp; Departments">
+                            <group string="Subclubs &amp; Departments">
+                                <field name="subclub_ids" widget="one2many_list" readonly="1"/>
+                                <field name="department_ids" widget="one2many_list" readonly="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Boards">
+                            <field name="board_ids" widget="one2many_list" context="{'default_scope_type': 'club', 'default_club_id': id}">
+                                <list>
+                                    <field name="name" />
+                                    <field name="active" />
+                                </list>
+                                <form>
+                                    <group>
                                         <field name="name" />
                                         <field name="active" />
-                                    </list>
-                                    <form>
-                                        <group>
-                                            <field name="name" />
-                                            <field name="active" />
-                                            <field name="scope_type" invisible="True" />
-                                            <field name="club_id" invisible="True" />
-                                        </group>
-                                    </form>
-                                </field>
-                            </page>
-                            <page string="Teams">
-                                <field name="team_ids" widget="one2many_list">
-                                    <list>
-                                        <field name="name" />
-                                        <field name="shortname" />
-                                        <field name="department_id" />
-                                        <field name="members_count" />
-                                    </list>
-                                </field>
-                            </page>
+                                        <field name="scope_type" invisible="True" />
+                                        <field name="club_id" invisible="True" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Teams">
+                            <field name="team_ids" widget="one2many_list">
+                                <list>
+                                    <field name="name" />
+                                    <field name="shortname" />
+                                    <field name="department_id" />
+                                    <field name="members_count" />
+                                </list>
+                            </field>
+                        </page>
 
-                            <page string="Roles">
-                                <field name="role_ids" widget="one2many_list" context="{'default_scope_type': 'club', 'default_club_id': id}">
-                                    <list>
+                        <page string="Roles">
+                            <field name="role_ids" widget="one2many_list" context="{'default_scope_type': 'club', 'default_club_id': id}">
+                                <list>
+                                    <field name="name" />
+                                    <field name="code" />
+                                    <field name="active" />
+                                    <field name="role_type" />
+                                    <field name="perm_read" />
+                                    <field name="perm_write"  />
+                                    <field name="perm_create" />
+                                    <field name="perm_unlink" />
+                                    <field name="perm_mail" />
+                                </list>
+                                <form>
+                                    <group>
                                         <field name="name" />
                                         <field name="code" />
                                         <field name="active" />
-                                        <field name="role_type" />
+                                        <field name="scope_type" invisible="True" />
+                                        <field name="club_id" invisible="True" />
+                                    </group>
+                                    <group>
                                         <field name="perm_read" />
                                         <field name="perm_write"  />
                                         <field name="perm_create" />
                                         <field name="perm_unlink" />
                                         <field name="perm_mail" />
-                                    </list>
-                                    <form>
-                                        <group>
-                                            <field name="name" />
-                                            <field name="code" />
-                                            <field name="active" />
-                                            <field name="scope_type" invisible="True" />
-                                            <field name="club_id" invisible="True" />
-                                        </group>
-                                        <group>
-                                            <field name="perm_read" />
-                                            <field name="perm_write"  />
-                                            <field name="perm_create" />
-                                            <field name="perm_unlink" />
-                                            <field name="perm_mail" />
-                                        </group>
-                                    </form>
-                                </field>
-                            </page>
-                            <page string="Messages">
-                                <div class="oe_chatter">
-                                    <field name="message_follower_ids" widget="mail_followers"/>
-                                    <field name="activity_ids" widget="mail_activity"/>
-                                    <field name="message_ids" widget="mail_thread"/>
-                                </div>
-                            </page>
-                        </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Messages">
+                            <div class="oe_chatter">
+                                <field name="message_follower_ids" widget="mail_followers"/>
+                                <field name="activity_ids" widget="mail_activity"/>
+                                <field name="message_ids" widget="mail_thread"/>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <record id="club_club_form_action_server" model="ir.actions.server">
-            <field name="name">club.club.form.action.server</field>
-            <field name="model_id" ref="model_club_club"/>
-            <field name="state">code</field>
-            <field name="code">
+    <record id="club_club_form_action_server" model="ir.actions.server">
+        <field name="name">club.club.form.action.server</field>
+        <field name="model_id" ref="model_club_club"/>
+        <field name="state">code</field>
+        <field name="code">
 result = env['club.club'].search([], limit=1)
 action = False
 if result:
@@ -150,18 +148,15 @@ else:
         'view_mode': 'form',
         'target': 'current',
     }
-            </field>
-        </record>
-    
-        <menuitem
-            id="club_club_form_menu"
-            name="Club"
-            action="club_club_form_action_server"
-            groups="clubmanagement.group_clubmanagement_administrator"
-            parent="club_administration_root_menu"
-            sequence="70"/>
-    
-    </data>
-    
+        </field>
+    </record>
+
+    <menuitem
+        id="club_club_form_menu"
+        name="Club"
+        action="club_club_form_action_server"
+        groups="clubmanagement.group_clubmanagement_administrator"
+        parent="club_administration_organisation_menu"
+        sequence="60"/>
 
 </odoo>

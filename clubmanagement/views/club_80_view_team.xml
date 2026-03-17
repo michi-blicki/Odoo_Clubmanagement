@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="club_team_form_view" model="ir.ui.view">
+        <field name="name">club.team.form</field>
+        <field name="model">club.team</field>
+        <field name="arch" type="xml">
+            <form string="Team">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                            <span class="ml-2" invisible="active == True">(<span style="color:red;">Archived</span>)</span>
+                        </h1>
+                    </div>
+                    <header>
+                        <button
+                            name="action_create_default_roles"
+                            type="object"
+                            string="Create Default Roles"
+                            class="btn btn-primary"
+                            invisible="id == False"
+                        />
+                    </header>
+                    <group>
+                        <group>
+                            <field name="active"/>
+                            <field name="shortname" />
+                            <field name="gender" readonly="1"/>
+                            <field name="sequence"/>
+                            <field name="club_id" readonly="1" invisible="True"/>
+                            <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
+                            <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
+                            <field name="department_id"/>
+                            <field name="pool_id"/>
+                            <field name="account_analytic_account_id"/>
+                            <field name="hr_department_id"/>
+                            <field name="membership_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Additional Information">
+                            <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                        </page>
+                        <page string="Membership">
+                            <group>
+                                <field name="effective_membership_id" readonly="True"/>
+                                <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="True"/>
+                                <field name="currency_id" readonly="True"/>
+                            </group>
+                            <group>
+                                <field name="membership_id" help="Will take effect for this team overwriting upper organisation settings"/>
+                            </group>
+                        </page>
+                        <page string="Members">
+                            <field name="member_ids">
+                                <list>
+                                    <field name="partner_id"/>
+                                    <field name="firstname"/>
+                                    <field name="lastname"/>
+                                    <field name="membership_date_start"/>
+                                    <field name="current_state_id"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Roles / Functions">
+                            <field name="role_ids" context="{'default_team_id': id}">
+                                <list>
+                                    <field name="role_type"/>
+                                    <field name="scope_type"/>
+                                    <field name="member_id"/>
+                                    <field name="perm_read"/>
+                                    <field name="perm_write"/>
+                                    <field name="perm_create"/>
+                                    <field name="perm_unlink"/>
+                                    <field name="perm_mail"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="club_team_kanban_view" model="ir.ui.view">
+        <field name="name">club.team.kanban</field>
+        <field name="model">club.team</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="department_id" 
+                    class="o_kanban_small_column"
+                    group_create="false"
+                    group_delete="false"
+                    group_edit="false"
+                    quick_create="false">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="shortname"/>
+                <field name="gender"/>
+                <field name="sequence"/>
+                <field name="department_id"/>
+                <field name="pool_id"/>
+                <field name="hr_department_id"/>
+                <field name="members_count"/>
+                <field name="price"/>
+                <field name="currency_id"/>
+                <field name="company_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_club_team_kanban">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_card_header_title" width="100%">
+                                    <h2>
+                                        <t t-if="record.gender.raw_value == 'male'"><i title="Male" class="fa fa-mars"/> </t>
+                                        <t t-if="record.gender.raw_value == 'female'"><i title="Female" class="fa fa-venus"/> </t>
+                                        <t t-if="record.gender.raw_value == 'mixed'"><i title="Mixed" class="fa fa-venus-mars"/> </t>
+                                        <t t-if="record.gender.raw_value == 'divers'"><i title="Divers" class="fa fa-transgender"/> </t>
+                                        <field name="name"/>
+                                    </h2>
+                                </div>
+                                <hr class="mb-3 mt-2"/>
+                                <table class="o_kanban_card_content" width="100%">
+                                    <tr name="shortname" t-if="record.shortname.raw_value">
+                                        <td>Short Name:</td>
+                                        <td><strong><field name="shortname"/></strong></td>
+                                    </tr>
+                                    <tr name="sequence" t-if="record.sequence.raw_value">
+                                        <td>Sequence:</td>
+                                        <td><strong><field name="sequence" /></strong></td>
+                                    </tr>
+                                    <tr name="department">
+                                        <td>Department:</td>
+                                        <td><strong><field name="department_id"/></strong></td>
+                                    </tr>
+                                    <tr name="pool" t-if="record.pool_id.raw_value">
+                                        <td>Pool:</td>
+                                        <td><strong><field name="pool_id"/></strong></td>
+                                    </tr>
+                                    <tr name="price" t-if="record.price.raw_value != 0">
+                                        <td>Price:</td>
+                                        <td><strong><field name="price" widget="monetary" options="{'currency_field': 'currency_id'}"/></strong></td>
+                                    </tr>
+                                    <tr name="members" style="border-top: 1px solid #acc;">
+                                        <td>Members:</td>
+                                        <td class="text-right"><strong><field name="members_count"/></strong></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="club_team_list_view" model="ir.ui.view">
+        <field name="name">club.team.list</field>
+        <field name="model">club.team</field>
+        <field name="arch" type="xml">
+            <list string="Teams" default_order="sequence, name">
+                <field name="active" widget="boolean_button"/>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="pool_id"/>
+                <field name="hr_department_id"/>
+                <field name="effective_membership_id"/>
+                <field name="members_count" string="Members"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="club_team_search_view" model="ir.ui.view">
+        <field name="name">club.team.search</field>
+        <field name="model">club.team</field>
+        <field name="arch" type="xml">
+            <search string="Search Teams">
+                <field name="name"/>
+                <field name="shortname" />
+                <field name="department_id"/>
+                <field name="pool_id"/>
+                <field name="hr_department_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <filter string="My Company" name="my_company" domain="[('company_id', '=', allowed_company_ids)]"/>
+            </search>
+        </field>
+    </record>        
+
+    <record id="club_team_list_action" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="res_model">club.team</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_ids" eval="[
+            (5,0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('club_team_kanban_view')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('club_team_list_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('club_team_form_view')})
+        ]"/>
+        <field name="search_view_id" ref="club_team_search_view"/>
+        <field name="context">{'search_default_my_company': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first team for your club!
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="club_team_list_menu"
+        name="Teams"
+        action="club_team_list_action"
+        groups="clubmanagement.group_clubmanagement_user"
+        parent="club_administration_organisation_menu"
+        sequence="20"/>
+
+</odoo>

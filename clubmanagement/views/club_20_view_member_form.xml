@@ -1,138 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data>
+    <record id="club_member_form_view" model="ir.ui.view">
+        <field name="name">club.member.form</field>
+        <field name="model">club.member</field>
+        <field name="arch" type="xml">
 
-        <record id="club_member_form_view" model="ir.ui.view">
-            <field name="name">club.member.form</field>
-            <field name="model">club.member</field>
-            <field name="arch" type="xml">
-
-                <form>
-                    <header>
-                        <field name="current_state_id" widget="statusbar" options="{'clickable': '1'}"/>
-                    </header>
-                    <sheet>
+            <form>
+                <header>
+                    <field name="current_state_id" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <div class="oe_button_box" name="button_box">
+                            <!-- Hier können später Smart Buttons hinzugefügt werden -->
+                        </div>
+                        <field name="photo" widget="image" class="oe_avatar" options="{'size': [272, 384]}" nolabel="1" />
+                        <div class="oe_title">
+                            <h1>
+                                <field name="firstname" placeholder="Firstname" required="1" class="oe_inline"/>
+                                <field name="lastname" placeholder="Lastname" required="1" class="oe_inline"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
                         <group>
-                            <div class="oe_button_box" name="button_box">
-                                <!-- Hier können später Smart Buttons hinzugefügt werden -->
+                            <field name="partner_id" readonly="id != False" context="{'default_is_company': False}" help="Existing contact record for this member; select if already exists." />
+                            <field name="gender" options="{'no_create': True}"/>
+                            <field name="nationality_id" options="{'no_create': True}"/>
+                            <field name="birthdate_date"/>
+                            <field name="ssnid"/>
+                        </group>
+                        <group>
+                            <field name="member_id" />
+                            <label for="age" string="Age"/>
+                            <div>
+                                <field name="age" class="oe_inline"/> years old
                             </div>
-                            <field name="photo" widget="image" class="oe_avatar" options="{'size': [272, 384]}" nolabel="1" />
-                            <div class="oe_title">
-                                <h1>
-                                    <field name="firstname" placeholder="Firstname" required="1" class="oe_inline"/>
-                                    <field name="lastname" placeholder="Lastname" required="1" class="oe_inline"/>
-                                </h1>
+                            <label for="year_of_birth" string="Year of Birth"/>
+                            <div>
+                                <field name="year_of_birth" class="oe_inline" />
+                            </div>
+                            <label for="years_in_club" string="Club Membership"/>
+                            <div>
+                                <field name="years_in_club" class="oe_inline"/> years,
+                            </div>
+
+                            <field name="is_employee"/>
+                            <field name="employee_id" invisible='not is_employee' required='is_employee' options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Address">
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}"/>
                             </div>
                         </group>
-                        <group>
-                            <group>
-                                <field name="partner_id" readonly="id != False" context="{'default_is_company': False}" help="Existing contact record for this member; select if already exists." />
-                                <field name="gender" options="{'no_create': True}"/>
-                                <field name="nationality_id" options="{'no_create': True}"/>
-                                <field name="birthdate_date"/>
-                                <field name="ssnid"/>
-                            </group>
-                            <group>
-                                <field name="member_id" />
-                                <label for="age" string="Age"/>
-                                <div>
-                                    <field name="age" class="oe_inline"/> years old
-                                </div>
-                                <label for="year_of_birth" string="Year of Birth"/>
-                                <div>
-                                    <field name="year_of_birth" class="oe_inline" />
-                                </div>
-                                <label for="years_in_club" string="Club Membership"/>
-                                <div>
-                                    <field name="years_in_club" class="oe_inline"/> years,
-                                </div>
-
-                                <field name="is_employee"/>
-                                <field name="employee_id" invisible='not is_employee' required='is_employee' options="{'no_create': True}"/>
-                            </group>
+                        <group string="Communication">
+                            <field name="email" widget="email"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
                         </group>
-                        <group>
-                            <group string="Address">
-                                <div class="o_address_format">
-                                    <field name="street" placeholder="Street..." class="o_address_street"/>
-                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                    <field name="city" placeholder="City" class="o_address_city"/>
-                                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_create': True}"/>
-                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{'no_open': True, 'no_create': True}"/>
-                                </div>
+                    </group>
+                    <notebook>
+                        <page string="Club Member" name="page_club_member">
+                            <group>
+                                <field name="club_id" readonly="1"/>
+                                <field name="subclub_ids" widget="many2many_tags"/>
+                                <field name="department_ids" widget="many2many_tags" />
+                                <field name="team_ids" widget="many2many_tags" />
                             </group>
-                            <group string="Communication">
-                                <field name="email" widget="email"/>
-                                <field name="phone" widget="phone"/>
-                                <field name="mobile" widget="phone"/>
-                            </group>
-                        </group>
-                        <notebook>
-                            <page string="Club Member" name="page_club_member">
-                                <group>
-                                    <field name="club_id" readonly="1"/>
-                                    <field name="subclub_ids" widget="many2many_tags"/>
-                                    <field name="department_ids" widget="many2many_tags" />
-                                    <field name="team_ids" widget="many2many_tags" />
-                                </group>
-                            </page>
-                            <page string="Club Status" name="page_club_status">
-                                <field name="state_history_ids">
-                                    <list>
-                                        <field name="state_id"/>
-                                        <field name="start_date"/>
-                                        <field name="end_date"/>
-                                    </list>
-                                </field>
-                            </page>
-                            <page string="Memberships" name="page_memberships">
-                                <field name="membership_history_ids">
-                                    <list>
-                                        <field name="membership_id"/>
-                                        <field name="date_start"/>
-                                        <field name="date_end"/>
-                                    </list>
-                                </field>
-                            </page>
-                            <page string="Club Roles" name="page_club_roles">
-                                <field name="role_ids" readonly="1">
-                                    <list>
-                                        <field name="name"/>
-                                        <field name="scope_type"/>
-                                        <field name="code"/>
-                                    </list>
-                                </field>
-                            </page>
-                            <page string="Guardians" name="page_guargians" invisible='not requires_guardian'>
-                                <field name="guardian_ids">
-                                    <list editable="bottom">
-                                        <field name="guardian_id"/>
-                                        <field name="relation"/>
-                                        <field name="is_primary"/>
-                                    </list>
-                                </field>
-                            </page>
-                            <page string="Additional Information" name="page_additional_information">
-                                <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
-                            </page>
-                            <page string="Messages">
-                                <div class="oe_chatter">
-                                    <field name="message_follower_ids" widget="mail_followers"/>
-                                    <field name="activity_ids" widget="mail_activity"/>
-                                    <field name="message_ids" widget="mail_thread"/>
-                                </div>
-                            </page>
-                        </notebook>
-                    </sheet>
-                </form>
+                        </page>
+                        <page string="Club Status" name="page_club_status">
+                            <field name="state_history_ids">
+                                <list>
+                                    <field name="state_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Memberships" name="page_memberships">
+                            <field name="membership_history_ids">
+                                <list>
+                                    <field name="membership_id"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Club Roles" name="page_club_roles">
+                            <field name="role_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="scope_type"/>
+                                    <field name="code"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Guardians" name="page_guargians" invisible='not requires_guardian'>
+                            <field name="guardian_ids">
+                                <list editable="bottom">
+                                    <field name="guardian_id"/>
+                                    <field name="relation"/>
+                                    <field name="is_primary"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Additional Information" name="page_additional_information">
+                            <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                        </page>
+                        <page string="Messages">
+                            <div class="oe_chatter">
+                                <field name="message_follower_ids" widget="mail_followers"/>
+                                <field name="activity_ids" widget="mail_activity"/>
+                                <field name="message_ids" widget="mail_thread"/>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
 
 
-            </field>
-        </record>
-    
-    </data>
-    
+        </field>
+    </record>
 
 </odoo>

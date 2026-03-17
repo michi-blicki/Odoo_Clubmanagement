@@ -6,6 +6,15 @@ _logger = logging.getLogger(__name__)
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    pobox = fields.Char(string='P.O. Box', groups="base.group_user", copy=False, tracking=False)
+
+    phone_fix_home = fields.Char(string='Home Phone', groups="base.group_user", copy=False, tracking=False)
+    phone_fix_work = fields.Char(string='Work Phone', groups="base.group_user", copy=False, tracking=False)
+    mobile2 = fields.Char(string='Mobile 2', groups="base.group_user", copy=False, tracking=False)
+    mobile_work = fields.Char(string='Work Mobile', groups="base.group_user", copy=False, tracking=False)
+    email2 = fields.Char(string='Secondary Email', groups="base.group_user", copy=False, tracking=False)
+    email_work = fields.Char(string='Work Email', groups="base.group_user", copy=False, tracking=False)
+
     ssnid = fields.Char(string='SSN No', help='Social Security Number', groups="base.group_user", copy=False, tracking=True)
 
     club_member_id = fields.Many2one(string="Club Member", comodel_name="club.member", compute="_compute_club_member_id", store=True, search="_search_club_member_id")

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data>
-
         <record id="club_department_form_view" model="ir.ui.view">
             <field name="name">club.department.form</field>
             <field name="model">club.department</field>
@@ -44,6 +42,16 @@
                         <notebook>
                             <page string="Additional Information">
                                 <field name="custom_field_lines" widget="clubmanagement_custom_fields"/>
+                            </page>
+                            <page string="Membership">
+                                <group>
+                                    <field name="effective_membership_id" readonly="True"/>
+                                    <field name="price" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="True"/>
+                                    <field name="currency_id" readonly="True"/>
+                                </group>
+                                <group>
+                                    <field name="membership_id" help="Will take effect for this team overwriting upper organisation settings"/>
+                                </group>
                             </page>
                             <page string="Boards">
                                 <field name="board_ids" mode="list,form">
@@ -102,7 +110,7 @@
                         <field name="subclub_id" />
                         <field name="hr_department_id" />
                         <field name="sequence" invisible="True" />
-                        <field name="member_count" />
+                        <field name="members_count" />
                         <field name="team_ids" />
                         <field name="pool_ids" />
                         <t t-name="card">
@@ -131,7 +139,7 @@
                                 <div class="o_kanban_list_item mt8">
                                     <span class="badge bg-primary" title="Members">
                                         <i class="fa fa-users"/> 
-                                        <field name="member_count" />
+                                        <field name="members_count" />
                                     </span>
                                     <span class="badge bg-info" title="Teams">
                                         <i class="fa fa-users"/> <field name="team_count" />
@@ -158,7 +166,10 @@
                     <field name="name"/>
                     <field name="subclub_id"/>
                     <field name="hr_department_id"/>
-                    <field name="member_ids_display" widget="many2many_tags" string="Members"/>
+                    <field name="effective_membership_id"/>
+                    <field name="members_count" />
+                    <field name="team_count" />
+                    <field name="pool_count" />
                 </list>
             </field>
         </record>
@@ -201,10 +212,7 @@
             name="Departments"
             action="club_department_list_action"
             groups="clubmanagement.group_clubmanagement_master_user"
-            parent="club_organisation_main_menu"
-            sequence="30"/>
-    
-    </data>
-    
+            parent="club_administration_organisation_menu"
+            sequence="40"/>
 
 </odoo>

@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data>
-    
-        <record id="club_member_active_list_view" model="ir.ui.view">
-            <field name="name">club.member.list.view</field>
-            <field name="model">club.member</field>
-            <field name="arch" type="xml">
-                <list string="Active Members" default_order="lastname">
-                    <field name="id" />
-                    <field name="lastname" />
-                    <field name="firstname" />
-                    <field name="birthdate_date" />
-                    <field name="nationality_id" />
-                    <field name="city" />
-                    <field name="state_date_start" />
-                    <field name="months_in_club" />
-                </list>
-            </field>
-        </record>
+    <record id="club_member_active_list_view" model="ir.ui.view">
+        <field name="name">club.member.list.view</field>
+        <field name="model">club.member</field>
+        <field name="arch" type="xml">
+            <list string="Active Members" default_order="lastname">
+                <field name="member_id" />
+                <field name="partner_id" optional="hide" />
+                <field name="lastname" />
+                <field name="firstname" />
+                <field name="birthdate_date" />
+                <field name="year_of_birth" optional="hide" />
+                <field name="requires_guardian" optional="hide" />
+                <field name="nationality_id" />
+                <field name="city" />
+                <field name="subclub_ids" widget="many2many_tags" options="{'no_create': True}" optional="show" />
+                <field name="department_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
+                <field name="team_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
+                <field name="current_state_id" optional="hide" />
+                <field name="current_membership_id" optional="hide" />
+                <field name="state_date_start" />
+                <field name="months_in_club" />
+                <field name="guardian_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
+            </list>
+        </field>
+    </record>
 
-        <record id="club_member_active_list_action" model="ir.actions.act_window">
-            <field name="name">Club Member: Active List</field>
-            <field name="res_model">club.member</field>
-            <field name="view_mode">list,form</field>
-            <field name="view_ids" eval="[
-                (5,0),
-                (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_active_list_view')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
-            ]"/>
-            <field name="domain">[('current_state_id.state_type', 'in', ["active", "inactive"])]</field>
-            <field name="context">{}</field>
-            <field name="help" type="html">
-                <p>Show active and inactive members of the club</p>
-            </field>
-        </record>
+    <record id="club_member_active_list_action" model="ir.actions.act_window">
+        <field name="name">Club Member: Active List</field>
+        <field name="res_model">club.member</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5,0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_active_list_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
+        ]"/>
+        <field name="domain">[('current_state_id.state_type', 'in', ["active", "inactive"])]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>Show active and inactive members of the club</p>
+        </field>
+    </record>
 
 
-        <menuitem
-            id="club_member_active_list_menu"
-            name="Active Members"
-            action="club_member_active_list_action"
-            groups="clubmanagement.group_clubmanagement_user"
-            parent="club_member_main_menu"
-            sequence="10"/>
-    
-    </data>
+    <menuitem
+        id="club_member_active_list_menu"
+        name="Active Members"
+        action="club_member_active_list_action"
+        groups="clubmanagement.group_clubmanagement_user"
+        parent="club_member_main_menu"
+        sequence="10"/>
 
 </odoo>

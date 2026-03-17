@@ -6,9 +6,11 @@
         <record id="res_partner_form_add_club_member" model="ir.ui.view">
             <field name="name">res.partner.form.add.club.member</field>
             <field name="model">res.partner</field>
+            <field name="priority" eval="99"/>
             <field name="inherit_id" eval="ref('base.view_partner_form')"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[@class='oe_button_box']" position="inside">
+
+                <xpath expr="//div[@name='button_box']" position="inside">
                     <button name="action_create_club_member" 
                             type="object" 
                             class="oe_stat_button" 
@@ -23,6 +25,55 @@
                             string="Remove Club Member"
                             invisible="club_member_id != False" />
                 </xpath>
+
+                <xpath expr="//field[@name='street2']" position="after">
+                    <field name="pobox" placeholder="P.O. Box"/>
+                </xpath>
+
+                <xpath expr="//label[@for='phone']" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="replace">
+                </xpath>
+
+                <xpath expr="//label[@for='mobile']" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='mobile']" position="replace">
+                </xpath>
+
+                <xpath expr="//label[@for='email']" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='email']" position="replace">
+                </xpath>
+
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="ssnid"/>
+                    <field name="is_club_member" readonly="1" invisible="is_company"/>
+                    <field name="club_member_id" readonly="1" invisible="is_company"/>
+                </xpath>
+
+                <xpath expr="//page[@name='contact_addresses']" position="after">
+                    <page string="Communication" name="contact_communication">
+                        <group colspan="6">
+                            <separator name="phone" string="Phone Numbers" class="oe_block_label"/>
+                            <field name="phone" placeholder="Primary Phone" widget="phone" invisible="not is_company"/>
+                            <field name="phone_fix_home" placeholder="Home Phone" invisible="is_company" widget="phone"/>
+                            <field name="phone_fix_work" placeholder="Work Phone" invisible="is_company" widget="phone"/>
+                        </group>
+                        <group colspan="6">
+                            <separator name="mobile" string="Mobile Phones" class="oe_block_label"/>
+                            <field name="mobile" placeholder="Primary Mobile" widget="phone"/>
+                            <field name="mobile2" placeholder="Secondary Mobile" invisible="is_company" widget="phone"/>
+                            <field name="mobile_work" placeholder="Work Mobile" invisible="is_company" widget="phone"/>
+                        </group>
+                        <group colspan="6">
+                            <separator name="email" string="Email Addresses" class="oe_block_label"/>
+                            <field name="email" placeholder="Primary Email" widget="email"/>
+                            <field name="email2" placeholder="Secondary Email" widget="email"/>
+                            <field name="email_work" placeholder="Work Email" invisible="is_company" widget="email"/>
+                        </group>
+                    </page>
+                </xpath>
+
             </field>
         </record>
 

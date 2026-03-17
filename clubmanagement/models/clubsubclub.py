@@ -29,6 +29,11 @@ class SubClub(models.Model):
     member_ids_display          = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids')
     active                      = fields.Boolean(default=True, tracking=True)
 
+    price                       = fields.Monetary(string="Price", compute="_compute_price", store=True, currency_field='currency_id', readonly=True)
+    currency_id                 = fields.Many2one(string="Currency", compute="_compute_price", comodel_name='res.currency', related='company_id.currency_id', readonly=True)
+    membership_id               = fields.Many2one(string="Membership", comodel_name="club.member.membership", store=True)
+    effective_membership_id     = fields.Many2one(string="Effective Membership", comodel_name="club.member.membership", compute="_compute_effective_membership_id", store=True, readonly=True)
+
     boards_count                = fields.Integer(string='No Boards', compute="_compute_counts")
     departments_count           = fields.Integer(string='No Departments', compute="_compute_counts")
     roles_count                 = fields.Integer(string='No Roles', compute="_compute_counts")
@@ -56,6 +61,21 @@ class SubClub(models.Model):
             subclub.departments_count = len(subclub.department_ids)
             subclub.roles_count = len(subclub.role_ids)
             subclub.members_count = len(subclub.member_ids_display)
+
+    @api.depends('membership_id')
+    def _compute_effective_membership_id(self):
+        for subclub in self:
+            subclub.effective_membership_id = subclub.membership_id
+
+    @api.depends('effective_membership_id')
+    def _compute_price(self):
+        for subclub in self:
+            price = 0.0
+            if subclub.effective_membership_id:
+                price = subclub.effective_membership_id.price
+                currency = subclub.effective_membership_id.currency_id
+            subclub.price = price
+            subclub.currency_id = currency.id if price else False
 
 
     ########################

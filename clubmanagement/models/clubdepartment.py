@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, AccessError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -30,14 +30,15 @@ class ClubDepartment(models.Model):
     role_ids                    = fields.One2many(string='Roles / Functions', comodel_name='club.role', inverse_name='department_id', tracking=True)
     member_ids                  = fields.Many2many(string='Members', comodel_name='club.member', relation='club_department_member_rel', column1='department_id', column2='member_id', tracking=True)
     member_ids_display          = fields.Many2many(string='All Members', comodel_name='club.member', compute='_compute_member_ids', store=True)
-    member_count                = fields.Integer(string="Member Count", compute="_compute_member_ids", store=True)
+    members_count               = fields.Integer(string="Members Count", compute="_compute_member_ids", store=True)
+    waiting_member_count        = fields.Integer(string='Waiting Member Count', compute='_compute_member_state_counters', store=False)
+    active_member_count         = fields.Integer(string='Active Member Count', compute='_compute_member_state_counters', store=False)
     active                      = fields.Boolean(default=True)
 
-    price                       = fields.Monetary(string="Price", compute="_compute_price", store=True, currency_field='currency_id')
-    currency_id                 = fields.Many2one(string="Currency", comodel_name='res.currency', related='company_id.currency_id', readonly=True)
-    main_product_id             = fields.Many2one(string="Main Product", comodel_name="product.product", required=False)
-    main_product_price          = fields.Monetary(string="Main Product Price", compute="_compute_main_product_price", store=False, currency_field='currency_id')
-    additional_product_ids      = fields.One2many(string="Additional Products", comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
+    price                       = fields.Monetary(string="Price", compute="_compute_price", store=True, currency_field='currency_id', readonly=True)
+    currency_id                 = fields.Many2one(string="Currency", compute="_compute_price", comodel_name='res.currency', related='company_id.currency_id', readonly=True)
+    membership_id               = fields.Many2one(string="Membership", comodel_name="club.member.membership", store=True)
+    effective_membership_id     = fields.Many2one(string="Effective Membership", comodel_name="club.member.membership", compute="_compute_effective_membership_id", store=True, readonly=True)
 
     custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
@@ -64,23 +65,39 @@ class ClubDepartment(models.Model):
             pool_members = dept.pool_ids.mapped('member_ids_display')
             all_members = direct | team_members | pool_members
             dept.member_ids_display = [(6, 0, all_members.ids)]
-            member_count = len(dept.member_ids_display)
+            members_count = len(dept.member_ids_display)
 
-    @api.depends('main_product_id')
-    def _compute_main_product_price(self):
-        for record in self:
-            record.main_product_price = record.main_product_id.list_price if record.main_product_id else 0.0
+    @api.depends('member_ids_display.current_state_id')
+    def _compute_member_state_counters(self):
+        waiting_states = {'registered', 'pending'}
+        active_states = {'active', 'inactive', 'blocked'}
+        for department in self:
+            members = department.member_ids_display
+            department.waiting_member_count = len(
+                members.filtered(lambda member: member.current_state_id.state_type in waiting_states)
+            )
+            department.active_member_count = len(
+                members.filtered(lambda member: member.current_state_id.state_type in active_states)
+            )
 
+    @api.depends('membership_id')
+    def _compute_effective_membership_id(self):
+        for department in self:
+            if department.membership_id:
+                department.effective_membership_id = department.membership_id
+            elif department.subclub_id and department.subclub_id.membership_id:
+                department.effective_membership_id = department.subclub_id.membership_id
+            else:
+                department.effective_membership_id = False
 
-    @api.depends('main_product_id', 'additional_product_ids')
     def _compute_price(self):
         for department in self:
-            total_price = 0.0
-            if department.main_product_id:
-                total_price += department.main_product_id.product_tmpl_id.list_price
-            if department.additional_product_ids:
-                total_price += sum(product.product_tmpl_id.list_price for product in department.additional_product_ids)
-            department.price = total_price
+            price = 0.0
+            if department.effective_membership_id:
+                price = department.effective_membership_id.price
+                currency = department.effective_membership_id.currency_id
+            department.price = price
+            department.currency_id = currency.id if price else False
 
     ########################
     # CREATE HOOK
@@ -89,12 +106,14 @@ class ClubDepartment(models.Model):
     def create(self, vals_list):
         subclub_exists = self.env['club.subclub'].search_count([('active', '=', True)]) > 0
 
-        #club = self.env['club.club'].search([], limit=1)
-        #if not club:
-        #    raise ValidationError(_("Club must be created first"))
+        club = self.env['club.club'].search([('company_id', '=', self.env.company.id)], limit=1)
+        if not club:
+            club = self.env['club.club'].search([], limit=1)
 
         for vals in vals_list:
             if not vals.get('club_id'):
+                if not club:
+                    raise ValidationError(_("Club must be created first"))
                 vals['club_id'] = club.id
             if subclub_exists:
                 if not vals.get('subclub_id'):
@@ -152,6 +171,52 @@ class ClubDepartment(models.Model):
         return {
             'type': "ir.actions.client",
             'tag': 'reload',
+        }
+
+    def action_open_waiting_members_list(self):
+        self.ensure_one()
+        if not self.env.user.has_group('clubmanagement.group_clubmanagement_key_user'):
+            raise AccessError(_('You are not allowed to access waiting members for this department.'))
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Waiting Members'),
+            'res_model': 'club.member',
+            'view_mode': 'list,form',
+            'views': [
+                (self.env.ref('clubmanagement.club_team_department_member_waiting_list_view').id, 'list'),
+                (self.env.ref('clubmanagement.club_member_form_view').id, 'form'),
+            ],
+            'search_view_id': self.env.ref('clubmanagement.club_team_department_member_waiting_search_view').id,
+            'domain': [
+                ('id', 'in', self.member_ids_display.ids),
+                ('current_state_id.state_type', 'in', ['registered', 'pending']),
+            ],
+            'context': {
+                'search_default_group_by_current_state': 1,
+            },
+        }
+
+    def action_open_active_members_list(self):
+        self.ensure_one()
+        if not self.env.user.has_group('clubmanagement.group_clubmanagement_key_user'):
+            raise AccessError(_('You are not allowed to access active members for this department.'))
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Active Members'),
+            'res_model': 'club.member',
+            'view_mode': 'list,form',
+            'views': [
+                (self.env.ref('clubmanagement.club_team_department_member_active_list_view').id, 'list'),
+                (self.env.ref('clubmanagement.club_member_form_view').id, 'form'),
+            ],
+            'search_view_id': self.env.ref('clubmanagement.club_team_department_member_active_search_view').id,
+            'domain': [
+                ('id', 'in', self.member_ids_display.ids),
+                ('current_state_id.state_type', 'in', ['active', 'inactive', 'blocked']),
+            ],
+            'context': {
+                'search_default_group_by_current_state': 1,
+            },
         }
 
     #######################################
