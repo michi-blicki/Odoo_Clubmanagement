@@ -24,6 +24,7 @@
             <field name="hr_department_id" ref="dept_executive_board_main_club"/>
             <field name="account_analytic_account_id" ref="ac_main_club"/>
             <field name="sequence">10</field>
+            <field name="membership_id" ref="membership_manchester_main_fc_active"/>
             <field name="active" eval="True"/>
         </record>
 
@@ -74,6 +75,7 @@
             <field name="hr_department_id" ref="dept_executive_board_lucerne"/>
             <field name="account_analytic_account_id" ref="ac_lucerne"/>
             <field name="sequence">30</field>
+            <field name="membership_id" ref="membership_lucerne_active"/>
             <field name="active" eval="True"/>
         </record>
 

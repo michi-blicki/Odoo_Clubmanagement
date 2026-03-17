@@ -18,7 +18,6 @@
             <field name="subclub_id" ref="subclub_main_club"/>
             <field name="hr_department_id" ref="dept_active_man"/>
             <field name="account_analytic_account_id" ref="ac_dept_main_active_man"/>
-            <field name="main_product_id" ref="product_active_member_manchester" />
             <field name="sequence">10</field>
             <field name="active" eval="True"/>
         </record>
@@ -38,7 +37,6 @@
             <field name="subclub_id" ref="subclub_main_club"/>
             <field name="hr_department_id" ref="dept_active_woman"/>
             <field name="account_analytic_account_id" ref="ac_dept_main_active_momen"/>
-            <field name="main_product_id" ref="product_active_member_manchester" />
             <field name="sequence">20</field>
             <field name="active" eval="True"/>
         </record>
@@ -59,7 +57,7 @@
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_youth_football_boys"/>
             <field name="account_analytic_account_id" ref="ac_dept_youth_boys"/>
-            <field name="main_product_id" ref="product_member_manchester_youth_football_boys" />
+            <field name="membership_id" ref="membership_manchester_junior_division_youth_boys"/>
             <field name="sequence">30</field>
             <field name="active" eval="True"/>
         </record>
@@ -79,9 +77,9 @@
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_youth_football_girls"/>
             <field name="account_analytic_account_id" ref="ac_dept_youth_girls"/>
-            <field name="main_product_id" ref="product_member_manchester_youth_football_girls" />
             <field name="sequence">40</field>
             <field name="active" eval="True"/>
+            <field name="membership_id" ref="membership_manchester_junior_division_youth_girls"/>
         </record>
 
         <record id="ac_dept_kids_boys" model="account.analytic.account">
@@ -99,9 +97,9 @@
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_kids_football_boys"/>
             <field name="account_analytic_account_id" ref="ac_dept_kids_boys"/>
-            <field name="main_product_id" ref="product_member_manchester_kids_football_boys" />
             <field name="sequence">50</field>
             <field name="active" eval="True"/>
+            <field name="membership_id" ref="membership_manchester_junior_division_kids_boys"/>
         </record>
 
         <record id="ac_dept_kids_girls" model="account.analytic.account">
@@ -119,9 +117,9 @@
             <field name="subclub_id" ref="subclub_junior"/>
             <field name="hr_department_id" ref="dept_kids_football_girls"/>
             <field name="account_analytic_account_id" ref="ac_dept_kids_girls"/>
-            <field name="main_product_id" ref="product_member_manchester_kids_football_girls" />
             <field name="sequence">60</field>
             <field name="active" eval="True"/>
+            <field name="membership_id" ref="membership_manchester_junior_division_kids_girls"/>
         </record>
 
         <!-- Club Departments for nebula_fc_lucerne -->
@@ -140,9 +138,9 @@
             <field name="subclub_id" ref="subclub_lucerne"/>
             <field name="hr_department_id" ref="dept_active_football_lucerne"/>
             <field name="account_analytic_account_id" ref="ac_dept_lucerne_aktive"/>
-            <field name="main_product_id" ref="product_aktivmitglied_luzern" />
             <field name="sequence">70</field>
             <field name="active" eval="True"/>
+            <field name="membership_id" ref="membership_lucerne_active"/>
         </record>
 
         <record id="ac_dept_lucerne_junioren" model="account.analytic.account">
@@ -160,7 +158,7 @@
             <field name="subclub_id" ref="subclub_lucerne"/>
             <field name="hr_department_id" ref="dept_youth_football_lucerne"/>
             <field name="account_analytic_account_id" ref="ac_dept_lucerne_junioren"/>
-            <field name="main_product_id" ref="product_juniorenmitglied_luzern" />
+            <field name="membership_id" ref="membership_lucerne_junior"/>
             <field name="sequence">80</field>
             <field name="active" eval="True"/>
         </record>

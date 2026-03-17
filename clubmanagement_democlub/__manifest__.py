@@ -43,7 +43,7 @@ and system testing. Experience the future of football management with Manchester
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Sports/Football',
-    'version': '18.0.1.0.3',
+    'version': '18.0.1.0.6',
     'application': False,
     'auto_install': False,
     'installable': True,
@@ -58,6 +58,7 @@ and system testing. Experience the future of football management with Manchester
         'data/020_product_product.xml',
         'data/040_account_analytics.xml',
         'data/100_club_club.xml',
+        'data/105_club_memberships.xml',        
         'data/110_club_subclub.xml',
         'data/120_club_department.xml',
         'data/130_club_pool.xml',
@@ -77,7 +78,6 @@ and system testing. Experience the future of football management with Manchester
         'data/440_club_team_manchester_girls_role.xml',
         'data/440_club_team_lucerne_role.xml',
         'data/500_club_member_states.xml',
-        'data/510_club_memberships.xml',
         'data/res_users.xml',
     ],
 
