@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, SUPERUSER_ID
+import time
 import logging
 import random
 from datetime import date
@@ -12,6 +13,15 @@ def generate_club_members(env, team_config):
     ClubMember = env['club.member']
     MemberState = env['club.member.state']
     MODULE = 'clubmanagement_democlub'
+
+    # Ensure previous module data is flushed/committed so XML IDs are available
+    try:
+        env.cr.commit()
+        # small pause to let the DB settle
+        time.sleep(3.5)
+    except Exception:
+        env.cr.rollback()
+        _logger.exception('Could not commit DB before demo ref lookup')
 
     # Fix reference for Club - as there can't be more than one
     Club = env.ref(f'{MODULE}.manchester_nebula_fc_club')
