@@ -26,6 +26,7 @@ class ClubApiConfig(models.Model):
 
     # Jetzt generisch, damit auch club.custom.fields verarbeitet werden können
     allowed_fields = fields.Many2many(string='Allowed API Fields', comodel_name='club.field.mixin', relation='club_api_config_allowed_field_rel', column1='config_id', column2='field_id', domain=lambda self: self._domain_allowed_fields())
+    required_fields = fields.Many2many(string='Required API Fields', comodel_name='club.field.mixin', relation='club_api_config_required_field_rel', column1='config_id', column2='field_id', domain=lambda self: self._domain_allowed_fields())
 
     active = fields.Boolean(default=True, required=True)
 

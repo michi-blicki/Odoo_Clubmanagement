@@ -57,8 +57,21 @@
                                     </list>
                                 </field>
                             </group>
+                        </page>
+                        <page string="Required API Fields">
                             <separator string="Automatically included required fields"/>
                             <label for="allowed_fields" string="Required fields are automatically included and cannot be deselected."/>
+                            <group>
+                                <field name="required_fields" mode="list" nolabel="1" no_create="1" no_create_edit="1">
+                                    <list editable="bottom">
+                                        <field name="label" string="Label"/>
+                                        <field name="technical_name" string="Technical Name"/>
+                                        <field name="field_type" string="Field Type" />
+                                        <field name="model" string="Model" />
+                                        <field name="required" readonly="1"/>
+                                    </list>
+                                </field>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
