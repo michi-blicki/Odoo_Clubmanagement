@@ -38,6 +38,7 @@
             (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
         ]"/>
         <field name="domain"></field>
+        <field name="search_view_id" ref="club_member_search_view"/>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p>Show all members of the club</p>

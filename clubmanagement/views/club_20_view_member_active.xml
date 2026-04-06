@@ -28,6 +28,31 @@
         </field>
     </record>
 
+    <record id="club_member_search_view" model="ir.ui.view">
+        <field name="name">club.member.search</field>
+        <field name="model">club.member</field>
+        <field name="arch" type="xml">
+            <search string="Search Members">
+                <field name="member_id"/>
+                <field name="firstname"/>
+                <field name="lastname"/>
+                <field name="subclub_ids"/>
+                <field name="department_ids"/>
+
+                <filter name="filter_subclub" string="Has Subclub" domain="[('subclub_ids', '!=', False)]"/>
+                <filter name="filter_department" string="Has Department" domain="[('department_ids', '!=', False)]"/>
+
+                <group expand="0" string="Group By">
+                    <filter name="group_subclub" string="Subclubs" context="{'group_by': 'subclub_ids'}"/>
+                    <filter name="group_department" string="Departments" context="{'group_by': 'department_ids'}"/>
+                    <filter name="group_pool" string="Pools" context="{'group_by': 'pool_ids'}"/>
+                    <filter name="group_membership" string="Current Membership" context="{'group_by': 'current_membership_id'}"/>
+                    <filter name="group_age" string="Age" context="{'group_by': 'age'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="club_member_active_list_action" model="ir.actions.act_window">
         <field name="name">Club Member: Active List</field>
         <field name="res_model">club.member</field>
@@ -38,6 +63,7 @@
             (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
         ]"/>
         <field name="domain">[('current_state_id.state_type', 'in', ["active", "inactive"])]</field>
+        <field name="search_view_id" ref="club_member_search_view"/>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p>Show active and inactive members of the club</p>

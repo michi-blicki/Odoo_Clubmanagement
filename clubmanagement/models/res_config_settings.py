@@ -25,6 +25,33 @@ class ResConfigSettings(models.TransientModel):
         help="Maximum number of allowed requests per IP address per minute"
     )
 
+    club_invoice_grouping_mode = fields.Selection(
+        selection=[
+            ('single', 'Single Invoice'),
+            ('by_payer', 'Group by Payer'),
+        ],
+        string='Default Invoice Grouping Mode',
+        config_parameter='clubmanagement.default_invoice_grouping_mode',
+        default='single',
+    )
+
+    club_minor_invoice_source = fields.Selection(
+        selection=[
+            ('primary_guardian', 'Primary Guardian'),
+            ('manual', 'Manual'),
+        ],
+        string='Default Minor Debtor Source',
+        config_parameter='clubmanagement.default_minor_invoice_source',
+        default='primary_guardian',
+    )
+
+    membership_billing_journal_id = fields.Many2one(
+        comodel_name='account.journal',
+        string='Default Membership Billing Journal',
+        config_parameter='clubmanagement.membership_billing_journal_id',
+        domain="[('type', '=', 'sale')]",
+    )
+
 
     @api.depends('start_member_id')
     def _compute_start_member_id_set(self):
@@ -67,9 +94,24 @@ class ResConfigSettings(models.TransientModel):
         if auto_actions:
             auto_actions.unlink()
 
-        departments = self.env['club.department'].sudo().search([], order='sequence, name')
-        pools = self.env['club.pool'].sudo().search([], order='sequence, name')
-        teams = self.env['club.team'].sudo().search([], order='sequence, name')
+        subclubs = self.env['club.subclub'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+        departments = self.env['club.department'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+        pools = self.env['club.pool'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+        teams = self.env['club.team'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+
+        departments_by_subclub = {}
+        for department in departments:
+            subclub_key = department.subclub_id.id or False
+            departments_by_subclub.setdefault(subclub_key, self.env['club.department'])
+            departments_by_subclub[subclub_key] |= department
 
         pools_by_department = {}
         for pool in pools:
@@ -86,29 +128,70 @@ class ResConfigSettings(models.TransientModel):
                 unpooled_teams_by_department.setdefault(team.department_id.id, self.env['club.team'])
                 unpooled_teams_by_department[team.department_id.id] |= team
 
-        for department in departments:
-            department_menu = menu_model.create({
-                'name': department.name,
+        subclub_items = []
+        for subclub in subclubs:
+            subclub_items.append((subclub.id, subclub.name, subclub.sequence or 10))
+
+        has_orphan_departments = bool(departments_by_subclub.get(False))
+        if has_orphan_departments or not subclub_items:
+            subclub_items.append((False, _('No Subclub'), 9999))
+
+        for subclub_id, subclub_name, subclub_sequence in subclub_items:
+            subclub_menu = menu_model.create({
+                'name': subclub_name,
                 'parent_id': root_menu.id,
-                'sequence': department.sequence or 10,
+                'sequence': subclub_sequence,
                 'groups_id': [(6, 0, [user_group.id])],
             })
 
-            department_pools = pools_by_department.get(department.id, self.env['club.pool']).sorted(
+            subclub_departments = departments_by_subclub.get(subclub_id, self.env['club.department']).sorted(
                 key=lambda record: (record.sequence, record.name)
             )
-            for pool in department_pools:
-                pool_menu = menu_model.create({
-                    'name': pool.name,
-                    'parent_id': department_menu.id,
-                    'sequence': pool.sequence or 10,
+
+            for department in subclub_departments:
+                department_menu = menu_model.create({
+                    'name': department.name,
+                    'parent_id': subclub_menu.id,
+                    'sequence': department.sequence or 10,
                     'groups_id': [(6, 0, [user_group.id])],
                 })
 
-                pool_teams = pooled_teams_by_pool.get(pool.id, self.env['club.team']).sorted(
+                department_pools = pools_by_department.get(department.id, self.env['club.pool']).sorted(
                     key=lambda record: (record.sequence, record.name)
                 )
-                for team in pool_teams:
+                for pool in department_pools:
+                    pool_menu = menu_model.create({
+                        'name': pool.name,
+                        'parent_id': department_menu.id,
+                        'sequence': pool.sequence or 10,
+                        'groups_id': [(6, 0, [user_group.id])],
+                    })
+
+                    pool_teams = pooled_teams_by_pool.get(pool.id, self.env['club.team']).sorted(
+                        key=lambda record: (record.sequence, record.name)
+                    )
+                    for team in pool_teams:
+                        team_action = action_model.create({
+                            'name': _('[Teams Menu] Team: %s') % team.name,
+                            'res_model': 'club.team',
+                            'view_mode': 'form',
+                            'view_id': team_form_view.id,
+                            'res_id': team.id,
+                            'target': 'current',
+                        })
+
+                        menu_model.create({
+                            'name': team.name,
+                            'parent_id': pool_menu.id,
+                            'sequence': team.sequence or 10,
+                            'groups_id': [(6, 0, [user_group.id])],
+                            'action': 'ir.actions.act_window,%s' % team_action.id,
+                        })
+
+                department_teams = unpooled_teams_by_department.get(department.id, self.env['club.team']).sorted(
+                    key=lambda record: (record.sequence, record.name)
+                )
+                for team in department_teams:
                     team_action = action_model.create({
                         'name': _('[Teams Menu] Team: %s') % team.name,
                         'res_model': 'club.team',
@@ -120,43 +203,27 @@ class ResConfigSettings(models.TransientModel):
 
                     menu_model.create({
                         'name': team.name,
-                        'parent_id': pool_menu.id,
+                        'parent_id': department_menu.id,
                         'sequence': team.sequence or 10,
                         'groups_id': [(6, 0, [user_group.id])],
                         'action': 'ir.actions.act_window,%s' % team_action.id,
                     })
-
-            department_teams = unpooled_teams_by_department.get(department.id, self.env['club.team']).sorted(
-                key=lambda record: (record.sequence, record.name)
-            )
-            for team in department_teams:
-                team_action = action_model.create({
-                    'name': _('[Teams Menu] Team: %s') % team.name,
-                    'res_model': 'club.team',
-                    'view_mode': 'form',
-                    'view_id': team_form_view.id,
-                    'res_id': team.id,
-                    'target': 'current',
-                })
-
-                menu_model.create({
-                    'name': team.name,
-                    'parent_id': department_menu.id,
-                    'sequence': team.sequence or 10,
-                    'groups_id': [(6, 0, [user_group.id])],
-                    'action': 'ir.actions.act_window,%s' % team_action.id,
-                })
 
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': _('Menu structure rebuilt'),
-                'message': _('The Teams menu hierarchy was rebuilt from Department, Pool, and Team data.'),
+                'message': _('The Teams menu hierarchy was rebuilt from Subclub, Department, Pool, and Team data.'),
                 'type': 'success',
                 'sticky': False,
             },
         }
+
+    # Backward-compatible alias for potential typo-based calls
+    def action_rebuild_team_menu_structur(self):
+        self.ensure_one()
+        return self.action_rebuild_team_menu_structure()
 
     def action_rebuild_pool_menu_structure(self):
         self.ensure_one()
@@ -185,49 +252,81 @@ class ResConfigSettings(models.TransientModel):
         if auto_actions:
             auto_actions.unlink()
 
-        departments = self.env['club.department'].sudo().search([], order='sequence, name')
-        pools = self.env['club.pool'].sudo().search([], order='sequence, name')
+        subclubs = self.env['club.subclub'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+        departments = self.env['club.department'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+        pools = self.env['club.pool'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+
+        departments_by_subclub = {}
+        for department in departments:
+            subclub_key = department.subclub_id.id or False
+            departments_by_subclub.setdefault(subclub_key, self.env['club.department'])
+            departments_by_subclub[subclub_key] |= department
 
         pools_by_department = {}
         for pool in pools:
             pools_by_department.setdefault(pool.department_id.id, self.env['club.pool'])
             pools_by_department[pool.department_id.id] |= pool
 
-        for department in departments:
-            department_menu = menu_model.create({
-                'name': department.name,
+        subclub_items = []
+        for subclub in subclubs:
+            subclub_items.append((subclub.id, subclub.name, subclub.sequence or 10))
+
+        has_orphan_departments = bool(departments_by_subclub.get(False))
+        if has_orphan_departments or not subclub_items:
+            subclub_items.append((False, _('No Subclub'), 9999))
+
+        for subclub_id, subclub_name, subclub_sequence in subclub_items:
+            subclub_menu = menu_model.create({
+                'name': subclub_name,
                 'parent_id': root_menu.id,
-                'sequence': department.sequence or 10,
+                'sequence': subclub_sequence,
                 'groups_id': [(6, 0, [user_group.id])],
             })
 
-            department_pools = pools_by_department.get(department.id, self.env['club.pool']).sorted(
+            subclub_departments = departments_by_subclub.get(subclub_id, self.env['club.department']).sorted(
                 key=lambda record: (record.sequence, record.name)
             )
-            for pool in department_pools:
-                pool_action = action_model.create({
-                    'name': _('[Pools Menu] Pool: %s') % pool.name,
-                    'res_model': 'club.pool',
-                    'view_mode': 'form',
-                    'view_id': pool_form_view.id,
-                    'res_id': pool.id,
-                    'target': 'current',
+            for department in subclub_departments:
+                department_menu = menu_model.create({
+                    'name': department.name,
+                    'parent_id': subclub_menu.id,
+                    'sequence': department.sequence or 10,
+                    'groups_id': [(6, 0, [user_group.id])],
                 })
 
-                menu_model.create({
-                    'name': pool.name,
-                    'parent_id': department_menu.id,
-                    'sequence': pool.sequence or 10,
-                    'groups_id': [(6, 0, [user_group.id])],
-                    'action': 'ir.actions.act_window,%s' % pool_action.id,
-                })
+                department_pools = pools_by_department.get(department.id, self.env['club.pool']).sorted(
+                    key=lambda record: (record.sequence, record.name)
+                )
+                for pool in department_pools:
+                    pool_action = action_model.create({
+                        'name': _('[Pools Menu] Pool: %s') % pool.name,
+                        'res_model': 'club.pool',
+                        'view_mode': 'form',
+                        'view_id': pool_form_view.id,
+                        'res_id': pool.id,
+                        'target': 'current',
+                    })
+
+                    menu_model.create({
+                        'name': pool.name,
+                        'parent_id': department_menu.id,
+                        'sequence': pool.sequence or 10,
+                        'groups_id': [(6, 0, [user_group.id])],
+                        'action': 'ir.actions.act_window,%s' % pool_action.id,
+                    })
 
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': _('Menu structure rebuilt'),
-                'message': _('The Pools menu hierarchy was rebuilt from Department and Pool data.'),
+                'message': _('The Pools menu hierarchy was rebuilt from Subclub, Department, and Pool data.'),
                 'type': 'success',
                 'sticky': False,
             },
@@ -240,14 +339,14 @@ class ResConfigSettings(models.TransientModel):
         action_model = self.env['ir.actions.act_window'].sudo()
         root_menu = self.env.ref('clubmanagement.club_departments_root_menu', raise_if_not_found=False)
         user_group = self.env.ref('clubmanagement.group_clubmanagement_user', raise_if_not_found=False)
-        department_form_view = self.env.ref('clubmanagement.club_team_department_form_view', raise_if_not_found=False)
+        department_form_view = self.env.ref('clubmanagement.club_department_overview_form_view', raise_if_not_found=False)
 
         if not root_menu:
             raise ValidationError(_("Root menu 'Departments' was not found (clubmanagement.club_departments_root_menu)."))
         if not user_group:
             raise ValidationError(_("User group was not found (clubmanagement.group_clubmanagement_user)."))
         if not department_form_view:
-            raise ValidationError(_("Department form view was not found (clubmanagement.club_team_department_form_view)."))
+            raise ValidationError(_("Department form view was not found (clubmanagement.club_department_overview_form_view)."))
 
         child_menus = menu_model.search([
             ('id', 'child_of', root_menu.id),
@@ -260,31 +359,62 @@ class ResConfigSettings(models.TransientModel):
         if auto_actions:
             auto_actions.unlink()
 
-        departments = self.env['club.department'].sudo().search([], order='sequence, name')
+        subclubs = self.env['club.subclub'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+        departments = self.env['club.department'].sudo().search([
+            ('active', '=', True),
+        ], order='sequence, name')
+
+        departments_by_subclub = {}
         for department in departments:
-            department_action = action_model.create({
-                'name': _('[Departments Menu] Department: %s') % department.name,
-                'res_model': 'club.department',
-                'view_mode': 'form',
-                'view_id': department_form_view.id,
-                'res_id': department.id,
-                'target': 'current',
+            subclub_key = department.subclub_id.id or False
+            departments_by_subclub.setdefault(subclub_key, self.env['club.department'])
+            departments_by_subclub[subclub_key] |= department
+
+        subclub_items = []
+        for subclub in subclubs:
+            subclub_items.append((subclub.id, subclub.name, subclub.sequence or 10))
+
+        has_orphan_departments = bool(departments_by_subclub.get(False))
+        if has_orphan_departments or not subclub_items:
+            subclub_items.append((False, _('No Subclub'), 9999))
+
+        for subclub_id, subclub_name, subclub_sequence in subclub_items:
+            subclub_menu = menu_model.create({
+                'name': subclub_name,
+                'parent_id': root_menu.id,
+                'sequence': subclub_sequence,
+                'groups_id': [(6, 0, [user_group.id])],
             })
 
-            menu_model.create({
-                'name': department.name,
-                'parent_id': root_menu.id,
-                'sequence': department.sequence or 10,
-                'groups_id': [(6, 0, [user_group.id])],
-                'action': 'ir.actions.act_window,%s' % department_action.id,
-            })
+            subclub_departments = departments_by_subclub.get(subclub_id, self.env['club.department']).sorted(
+                key=lambda record: (record.sequence, record.name)
+            )
+            for department in subclub_departments:
+                department_action = action_model.create({
+                    'name': _('[Departments Menu] Department: %s') % department.name,
+                    'res_model': 'club.department',
+                    'view_mode': 'form',
+                    'view_id': department_form_view.id,
+                    'res_id': department.id,
+                    'target': 'current',
+                })
+
+                menu_model.create({
+                    'name': department.name,
+                    'parent_id': subclub_menu.id,
+                    'sequence': department.sequence or 10,
+                    'groups_id': [(6, 0, [user_group.id])],
+                    'action': 'ir.actions.act_window,%s' % department_action.id,
+                })
 
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': _('Menu structure rebuilt'),
-                'message': _('The Departments menu hierarchy was rebuilt from Department data.'),
+                'message': _('The Departments menu hierarchy was rebuilt from Subclub and Department data.'),
                 'type': 'success',
                 'sticky': False,
             },

@@ -104,7 +104,10 @@ class ClubDepartment(models.Model):
     ########################
     @api.model_create_multi
     def create(self, vals_list):
-        subclub_exists = self.env['club.subclub'].search_count([('active', '=', True)]) > 0
+        subclub_exists = self.env['club.subclub'].search_count([
+            ('active', '=', True),
+            ('company_id', '=', self.env.company.id),
+        ]) > 0
 
         club = self.env['club.club'].search([('company_id', '=', self.env.company.id)], limit=1)
         if not club:
@@ -118,8 +121,6 @@ class ClubDepartment(models.Model):
             if subclub_exists:
                 if not vals.get('subclub_id'):
                     raise ValidationError(_('A subclub exists and must be assigned when creating a new department'))
-                else:
-                    vals['subclub_id'] = False
         
         self._check_user_action_permissions('create', record=self.env['club.department'])
         departments = super(ClubDepartment, self).create(vals_list)

@@ -18,6 +18,7 @@ from . import clubmember
 from . import clubmember_membership_additionalproduct
 from . import clubmember_membership
 from . import clubmember_membership_history
+from . import clubmember_billing_run
 from . import clubmember_state
 from . import clubmember_state_history
 from . import clubmember_state_rule

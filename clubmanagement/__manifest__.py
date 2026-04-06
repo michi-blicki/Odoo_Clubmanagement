@@ -20,7 +20,7 @@ Long description of module's purpose
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Association',
-    'version': '18.0.0.7.0',
+    'version': '18.0.0.8.0',
     'application': True,
     'auto_install': False,
     'installable': True,
@@ -91,6 +91,7 @@ Long description of module's purpose
         'views/club_80_view_memberstate_rules.xml',
         'views/club_80_view_roles.xml',
         'views/club_80_view_apisettings.xml',
+        'views/club_80_view_member_billing_run.xml',
         'views/res_config_settings_view.xml',
     ],
 

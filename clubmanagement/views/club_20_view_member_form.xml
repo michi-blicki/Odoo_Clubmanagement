@@ -75,6 +75,11 @@
                                 <field name="department_ids" widget="many2many_tags" />
                                 <field name="team_ids" widget="many2many_tags" />
                             </group>
+                            <group string="Billing">
+                                <field name="invoice_grouping_mode"/>
+                                <field name="invoice_partner_source"/>
+                                <field name="invoice_partner_id"/>
+                            </group>
                         </page>
                         <page string="Club Status" name="page_club_status">
                             <field name="state_history_ids">

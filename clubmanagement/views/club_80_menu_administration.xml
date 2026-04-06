@@ -16,11 +16,18 @@
         sequence="10"/>
 
     <menuitem
+        id="club_administration_finance_menu"
+        name="Finance"
+        groups="clubmanagement.group_clubmanagement_master_user"
+        parent="club_administration_root_menu"
+        sequence="40"/>
+
+    <menuitem
         id="club_administration_customizing_menu"
         name="Customizing"
         groups="clubmanagement.group_clubmanagement_master_user"
         parent="club_administration_root_menu"
-        sequence="40"/>
+        sequence="60"/>
 
     <menuitem
         id="club_administration_setting_menu"

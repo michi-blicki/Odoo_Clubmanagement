@@ -137,6 +137,7 @@
             (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
         ]"/>
         <field name="domain">[('current_state_id.state_type', '=', 'blocked')]</field>
+        <field name="search_view_id" ref="club_member_search_view"/>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p>Blocked members by the club or any other instance.</p>

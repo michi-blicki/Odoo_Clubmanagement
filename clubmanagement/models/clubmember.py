@@ -51,6 +51,31 @@ class ClubMember(models.Model):
 
     role_ids                = fields.One2many(string="Roles / Functions", comodel_name="club.role", inverse_name="member_id")
 
+    invoice_partner_id      = fields.Many2one(
+        string="Invoice Partner",
+        comodel_name="res.partner",
+        tracking=True,
+    )
+    invoice_partner_source  = fields.Selection(
+        selection=[
+            ('self', 'Self'),
+            ('primary_guardian', 'Primary Guardian'),
+            ('manual', 'Manual'),
+        ],
+        string="Invoice Partner Source",
+        tracking=True,
+        default=lambda self: self._default_invoice_partner_source(),
+    )
+    invoice_grouping_mode   = fields.Selection(
+        selection=[
+            ('single', 'Single Invoice'),
+            ('by_payer', 'Group by Payer'),
+        ],
+        string="Invoice Grouping Mode",
+        tracking=True,
+        default=lambda self: self._default_invoice_grouping_mode(),
+    )
+
     current_membership_id  = fields.Many2one(string="Current Membership", comodel_name="club.member.membership", compute="_compute_current_membership", store=True)
     membership_history_ids = fields.One2many(string="Membership History", comodel_name="club.member.membership.history", inverse_name="member_id")
     membership_date_start  = fields.Date(string="Membership Start Date", compute="_compute_current_membership", store=True)
@@ -77,6 +102,101 @@ class ClubMember(models.Model):
     def init(self):
         _logger.info('Initializing model: %s', self._name)
         super().init()
+
+    @api.model
+    def _default_invoice_grouping_mode(self):
+        value = self.env['ir.config_parameter'].sudo().get_param('clubmanagement.default_invoice_grouping_mode', 'single')
+        return value if value in ('single', 'by_payer') else 'single'
+
+    @api.model
+    def _default_invoice_partner_source(self):
+        value = self.env['ir.config_parameter'].sudo().get_param('clubmanagement.default_minor_invoice_source', 'primary_guardian')
+        return value if value in ('self', 'primary_guardian', 'manual') else 'manual'
+
+    @api.model
+    def _get_age_of_majority(self):
+        value = self.env['ir.config_parameter'].sudo().get_param('clubmanagement.age_of_majority', 18)
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return 18
+
+    @api.model
+    def _is_minor_for_billing(self, birthdate_value):
+        if not birthdate_value:
+            return False
+        birthdate = fields.Date.to_date(birthdate_value)
+        if not birthdate:
+            return False
+        age = relativedelta(fields.Date.today(), birthdate).years
+        return age < self._get_age_of_majority()
+
+    @api.model
+    def _can_manage_billing_fields(self):
+        user = self.env.user
+        return (
+            user.has_group('account.group_account_invoice')
+            or user.has_group('account.group_account_manager')
+            or user.has_group('clubmanagement.group_clubmanagement_key_user')
+        )
+
+    @api.model
+    def _check_billing_field_permissions(self, vals):
+        if self._context.get('club_billing_internal'):
+            return
+
+        billing_fields = {'invoice_partner_id', 'invoice_partner_source', 'invoice_grouping_mode'}
+        if billing_fields.intersection(set(vals.keys())) and not self._can_manage_billing_fields():
+            raise AccessError(_("You are not allowed to modify member billing fields."))
+
+    def _validate_invoice_partner_quality(self):
+        for member in self:
+            partner = member.invoice_partner_id
+            if not partner:
+                continue
+
+            missing = []
+            if not partner.name:
+                missing.append('name')
+            if not partner.street:
+                missing.append('street')
+            if not partner.zip:
+                missing.append('zip')
+            if not partner.city:
+                missing.append('city')
+
+            if missing:
+                raise ValidationError(
+                    _("Invoice partner '%s' is missing required billing fields: %s")
+                    % (partner.display_name, ', '.join(missing))
+                )
+
+    def _apply_billing_defaults(self):
+        default_minor_source = self._default_invoice_partner_source()
+        default_grouping = self._default_invoice_grouping_mode()
+
+        for member in self:
+            values = {}
+
+            if not member.invoice_grouping_mode:
+                values['invoice_grouping_mode'] = default_grouping
+
+            is_minor = self._is_minor_for_billing(member.birthdate_date)
+            if not is_minor:
+                if member.invoice_partner_source != 'self':
+                    values['invoice_partner_source'] = 'self'
+                if member.invoice_partner_id != member.partner_id:
+                    values['invoice_partner_id'] = member.partner_id.id
+            else:
+                if member.invoice_partner_source != 'manual':
+                    if default_minor_source == 'primary_guardian' and member.primary_guardian_id:
+                        values['invoice_partner_source'] = 'primary_guardian'
+                        values['invoice_partner_id'] = member.primary_guardian_id.id
+                    elif not member.invoice_partner_source:
+                        values['invoice_partner_source'] = 'manual'
+
+            if values:
+                member.with_context(club_billing_internal=True).write(values)
 
     @api.constrains('partner_id')
     def _check_unique_member_for_partner(self):
@@ -188,6 +308,7 @@ class ClubMember(models.Model):
         self._check_user_action_permissions('create', record=self.env['club.member'])
 
         for vals in vals_list:
+            self._check_billing_field_permissions(vals)
             # Generiere Partner
             if not vals.get('partner_id'):
                 partner_vals = {
@@ -198,6 +319,8 @@ class ClubMember(models.Model):
             # Generiere Member ID
             vals['member_id'] = self._generate_member_id()
         members = super(ClubMember, self).create(vals_list)
+
+        members.with_context(club_billing_internal=True)._apply_billing_defaults()
 
         for member in members:
             if member.partner_id:
@@ -259,10 +382,15 @@ class ClubMember(models.Model):
     # WRITE HOOK
     #######################################
     def write(self, vals):
+        self._check_billing_field_permissions(vals)
+
         for rec in self:
             rec._check_user_action_permissions('write', record=rec)
 
         res = super().write(vals)
+
+        if {'birthdate_date', 'primary_guardian_id', 'guardian_ids', 'partner_id', 'invoice_partner_source', 'invoice_partner_id', 'invoice_grouping_mode'}.intersection(set(vals.keys())):
+            self.with_context(club_billing_internal=True)._apply_billing_defaults()
 
         # Update custom fields, if available and required
         if 'custom_field_lines' in vals:

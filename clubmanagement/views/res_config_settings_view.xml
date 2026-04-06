@@ -30,11 +30,35 @@
                         </setting>
                     </block>
 
-                    <block title="Team Menu" name="clubteammenu_setting_container">
+                    <block title="Membership Billing" name="clubmembership_billing_setting_container">
+                        <setting id="default_invoice_grouping_mode_setting" title="Default Invoice Grouping Mode">
+                            <field name="club_invoice_grouping_mode"/>
+                        </setting>
+                        <setting id="default_minor_invoice_source_setting" title="Default Minor Debtor Source">
+                            <field name="club_minor_invoice_source"/>
+                        </setting>
+                        <setting id="membership_billing_journal_setting" title="Default Membership Billing Journal">
+                            <field name="membership_billing_journal_id"/>
+                        </setting>
+                    </block>
+
+                    <block title="Organization Menu" name="cluborganizationmenu_setting_container">
                         <setting id="rebuild_team_menu_setting" title="Rebuild Team Menu Structure">
                             <button name="action_rebuild_team_menu_structure"
                                 type="object"
                                 string="Rebuild Team Menu"
+                                class="btn btn-primary"/>
+                        </setting>
+                        <setting id="rebuild_pool_menu_setting" title="Rebuild Pool Menu Structure">
+                            <button name="action_rebuild_pool_menu_structure"
+                                type="object"
+                                string="Rebuild Pool Menu"
+                                class="btn btn-primary"/>
+                        </setting>
+                        <setting id="rebuild_department_menu_setting" title="Rebuild Department Menu Structure">
+                            <button name="action_rebuild_department_menu_structure"
+                                type="object"
+                                string="Rebuild Department Menu"
                                 class="btn btn-primary"/>
                         </setting>
                     </block>

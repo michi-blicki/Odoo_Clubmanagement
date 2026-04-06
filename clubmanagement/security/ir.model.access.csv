@@ -115,3 +115,13 @@ access_club_member_api_user,access.club.member.api.user,model_club_member,group_
 access_club_api_config_api_user,access.club.api.config.api.user,model_club_api_config,group_clubmanagement_api_user,1,0,0,0
 access_club_field_mixin_api_user,access.club.field.mixin.api.user,model_club_field_mixin,group_clubmanagement_api_user,1,0,0,0
 access_res_partner_api_user,access.res.partner.api.user,model_res_partner,group_clubmanagement_api_user,1,1,1,0
+
+access_club_member_billing_run_user,access.club.member.billing.run.user,model_club_member_billing_run,group_clubmanagement_user,1,0,0,0
+access_club_member_billing_run_key_user,access.club.member.billing.run.key.user,model_club_member_billing_run,group_clubmanagement_key_user,1,1,1,0
+access_club_member_billing_run_master_user,access.club.member.billing.run.master.user,model_club_member_billing_run,group_clubmanagement_master_user,1,1,1,0
+access_club_member_billing_run_admin,access.club.member.billing.run.administrator,model_club_member_billing_run,group_clubmanagement_administrator,1,1,1,1
+
+access_club_member_billing_run_line_user,access.club.member.billing.run.line.user,model_club_member_billing_run_line,group_clubmanagement_user,1,0,0,0
+access_club_member_billing_run_line_key_user,access.club.member.billing.run.line.key.user,model_club_member_billing_run_line,group_clubmanagement_key_user,1,1,1,0
+access_club_member_billing_run_line_master_user,access.club.member.billing.run.line.master.user,model_club_member_billing_run_line,group_clubmanagement_master_user,1,1,1,0
+access_club_member_billing_run_line_admin,access.club.member.billing.run.line.administrator,model_club_member_billing_run_line,group_clubmanagement_administrator,1,1,1,1

@@ -78,7 +78,7 @@
                                         <strong class="o_kanban_record_title">
                                             <field name="name"/>
                                             <span t-if="!record.active.raw_value" class="text-danger ml-2">
-                                                (<span t-esc="env._t('Inactive')" />)
+                                                (Inactive)
                                             </span>
                                         </strong>
                                     </div>
@@ -89,7 +89,7 @@
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left">
                                         <span class="badge rounded-pill text-bg-info">
-                                            <i class="fa fa-users"/> <t t-esc="record.member_count.value"/> <span t-esc="env._t('Members')" />
+                                            <i class="fa fa-users"/> <t t-esc="record.member_count.value"/> Members
                                         </span>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
