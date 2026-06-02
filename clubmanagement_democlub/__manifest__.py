@@ -57,6 +57,7 @@ and system testing. Experience the future of football management with Manchester
         'data/010_hr_department.xml',
         'data/020_product_product.xml',
         'data/040_account_analytics.xml',
+        'data/041_account_chart.xml',
         'data/100_club_club.xml',
         'data/105_club_memberships.xml',        
         'data/110_club_subclub.xml',

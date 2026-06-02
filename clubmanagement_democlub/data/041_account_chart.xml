@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<data noupdate="True">
+
+		<record id="acc_1000_cash" model="account.account">
+			<field name="code">1000</field>
+			<field name="name">Cash</field>
+			<field name="account_type">asset_cash</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_1020_bank" model="account.account">
+			<field name="code">1020</field>
+			<field name="name">Bank</field>
+			<field name="account_type">asset_cash</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_1090_transit_account" model="account.account">
+			<field name="code">1090</field>
+			<field name="name">Transit Account</field>
+			<field name="account_type">asset_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_1100_accounts_receivable_goods_services" model="account.account">
+			<field name="code">1100</field>
+			<field name="name">Accounts Receivable from Goods and Services (Debtors)</field>
+			<field name="account_type">asset_receivable</field>
+			<field name="reconcile">True</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_1200_goods_merchandise_trade" model="account.account">
+			<field name="code">1200</field>
+			<field name="name">Goods / Merchandise (Trade)</field>
+			<field name="account_type">asset_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_1400_financial_assets" model="account.account">
+			<field name="code">1400</field>
+			<field name="name">Financial Assets</field>
+			<field name="account_type">asset_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_1500_machines" model="account.account">
+			<field name="code">1500</field>
+			<field name="name">Machines</field>
+			<field name="account_type">asset_non_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_1600_long_term_assets" model="account.account">
+			<field name="code">1600</field>
+			<field name="name">Long-Term Assets</field>
+			<field name="account_type">asset_non_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_2000_accounts_payable_goods_services" model="account.account">
+			<field name="code">2000</field>
+			<field name="name">Accounts Payable from Goods and Services (Creditors)</field>
+			<field name="account_type">liability_payable</field>
+			<field name="reconcile">True</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_2100_short_term_financial_receivables" model="account.account">
+			<field name="code">2100</field>
+			<field name="name">Short-Term Financial Receivables</field>
+			<field name="account_type">asset_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_2200_orther_short_term_receivables" model="account.account">
+			<field name="code">2200</field>
+			<field name="name">Other Short-Term Receivables</field>
+			<field name="account_type">asset_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_2400_long_term_financial_receivables" model="account.account">
+			<field name="code">2400</field>
+			<field name="name">Long-Term Financial Receivables</field>
+			<field name="account_type">asset_non_current</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_2800_own_capital" model="account.account">
+			<field name="code">2800</field>
+			<field name="name">Own Capital</field>
+			<field name="account_type">equity</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_3000_incomes" model="account.account">
+			<field name="code">3000</field>
+			<field name="name">Income</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_3002_player_transfer_incomes" model="account.account">
+			<field name="code">3002</field>
+			<field name="name">Player Transfer Income</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_3010_active_member_fees" model="account.account">
+			<field name="code">3010</field>
+			<field name="name">Active Member Fees</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_3020_passive_member_fees" model="account.account">
+			<field name="code">3020</field>
+			<field name="name">Passive Member Fees</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_3200_sponsoring" model="account.account">
+			<field name="code">3200</field>
+			<field name="name">Sponsoring</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_3500_gastronomy_incomes" model="account.account">
+			<field name="code">3500</field>
+			<field name="name">Gastronomy Income</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_3900_other_incomes" model="account.account">
+			<field name="code">3900</field>
+			<field name="name">Other Income</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4000_other_expenses" model="account.account">
+			<field name="code">4000</field>
+			<field name="name">Other Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4020_referee_compensation" model="account.account">
+			<field name="code">4020</field>
+			<field name="name">Referee Compensation</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4030_football_field_expenses" model="account.account">
+			<field name="code">4030</field>
+			<field name="name">Football Field Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4035_football_field_drawing_expenses" model="account.account">
+			<field name="code">4035</field>
+			<field name="name">Football Field Marking Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4050_football_field_maschines_expenses" model="account.account">
+			<field name="code">4050</field>
+			<field name="name">Football Field Machinery Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4100_games_operating_costs" model="account.account">
+			<field name="code">4100</field>
+			<field name="name">Games Operating Costs</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4200_trainings_camp" model="account.account">
+			<field name="code">4200</field>
+			<field name="name">Training Camp</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4210_player_expenses" model="account.account">
+			<field name="code">4210</field>
+			<field name="name">Player Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4300_trainer_compensation" model="account.account">
+			<field name="code">4300</field>
+			<field name="name">Trainer Compensation</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4400_material_expenses" model="account.account">
+			<field name="code">4400</field>
+			<field name="name">Material Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4700_meetings" model="account.account">
+			<field name="code">4700</field>
+			<field name="name">Meetings</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4710_general_meeting" model="account.account">
+			<field name="code">4710</field>
+			<field name="name">General Meeting</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_4780_conventions" model="account.account">
+			<field name="code">4780</field>
+			<field name="name">Conventions</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5000_personal_expenses" model="account.account">
+			<field name="code">5000</field>
+			<field name="name">Personnel Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5001_fix_employed_personnel_wages" model="account.account">
+			<field name="code">5001</field>
+			<field name="name">Fixed Employee Wages</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5002_temporary_eployed_personnel_wages" model="account.account">
+			<field name="code">5002</field>
+			<field name="name">Temporary Employee Wages</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5005_employed_trainer_wages" model="account.account">
+			<field name="code">5005</field>
+			<field name="name">Employed Trainer Wages</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5009_other_exployed_personnel_wages" model="account.account">
+			<field name="code">5009</field>
+			<field name="name">Other Employee Wages</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5010_personnel_additional_wages" model="account.account">
+			<field name="code">5010</field>
+			<field name="name">Additional Personnel Wages</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5200_social_deductions" model="account.account">
+			<field name="code">5200</field>
+			<field name="name">Social Deductions</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5210_personnel_insurances" model="account.account">
+			<field name="code">5210</field>
+			<field name="name">Personnel Insurance</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5290_other_social_deductions" model="account.account">
+			<field name="code">5290</field>
+			<field name="name">Other Social Deductions</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5400_personnel_expenses" model="account.account">
+			<field name="code">5400</field>
+			<field name="name">Personnel-Related Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5500_recruitement_expenses" model="account.account">
+			<field name="code">5500</field>
+			<field name="name">Recruitment Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_5900_third_party_personnel_services" model="account.account">
+			<field name="code">5900</field>
+			<field name="name">Third-party personnel services and deliveries</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6000_maintenance_repairs_replacements" model="account.account">
+			<field name="code">6000</field>
+			<field name="name">Maintenance, Repairs and Replacements</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6100_maintenance_properties" model="account.account">
+			<field name="code">6100</field>
+			<field name="name">Property Maintenance</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6110_maintenance_fields" model="account.account">
+			<field name="code">6110</field>
+			<field name="name">Field Maintenance</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6150_maintenance_machines" model="account.account">
+			<field name="code">6150</field>
+			<field name="name">Machinery Maintenance</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6200_maintenance_cars" model="account.account">
+			<field name="code">6200</field>
+			<field name="name">Vehicle Maintenance</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6210_assurance_cars" model="account.account">
+			<field name="code">6210</field>
+			<field name="name">Vehicle Insurance</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6300_assurance_others" model="account.account">
+			<field name="code">6300</field>
+			<field name="name">Other Insurance</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6400_electricity_gas_gasoline" model="account.account">
+			<field name="code">6400</field>
+			<field name="name">Electricity, Gas, Gasoline</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6405_water_and_sewage" model="account.account">
+			<field name="code">6405</field>
+			<field name="name">Water and Sewage</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6410_cleaning" model="account.account">
+			<field name="code">6410</field>
+			<field name="name">Cleaning</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6500_other_material_expenses" model="account.account">
+			<field name="code">6500</field>
+			<field name="name">Other Material Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6501_office_materials" model="account.account">
+			<field name="code">6501</field>
+			<field name="name">Office materials</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6502_lawyer_and_consulting" model="account.account">
+			<field name="code">6502</field>
+			<field name="name">Lawyer and Consulting</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6503_digitalization" model="account.account">
+			<field name="code">6503</field>
+			<field name="name">Digitalization</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6520_contributions_and_donations" model="account.account">
+			<field name="code">6520</field>
+			<field name="name">Contributions and Donations</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6590_other_administration_expenses" model="account.account">
+			<field name="code">6590</field>
+			<field name="name">Other Administrative Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6600_sponsoring_expenses" model="account.account">
+			<field name="code">6600</field>
+			<field name="name">Sponsoring Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6640_representation_expenses" model="account.account">
+			<field name="code">6640</field>
+			<field name="name">Representation Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6710_loses_of_debitors" model="account.account">
+			<field name="code">6710</field>
+			<field name="name">Losses on Debtors</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6801_deprecation_on_real_estate" model="account.account">
+			<field name="code">6801</field>
+			<field name="name">Depreciation on Real Estate</field>
+			<field name="account_type">expense_depreciation</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6802_deprecation_on_assets" model="account.account">
+			<field name="code">6802</field>
+			<field name="name">Depreciation on Assets</field>
+			<field name="account_type">expense_depreciation</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6820_other_deprecations" model="account.account">
+			<field name="code">6820</field>
+			<field name="name">Other Depreciation</field>
+			<field name="account_type">expense_depreciation</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6901_bank_differences" model="account.account">
+			<field name="code">6901</field>
+			<field name="name">Bank Differences</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6905_bank_interest_expense" model="account.account">
+			<field name="code">6905</field>
+			<field name="name">Bank Interest Expense</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6910_mortgage_interest_expense" model="account.account">
+			<field name="code">6910</field>
+			<field name="name">Mortgage Interest Expense</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_6990_other_financial_expenses" model="account.account">
+			<field name="code">6990</field>
+			<field name="name">Other Financial Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_8000_non_operating_incomes" model="account.account">
+			<field name="code">8000</field>
+			<field name="name">Non-Operating Incomes</field>
+			<field name="account_type">income</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_8001_non_operating_expenses" model="account.account">
+			<field name="code">8001</field>
+			<field name="name">Non-Operating Expenses</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_8900_taxes" model="account.account">
+			<field name="code">8900</field>
+			<field name="name">Taxes</field>
+			<field name="account_type">expense</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+		<record id="acc_9000_result" model="account.account">
+			<field name="code">9000</field>
+			<field name="name">Result</field>
+			<field name="account_type">equity_unaffected</field>
+			<field name="company_ids" eval="[(6, 0, [ref('manchester_nebula_fc_main')])]"/>
+		</record>
+
+	</data>
+
+</odoo>
