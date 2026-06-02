@@ -21,12 +21,18 @@ class ClubMemberMembership(models.Model):
     member_ids              = fields.Many2many(string='Current Members', comodel_name="club.member", compute="_compute_member_ids", store=False, readonly=True)
     member_count            = fields.Integer(string='Member Count', compute="_compute_member_ids", store=False, readonly=True)
     description             = fields.Html(string='Description', help="Description of Membership - can be HTML or Markdown Code")
+    is_base_membership      = fields.Boolean(string='Is Base Membership', default=False, help="Base Memberships are the default membership for new members. A member can only have one base membership at a time.")
+    is_fee_exempt           = fields.Boolean(
+        string='Fee Exempt',
+        default=False,
+        help="If enabled, members with this effective membership are excluded from membership billing.",
+    )
 
     membership_history_ids  = fields.One2many(string='Membership History', comodel_name="club.member.membership.history", inverse_name="membership_id")
     
     active                  = fields.Boolean(default=True)
 
-    main_product_id         = fields.Many2one(string='Main Product', comodel_name="product.product", required=True)
+    main_product_id         = fields.Many2one(string='Main Product', comodel_name="product.product", required=False)
     main_product_price      = fields.Monetary(string='Main Product Price', compute="_compute_main_product_price", store=False, currency_field='currency_id')
 
     additional_product_ids  = fields.One2many(string='Additional Products', comodel_name='club.member.membership.additional.product', inverse_name='membership_id')
@@ -49,18 +55,33 @@ class ClubMemberMembership(models.Model):
     @api.depends('main_product_id')
     def _compute_main_product_price(self):
         for record in self:
+            if record.is_fee_exempt:
+                record.main_product_price = 0.0
+                continue
             record.main_product_price = record.main_product_id.list_price if record.main_product_id else 0.0
 
 
-    @api.depends('main_product_id', 'additional_product_ids', 'additional_product_ids.product_id')
+    @api.depends('is_fee_exempt', 'main_product_id', 'additional_product_ids', 'additional_product_ids.product_id')
     def _compute_price(self):
         for membership in self:
+            if membership.is_fee_exempt:
+                membership.price = 0.0
+                continue
+
             total_price = 0.0
             if membership.main_product_id:
                 total_price += membership.main_product_id.list_price
             if membership.additional_product_ids:
                 total_price += sum(additional.product_id.list_price for additional in membership.additional_product_ids)
             membership.price = total_price
+
+    @api.constrains('is_fee_exempt', 'main_product_id')
+    def _check_billing_product_rules(self):
+        for membership in self:
+            if not membership.is_fee_exempt and not membership.main_product_id:
+                raise ValidationError(
+                    _("A main product is required unless the membership is marked as fee exempt.")
+                )
 
 
     def action_show_members(self):
@@ -85,6 +106,9 @@ class ClubMemberMembership(models.Model):
         memberships = super(ClubMemberMembership, self).create(vals)
 
         for membership in memberships:
+            if not membership.is_base_membership:
+                continue
+
             # 1. Get root menu for membership lists
             menu_root = self.env.ref('clubmanagement.club_memberships_root_menu', raise_if_not_found=True)
             
@@ -104,7 +128,7 @@ class ClubMemberMembership(models.Model):
                 'name': membership.name,
                 'parent_id': menu_root.id,
                 'action': "ir.actions.act_window,%d" % action.id,
-                'sequence': 10,
+                'sequence': membership.sequence,
             })
 
             # 4. Add to helper table used by unlink hook
@@ -122,6 +146,10 @@ class ClubMemberMembership(models.Model):
     def write(self, vals):
         result = super().write(vals)
         for membership in self:
+            # Nur für Base Memberships Menüs bearbeiten.
+            if not membership.is_base_membership:
+                continue
+
             # Membership AKTIVIERT -> Menü ggf. anlegen (sofern nicht vorhanden)
             if 'active' in vals and vals['active']:
                 if not self.env['club.member.membership.menu'].search([
@@ -141,7 +169,7 @@ class ClubMemberMembership(models.Model):
                         'name': membership.name,
                         'parent_id': menu_root.id,
                         'action': "ir.actions.act_window,%d" % action.id,
-                        'sequence': 10,
+                        'sequence': membership.sequence,
                     })
                     self.env['club.member.membership.menu'].create({
                         'membership_id': membership.id,

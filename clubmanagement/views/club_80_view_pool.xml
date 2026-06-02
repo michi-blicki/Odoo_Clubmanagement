@@ -30,9 +30,10 @@
                             <field name="active"/>
                             <field name="sequence"/>
                             <field name="club_id" readonly="1" invisible="True"/>
-                            <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
-                            <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>
+                            <field name="subclub_id" options="{'no_create': True}"/>
                             <field name="department_id"/>
+                            <field name="registration_mode"/>
+                            <field name="effective_registration_mode" readonly="1"/>
                             <field name="account_analytic_account_id"/>
                             <field name="hr_department_id"/>
                         </group>
@@ -88,7 +89,8 @@
         <field name="name">club.pool.kanban</field>
         <field name="model">club.pool</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="department_id" 
+            <kanban default_group_by="department_id"
+                    default_order="sequence, name" 
                     class="o_kanban_small_column" 
                     on_create="quick_create" 
                     group_create="false" 
@@ -144,6 +146,8 @@
                 <field name="sequence"/>
                 <field name="name"/>
                 <field name="department_id"/>
+                <field name="registration_mode"/>
+                <field name="effective_registration_mode"/>
                 <field name="hr_department_id"/>
                 <field name="effective_membership_id"/>
                 <field name="team_count" />

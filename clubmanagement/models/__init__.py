@@ -23,6 +23,9 @@ from . import clubmember_state
 from . import clubmember_state_history
 from . import clubmember_state_rule
 from . import clubmember_guardian
+from . import club_member_mail_wizard
+from . import club_member_single_billing_wizard
+from . import club_member_transfer_wizard
 from . import clubrole
 from . import clubfield_mixin
 from . import clubapiconfig

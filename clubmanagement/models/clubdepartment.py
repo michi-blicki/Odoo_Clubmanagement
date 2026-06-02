@@ -41,6 +41,17 @@ class ClubDepartment(models.Model):
     effective_membership_id     = fields.Many2one(string="Effective Membership", comodel_name="club.member.membership", compute="_compute_effective_membership_id", store=True, readonly=True)
 
     custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
+    registration_mode           = fields.Selection([
+                                    ('inherit', 'Inherit'),
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Registration Mode', required=True, default='inherit', tracking=True)
+    effective_registration_mode = fields.Selection([
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Effective Registration Mode', compute='_compute_effective_registration_mode', store=True, readonly=True)
 
     @api.model
     def init(self):
@@ -89,6 +100,27 @@ class ClubDepartment(models.Model):
                 department.effective_membership_id = department.subclub_id.membership_id
             else:
                 department.effective_membership_id = False
+
+    @api.model
+    def _merge_registration_modes(self, modes):
+        rank = {
+            'open': 1,
+            'restricted': 2,
+            'closed': 3,
+        }
+        valid_modes = [m for m in modes if m in rank]
+        if not valid_modes:
+            return 'open'
+        return sorted(valid_modes, key=lambda m: rank[m], reverse=True)[0]
+
+    @api.depends('registration_mode', 'subclub_id.effective_registration_mode')
+    def _compute_effective_registration_mode(self):
+        for department in self:
+            parent_mode = department.subclub_id.effective_registration_mode or 'open'
+            modes = [parent_mode]
+            if department.registration_mode != 'inherit':
+                modes.append(department.registration_mode)
+            department.effective_registration_mode = self._merge_registration_modes(modes)
 
     def _compute_price(self):
         for department in self:

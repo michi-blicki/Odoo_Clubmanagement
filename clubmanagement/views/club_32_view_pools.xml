@@ -25,6 +25,8 @@
                         </group>
                         <group>
                             <field name="hr_department_id" readonly="1"/>
+                            <field name="registration_mode" readonly="1"/>
+                            <field name="effective_registration_mode" readonly="1"/>
                         </group>
                         <group>
                             <field name="members_count" readonly="1" string="Members"/>

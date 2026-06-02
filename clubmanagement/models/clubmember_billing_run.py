@@ -54,6 +54,39 @@ class ClubMemberBillingRun(models.Model):
     )
 
     line_ids = fields.One2many(string='Run Lines', comodel_name='club.member.billing.run.line', inverse_name='run_id')
+    selection_team_id = fields.Many2one(
+        string='Selection Team',
+        comodel_name='club.team',
+        domain="[('club_id', '=', club_id)]",
+    )
+    selection_pool_id = fields.Many2one(
+        string='Selection Pool',
+        comodel_name='club.pool',
+        domain="[('club_id', '=', club_id)]",
+    )
+    selection_department_id = fields.Many2one(
+        string='Selection Department',
+        comodel_name='club.department',
+        domain="[('club_id', '=', club_id)]",
+    )
+    selection_subclub_id = fields.Many2one(
+        string='Selection Subclub',
+        comodel_name='club.subclub',
+        domain="[('club_id', '=', club_id)]",
+    )
+    selected_member_ids = fields.Many2many(
+        string='Preselected Members',
+        comodel_name='club.member',
+        relation='club_member_billing_run_selected_member_rel',
+        column1='run_id',
+        column2='member_id',
+        domain="[('club_id', '=', club_id)]",
+        help='Members loaded from one selected source (team, pool, department, or subclub) and manually adjustable before invoice generation.',
+    )
+    selected_member_count = fields.Integer(
+        string='Preselected Member Count',
+        compute='_compute_selected_member_count',
+    )
     note = fields.Text(string='Notes')
 
     rerun_of_id = fields.Many2one(string='Rerun Of', comodel_name='club.member.billing.run', readonly=True, copy=False)
@@ -68,6 +101,19 @@ class ClubMemberBillingRun(models.Model):
     )
 
     draft_move_count = fields.Integer(string='Draft Invoice Count', compute='_compute_draft_move_count')
+    fee_exempt_member_ids = fields.Many2many(
+        string='Skipped Fee Exempt Members',
+        comodel_name='club.member',
+        relation='club_member_billing_run_fee_exempt_rel',
+        column1='run_id',
+        column2='member_id',
+        readonly=True,
+        copy=False,
+    )
+    fee_exempt_member_count = fields.Integer(
+        string='Skipped Fee Exempt Count',
+        compute='_compute_fee_exempt_member_count',
+    )
 
     @api.model
     def init(self):
@@ -93,6 +139,30 @@ class ClubMemberBillingRun(models.Model):
     def _compute_draft_move_count(self):
         for run in self:
             run.draft_move_count = len(run.line_ids.mapped('move_id').filtered(lambda move: move.state == 'draft'))
+
+    @api.depends('selected_member_ids')
+    def _compute_selected_member_count(self):
+        for run in self:
+            run.selected_member_count = len(run.selected_member_ids)
+
+    @api.depends('fee_exempt_member_ids')
+    def _compute_fee_exempt_member_count(self):
+        for run in self:
+            run.fee_exempt_member_count = len(run.fee_exempt_member_ids)
+
+    @api.constrains('selection_team_id', 'selection_pool_id', 'selection_department_id', 'selection_subclub_id')
+    def _check_selection_scope_exclusivity(self):
+        for run in self:
+            selected_scopes = [
+                bool(run.selection_team_id),
+                bool(run.selection_pool_id),
+                bool(run.selection_department_id),
+                bool(run.selection_subclub_id),
+            ]
+            if sum(selected_scopes) > 1:
+                raise ValidationError(
+                    _("Only one selection scope is allowed. Choose exactly one of team, pool, department, or subclub.")
+                )
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -149,28 +219,114 @@ class ClubMemberBillingRun(models.Model):
 
     def _get_candidate_members(self):
         self.ensure_one()
-        return self.env['club.member'].search([
-            ('active', '=', True),
-            ('club_id', '=', self.club_id.id),
-            ('current_membership_id', '!=', False),
-            ('invoice_partner_id', '!=', False),
-        ])
+        selected_member_ids = self.env.context.get('club_selected_member_ids') or self.selected_member_ids.ids
+
+        # For explicit member selection, include the selected records and let
+        # _validate_member_for_run return precise, user-facing reasons.
+        if selected_member_ids:
+            domain = [
+                ('active', '=', True),
+                ('club_id', '=', self.club_id.id),
+                ('id', 'in', selected_member_ids),
+            ]
+        else:
+            domain = [
+                ('active', '=', True),
+                ('club_id', '=', self.club_id.id),
+                ('effective_membership_id', '!=', False),
+                ('invoice_partner_id', '!=', False),
+            ]
+        members = self.env['club.member'].search(domain)
+        _logger.info(
+            "Billing run %s candidate selection | run_type=%s | club=%s | selected_member_ids=%s | found_member_ids=%s",
+            self.id,
+            self.run_type,
+            self.club_id.id,
+            selected_member_ids,
+            members.ids,
+        )
+        return members
+
+    def _get_selected_scope_record(self):
+        self.ensure_one()
+
+        selected_scopes = [
+            ('team', self.selection_team_id),
+            ('pool', self.selection_pool_id),
+            ('department', self.selection_department_id),
+            ('subclub', self.selection_subclub_id),
+        ]
+        selected_scopes = [(scope_type, record) for scope_type, record in selected_scopes if record]
+
+        if len(selected_scopes) > 1:
+            raise ValidationError(
+                _("Only one selection scope is allowed. Choose exactly one of team, pool, department, or subclub.")
+            )
+
+        if not selected_scopes:
+            raise ValidationError(
+                _("Please choose one selection scope (team, pool, department, or subclub) before loading members.")
+            )
+
+        return selected_scopes[0]
+
+    def action_load_selected_members(self):
+        for run in self:
+            if run.state != 'draft':
+                raise ValidationError(_("Members can only be loaded while the run is in draft state."))
+
+            scope_type, scope_record = run._get_selected_scope_record()
+            members = scope_record.member_ids_display.filtered(lambda member: member.club_id == run.club_id)
+
+            run.write({
+                'selected_member_ids': [(6, 0, members.ids)],
+            })
+
+            _logger.info(
+                "Loaded preselected members for billing run | run_id=%s | scope_type=%s | scope_record_id=%s | selected_member_ids=%s",
+                run.id,
+                scope_type,
+                scope_record.id,
+                members.ids,
+            )
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': _('Members loaded'),
+                'message': _('Preselection updated. You can still adjust the member list manually.'),
+                'type': 'success',
+                'sticky': False,
+            },
+        }
 
     def _validate_member_for_run(self, member):
         self.ensure_one()
 
-        if not member.current_membership_id:
-            return _("Member '%s' has no current membership.") % member.display_name
+        if not member.effective_membership_id:
+            return _("Member '%s' has no effective membership.") % member.display_name
 
-        if member.current_membership_id.company_id != self.company_id:
+        membership = member.effective_membership_id
+
+        if membership.company_id != self.company_id:
             return _("Member '%(member)s' membership company '%(membership_company)s' does not match run company '%(run_company)s'.") % {
                 'member': member.display_name,
-                'membership_company': member.current_membership_id.company_id.display_name,
+                'membership_company': membership.company_id.display_name,
                 'run_company': self.company_id.display_name,
             }
 
         if len(member.subclub_ids.mapped('company_id')) > 1:
             return _("Member '%s' is linked to multiple subclub companies. Resolve data quality before billing.") % member.display_name
+
+        if membership.is_fee_exempt:
+            _logger.info(
+                "Member is fee exempt and skipped from billing entries | run_id=%s | member_id=%s | membership_id=%s",
+                self.id,
+                member.id,
+                membership.id,
+            )
+            return False
 
         invoice_partner = member.invoice_partner_id
         if not invoice_partner:
@@ -191,17 +347,21 @@ class ClubMemberBillingRun(models.Model):
                 'fields': ', '.join(missing_address_fields),
             }
 
-        if not invoice_partner.property_account_position_id:
-            return _("Invoice partner '%s' has no fiscal position.") % invoice_partner.display_name
-
-        if not member.current_membership_id.main_product_id:
-            return _("Membership '%s' has no main product configured.") % member.current_membership_id.display_name
+        if not membership.main_product_id:
+            return _("Membership '%s' has no main product configured.") % membership.display_name
 
         return False
 
     def _build_member_product_entries(self, member):
         self.ensure_one()
-        membership = member.current_membership_id
+        membership = member.effective_membership_id
+
+        if membership.is_fee_exempt:
+            return []
+
+        if not membership.main_product_id:
+            return []
+
         entries = []
 
         entries.append({
@@ -232,13 +392,6 @@ class ClubMemberBillingRun(models.Model):
         income_account = product.property_account_income_id or product.categ_id.property_account_income_categ_id
         if not income_account:
             return _("Product '%s' has no income account configured.") % product.display_name
-
-        taxes = product.taxes_id.filtered(lambda tax: tax.company_id == self.company_id)
-        if not taxes:
-            return _("Product '%s' has no taxes configured for company '%s'.") % (product.display_name, self.company_id.display_name)
-
-        if not invoice_partner.property_account_position_id:
-            return _("Partner '%s' has no fiscal position configured.") % invoice_partner.display_name
 
         return False
 
@@ -277,6 +430,16 @@ class ClubMemberBillingRun(models.Model):
                 raise ValidationError(validation_error)
 
             product_taxes = product.taxes_id.filtered(lambda tax: tax.company_id == self.company_id)
+            if not product_taxes:
+                _logger.info(
+                    "No company tax matched for product line, using tax-exempt line | run_id=%s | product_id=%s | product_name=%s | run_company_id=%s | configured_tax_ids=%s | configured_tax_companies=%s",
+                    self.id,
+                    product.id,
+                    product.display_name,
+                    self.company_id.id,
+                    product.taxes_id.ids,
+                    [tax.company_id.id for tax in product.taxes_id],
+                )
             line_name = _("%(member)s - %(product)s") % {
                 'member': entry['member'].display_name,
                 'product': product.display_name,
@@ -293,6 +456,10 @@ class ClubMemberBillingRun(models.Model):
             run_line_commands.append((0, 0, {
                 'member_id': entry['member'].id,
                 'membership_id': entry['membership'].id,
+                'effective_membership_source_scope': entry['member'].effective_membership_source_scope,
+                'effective_membership_source_model': entry['member'].effective_membership_source_model,
+                'effective_membership_source_res_id': entry['member'].effective_membership_source_res_id,
+                'effective_membership_source_name': entry['member'].effective_membership_source_name,
                 'invoice_partner_id': invoice_partner.id,
                 'product_id': product.id,
                 'quantity': entry['quantity'],
@@ -304,6 +471,11 @@ class ClubMemberBillingRun(models.Model):
                     'billing_year': self.billing_year,
                     'member_name': entry['member'].display_name,
                     'membership_name': entry['membership'].display_name,
+                    'base_membership_name': entry['member'].current_membership_id.display_name,
+                    'effective_membership_source_scope': entry['member'].effective_membership_source_scope,
+                    'effective_membership_source_model': entry['member'].effective_membership_source_model,
+                    'effective_membership_source_res_id': entry['member'].effective_membership_source_res_id,
+                    'effective_membership_source_name': entry['member'].effective_membership_source_name,
                     'product_name': product.display_name,
                     'invoice_partner_name': invoice_partner.display_name,
                     'once_per_invoice': entry['once_per_invoice'],
@@ -339,26 +511,88 @@ class ClubMemberBillingRun(models.Model):
             if run.state != 'draft':
                 raise ValidationError(_("Invoices can only be generated from draft runs."))
 
+            selected_member_ids = run.env.context.get('club_selected_member_ids') or run.selected_member_ids.ids
+            _logger.info(
+                "Start draft invoice generation | run_id=%s | run_type=%s | company=%s | club=%s | selected_member_ids=%s | skip_replaced_cleanup=%s",
+                run.id,
+                run.run_type,
+                run.company_id.id,
+                run.club_id.id,
+                selected_member_ids,
+                bool(run.env.context.get('club_skip_replaced_cleanup')),
+            )
+
             run._cleanup_current_run_draft_moves()
-            replaced_runs = run._cleanup_replaced_draft_moves()
-            if replaced_runs:
-                run.write({
-                    'rerun_of_id': replaced_runs[0].id,
-                    'replaced_run_ids': [(6, 0, replaced_runs.ids)],
-                })
+            if not self.env.context.get('club_skip_replaced_cleanup'):
+                replaced_runs = run._cleanup_replaced_draft_moves()
+                if replaced_runs:
+                    run.write({
+                        'rerun_of_id': replaced_runs[0].id,
+                        'replaced_run_ids': [(6, 0, replaced_runs.ids)],
+                    })
 
             members = run._get_candidate_members()
             if not members:
+                _logger.warning(
+                    "No billable members found | run_id=%s | run_type=%s | company=%s | club=%s | selected_member_ids=%s",
+                    run.id,
+                    run.run_type,
+                    run.company_id.id,
+                    run.club_id.id,
+                    selected_member_ids,
+                )
                 raise ValidationError(_("No billable members found for this run."))
+
+            _logger.info(
+                "Applying billing defaults before validation | run_id=%s | member_ids=%s",
+                run.id,
+                members.ids,
+            )
+            members.with_context(club_billing_internal=True)._apply_billing_defaults()
 
             errors = []
             all_entries = []
+            fee_exempt_members = self.env['club.member']
             for member in members:
+                _logger.info(
+                    "Member billing snapshot | run_id=%s | member_id=%s | member_partner_id=%s | is_minor=%s | membership_id=%s | invoice_partner_id=%s | invoice_partner_source=%s | primary_guardian_id=%s | guardian_partner_ids=%s | grouping_mode=%s",
+                    run.id,
+                    member.id,
+                    member.partner_id.id if member.partner_id else False,
+                    member._is_minor_for_billing(member.birthdate_date),
+                    member.effective_membership_id.id if member.effective_membership_id else False,
+                    member.invoice_partner_id.id if member.invoice_partner_id else False,
+                    member.invoice_partner_source,
+                    member.primary_guardian_id.id if member.primary_guardian_id else False,
+                    member.guardian_ids.mapped('guardian_id').ids,
+                    member.invoice_grouping_mode,
+                )
+
+                if member.effective_membership_id and member.effective_membership_id.is_fee_exempt:
+                    fee_exempt_members |= member
+                    continue
+
                 error_message = run._validate_member_for_run(member)
                 if error_message:
+                    _logger.warning(
+                        "Member skipped in billing run | run_id=%s | member_id=%s | member_name=%s | reason=%s",
+                        run.id,
+                        member.id,
+                        member.display_name,
+                        error_message,
+                    )
                     errors.append(error_message)
                     continue
                 all_entries.extend(run._build_member_product_entries(member))
+
+            _logger.info(
+                "Billing run validation summary | run_id=%s | candidate_count=%s | fee_exempt_count=%s | error_count=%s | entry_count=%s",
+                run.id,
+                len(members),
+                len(fee_exempt_members),
+                len(errors),
+                len(all_entries),
+            )
 
             if errors:
                 raise ValidationError("\n".join(errors))
@@ -369,12 +603,30 @@ class ClubMemberBillingRun(models.Model):
                 groups.setdefault(key, [])
                 groups[key].append(entry)
 
+            _logger.info(
+                "Billing run grouping summary | run_id=%s | group_count=%s",
+                run.id,
+                len(groups),
+            )
+
             all_run_line_commands = []
             for group_entries in groups.values():
                 all_run_line_commands.extend(run._create_invoice_for_group(group_entries))
 
+            run_write_vals = {
+                'fee_exempt_member_ids': [(6, 0, fee_exempt_members.ids)],
+            }
             if all_run_line_commands:
-                run.write({'line_ids': all_run_line_commands})
+                run_write_vals['line_ids'] = all_run_line_commands
+            run.write(run_write_vals)
+
+            _logger.info(
+                "Finished draft invoice generation | run_id=%s | generated_line_count=%s | generated_move_count=%s | fee_exempt_count=%s",
+                run.id,
+                len(all_run_line_commands),
+                len(run.line_ids.mapped('move_id')),
+                len(run.fee_exempt_member_ids),
+            )
 
     def action_mark_done(self):
         for run in self:
@@ -401,6 +653,19 @@ class ClubMemberBillingRunLine(models.Model):
 
     member_id = fields.Many2one(string='Member', comodel_name='club.member', required=True)
     membership_id = fields.Many2one(string='Membership', comodel_name='club.member.membership')
+    effective_membership_source_scope = fields.Selection(
+        selection=[
+            ('team', 'Team'),
+            ('pool', 'Pool'),
+            ('department', 'Department'),
+            ('subclub', 'Subclub'),
+            ('base', 'Base Membership'),
+        ],
+        string='Membership Source',
+    )
+    effective_membership_source_model = fields.Char(string='Membership Source Model')
+    effective_membership_source_res_id = fields.Integer(string='Membership Source ID')
+    effective_membership_source_name = fields.Char(string='Membership Source Name')
     invoice_partner_id = fields.Many2one(string='Invoice Partner', comodel_name='res.partner')
 
     product_id = fields.Many2one(string='Product', comodel_name='product.product')

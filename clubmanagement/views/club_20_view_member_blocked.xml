@@ -6,92 +6,47 @@
         <field name="model">club.member</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_small_column">
+                <field name="gender"/>
+                <field name="firstname"/>
+                <field name="lastname"/>
+                <field name="birthdate_date"/>
+                <field name="state_days_in_state"/>
+                <field name="state_date_start"/>
+                <field name="city"/>
                 <templates>
                     <t t-name="card">
-                        <!-- Header -->
-                        <div t-attf-class="o_kanban_record_top {{ state_header_color }}">
-                            <strong>
-                                <field name="lastname"/>
-                                <field name="firstname"/>
-                            </strong>
-                            <span class="ml-2 text-secondary">
-                                <i class="fa fa-clock-o" title="Days in state"/>
-                                <t t-esc="record.state_days_in_state.value"/>
-                            </span>
-                        </div>
-                        <div class="o_kanban_details">
-                            <!-- 1. State -->
-                            <table class="o_kanban_table table-sm" width="100%">
-                                <tr>
-                                    <th>State</th>
-                                    <th>Date</th>
-                                </tr>
-                                <tr>
-                                    <td><field name="current_state_id" options="{'no_open': True}" /></td>
-                                    <td><field name="state_date_start"/></td>
-                                </tr>
-                            </table>
-                            <!-- 2. Geburt, Alter, Club-Dauer -->
-                            <table class="o_kanban_table table-sm" width="100%">
-                                <tr>
-                                    <th>Birthdate</th>
-                                    <th>Age</th>
-                                    <th>Years in Club</th>
-                                </tr>
-                                <tr>
-                                    <td><field name="birthdate_date"/></td>
-                                    <td><field name="age"/></td>
-                                    <td><field name="years_in_club"/></td>
-                                </tr>
-                            </table>
-                            <!-- 3. Departments (alle anzeigen, falls mehrere?) -->
-                            <table class="o_kanban_table table-sm" width="100%">
-                                <tr>
-                                    <th>Department(s)</th>
-                                </tr>
-                                <tr>
-                                    <td><field name="department_ids"/></td>
-                                </tr>
-                            </table>
-                            <!-- 4. Rollen -->
-                            <t t-if="record.role_ids.raw_value">
-                                <table class="o_kanban_table table-sm" width="100%">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_club_member_kanban">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_card_header_title" width="100%">
+                                    <h2>
+                                        <t t-if="record.gender.raw_value == 'male'"><i title="Male" class="fa fa-mars"/> </t>
+                                        <t t-if="record.gender.raw_value == 'female'"><i title="Female" class="fa fa-venus"/> </t>
+                                        <t t-if="record.gender.raw_value == 'others'"><i title="Other" class="fa fa-genderless"/> </t>
+                                        <field name="firstname"/>
+                                        <field name="lastname"/>
+                                    </h2>
+                                </div>
+                                <hr class="mb-3 mt-2"/>
+                                <table class="o_kanban_card_content" width="100%">
                                     <tr>
-                                        <th>Role</th>
-                                        <th>Scope</th>
-                                        <th>Type</th>
+                                        <td>Birthdate:</td>
+                                        <td><strong><field name="birthdate_date"/></strong></td>
                                     </tr>
-                                    <t t-foreach="record.role_ids.raw_value" t-as="role">
-                                        <tr>
-                                            <td>
-                                                <t t-esc="role.name"/>
-                                            </td>
-                                            <td>
-                                                <t t-esc="role.scope_type"/>
-                                            </td>
-                                            <td>
-                                                <t t-esc="role.role_type"/>
-                                            </td>
-                                        </tr>
-                                    </t>
+                                    <tr>
+                                        <td>Waiting since:</td>
+                                        <td>
+                                            <strong>
+                                                <t t-esc="record.state_days_in_state.value"/> days
+                                                (<field name="state_date_start"/>)
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>City:</td>
+                                        <td><strong><field name="city"/></strong></td>
+                                    </tr>
                                 </table>
-                            </t>
-                            <!-- 5. Mitarbeiter-Status -->
-                            <table class="o_kanban_table table-sm" width="100%">
-                                <tr>
-                                    <th>Is Employee</th>
-                                    <th>Employee</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <t t-if="record.is_employee.value">✔</t>
-                                        <t t-if="!record.is_employee.value">✖</t>
-                                    </td>
-                                    <td>
-                                        <field name="employee_id"/>
-                                    </td>
-                                </tr>
-                            </table>
+                            </div>
                         </div>
                     </t>
                 </templates>

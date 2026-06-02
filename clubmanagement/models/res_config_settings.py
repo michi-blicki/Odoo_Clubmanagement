@@ -52,6 +52,36 @@ class ResConfigSettings(models.TransientModel):
         domain="[('type', '=', 'sale')]",
     )
 
+    member_default_receivable_account_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Default Member Receivable Account',
+        config_parameter='clubmanagement.member_default_receivable_account_id',
+        domain="[('deprecated', '=', False), ('account_type', '=', 'asset_receivable')]",
+        help='Default receivable account used when creating a member contact.',
+    )
+
+    member_default_payable_account_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Default Member Payable Account',
+        config_parameter='clubmanagement.member_default_payable_account_id',
+        domain="[('deprecated', '=', False), ('account_type', '=', 'liability_payable')]",
+        help='Default payable account used when creating a member contact.',
+    )
+
+    registration_success_mail_enabled = fields.Boolean(
+        string='Send Registration Success Mail',
+        config_parameter='clubmanagement.registration_success_mail_enabled',
+        default=True,
+        help='When enabled, a registration success mail is queued after a successful registration event.',
+    )
+
+    registration_success_on_manual_create = fields.Boolean(
+        string='Trigger Registration Success on Manual Member Create',
+        config_parameter='clubmanagement.registration_success_on_manual_create',
+        default=False,
+        help='When enabled, manually created members also trigger the registration success event.',
+    )
+
 
     @api.depends('start_member_id')
     def _compute_start_member_id_set(self):

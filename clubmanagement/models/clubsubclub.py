@@ -40,6 +40,17 @@ class SubClub(models.Model):
     members_count               = fields.Integer(string='No Members', compute="_compute_counts")
 
     custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
+    registration_mode           = fields.Selection([
+                                    ('inherit', 'Inherit'),
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Registration Mode', required=True, default='open', tracking=True)
+    effective_registration_mode = fields.Selection([
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Effective Registration Mode', compute='_compute_effective_registration_mode', store=True, readonly=True)
 
     @api.model
     def init(self):
@@ -66,6 +77,12 @@ class SubClub(models.Model):
     def _compute_effective_membership_id(self):
         for subclub in self:
             subclub.effective_membership_id = subclub.membership_id
+
+    @api.depends('registration_mode')
+    def _compute_effective_registration_mode(self):
+        for subclub in self:
+            mode = subclub.registration_mode
+            subclub.effective_registration_mode = 'open' if mode == 'inherit' else mode
 
     @api.depends('effective_membership_id')
     def _compute_price(self):

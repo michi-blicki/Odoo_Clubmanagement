@@ -15,6 +15,7 @@
                 <field name="journal_id"/>
                 <field name="state"/>
                 <field name="draft_move_count"/>
+                <field name="fee_exempt_member_count"/>
             </list>
         </field>
     </record>
@@ -50,15 +51,33 @@
 
                     <group>
                         <field name="replaced_run_ids" widget="many2many_tags" readonly="1"/>
+                        <field name="fee_exempt_member_count" readonly="1"/>
                         <field name="note"/>
                     </group>
 
                     <notebook>
+                        <page string="Selection">
+                            <group>
+                                <group string="Selection Scope (choose one)">
+                                    <field name="selection_team_id" readonly="state != 'draft'"/>
+                                    <field name="selection_pool_id" readonly="state != 'draft'"/>
+                                    <field name="selection_department_id" readonly="state != 'draft'"/>
+                                    <field name="selection_subclub_id" readonly="state != 'draft'"/>
+                                    <button name="action_load_selected_members" type="object" string="Load Members" class="btn-secondary" invisible="state != 'draft'"/>
+                                </group>
+                                <group string="Preselected Members">
+                                    <field name="selected_member_count" readonly="1"/>
+                                    <field name="selected_member_ids" widget="many2many_tags" readonly="state != 'draft'"/>
+                                </group>
+                            </group>
+                        </page>
                         <page string="Run Lines">
                             <field name="line_ids">
                                 <list editable="bottom">
                                     <field name="member_id"/>
                                     <field name="membership_id"/>
+                                    <field name="effective_membership_source_scope"/>
+                                    <field name="effective_membership_source_name"/>
                                     <field name="invoice_partner_id"/>
                                     <field name="product_id"/>
                                     <field name="quantity"/>
@@ -67,6 +86,12 @@
                                     <field name="has_error"/>
                                 </list>
                             </field>
+                        </page>
+                        <page string="Skipped (Fee Exempt)">
+                            <group>
+                                <field name="fee_exempt_member_count" readonly="1"/>
+                            </group>
+                            <field name="fee_exempt_member_ids" readonly="1" widget="many2many_tags"/>
                         </page>
                         <page string="Messages">
                             <div class="oe_chatter">

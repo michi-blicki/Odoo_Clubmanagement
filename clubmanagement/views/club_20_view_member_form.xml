@@ -25,7 +25,12 @@
                     </group>
                     <group>
                         <group>
-                            <field name="partner_id" readonly="id != False" context="{'default_is_company': False}" help="Existing contact record for this member; select if already exists." />
+                            <field name="partner_id"
+                                readonly="id != False"
+                                required="0"
+                                context="{'default_is_company': False}"
+                                options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True}"
+                                help="Optional: link an existing contact. Leave empty to create the contact automatically from this form."/>
                             <field name="gender" options="{'no_create': True}"/>
                             <field name="nationality_id" options="{'no_create': True}"/>
                             <field name="birthdate_date"/>
@@ -72,13 +77,13 @@
                             <group>
                                 <field name="club_id" readonly="1"/>
                                 <field name="subclub_ids" widget="many2many_tags"/>
-                                <field name="department_ids" widget="many2many_tags" />
-                                <field name="team_ids" widget="many2many_tags" />
+                                <field name="department_ids" widget="many2many_tags" domain="[('subclub_id', 'in', subclub_ids)]"/>
+                                <field name="team_ids" widget="many2many_tags" domain="[('department_id', 'in', department_ids)]"/>
                             </group>
                             <group string="Billing">
                                 <field name="invoice_grouping_mode"/>
                                 <field name="invoice_partner_source"/>
-                                <field name="invoice_partner_id"/>
+                                <field name="invoice_partner_id" string="Invoice Contact (Partner)"/>
                             </group>
                         </page>
                         <page string="Club Status" name="page_club_status">
@@ -91,6 +96,12 @@
                             </field>
                         </page>
                         <page string="Memberships" name="page_memberships">
+                            <group string="Current Membership Resolution">
+                                <field name="current_membership_id" readonly="1"/>
+                                <field name="effective_membership_id" readonly="1"/>
+                                <field name="effective_membership_source_scope" readonly="1"/>
+                                <field name="effective_membership_source_name" readonly="1"/>
+                            </group>
                             <field name="membership_history_ids">
                                 <list>
                                     <field name="membership_id"/>

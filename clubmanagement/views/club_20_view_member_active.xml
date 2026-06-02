@@ -21,6 +21,8 @@
                 <field name="team_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
                 <field name="current_state_id" optional="hide" />
                 <field name="current_membership_id" optional="hide" />
+                <field name="effective_membership_id" optional="hide" />
+                <field name="effective_membership_source_scope" optional="hide" />
                 <field name="state_date_start" />
                 <field name="months_in_club" />
                 <field name="guardian_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />

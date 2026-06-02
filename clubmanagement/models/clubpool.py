@@ -17,7 +17,8 @@ class ClubPool(models.Model):
 
     name                        = fields.Char(string='Name', required=True, tracking=True)
     club_id                     = fields.Many2one(string='Club', comodel_name='club.club', store=True, readonly=True, default=lambda self: self.env['club.club'].search([], limit=1).id)
-    company_id                  = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    company_id                  = fields.Many2one(string='Company', comodel_name='res.company', related='subclub_id.company_id', store=True, readonly=True)
+    subclub_id                  = fields.Many2one(string='Subclub', comodel_name='club.subclub', required=True, tracking=True)
     department_id               = fields.Many2one(string='Department', comodel_name='club.department', required=True, tracking=True)
     hr_department_id            = fields.Many2one(string='HR Department', comodel_name='hr.department', help='Optional HR department mapping for HR processes', tracking=True)
     account_analytic_account_id = fields.Many2one(string="Account Analytic Account", comodel_name="account.analytic.account")
@@ -36,6 +37,17 @@ class ClubPool(models.Model):
     currency_id                 = fields.Many2one(string="Currency", compute="_compute_price", comodel_name='res.currency', related='company_id.currency_id', readonly=True)
     membership_id               = fields.Many2one(string="Membership", comodel_name="club.member.membership", store=True)
     effective_membership_id     = fields.Many2one(string="Effective Membership", comodel_name="club.member.membership", compute="_compute_effective_membership_id", store=True, readonly=True)
+    registration_mode           = fields.Selection([
+                                    ('inherit', 'Inherit'),
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Registration Mode', required=True, default='inherit', tracking=True)
+    effective_registration_mode = fields.Selection([
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Effective Registration Mode', compute='_compute_effective_registration_mode', store=True, readonly=True)
 
     _group_by_full              = {'department_id': lambda self, *args, **kwargs: self._read_group_department_id(*args, **kwargs), }
 
@@ -71,6 +83,27 @@ class ClubPool(models.Model):
                 pool.effective_membership_id = pool.department_id.effective_membership_id
             else:
                 pool.effective_membership_id = False
+
+    @api.model
+    def _merge_registration_modes(self, modes):
+        rank = {
+            'open': 1,
+            'restricted': 2,
+            'closed': 3,
+        }
+        valid_modes = [m for m in modes if m in rank]
+        if not valid_modes:
+            return 'open'
+        return sorted(valid_modes, key=lambda m: rank[m], reverse=True)[0]
+
+    @api.depends('registration_mode', 'department_id.effective_registration_mode')
+    def _compute_effective_registration_mode(self):
+        for pool in self:
+            parent_mode = pool.department_id.effective_registration_mode or 'open'
+            modes = [parent_mode]
+            if pool.registration_mode != 'inherit':
+                modes.append(pool.registration_mode)
+            pool.effective_registration_mode = self._merge_registration_modes(modes)
 
     def _compute_price(self):
         for pool in self:

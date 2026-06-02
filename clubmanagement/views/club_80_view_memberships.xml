@@ -22,6 +22,10 @@
                         </h1>
                         <h2>
                             <field name="code" placeholder="Membership Code"/>
+                            <field name="is_base_membership"/>
+                            <label for="is_base_membership" string="Base Membership" class="ml-1"/>
+                            <field name="is_fee_exempt"/>
+                            <label for="is_fee_exempt" string="Fee Exempt" class="ml-1"/>
                         </h2>
                     </div>
                     <group>
@@ -37,10 +41,10 @@
                     <notebook>
                         <page string="Products">
                             <group>
-                                <field name="main_product_id"/>
+                                <field name="main_product_id" required="is_fee_exempt == False"/>
                                 <field name="main_product_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             </group>
-                            <field name="additional_product_ids">
+                            <field name="additional_product_ids" readonly="is_fee_exempt == True">
                                 <list editable="bottom">
                                     <field name="product_id"/>
                                     <field name="price" widget="monetary" options="{'currency_field': 'parent.currency_id'}"/>
@@ -60,10 +64,19 @@
         <field name="name">club.member.membership.kanban</field>
         <field name="model">club.member.membership</field>
         <field name="arch" type="xml">
-            <kanban string="Memberships" default_group_by="company_id" default_order="sequence" class="o_kanban_small_column">
+            <kanban string="Memberships"
+                    default_group_by="company_id"
+                    default_order="is_base_membership desc, sequence" 
+                    class="o_kanban_small_column"
+                    group_create="false"
+                    group_delete="false"
+                    group_edit="false"
+                    quick_create="false">
                 <field name="sequence"/>
                 <field name="name"/>
                 <field name="code"/>
+                <field name="is_base_membership"/>
+                <field name="is_fee_exempt"/>
                 <field name="active"/>
                 <field name="member_count"/>
                 <field name="price"/>
@@ -71,7 +84,7 @@
                 <field name="company_id"/>
                 <templates>
                     <t t-name="card">
-                        <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.active.raw_value ? '' : 'text-muted'}">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.active.raw_value ? '' : 'text-muted'} #{record.is_base_membership.raw_value ? 'border border-2 border-warning' : ''}">
                             <div class="oe_kanban_content">
                                 <div class="o_kanban_record_top mb-0">
                                     <div class="o_kanban_record_headings">
@@ -82,6 +95,12 @@
                                             </span>
                                         </strong>
                                     </div>
+                                </div>
+                                <div t-if="record.is_base_membership.raw_value" class="mb-1">
+                                    <span class="badge rounded-pill text-bg-warning">Base Membership</span>
+                                </div>
+                                <div t-if="record.is_fee_exempt.raw_value" class="mb-1">
+                                    <span class="badge rounded-pill text-bg-secondary">Fee Exempt</span>
                                 </div>
                                 <div class="text-muted">
                                     <field name="code"/>
@@ -108,8 +127,10 @@
         <field name="name">club.member.membership.list</field>
         <field name="model">club.member.membership</field>
         <field name="arch" type="xml">
-            <list string="Memberships" default_order="sequence">
+            <list string="Memberships" default_order="is_base_membership desc, sequence">
                 <field name="sequence"/>
+                <field name="is_base_membership"/>
+                <field name="is_fee_exempt"/>
                 <field name="name"/>
                 <field name="code"/>
                 <field name="main_product_id"/>
@@ -150,6 +171,7 @@
                 <field name="name"/>
                 <field name="code"/>
                 <field name="main_product_id"/>
+                <filter name="fee_exempt" string="Fee Exempt" domain="[('is_fee_exempt', '=', True)]"/>
                 <filter name="active" string="Active" domain="[('active', '=', True)]"/>
                 <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"/>
             </search>

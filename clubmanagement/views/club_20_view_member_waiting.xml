@@ -6,49 +6,46 @@
         <field name="model">club.member</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_small_column">
+                <field name="gender"/>
+                <field name="firstname"/>
+                <field name="lastname"/>
+                <field name="birthdate_date"/>
+                <field name="state_days_in_state"/>
+                <field name="state_date_start"/>
+                <field name="city"/>
                 <templates>
-                    <field name="gender" />
-                    <field name="lastname" />
-                    <field name="firstname" />
-                    <field name="year_of_birth" />
-                    <field name="birthdate_date" />
-                    <field name="state_days_in_state" />
-                    <field name="state_date_start" />
-                    <field name="city" />
                     <t t-name="card">
-                        <div t-attf-class="o_kanban_record_top {{ state_header_color }}">
-                            <div class="o_kanban_primary_left">
-                                
-                                <span>
-                                    <t t-if="record.gender.raw_value == 'male'">
-                                        <i class="fa fa-mars text-primary" title="Male" />
-                                    </t>
-                                    <t t-if="record.gender.raw_value == 'female'">
-                                        <i class="fa fa-venus text-pink" title="Female" />
-                                    </t>
-                                    <t t-if="record.gender.raw_value == 'others'">
-                                        <i class="fa fa-genderless text-secondary" title="Other" />
-                                    </t>
-                                    <strong>
-                                        <field name="lastname" />
-                                        <field name="firstname" />
-                                        (<t t-esc="record.year_of_birth.value" />)
-                                    </strong>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="o_kanban_details">
-                            <div>
-                                Birthdate:
-                                <strong><field name="birthdate_date" /></strong>
-                            </div>
-                            <div>
-                                Waiting since <strong><t t-esc="record.state_days_in_state.value" /></strong> days:
-                                <strong><field name="state_date_start" /></strong>
-                            </div>
-                            <div>
-                                City:
-                                <strong><field name="city" /></strong>
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_club_member_kanban">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_card_header_title" width="100%">
+                                    <h2>
+                                        <t t-if="record.gender.raw_value == 'male'"><i title="Male" class="fa fa-mars" style="color: #0000FF"/> </t>
+                                        <t t-if="record.gender.raw_value == 'female'"><i title="Female" class="fa fa-venus" style="color: #FF69B4"/> </t>
+                                        <t t-if="record.gender.raw_value == 'others'"><i title="Other" class="fa fa-genderless" style="color: #6C757D"/> </t>
+                                        <span class="ms-1"><field name="firstname"/></span>
+                                        <span class="ms-1"><field name="lastname"/></span>
+                                    </h2>
+                                </div>
+                                <hr class="mb-3 mt-2"/>
+                                <table class="o_kanban_card_content" width="100%">
+                                    <tr>
+                                        <td>Birthdate:</td>
+                                        <td><strong><field name="birthdate_date"/></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Waiting since:</td>
+                                        <td>
+                                            <strong>
+                                                <t t-esc="record.state_days_in_state.value"/> days
+                                                (<field name="state_date_start"/>)
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>City:</td>
+                                        <td><strong><field name="city"/></strong></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </t>

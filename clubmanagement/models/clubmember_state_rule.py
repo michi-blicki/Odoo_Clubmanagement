@@ -103,6 +103,49 @@ return True, None, None
     ################################
     # HELPER FUNCTIONS
     ################################
+    @api.model
+    def _merge_registration_modes(self, modes):
+        rank = {
+            'open': 1,
+            'restricted': 2,
+            'closed': 3,
+        }
+        valid_modes = [m for m in modes if m in rank]
+        if not valid_modes:
+            return 'open'
+        return sorted(valid_modes, key=lambda m: rank[m], reverse=True)[0]
+
+    @api.model
+    def _get_member_effective_registration_mode(self, member):
+        modes = ['open']
+        modes.extend(member.subclub_ids.mapped('effective_registration_mode'))
+        modes.extend(member.department_ids.mapped('effective_registration_mode'))
+        modes.extend(member.pool_ids.mapped('effective_registration_mode'))
+        modes.extend(member.team_ids.mapped('effective_registration_mode'))
+        return self._merge_registration_modes(modes)
+
+    @api.model
+    def _apply_registration_mode_steering_rule(self, members):
+        pending_state = self.env['club.member.state'].search([('state_type', '=', 'pending')], limit=1)
+        blocked_state = self.env['club.member.state'].search([('state_type', '=', 'blocked')], limit=1)
+
+        for member in members:
+            mode = self._get_member_effective_registration_mode(member)
+            if mode == 'restricted' and pending_state:
+                self._change_member_state(
+                    member,
+                    pending_state,
+                    _('Registration mode is restricted. Member moved to waiting list.'),
+                )
+            elif mode == 'closed' and blocked_state:
+                self._change_member_state(
+                    member,
+                    blocked_state,
+                    _('Registration mode is closed. Registration is blocked.'),
+                )
+            elif mode == 'closed' and not blocked_state:
+                _logger.warning("Registration mode is 'closed' for member %s, but no blocked state is configured.", member.id)
+
     def _run_rule(self, rule_id):
         rule = self.browse(rule_id)
         if rule.exists() and rule.active:
@@ -210,6 +253,9 @@ return True, None, None
                     'state_id': registered_state.id,
                     'start_date': fields.Date.today(),
                 })
+
+        # 3.5️⃣ Apply base steering by effective registration mode
+        self._apply_registration_mode_steering_rule(members)
 
         # 4️⃣ Apply rules, if existing
         rules = self.search([

@@ -43,6 +43,17 @@ class ClubTeam(models.Model):
     currency_id                 = fields.Many2one(string="Currency", compute="_compute_price", comodel_name='res.currency', related='company_id.currency_id', readonly=True)
     membership_id               = fields.Many2one(string="Membership", comodel_name="club.member.membership", store=True)
     effective_membership_id     = fields.Many2one(string="Effective Membership", comodel_name="club.member.membership", compute="_compute_effective_membership_id", store=True, readonly=True)
+    registration_mode           = fields.Selection([
+                                    ('inherit', 'Inherit'),
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Registration Mode', required=True, default='inherit', tracking=True)
+    effective_registration_mode = fields.Selection([
+                                    ('open', 'Open'),
+                                    ('restricted', 'Restricted (Waitlist)'),
+                                    ('closed', 'Closed')
+                                ], string='Effective Registration Mode', compute='_compute_effective_registration_mode', store=True, readonly=True)
 
     custom_field_lines          = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
 
@@ -111,6 +122,28 @@ class ClubTeam(models.Model):
                 or team.pool_id.effective_membership_id
                 or team.department_id.effective_membership_id
             )
+
+    @api.model
+    def _merge_registration_modes(self, modes):
+        rank = {
+            'open': 1,
+            'restricted': 2,
+            'closed': 3,
+        }
+        valid_modes = [m for m in modes if m in rank]
+        if not valid_modes:
+            return 'open'
+        return sorted(valid_modes, key=lambda m: rank[m], reverse=True)[0]
+
+    @api.depends('registration_mode', 'pool_id.effective_registration_mode', 'department_id.effective_registration_mode')
+    def _compute_effective_registration_mode(self):
+        for team in self:
+            modes = [team.department_id.effective_registration_mode or 'open']
+            if team.pool_id:
+                modes.append(team.pool_id.effective_registration_mode or 'open')
+            if team.registration_mode != 'inherit':
+                modes.append(team.registration_mode)
+            team.effective_registration_mode = self._merge_registration_modes(modes)
 
     @api.depends('effective_membership_id')
     def _compute_price(self):

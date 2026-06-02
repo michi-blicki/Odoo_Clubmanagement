@@ -75,7 +75,12 @@ class ClubLog(models.Model):
     # CREATE HOOK
     ########################
     def log_event(self, scope_type, activity_type, model, res_id, res_name, description=False, old_value=False, new_value=False):
-        self.create({
+        if self.env.context.get('club_log_skip'):
+            return False
+
+        actor_user_id = self.env.user.id
+        return self.sudo().with_context(club_log_skip=True).create({
+            'user_id': actor_user_id,
             'scope_type': scope_type,
             'activity_type': activity_type,
             'model': model,
@@ -105,44 +110,62 @@ class ClubLogMixin(models.AbstractModel):
 
     def create(self, vals):
         record = super(ClubLogMixin, self).create(vals)
+        if self.env.context.get('club_log_skip'):
+            return record
+
         if self.env['club.log']._should_log(self._name):
-            self.env['club.log'].log_event(
-                scope_type=self._get_log_scope_type(),
-                activity_type='create',
-                model=self._name,
-                res_id=record.id,
-                res_name=record.display_name,
-                description=_("Created %s") % self._description,
-                new_value=str(vals)
-            )
+            try:
+                self.env['club.log'].log_event(
+                    scope_type=self._get_log_scope_type(),
+                    activity_type='create',
+                    model=self._name,
+                    res_id=record.id,
+                    res_name=record.display_name,
+                    description=_("Created %s") % self._description,
+                    new_value=str(vals)
+                )
+            except Exception as exc:
+                _logger.exception('Failed to write create log for %s: %s', self._name, exc)
         return record
 
     def write(self,vals):
+        if self.env.context.get('club_log_skip'):
+            return super(ClubLogMixin, self).write(vals)
+
         if self.env['club.log']._should_log(self._name):
             for record in self:
                 old_values = record.read(list(vals.keys()))[0]
-                self.env['club.log'].log_event(
-                    scope_type=self._get_log_scope_type(),
-                    activity_type='update',
-                    model=self._name,
-                    res_id=record.id,
-                    res_name=record.display_name,
-                    description=_("Updated %s") % self._description,
-                    old_value=str({k: v for k, v in old_values.items() if k in vals}),
-                    new_value=str(vals)
-                )
+                try:
+                    self.env['club.log'].log_event(
+                        scope_type=self._get_log_scope_type(),
+                        activity_type='update',
+                        model=self._name,
+                        res_id=record.id,
+                        res_name=record.display_name,
+                        description=_("Updated %s") % self._description,
+                        old_value=str({k: v for k, v in old_values.items() if k in vals}),
+                        new_value=str(vals)
+                    )
+                except Exception as exc:
+                    _logger.exception('Failed to write update log for %s: %s', self._name, exc)
         return super(ClubLogMixin, self).write(vals)
 
     def unlink(self):
+        if self.env.context.get('club_log_skip'):
+            return super(ClubLogMixin, self).unlink()
+
         if self.env['club.log']._should_log(self._name):
             for record in self:
-                self.env['club.log'].log_event(
-                    scope_type=self._get_log_scope_type(),
-                    activity_type='unlink',
-                    model=self._name,
-                    res_id=record.id,
-                    res_name=record.display_name,
-                    description=_("Deleted %s") % self._description,
-                    old_value=str(record.read()[0])
-                )
+                try:
+                    self.env['club.log'].log_event(
+                        scope_type=self._get_log_scope_type(),
+                        activity_type='unlink',
+                        model=self._name,
+                        res_id=record.id,
+                        res_name=record.display_name,
+                        description=_("Deleted %s") % self._description,
+                        old_value=str(record.read()[0])
+                    )
+                except Exception as exc:
+                    _logger.exception('Failed to write unlink log for %s: %s', self._name, exc)
         return super(ClubLogMixin, self).unlink()

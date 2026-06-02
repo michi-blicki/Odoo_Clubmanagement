@@ -40,6 +40,21 @@
                         <setting id="membership_billing_journal_setting" title="Default Membership Billing Journal">
                             <field name="membership_billing_journal_id"/>
                         </setting>
+                        <setting id="member_default_receivable_account_setting" title="Default Member Debtor Account">
+                            <field name="member_default_receivable_account_id"/>
+                        </setting>
+                        <setting id="member_default_payable_account_setting" title="Default Member Creditor Account">
+                            <field name="member_default_payable_account_id"/>
+                        </setting>
+                    </block>
+
+                    <block title="Registration" name="clubregistration_setting_container">
+                        <setting id="registration_success_mail_enabled_setting" title="Send Registration Success Mail">
+                            <field name="registration_success_mail_enabled"/>
+                        </setting>
+                        <setting id="registration_success_on_manual_create_setting" title="Trigger Registration Success on Manual Member Create">
+                            <field name="registration_success_on_manual_create"/>
+                        </setting>
                     </block>
 
                     <block title="Organization Menu" name="cluborganizationmenu_setting_container">

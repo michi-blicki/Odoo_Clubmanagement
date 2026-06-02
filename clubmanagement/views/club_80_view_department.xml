@@ -32,6 +32,8 @@
                                 <field name="company_id" groups="clubmanagement.group_clubmanagement_administrator"/>
                                 <field name="company_id" readonly="1" groups="!clubmanagement.group_clubmanagement_administrator"/>                                
                                 <field name="subclub_id"/>
+                                <field name="registration_mode"/>
+                                <field name="effective_registration_mode" readonly="1"/>
                                 <field name="account_analytic_account_id"/>
                                 <field name="hr_department_id"/>
                             </group>
@@ -103,7 +105,7 @@
             <field name="name">club.department.kanban</field>
             <field name="model">club.department</field>
             <field name="arch" type="xml">
-                <kanban class="o_kanban_small_column" string="Departments">
+                <kanban class="o_kanban_small_column" string="Departments" default_order="sequence, name">
                     <templates>
                         <field name="name" />
                         <field name="company_id" />
@@ -165,6 +167,8 @@
                     <field name="sequence"/>
                     <field name="name"/>
                     <field name="subclub_id"/>
+                    <field name="registration_mode"/>
+                    <field name="effective_registration_mode"/>
                     <field name="hr_department_id"/>
                     <field name="effective_membership_id"/>
                     <field name="members_count" />
