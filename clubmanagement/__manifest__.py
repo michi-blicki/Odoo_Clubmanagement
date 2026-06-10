@@ -62,6 +62,7 @@ Long description of module's purpose
         'security/res_partner.ir_rule.xml',
         'data/club_member_mail_templates.xml',
         'views/contacts_contacts.xml',
+        'views/view_hr_employee_form.xml',
         'views/club_00_menu_root.xml',
         'views/club_20_menu_members.xml',
         'views/club_20_view_member_form.xml',

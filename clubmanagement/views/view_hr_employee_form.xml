@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_employee_form_clubmanagement" model="ir.ui.view">
+            <field name="name">hr.employee.form.clubmanagement_inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='personal_information']/group/group" position="replace">
+                    <group string="Private Contact">
+                        <field name="private_address_id" context="{'default_is_company': False}"/>
+                        <label for="private_street" string="Private Address" />
+                        <div class="o_address_format">
+                            <field name="private_street" placeholder="Street..." class="o_address_street" invisible="private_address_id"/>
+                            <field name="private_street" placeholder="Street..." class="o_address_street" readonly="1" invisible="not private_address_id"/>
+                            <field name="private_street2" placeholder="Street2..." class="o_address_street" invisible="private_address_id"/>
+                            <field name="private_street2" placeholder="Street2..." class="o_address_street" readonly="1" invisible="not private_address_id"/>
+                            <field name="private_zip" placeholder="Zip..." class="o_address_zip" invisible="private_address_id"/>
+                            <field name="private_zip" placeholder="Zip..." class="o_address_zip" readonly="1" invisible="not private_address_id"/>
+                            <field name="private_city" placeholder="City..." class="o_address_city" invisible="private_address_id"/>
+                            <field name="private_city" placeholder="City..." class="o_address_city" readonly="1" invisible="not private_address_id"/>
+                            <field name="private_state_id" placeholder="State..." class="o_address_state" invisible="private_address_id" options="{'no_open': True, 'no_quick_create': True}" context="{'default_country_id': private_country_id}"/>
+                            <field name="private_state_id" placeholder="State..." class="o_address_state" readonly="1" invisible="not private_address_id"/>
+                            <field name="private_country_id" placeholder="Country..." class="o_address_country" invisible="private_address_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="private_country_id" placeholder="Country..." class="o_address_country" readonly="1" invisible="not private_address_id"/>
+                        </div>
+                        <field name="private_email" placeholder="Private Email..." class="o_address_email" invisible="private_address_id"/>
+                        <field name="private_email" placeholder="Private Email..." class="o_address_email" readonly="1" invisible="not private_address_id"/>
+                        <field name="private_phone" placeholder="Private Phone..." class="o_address_phone" invisible="private_address_id"/>
+                        <field name="private_phone" placeholder="Private Phone..." class="o_address_phone" readonly="1" invisible="not private_address_id"/>
+                        <field name="bank_account_id" context="{'default_partner_id': work_contact_id}" options="{'no_quick_create': True}" readonly="not id"/>
+                        <label for="distance_home_work"/>
+                        <div class="o_row" name="div_km_home_work">
+                            <field name="distance_home_work" class="o_hr_narrow_field"/>
+                            <span><field name="distance_home_work_unit"/></span>
+                        </div>
+                        <field name="private_car_plate"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
