@@ -8,6 +8,17 @@
 
             <form>
                 <header>
+                    <button name="action_create_related_user"
+                            type="object"
+                            string="Create User"
+                            class="oe_highlight"
+                            groups="base.group_system"
+                            invisible="related_user_id != False"/>
+                    <button name="action_open_related_user"
+                            type="object"
+                            string="Open User"
+                            groups="base.group_system"
+                            invisible="related_user_id == False"/>
                     <field name="current_state_id" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
@@ -38,6 +49,7 @@
                         </group>
                         <group>
                             <field name="member_id" />
+                            <field name="related_user_id" readonly="1" groups="base.group_system"/>
                             <label for="age" string="Age"/>
                             <div>
                                 <field name="age" class="oe_inline"/> years old

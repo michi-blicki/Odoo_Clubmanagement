@@ -76,6 +76,12 @@
                                 string="Rebuild Department Menu"
                                 class="btn btn-primary"/>
                         </setting>
+                        <setting id="rebuild_membership_menu_setting" title="Rebuild Membership Menu Structure">
+                            <button name="action_rebuild_membership_menu_structure"
+                                type="object"
+                                string="Rebuild Membership Menu"
+                                class="btn btn-primary"/>
+                        </setting>
                     </block>
                 </app>
             </xpath>

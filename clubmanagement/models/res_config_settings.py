@@ -104,14 +104,14 @@ class ResConfigSettings(models.TransientModel):
         action_model = self.env['ir.actions.act_window'].sudo()
         root_menu = self.env.ref('clubmanagement.club_teams_root_menu', raise_if_not_found=False)
         user_group = self.env.ref('clubmanagement.group_clubmanagement_user', raise_if_not_found=False)
-        team_form_view = self.env.ref('clubmanagement.club_team_overview_form_view', raise_if_not_found=False)
+        member_list_view = self.env.ref('clubmanagement.club_member_all_list_view', raise_if_not_found=False)
 
         if not root_menu:
             raise ValidationError(_("Root menu 'Teams' was not found (clubmanagement.club_teams_root_menu)."))
         if not user_group:
             raise ValidationError(_("User group was not found (clubmanagement.group_clubmanagement_user)."))
-        if not team_form_view:
-            raise ValidationError(_("Team form view was not found (clubmanagement.club_team_overview_form_view)."))
+        if not member_list_view:
+            raise ValidationError(_("Member list view was not found (clubmanagement.club_member_all_list_view)."))
 
         child_menus = menu_model.search([
             ('id', 'child_of', root_menu.id),
@@ -203,11 +203,16 @@ class ResConfigSettings(models.TransientModel):
                     for team in pool_teams:
                         team_action = action_model.create({
                             'name': _('[Teams Menu] Team: %s') % team.name,
-                            'res_model': 'club.team',
-                            'view_mode': 'form',
-                            'view_id': team_form_view.id,
-                            'res_id': team.id,
+                            'res_model': 'club.member',
+                            'view_mode': 'list,form',
+                            'view_id': member_list_view.id,
+                            'domain': [
+                                ('active', '=', True),
+                                ('id', 'in', team.member_ids_display.ids),
+                            ],
+                            'context': {},
                             'target': 'current',
+                            'type': 'ir.actions.act_window',
                         })
 
                         menu_model.create({
@@ -224,11 +229,16 @@ class ResConfigSettings(models.TransientModel):
                 for team in department_teams:
                     team_action = action_model.create({
                         'name': _('[Teams Menu] Team: %s') % team.name,
-                        'res_model': 'club.team',
-                        'view_mode': 'form',
-                        'view_id': team_form_view.id,
-                        'res_id': team.id,
+                        'res_model': 'club.member',
+                        'view_mode': 'list,form',
+                        'view_id': member_list_view.id,
+                        'domain': [
+                            ('active', '=', True),
+                            ('id', 'in', team.member_ids_display.ids),
+                        ],
+                        'context': {},
                         'target': 'current',
+                        'type': 'ir.actions.act_window',
                     })
 
                     menu_model.create({
@@ -262,14 +272,14 @@ class ResConfigSettings(models.TransientModel):
         action_model = self.env['ir.actions.act_window'].sudo()
         root_menu = self.env.ref('clubmanagement.club_pools_root_menu', raise_if_not_found=False)
         user_group = self.env.ref('clubmanagement.group_clubmanagement_user', raise_if_not_found=False)
-        pool_form_view = self.env.ref('clubmanagement.club_pool_overview_form_view', raise_if_not_found=False)
+        member_list_view = self.env.ref('clubmanagement.club_member_all_list_view', raise_if_not_found=False)
 
         if not root_menu:
             raise ValidationError(_("Root menu 'Pools' was not found (clubmanagement.club_pools_root_menu)."))
         if not user_group:
             raise ValidationError(_("User group was not found (clubmanagement.group_clubmanagement_user)."))
-        if not pool_form_view:
-            raise ValidationError(_("Pool form view was not found (clubmanagement.club_pool_overview_form_view)."))
+        if not member_list_view:
+            raise ValidationError(_("Member list view was not found (clubmanagement.club_member_all_list_view)."))
 
         child_menus = menu_model.search([
             ('id', 'child_of', root_menu.id),
@@ -336,11 +346,16 @@ class ResConfigSettings(models.TransientModel):
                 for pool in department_pools:
                     pool_action = action_model.create({
                         'name': _('[Pools Menu] Pool: %s') % pool.name,
-                        'res_model': 'club.pool',
-                        'view_mode': 'form',
-                        'view_id': pool_form_view.id,
-                        'res_id': pool.id,
+                        'res_model': 'club.member',
+                        'view_mode': 'list,form',
+                        'view_id': member_list_view.id,
+                        'domain': [
+                            ('active', '=', True),
+                            ('id', 'in', pool.member_ids_display.ids),
+                        ],
+                        'context': {},
                         'target': 'current',
+                        'type': 'ir.actions.act_window',
                     })
 
                     menu_model.create({
@@ -369,14 +384,14 @@ class ResConfigSettings(models.TransientModel):
         action_model = self.env['ir.actions.act_window'].sudo()
         root_menu = self.env.ref('clubmanagement.club_departments_root_menu', raise_if_not_found=False)
         user_group = self.env.ref('clubmanagement.group_clubmanagement_user', raise_if_not_found=False)
-        department_form_view = self.env.ref('clubmanagement.club_department_overview_form_view', raise_if_not_found=False)
+        member_list_view = self.env.ref('clubmanagement.club_member_all_list_view', raise_if_not_found=False)
 
         if not root_menu:
             raise ValidationError(_("Root menu 'Departments' was not found (clubmanagement.club_departments_root_menu)."))
         if not user_group:
             raise ValidationError(_("User group was not found (clubmanagement.group_clubmanagement_user)."))
-        if not department_form_view:
-            raise ValidationError(_("Department form view was not found (clubmanagement.club_department_overview_form_view)."))
+        if not member_list_view:
+            raise ValidationError(_("Member list view was not found (clubmanagement.club_member_all_list_view)."))
 
         child_menus = menu_model.search([
             ('id', 'child_of', root_menu.id),
@@ -424,11 +439,16 @@ class ResConfigSettings(models.TransientModel):
             for department in subclub_departments:
                 department_action = action_model.create({
                     'name': _('[Departments Menu] Department: %s') % department.name,
-                    'res_model': 'club.department',
-                    'view_mode': 'form',
-                    'view_id': department_form_view.id,
-                    'res_id': department.id,
+                    'res_model': 'club.member',
+                    'view_mode': 'list,form',
+                    'view_id': member_list_view.id,
+                    'domain': [
+                        ('active', '=', True),
+                        ('id', 'in', department.member_ids_display.ids),
+                    ],
+                    'context': {},
                     'target': 'current',
+                    'type': 'ir.actions.act_window',
                 })
 
                 menu_model.create({
@@ -445,6 +465,105 @@ class ResConfigSettings(models.TransientModel):
             'params': {
                 'title': _('Menu structure rebuilt'),
                 'message': _('The Departments menu hierarchy was rebuilt from Subclub and Department data.'),
+                'type': 'success',
+                'sticky': False,
+            },
+        }
+
+    def action_rebuild_membership_menu_structure(self):
+        self.ensure_one()
+
+        menu_model = self.env['ir.ui.menu'].sudo()
+        action_model = self.env['ir.actions.act_window'].sudo()
+        helper_model = self.env['club.member.membership.menu'].sudo()
+        subclub_model = self.env['club.subclub'].sudo()
+        membership_model = self.env['club.member.membership'].sudo()
+        root_menu = self.env.ref('clubmanagement.club_memberships_root_menu', raise_if_not_found=False)
+        key_user_group = self.env.ref('clubmanagement.group_clubmanagement_key_user', raise_if_not_found=False)
+        member_list_view = self.env.ref('clubmanagement.club_member_all_list_view', raise_if_not_found=False)
+
+        if not root_menu:
+            raise ValidationError(_("Root menu 'Memberships' was not found (clubmanagement.club_memberships_root_menu)."))
+        if not key_user_group:
+            raise ValidationError(_("Key user group was not found (clubmanagement.group_clubmanagement_key_user)."))
+        if not member_list_view:
+            raise ValidationError(_("Member list view was not found (clubmanagement.club_member_all_list_view)."))
+
+        child_menus = menu_model.search([
+            ('id', 'child_of', root_menu.id),
+            ('id', '!=', root_menu.id),
+        ])
+        if child_menus:
+            child_menus.unlink()
+
+        auto_actions = action_model.search([('name', 'like', '[Memberships Menu]%')])
+        if auto_actions:
+            auto_actions.unlink()
+
+        helper_entries = helper_model.search([])
+        if helper_entries:
+            helper_entries.unlink()
+
+        # Include all subclubs to avoid silently skipping records hidden by active_test context.
+        subclubs = subclub_model.with_context(active_test=False).search([], order='sequence, name')
+        memberships = membership_model.search([
+            ('active', '=', True),
+        ], order='sequence, name')
+
+        memberships_by_company = {}
+        for membership in memberships:
+            memberships_by_company.setdefault(membership.company_id.id, membership_model)
+            memberships_by_company[membership.company_id.id] |= membership
+
+        for subclub in subclubs:
+            subclub_menu = menu_model.create({
+                'name': subclub.name,
+                'parent_id': root_menu.id,
+                'sequence': subclub.sequence or 10,
+                'groups_id': [(6, 0, [key_user_group.id])],
+            })
+
+            subclub_members = subclub.member_ids_display.sudo().filtered(lambda member: member.active)
+            subclub_memberships = memberships_by_company.get(subclub.company_id.id, membership_model)
+
+            for membership in subclub_memberships:
+                membership_action = action_model.create({
+                    'name': _('%s / %s') % (subclub.name, membership.name),
+                    'res_model': 'club.member',
+                    'view_mode': 'list,form',
+                    'view_id': member_list_view.id,
+                    'domain': [
+                        ('active', '=', True),
+                        ('id', 'in', subclub_members.ids),
+                        '|',
+                        ('current_membership_id', '=', membership.id),
+                        ('effective_membership_id', '=', membership.id),
+                    ],
+                    'context': {},
+                    'target': 'current',
+                    'type': 'ir.actions.act_window',
+                })
+
+                membership_menu = menu_model.create({
+                    'name': membership.name,
+                    'parent_id': subclub_menu.id,
+                    'sequence': membership.sequence or 10,
+                    'groups_id': [(6, 0, [key_user_group.id])],
+                    'action': 'ir.actions.act_window,%s' % membership_action.id,
+                })
+
+                helper_model.create({
+                    'membership_id': membership.id,
+                    'menu_id': membership_menu.id,
+                    'action_id': membership_action.id,
+                })
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': _('Menu structure rebuilt'),
+                'message': _('The Memberships menu hierarchy was rebuilt from active memberships grouped by company and subclub.'),
                 'type': 'success',
                 'sticky': False,
             },

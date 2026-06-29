@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_club_member_state_rule_error" model="mail.template">
+        <field name="name">Club Member State Rule Error Notification</field>
+        <field name="model_id" ref="clubmanagement.model_club_member_state_rule"/>
+        <field name="subject">Rule error: ${object.name}</field>
+        <field name="email_from">${(user.email_formatted or '')}</field>
+        <field name="email_to"></field>
+        <field name="body_html" type="html">
+            <div>
+                <p>A rule execution failed.</p>
+                <table style="border-collapse: collapse; width: 100%; max-width: 900px;">
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600; width: 35%;">Rule</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.name or ''}</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Rule ID</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.id}</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Member</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${ctx.get('club_rule_error_member_name') or ''}</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Member ID</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${ctx.get('club_rule_error_member_id') or ''}</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Error</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${ctx.get('club_rule_error_message') or ''}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Traceback (full):</p>
+                <pre>${ctx.get('club_rule_error_trace') or ''}</pre>
+            </div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</odoo>

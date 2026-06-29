@@ -5,7 +5,7 @@
         <field name="name">club.member.waiting.kanban</field>
         <field name="model">club.member</field>
         <field name="arch" type="xml">
-            <kanban class="o_kanban_small_column">
+            <kanban class="o_kanban_small_column" default_order="state_date_start, lastname, firstname">
                 <field name="gender"/>
                 <field name="firstname"/>
                 <field name="lastname"/>
@@ -58,7 +58,7 @@
         <field name="name">club.member.waiting.list</field>
         <field name="model">club.member</field>
         <field name="arch" type="xml">
-            <list string="Active Members" default_order="lastname">
+            <list string="Active Members" default_order="state_date_start, lastname, firstname">
                 <field name="member_id" />
                 <field name="partner_id" optional="hide" />
                 <field name="lastname" />

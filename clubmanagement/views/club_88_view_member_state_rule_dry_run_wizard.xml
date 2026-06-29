@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_club_member_state_rule_dry_run_wizard_form" model="ir.ui.view">
+        <field name="name">club.member.state.rule.dry.run.wizard.form</field>
+        <field name="model">club.member.state.rule.dry.run.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Rule Dry Run">
+                <sheet>
+                    <group>
+                        <field name="rule_ids" widget="many2many_tags"/>
+                        <field name="max_members"/>
+                    </group>
+                    <group>
+                        <field name="line_ids" nolabel="1" readonly="1">
+                            <list>
+                                <field name="rule_id"/>
+                                <field name="member_id"/>
+                                <field name="matched"/>
+                                <field name="would_execute_action"/>
+                                <field name="error"/>
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_run_dry_run" type="object" string="Run Dry Run" class="btn-primary"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

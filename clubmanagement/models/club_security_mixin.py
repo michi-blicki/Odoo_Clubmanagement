@@ -11,7 +11,7 @@ class ClubSecurityMixin(models.AbstractModel):
     @api.model
     def _get_user_member(self, user=None):
         user = user or self.env.user
-        return self.env['club.member'].with_context(club_security_internal=True).search(
+        return self.env['club.member'].sudo().with_context(club_security_internal=True).search(
             [('partner_id', '=', user.partner_id.id)], limit=1
         )
 

@@ -131,12 +131,116 @@ class ClubMember(models.Model):
     days_in_club           = fields.Integer(string="Days in Club", compute="_compute_membership_duration", store=True)
 
     custom_field_lines     = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
+    related_user_id        = fields.Many2one(
+        string="Linked User",
+        comodel_name='res.users',
+        compute='_compute_related_user',
+        compute_sudo=True,
+    )
 
 
     @api.model
     def init(self):
         _logger.info('Initializing model: %s', self._name)
         super().init()
+
+    @api.depends('partner_id')
+    def _compute_related_user(self):
+        User = self.env['res.users'].sudo()
+        for member in self:
+            if not member.partner_id:
+                member.related_user_id = False
+                continue
+            member.related_user_id = User.search([
+                ('partner_id', '=', member.partner_id.id),
+            ], order='id asc', limit=1)
+
+    def _get_user_login_candidate(self):
+        self.ensure_one()
+        for email_field in ('email', 'email2', 'email_work'):
+            email_value = getattr(self.partner_id, email_field, False)
+            candidates = email_split(email_value or '')
+            if candidates:
+                return candidates[0].strip().lower()
+        return False
+
+    def _action_open_user_form(self, user):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'res.users',
+            'res_id': user.id,
+            'view_mode': 'form',
+            'target': 'current',
+        }
+
+    def action_open_related_user(self):
+        self.ensure_one()
+        self._check_user_action_permissions('read', record=self)
+
+        user = self.related_user_id
+        if not user:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': _('Information'),
+                    'message': _('No linked user exists for this member.'),
+                    'type': 'info',
+                }
+            }
+
+        return self._action_open_user_form(user)
+
+    def action_create_related_user(self):
+        self.ensure_one()
+        self._check_user_action_permissions('write', record=self)
+
+        if not self.env.user.has_group('base.group_system'):
+            raise AccessError(_('Only users with Settings access can create linked users.'))
+
+        existing_user = self.env['res.users'].sudo().search([
+            ('partner_id', '=', self.partner_id.id),
+        ], order='id asc', limit=1)
+        if existing_user:
+            return self._action_open_user_form(existing_user)
+
+        login = self._get_user_login_candidate()
+        if not login:
+            raise UserError(_('A valid email is required on the member contact to create a user.'))
+
+        duplicate_login_user = self.env['res.users'].sudo().search([
+            ('login', '=', login),
+        ], limit=1)
+        if duplicate_login_user and duplicate_login_user.partner_id != self.partner_id:
+            raise UserError(
+                _('A user with login %s already exists. Please use another email on the contact.') % login
+            )
+        if duplicate_login_user and duplicate_login_user.partner_id == self.partner_id:
+            return self._action_open_user_form(duplicate_login_user)
+
+        portal_group = self.env.ref('base.group_portal', raise_if_not_found=False)
+        user_vals = {
+            'name': self.partner_id.name,
+            'login': login,
+            'email': self.partner_id.email or login,
+            'partner_id': self.partner_id.id,
+        }
+        if portal_group:
+            user_vals['groups_id'] = [(6, 0, [portal_group.id])]
+
+        new_user = self.env['res.users'].with_context(no_reset_password=True).sudo().create(user_vals)
+
+        self.env['club.log'].log_event(
+            scope_type='member',
+            activity_type='update',
+            model=self._name,
+            res_id=self.id,
+            res_name=self.display_name,
+            description=_('Linked user created: %s') % new_user.display_name,
+        )
+
+        return self._action_open_user_form(new_user)
 
     @api.model
     def _default_invoice_grouping_mode(self):
@@ -210,6 +314,13 @@ class ClubMember(models.Model):
     def _get_registration_success_mail_template(self):
         return self.env.ref('clubmanagement.mail_template_member_registration_success', raise_if_not_found=False)
 
+    @api.model
+    def _get_registration_internal_notification_template(self):
+        return self.env.ref(
+            'clubmanagement.mail_template_member_registration_internal_notification',
+            raise_if_not_found=False,
+        )
+
     def _collect_registration_success_recipients(self):
         self.ensure_one()
         recipients = []
@@ -279,6 +390,71 @@ class ClubMember(models.Model):
             except Exception:
                 _logger.exception('Failed to queue registration success mail for member %s.', member.id)
 
+    def _build_registration_internal_notification_targets(self):
+        self.ensure_one()
+
+        targets = [
+            {
+                'email': 'finanzen@fcthalwil.ch',
+                'rule_label': _('Every registration'),
+            },
+        ]
+
+        if self.gender == 'female':
+            targets.append({
+                'email': 'michi@blicki.ch',
+                'rule_label': _('Female registration'),
+            })
+
+        if self.gender == 'male' and self.age is not False and self.age <= 14:
+            targets.append({
+                'email': 'ramondetta@fcthalwil.ch',
+                'rule_label': _('Male registration up to 14 years'),
+            })
+
+        deduplicated = []
+        seen = set()
+        for target in targets:
+            normalized = (target.get('email') or '').strip().lower()
+            if not normalized or normalized in seen:
+                continue
+            seen.add(normalized)
+            deduplicated.append({
+                'email': normalized,
+                'rule_label': target.get('rule_label') or _('Registration rule'),
+            })
+
+        return deduplicated
+
+    def _send_registration_internal_notifications(self):
+        template = self._get_registration_internal_notification_template()
+        if not template:
+            _logger.warning(
+                'Registration internal notification template not found: '
+                'clubmanagement.mail_template_member_registration_internal_notification'
+            )
+            return
+
+        for member in self:
+            targets = member._build_registration_internal_notification_targets()
+            for target in targets:
+                template_ctx = {
+                    'club_registration_rule_label': target['rule_label'],
+                    'club_registration_rule_recipient': target['email'],
+                }
+                try:
+                    template.with_context(**template_ctx).send_mail(
+                        member.id,
+                        force_send=False,
+                        email_values={'email_to': target['email']},
+                    )
+                except Exception:
+                    _logger.exception(
+                        'Failed to queue registration internal notification for member %s to %s.',
+                        member.id,
+                        target['email'],
+                    )
+
     def _on_successful_registration(self):
         if not self:
             return
@@ -287,6 +463,7 @@ class ClubMember(models.Model):
             _logger.info('Registration success mails are disabled by configuration.')
             return
 
+        self._send_registration_internal_notifications()
         self._send_registration_success_mail()
 
     @api.model
@@ -464,7 +641,13 @@ class ClubMember(models.Model):
     def _compute_primary_guardian(self):
         for member in self:
             primary = member.guardian_ids.filtered(lambda g: g.is_primary)
-            member.primary_guardian_id = primary.guardian_id if primary else False
+            if len(primary) > 1:
+                _logger.warning(
+                    'Member %s has %s primary guardians; using the first record for primary_guardian_id.',
+                    member.id,
+                    len(primary),
+                )
+            member.primary_guardian_id = primary[:1].guardian_id if primary else False
 
     @api.constrains('requires_guardian', 'guardian_ids')
     def _check_guardian_required(self):
@@ -596,7 +779,7 @@ class ClubMember(models.Model):
             if custom_data:
                 member.write_custom_fields(custom_data)
 
-        self.env['club.member.state.rule']._apply_registratoin_rules(members)
+        self.env['club.member.state.rule']._apply_registration_rules(members)
 
         trigger_success_event = self._is_truthy(self.env.context.get('club_trigger_registration_success_event'))
         if trigger_success_event or self._registration_success_on_manual_create_enabled():
@@ -913,5 +1096,9 @@ class ClubMember(models.Model):
             user.has_group('clubmanagement.group_clubmanagement_master_user')
         ):
             visible_members = self._get_visible_member_ids(user)
-            args = [('id', 'in', visible_members.ids)] + list(args)
+            args = [
+                '|',
+                ('id', 'in', visible_members.ids),
+                ('current_state_id.state_type', 'in', ['pending', 'registered', 'blocked']),
+            ] + list(args)
         return super().search(args, **kwargs)
