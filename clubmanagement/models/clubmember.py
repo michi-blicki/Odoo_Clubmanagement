@@ -495,6 +495,9 @@ class ClubMember(models.Model):
 
     @api.model
     def _check_billing_field_permissions(self, vals):
+        if self.env.su:
+            return
+
         if self._context.get('club_billing_internal'):
             return
 

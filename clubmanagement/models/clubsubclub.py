@@ -214,6 +214,9 @@ class SubClub(models.Model):
     ########################
     @api.model
     def search(self, args, **kwargs):
+        if self.env.su or self._context.get('club_security_internal'):
+            return super().search(args, **kwargs)
+
         user = self.env.user
         if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
             scopes = self._get_user_scope_entities(user)

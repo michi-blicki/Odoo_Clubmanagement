@@ -242,10 +242,15 @@ class ClubPool(models.Model):
     ########################
     @api.model
     def search(self, args, **kwargs):
+        if self.env.su or self._context.get('club_security_internal'):
+            return super().search(args, **kwargs)
+
         user = self.env.user
         if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
             scopes = self._get_user_scope_entities(user)
             pool_ids = scopes['pool_ids']
-            dept_pools = self.env['club.pool'].search([('department_id', 'in', scopes['department_ids'].ids)])
+            dept_pools = self.with_context(club_security_internal=True).search([
+                ('department_id', 'in', scopes['department_ids'].ids)
+            ])
             args = [('id', 'in', (pool_ids | dept_pools).ids)] + list(args)
         return super().search(args, **kwargs)

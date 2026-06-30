@@ -310,12 +310,17 @@ class ClubDepartment(models.Model):
     ########################
     @api.model
     def search(self, args, **kwargs):
+        if self.env.su or self._context.get('club_security_internal'):
+            return super().search(args, **kwargs)
+
         user = self.env.user
         if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
             scopes = self._get_user_scope_entities(user)
             dept_ids = scopes['department_ids']
             # Additionally include departments of visible subclubs
             visible_subclubs = scopes['subclub_ids']
-            dept_of_subclubs = self.env['club.department'].search([('subclub_id', 'in', visible_subclubs.ids)])
+            dept_of_subclubs = self.with_context(club_security_internal=True).search([
+                ('subclub_id', 'in', visible_subclubs.ids)
+            ])
             args = [('id', 'in', (dept_ids | dept_of_subclubs).ids)] + list(args)
         return super().search(args, **kwargs)

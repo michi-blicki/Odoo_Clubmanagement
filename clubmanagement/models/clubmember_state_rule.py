@@ -1,10 +1,9 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError, ValidationError, MissingError
 from odoo.tools import email_split
+from odoo.tools import safe_eval as safe_eval_tools
 from odoo.tools.safe_eval import safe_eval
 
-from datetime import datetime, date
-import time
 import traceback
 
 import logging
@@ -201,8 +200,8 @@ pass
             email_values={'email_to': ','.join(recipients)},
         )
 
+    @api.model
     def _format_execution_note(self, trigger, stats):
-        self.ensure_one()
         return (
             'Trigger: %(trigger)s | Checked: %(checked)s | Matched: %(matched)s | '
             'Actions: %(actions)s | Errors: %(errors)s'
@@ -217,7 +216,15 @@ pass
     @api.model
     def _safe_member_domain(self, member_domain):
         expression = (member_domain or '[]').strip() or '[]'
-        parsed = safe_eval(expression, {'datetime': datetime, 'date': date, 'time': time}, mode='eval')
+        parsed = safe_eval(
+            expression,
+            {
+                'datetime': safe_eval_tools.datetime,
+                'date': safe_eval_tools.datetime.date,
+                'time': safe_eval_tools.time,
+            },
+            mode='eval',
+        )
         if not isinstance(parsed, (list, tuple)):
             raise ValidationError(_('Member domain must evaluate to a list/tuple domain expression.'))
         return list(parsed)
@@ -248,9 +255,9 @@ pass
             'env': self.env,
             'member': member,
             'rule': self,
-            'datetime': datetime,
-            'date': date,
-            'time': time,
+            'datetime': safe_eval_tools.datetime,
+            'date': safe_eval_tools.datetime.date,
+            'time': safe_eval_tools.time,
             'result': result_bucket,
             'log': _log,
         }
@@ -311,7 +318,16 @@ pass
     def _execute_action_code(self, member, eval_result):
         self.ensure_one()
         eval_context = self._get_safe_eval_context(member, (eval_result or {}).get('aux'))
-        safe_eval(self.action_code or 'pass', eval_context, mode='exec', nocopy=True)
+        try:
+            safe_eval(self.action_code or 'pass', eval_context, mode='exec', nocopy=True)
+        except MissingError as exc:
+            _logger.warning(
+                "Rule %s action skipped for member %s due to missing linked record: %s",
+                self.id,
+                member.id,
+                exc,
+            )
+            return
         self._log_action_execution(member, eval_result or {})
 
     def _execute_match_effects(self, member, eval_result):

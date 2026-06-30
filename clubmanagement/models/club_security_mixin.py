@@ -67,6 +67,9 @@ class ClubSecurityMixin(models.AbstractModel):
     @api.model
     def _check_user_action_permissions(self, action: str, user=None, record=None):
         """Check if current user is allowed to perform a write/create/unlink action on given record."""
+        if self.env.su:
+            return True
+
         user = user or self.env.user
 
         if (user.login == 'admin') or (user.login == '__system__'):

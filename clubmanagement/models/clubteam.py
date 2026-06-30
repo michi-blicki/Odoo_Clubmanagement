@@ -266,6 +266,9 @@ class ClubTeam(models.Model):
     ########################
     @api.model
     def search(self, args, **kwargs):
+        if self.env.su or self._context.get('club_security_internal'):
+            return super().search(args, **kwargs)
+
         user = self.env.user
         if not user.has_group('clubmanagement.group_clubmanagement_administrator'):
             visible_teams = self._get_visible_team_ids(user)

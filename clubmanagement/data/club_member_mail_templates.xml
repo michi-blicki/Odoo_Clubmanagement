@@ -51,9 +51,9 @@
     <record id="mail_template_member_registration_success_info" model="mail.template">
         <field name="name">Club Member Registration</field>
         <field name="model_id" ref="clubmanagement.model_club_member"/>
-        <field name="subject">New Registration: ${object.name}</field>
-        <field name="email_from">${(user.email_formatted or '')}</field>
-        <field name="email_to">${ctx.get('club_registration_info_email') or ''}</field>
+        <field name="subject">New Registration: {{ object.name }}</field>
+        <field name="email_from">{{ user.email_formatted or '' }}</field>
+        <field name="email_to">{{ ctx.get('club_registration_info_email') or '' }}</field>
         <field name="body_html" type="html">
             <div>
                 <p>Hello,</p>
@@ -62,31 +62,31 @@
                     <tbody>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600; width: 35%;">Last name</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.lastname or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.lastname or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">First name</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.firstname or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.firstname or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Birthdate</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.birthdate_date and format_date(object.birthdate_date) or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.birthdate_date and format_date(object.birthdate_date) or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Address</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${(object.street or '') + (object.street2 and (' ' + object.street2) or '') + ((object.zip or object.city) and ' ' or '') + (object.zip or '') + ((object.zip and object.city) and ' ' or '') + (object.city or '')}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="(object.street or '') + (object.street2 and (' ' + object.street2) or '') + ((object.zip or object.city) and ' ' or '') + (object.zip or '') + ((object.zip and object.city) and ' ' or '') + (object.city or '')"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Registration date</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.create_date and format_datetime(object.create_date) or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.create_date and format_datetime(object.create_date) or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Current state</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${ctx.get('club_registration_state_name') or (object.current_state_id and object.current_state_id.name) or 'Not set'}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="ctx.get('club_registration_state_name') or (object.current_state_id and object.current_state_id.name) or 'Not set'"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Member ID</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.member_id or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.member_id or ''"/></td>
                         </tr>
                     </tbody>
                 </table>

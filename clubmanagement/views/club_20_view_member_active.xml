@@ -50,6 +50,9 @@
                     <filter name="group_pool" string="Pools" context="{'group_by': 'pool_ids'}"/>
                     <filter name="group_membership" string="Current Membership" context="{'group_by': 'current_membership_id'}"/>
                     <filter name="group_age" string="Age" context="{'group_by': 'age'}"/>
+                    <filter name="group_gender" string="Gender" context="{'group_by': 'gender'}"/>
+                    <filter name="group_year_of_birth" string="Year of Birth" context="{'group_by': 'year_of_birth'}"/>
+                    <filter name="group_city" string="City" context="{'group_by': 'city'}"/>
                 </group>
             </search>
         </field>
