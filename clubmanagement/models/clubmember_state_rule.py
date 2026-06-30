@@ -4,7 +4,9 @@ from odoo.tools import email_split
 from odoo.tools import safe_eval as safe_eval_tools
 from odoo.tools.safe_eval import safe_eval
 
+import time as py_time
 import traceback
+import types
 
 import logging
 
@@ -214,6 +216,15 @@ pass
         }
 
     @api.model
+    def _get_safe_time_context(self):
+        safe_time = getattr(safe_eval_tools, 'time', None)
+        if safe_time is None:
+            return safe_eval_tools.wrap_module(py_time, ['time', 'strptime', 'strftime', 'sleep'])
+        if isinstance(safe_time, types.ModuleType):
+            return safe_eval_tools.wrap_module(safe_time, ['time', 'strptime', 'strftime', 'sleep'])
+        return safe_time
+
+    @api.model
     def _safe_member_domain(self, member_domain):
         expression = (member_domain or '[]').strip() or '[]'
         parsed = safe_eval(
@@ -221,7 +232,7 @@ pass
             {
                 'datetime': safe_eval_tools.datetime,
                 'date': safe_eval_tools.datetime.date,
-                'time': safe_eval_tools.time,
+                'time': self._get_safe_time_context(),
             },
             mode='eval',
         )
@@ -257,7 +268,7 @@ pass
             'rule': self,
             'datetime': safe_eval_tools.datetime,
             'date': safe_eval_tools.datetime.date,
-            'time': safe_eval_tools.time,
+            'time': self._get_safe_time_context(),
             'result': result_bucket,
             'log': _log,
         }

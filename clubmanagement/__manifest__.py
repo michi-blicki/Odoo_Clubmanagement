@@ -12,15 +12,15 @@ Long description of module's purpose
     # Issuer Specification
     'author': "Michael Blickenstorfer",
     'website': "https://www.blicki.ch",
-    'license': "AGPL-3",
-    #'price': 120.00,
-    #'currency': "CHF",
+    'license': "OPL-1",
+    'price': 500.00,
+    'currency': "CHF",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Association',
-    'version': '18.0.0.9.0',
+    'version': '18.0.1.0.0',
     'application': True,
     'auto_install': False,
     'installable': True,
