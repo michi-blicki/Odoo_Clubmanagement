@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# Copyright (C) 2026 by Michael Blickenstorfer; licensed under OPL-1.0 or later; see LICENSE file for details.
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 

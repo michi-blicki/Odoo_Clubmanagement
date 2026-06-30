@@ -1,4 +1,7 @@
 /** @odoo-module **/
+/*
+    Copyright (C) 2026 by Michael Blickenstorfer; licensed under OPL-1.0 or later; see LICENSE file for details.
+*/
 
 import { Component } from "@odoo/owl";
 import { registry } from "@web/core/registry";

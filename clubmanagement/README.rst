@@ -2,8 +2,6 @@
 Club Management
 =================================
 
-**Actually under heavy development - do not use it yet!**
-
 The Club Management Addon allows you to manage your club or association with Odoo – flexible and fully customizable, designed for large, enterprise-like organizations.
 
 This module is fully developped to be compliant with Odoo Community Edition.

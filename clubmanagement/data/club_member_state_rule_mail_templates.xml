@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 by Michael Blickenstorfer; licensed under OPL-1.0 or later; see LICENSE file for details. -->
 <odoo>
     <record id="mail_template_club_member_state_rule_error" model="mail.template">
         <field name="name">Club Member State Rule Error Notification</field>
