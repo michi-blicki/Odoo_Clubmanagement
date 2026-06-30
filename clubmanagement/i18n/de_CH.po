@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-01 08:09+0000\n"
-"PO-Revision-Date: 2026-06-01 17:43+0200\n"
+"POT-Creation-Date: 2026-06-30 06:35+0000\n"
+"PO-Revision-Date: 2026-06-30 09:14+0200\n"
 "Last-Translator: Michael Blickenstorfer <michi@blicki.ch>\n"
 "Language-Team: de_CH Team\n"
 "Language: de_CH\n"
@@ -45,6 +45,12 @@ msgstr "%(member)s - %(product)s"
 #: code:addons/clubmanagement/models/clubsubclub.py:0
 msgid "%s - Executive Board"
 msgstr "%s - Exekutivausschuss"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+msgid "%s / %s"
+msgstr "%s / %s"
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_kanban_view
@@ -124,7 +130,116 @@ msgstr ""
 "                            <td style=\"vertical-align: top; width: 42%; "
 "padding: 6px 0;\">\r\n"
 "                                <div style=\"font-weight: 700;\">$"
-"{object.company_id and object.company_id.name or ''}</div>\r"
+"{object.company_id and object.company_id.name or ''}</div>\r\n"
+"                                <div>${object.company_id and "
+"object.company_id.street or ''}</div>\r\n"
+"                                <div>${object.company_id and "
+"object.company_id.zip or ''} ${object.company_id and object.company_id.city "
+"or ''}</div>\r\n"
+"                                <div>VAT: ${object.company_id and "
+"object.company_id.vat or ''}</div>\r\n"
+"                            </td>\r\n"
+"                            <td style=\"vertical-align: top; width: 38%; "
+"text-align: center; padding: 6px 12px; font-weight: 700;\">\r\n"
+"                                ${ctx.get('club_manual_subject') or ''}\r\n"
+"                            </td>\r\n"
+"                            <td style=\"vertical-align: top; width: 20%; "
+"text-align: right; padding: 6px 0;\">\r\n"
+"                                <img src=\"/logo.png?company=$"
+"{object.company_id%20and%20object.company_id.id%20or%200}\" style=\"max-"
+"height: 56px;\" alt=\"Company Logo\"/>\r\n"
+"                            </td>\r\n"
+"                        </tr>\r\n"
+"                    </tbody>\r\n"
+"                </table>\r\n"
+"\r"
+
+#. module: clubmanagement
+#: model:mail.template,body_html:clubmanagement.mail_template_club_member_state_rule_error
+msgid ""
+"<div>\n"
+"                <p>A rule execution failed.</p>\n"
+"                <table style=\"border-collapse: collapse; width: 100%; max-"
+"width: 900px;\">\n"
+"                    <tbody>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600; width: 35%;\">Rule</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.name or ''}</td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Rule ID</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.id}</td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Member</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${ctx.get('club_rule_error_member_name') or ''}</td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Member ID</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${ctx.get('club_rule_error_member_id') or ''}</td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Error</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${ctx.get('club_rule_error_message') or ''}</td>\n"
+"                        </tr>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"                <p>Traceback (full):</p>\n"
+"                <pre>${ctx.get('club_rule_error_trace') or ''}</pre>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div>\r\n"
+"                <p>Eine Regel ist fehlgeschlagen.</p>\r\n"
+"                <table style=\"border-collapse: collapse; width: 100%; max-"
+"width: 900px;\">\r\n"
+"                    <tbody>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600; width: 35%;\">Regel</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.name or ''}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Regel ID</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.id}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Mitglied</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${ctx.get('club_rule_error_member_name') or ''}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Mitglied ID</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${ctx.get('club_rule_error_member_id') or ''}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Fehler</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${ctx.get('club_rule_error_message') or ''}</td>\r\n"
+"                        </tr>\r\n"
+"                    </tbody>\r\n"
+"                </table>\r\n"
+"                <p>Traceback (full):</p>\r\n"
+"                <pre>${ctx.get('club_rule_error_trace') or ''}</pre>\r\n"
+"            </div>\r\n"
+"        "
 
 #. module: clubmanagement
 #: model:mail.template,body_html:clubmanagement.mail_template_member_registration_success
@@ -186,6 +301,131 @@ msgid ""
 "                    </tbody>\n"
 "                </table>\n"
 "                <p>Thank you.</p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div>\r\n"
+"                <p>Hallo ${object.firstname or object.name},</p>\r\n"
+"                <p>Deine Registrierung ist erfolgreich verarbeitet worden.</"
+"p>\r\n"
+"                <table style=\"border-collapse: collapse; width: 100%; max-"
+"width: 720px;\">\r\n"
+"                    <tbody>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600; width: 35%;\">Nachname</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.lastname or ''}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Vorname</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.firstname or ''}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Geburtsdatum</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.birthdate_date and format_date(object.birthdate_date) or ''}"
+"</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Addresse</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${(object.street or '') + (object.street2 and (' ' + object.street2) "
+"or '') + ((object.zip or object.city) and ' ' or '') + (object.zip or '') + "
+"((object.zip and object.city) and ' ' or '') + (object.city or '')}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Registrierungsdatum</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.create_date and format_datetime(object.create_date) or ''}</"
+"td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Aktueller Mitgliederstatus</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${ctx.get('club_registration_state_name') or (object.current_state_id "
+"and object.current_state_id.name) or 'Not set'}</td>\r\n"
+"                        </tr>\r\n"
+"                        <tr>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Mitglieder ID</td>\r\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\">${object.member_id or ''}</td>\r\n"
+"                        </tr>\r\n"
+"                    </tbody>\r\n"
+"                </table>\r\n"
+"                <p>Vielen Dank.</p>\r\n"
+"            </div>\r\n"
+"        "
+
+#. module: clubmanagement
+#: model:mail.template,body_html:clubmanagement.mail_template_member_registration_success_info
+msgid ""
+"<div>\n"
+"                <p>Hello,</p>\n"
+"                <p>A new member registration was successfully received and "
+"processed.</p>\n"
+"                <table style=\"border-collapse: collapse; width: 100%; max-"
+"width: 720px;\">\n"
+"                    <tbody>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600; width: 35%;\">Last name</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\"><t t-out=\"object.lastname or ''\"/></td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">First name</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\"><t t-out=\"object.firstname or ''\"/></td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Birthdate</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\"><t t-out=\"object.birthdate_date and "
+"format_date(object.birthdate_date) or ''\"/></td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Address</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\"><t t-out=\"(object.street or '') + (object.street2 and (' ' + "
+"object.street2) or '') + ((object.zip or object.city) and ' ' or '') + "
+"(object.zip or '') + ((object.zip and object.city) and ' ' or '') + "
+"(object.city or '')\"/></td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Registration date</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\"><t t-out=\"object.create_date and format_datetime(object.create_date) "
+"or ''\"/></td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Current state</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\"><t t-out=\"ctx.get('club_registration_state_name') or "
+"(object.current_state_id and object.current_state_id.name) or 'Not set'\"/></"
+"td>\n"
+"                        </tr>\n"
+"                        <tr>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px; font-weight: 600;\">Member ID</td>\n"
+"                            <td style=\"border: 1px solid #d9d9d9; padding: "
+"8px;\"><t t-out=\"object.member_id or ''\"/></td>\n"
+"                        </tr>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"                <p>Odoo Club Management System</p>\n"
 "            </div>\n"
 "        "
 msgstr ""
@@ -419,6 +659,23 @@ msgstr ""
 "zugewiesen werden"
 
 #. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid ""
+"A user with login %s already exists. Please use another email on the contact."
+msgstr ""
+"Ein Benutzer mit dem Login %s existiert bereits. Bitte verwende eine andere "
+"E-Mail Adresse im Kontakt."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "A valid email is required on the member contact to create a user."
+msgstr ""
+"Eine gültige E-Mail Adresse im Kontakt wird benötigt, um daraus einen "
+"Benutzer erstellen zu können."
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_api_config__api_name
 msgid "API"
 msgstr "API"
@@ -505,8 +762,6 @@ msgid "Activate basic per-IP rate limiting for public and JSON API routes"
 msgstr "Aktiviere Standard IP-Rate Limitierung für Public und JSON API Routen"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.model.fields,field_description:clubmanagement.field_club_api_config__active
 #: model:ir.model.fields,field_description:clubmanagement.field_club_board__active
 #: model:ir.model.fields,field_description:clubmanagement.field_club_club__active
@@ -548,7 +803,6 @@ msgstr "Anzahl aktive Mitglieder"
 #: code:addons/clubmanagement/models/clubdepartment.py:0
 #: model:ir.ui.menu,name:clubmanagement.club_member_active_list_menu
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_active_list_view
-#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_all_list_view
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_archived_list_view
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_blocked_list_view
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_deleted_list_view
@@ -618,10 +872,17 @@ msgid "Activity Type Icon"
 msgstr "Aktivitätsart-Symbol"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "Actual Members"
-msgstr "Tatsächliche Mitglieder"
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_transfer_wizard__transfer_mode__add_team
+msgid "Add team assignment (trainer process)"
+msgstr "Prozess Teams hinzuzufügen (Trainer Prozess)"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club_member_transfer_wizard.py:0
+msgid "Add team assignment mode can only be used with target type Team."
+msgstr ""
+"Der Prozess Trainer hinzuzufügen kann nur verwendet werden, wenn das Ziel "
+"ein Team ist."
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_club_form_view
@@ -693,6 +954,7 @@ msgstr "Alter der Volljährigkeit"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__member_ids_display
 #: model:ir.model.fields,field_description:clubmanagement.field_club_team__member_ids_display
 #: model:ir.ui.menu,name:clubmanagement.club_member_all_list_menu
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_all_list_view
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_form_view
 msgid "All Members"
 msgstr "Alle Mitglieder"
@@ -705,6 +967,11 @@ msgid ""
 msgstr ""
 "Alle Emails und Dokumente an diesen Kontakt werden in diese Sprache "
 "übersetzt."
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__allow_replace_multi_team
+msgid "Allow replacing assignments for multi-team members"
+msgstr "Erlaube das Ersetzen der Zugehörigkeiten bei Multi-Team Mitgliedern"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_api_config__allowed_fields
@@ -726,6 +993,11 @@ msgstr "Anwenden auf"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__apply_on
 msgid "Apply Rule on"
 msgstr "Regel anwenden auf"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_transfer_wizard_form
+msgid "Apply Transfer"
+msgstr "Anwenden auf"
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_membership_form_view
@@ -948,15 +1220,11 @@ msgid "Blacklisted Phone is Phone"
 msgstr "Blacklist Telefon ist Festnetz"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__blocked
 msgid "Blocked"
 msgstr "Blockiert"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.ui.menu,name:clubmanagement.club_member_blocked_list_menu
 msgid "Blocked Members"
 msgstr "Gesperrte Mitglieder"
@@ -1054,6 +1322,7 @@ msgstr "Kann veröffentlichen"
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_billing_run_form_view
 #: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_single_billing_wizard_form
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_transfer_wizard_form
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -1092,7 +1361,13 @@ msgstr "Checkbox"
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__city
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_search_view
 msgid "City"
+msgstr "Stadt"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "City..."
 msgstr "Stadt"
 
 #. module: clubmanagement
@@ -1103,6 +1378,7 @@ msgstr "Stadt:"
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_mail_wizard_form
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_dry_run_wizard_form
 msgid "Close"
 msgstr "Schliessen"
 
@@ -1243,6 +1519,11 @@ msgid "Club Member Membership History"
 msgstr "Club Mitglied: Historie der Mitgliedschaft"
 
 #. module: clubmanagement
+#: model:mail.template,name:clubmanagement.mail_template_member_registration_success_info
+msgid "Club Member Registration"
+msgstr "Mitglieder Registrierung"
+
+#. module: clubmanagement
 #: model:mail.template,name:clubmanagement.mail_template_member_registration_success
 msgid "Club Member Registration Successful"
 msgstr "Club Mitglied: Erfolgreiche Registrierung"
@@ -1251,6 +1532,26 @@ msgstr "Club Mitglied: Erfolgreiche Registrierung"
 #: model:ir.model,name:clubmanagement.model_club_member_single_billing_wizard
 msgid "Club Member Single Billing Wizard"
 msgstr "Club Mitglied: Einzelne Abrechnung Wizard"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_state_rule_dry_run_wizard
+msgid "Club Member State Rule Dry Run Wizard"
+msgstr "Club Mitglied Status Regel - Testlauf Wizard"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_state_rule_dry_run_wizard_line
+msgid "Club Member State Rule Dry Run Wizard Line"
+msgstr "Club Mitglied Status Regel - Testlauf Wizard Linie"
+
+#. module: clubmanagement
+#: model:mail.template,name:clubmanagement.mail_template_club_member_state_rule_error
+msgid "Club Member State Rule Error Notification"
+msgstr " Club Mitglied Status Regeln Fehler Meldung"
+
+#. module: clubmanagement
+#: model:ir.model,name:clubmanagement.model_club_member_transfer_wizard
+msgid "Club Member Transfer Wizard"
+msgstr "Club Mitglied Transfer Wizard"
 
 #. module: clubmanagement
 #: model:ir.actions.act_window,name:clubmanagement.club_member_active_list_action
@@ -1482,6 +1783,14 @@ msgid "Completed with errors"
 msgstr "Abgeschlossen mit Fehlern"
 
 #. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+msgid "Condition for rule '%(rule)s' must return bool, got '%(type)s'."
+msgstr ""
+"Die Bedingung der Regel '%{rule}s' muss wahr oder falsch sein. Ich habe '%"
+"{type}s' erhalten."
+
+#. module: clubmanagement
 #: model:ir.model,name:clubmanagement.model_res_config_settings
 msgid "Config Settings"
 msgstr "Konfigurationseinstellungen"
@@ -1497,6 +1806,11 @@ msgstr "Konfigurierbare Zusatzfelder für Vereine"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__partner_id
 msgid "Contact"
 msgstr "Kontakt"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__continue_on_error
+msgid "Continue On Error"
+msgstr "Weiterfahren im Fehlerfall"
 
 #. module: clubmanagement
 #. odoo-python
@@ -1523,6 +1837,11 @@ msgid "Country Code"
 msgstr "Ländercode"
 
 #. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "Country..."
+msgstr "Land..."
+
+#. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.res_partner_form_add_club_member
 msgid "Create Club Member"
 msgstr "Club Mitglied erstellen"
@@ -1544,6 +1863,11 @@ msgstr "Standard-Rollen und Gremien erstellen"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_create
 msgid "Create Permission"
 msgstr "Berechtigung erstellen"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Create User"
+msgstr "Benutzer erstellen"
 
 #. module: clubmanagement
 #: model_terms:ir.actions.act_window,help:clubmanagement.club_team_list_action
@@ -1600,6 +1924,9 @@ msgstr "Erstellt %s"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__create_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__create_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__create_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__create_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_pool__create_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__create_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__create_uid
@@ -1629,6 +1956,9 @@ msgstr "Erstellt von"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__create_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__create_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__create_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__create_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_pool__create_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__create_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__create_date
@@ -1855,6 +2185,7 @@ msgstr "Gelöschte Mitglieder"
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__department
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member__effective_membership_source_scope__department
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_billing_run_line__effective_membership_source_scope__department
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_transfer_wizard__target_scope__department
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__department
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_form_view
 msgid "Department"
@@ -1879,14 +2210,6 @@ msgstr "Abteilung gelöscht: %s"
 
 #. module: clubmanagement
 #. odoo-python
-#: code:addons/clubmanagement/models/res_config_settings.py:0
-msgid ""
-"Department form view was not found "
-"(clubmanagement.club_department_overview_form_view)."
-msgstr "Abteilungsansicht konnte nicht gefunden werden."
-
-#. module: clubmanagement
-#. odoo-python
 #: code:addons/clubmanagement/models/clubrole.py:0
 msgid "Department-Role needs to be assigned to a department"
 msgstr "Abteilung - Die Rolle muss einer Abteilung zugewiesen werden"
@@ -1898,8 +2221,6 @@ msgid "Department:"
 msgstr "Abteilung:"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.actions.act_window,name:clubmanagement.club_department_list_action
 #: model:ir.model.fields,field_description:clubmanagement.field_club_club__department_ids
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__department_ids
@@ -1922,12 +2243,6 @@ msgid ""
 msgstr ""
 "Mit dem Club verbundene Abteilungen. Der Club kann nicht gelöscht werden! "
 "Deaktivieren Sie stattdessen den Club."
-
-#. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "Departments:"
-msgstr "Abteilungen:"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_log__description
@@ -1992,6 +2307,9 @@ msgstr "Rechnungsvorlage im PDF Bericht anzeigen"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__display_name
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__display_name
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__display_name
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__display_name
 #: model:ir.model.fields,field_description:clubmanagement.field_club_pool__display_name
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__display_name
 #: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__display_name
@@ -2020,6 +2338,11 @@ msgstr "Entwurf"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__draft_move_count
 msgid "Draft Invoice Count"
 msgstr "Anzahl Rechnungsentwürfe"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+msgid "Dry Run"
+msgstr "Testlauf"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__duplicate_bank_partner_ids
@@ -2151,9 +2474,35 @@ msgid "Enforce HTTPS Header"
 msgstr "HTTPS Kopfzeilen erzwingen"
 
 #. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__error
+msgid "Error"
+msgstr "Fehler"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run_line__error_message
 msgid "Error Message"
 msgstr "Fehlermeldung"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__error_notify_member_id
+msgid "Error Notify Member"
+msgstr "Mitteilungsfehler Mitglied"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+msgid ""
+"Error evaluating condition for rule '%(rule)s' on member '%(member)s': %"
+"(error)s"
+msgstr ""
+"Fehler bei der Evaluierung der Bedingungen für die Regel '%{rule}s' auf "
+"Mitglied '%{member}s': ${error}s"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Every registration"
+msgstr "Alle Registrierungen"
 
 #. module: clubmanagement
 #. odoo-python
@@ -2218,6 +2567,12 @@ msgid "Female"
 msgstr "weiblich"
 
 #. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Female registration"
+msgstr "Weibliche Registrierung"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field_value__field_id
 msgid "Field"
 msgstr "Feld"
@@ -2272,6 +2627,11 @@ msgstr "Steuerposition"
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__float
 msgid "Float"
 msgstr "Fliesskommazahl"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+msgid "Flow Control"
+msgstr "Flusskontrolle"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_board__message_follower_ids
@@ -2398,6 +2758,7 @@ msgstr "GLN"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__gender
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_search_view
 msgid "Gender"
 msgstr "Geschlecht"
 
@@ -2551,6 +2912,9 @@ msgstr "Festnetz (privat)"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_pool__id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__id
@@ -2739,6 +3103,7 @@ msgstr "Industrie"
 
 #. module: clubmanagement
 #. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
 #: code:addons/clubmanagement/models/res_partner.py:0
 msgid "Information"
 msgstr "Infromation"
@@ -2934,6 +3299,15 @@ msgid "Key User"
 msgstr "Key User"
 
 #. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+msgid ""
+"Key user group was not found (clubmanagement.group_clubmanagement_key_user)."
+msgstr ""
+"Club Management Key Users Gruppe konnte nicht gefunden werden "
+"(clubmanagement.group_clubmanagement_user)."
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__label
 #: model:ir.model.fields,field_description:clubmanagement.field_club_field_mixin__label
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_api_config_form_view
@@ -2944,6 +3318,11 @@ msgstr "Label"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__lang
 msgid "Language"
 msgstr "Sprache"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__execution_note
+msgid "Last Execution Note"
+msgstr "Notizen zur letzten Ausführung"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_api_config__write_uid
@@ -2968,6 +3347,9 @@ msgstr "Sprache"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__write_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__write_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__write_uid
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__write_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_pool__write_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__write_uid
 #: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__write_uid
@@ -2998,6 +3380,9 @@ msgstr "Zuletzt aktualisiert von"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state__write_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__write_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__write_date
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__write_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_pool__write_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__write_date
 #: model:ir.model.fields,field_description:clubmanagement.field_club_subclub__write_date
@@ -3046,10 +3431,20 @@ msgid "Limit per IP per Minute"
 msgstr "Limit pro IP Adresse und Minute"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "Loading..."
-msgstr "Laden..."
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member__related_user_id
+msgid "Linked User"
+msgstr "Verknüpfter Benutzer"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Linked user created: %s"
+msgstr "Verknüpfter  Benutzer erstellt: %s"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_billing_run_form_view
+msgid "Load Members"
+msgstr "Mitglieder laden"
 
 #. module: clubmanagement
 #. odoo-python
@@ -3093,10 +3488,10 @@ msgid "Male"
 msgstr "Mann"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "Manage"
-msgstr "Verwalten"
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Male registration up to 14 years"
+msgstr "Registrierung für männliche Personen bis 14 Jahren"
 
 #. module: clubmanagement
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member__invoice_partner_source__manual
@@ -3115,6 +3510,16 @@ msgid "Master User"
 msgstr "Master User"
 
 #. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__matched
+msgid "Matched"
+msgstr "Gefunden"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__max_members
+msgid "Max Members Per Rule"
+msgstr "Maximale Anzahl Mitglieder pro Regel"
+
+#. module: clubmanagement
 #: model:ir.model.fields,help:clubmanagement.field_res_config_settings__club_api_rate_limit_count
 msgid "Maximum number of allowed requests per IP address per minute"
 msgstr "Maximale Anzahl zugelassener Requests pro IP Adresse und Minute"
@@ -3130,6 +3535,7 @@ msgstr "Meetings"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_mail_wizard_line__member_id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_history__member_id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_history__member_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__member_id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__member_id
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field_value__model__club_member
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__member
@@ -3178,6 +3584,11 @@ msgstr "Anzahl der Mitglieder"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership__member_count
 msgid "Member Count"
 msgstr "Anzahl der Mitglieder"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__member_domain
+msgid "Member Domain"
+msgstr "Mitglieder Domain"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__member_id
@@ -3237,6 +3648,23 @@ msgstr "Mitglied erstellt: %s"
 
 #. module: clubmanagement
 #. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+msgid "Member domain must evaluate to a list/tuple domain expression."
+msgstr ""
+"Mitgliedereinschränkung muss eine Liste oder ein Tupel als Resultat der "
+"Ausführung darstellen"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+msgid ""
+"Member list view was not found (clubmanagement.club_member_all_list_view)."
+msgstr ""
+"View für die Mitgliederliste konnte nicht gefunden werden "
+"(clubmanagement.club_team_overview_form_view)."
+
+#. module: clubmanagement
+#. odoo-python
 #: code:addons/clubmanagement/models/club_member_mail_wizard.py:0
 msgid "Member mail queued to %s."
 msgstr "Mitglied Mail eingeplant als '%s'."
@@ -3282,6 +3710,34 @@ msgstr "Mitglieder"
 #: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_list
 msgid "Members Count"
 msgstr "Anzahl der Mitglieder"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_billing_run.py:0
+msgid "Members can only be loaded while the run is in draft state."
+msgstr ""
+"Mitglieder können nur geladen werden, wenn der Lauf in Status Entwurf steht."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_billing_run.py:0
+msgid "Members loaded"
+msgstr "Mitglieder geladen"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_member_billing_run__selected_member_ids
+msgid ""
+"Members loaded from one selected source (team, pool, department, or subclub) "
+"and manually adjustable before invoice generation."
+msgstr ""
+"Mitglieder, welche von der ausgewählten Quelle (Team, Pool, Abteilung, "
+"Unterclub) geladen wurden sowie manuelle Anpassungen vor der "
+"Rechnungsgenerierung."
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__multi_team_member_count
+msgid "Members with multiple teams"
+msgstr "Mitglieder mit mehreren Teams"
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_kanban_view
@@ -3508,6 +3964,11 @@ msgid "Months in Club"
 msgstr "Monate im Club"
 
 #. module: clubmanagement
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_transfer_wizard__transfer_mode__replace
+msgid "Move and replace assignments"
+msgstr "Verschieben und Ersetzen von Zugehörigkeiten"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_board__my_activity_date_deadline
 #: model:ir.model.fields,field_description:clubmanagement.field_club_club__my_activity_date_deadline
 #: model:ir.model.fields,field_description:clubmanagement.field_club_custom_field__my_activity_date_deadline
@@ -3556,22 +4017,9 @@ msgid "New Club Members currently waiting to be accepted."
 msgstr "Neue Club Mitglieder warten derzeit auf ihre Aufnahme."
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "New Members"
-msgstr "Neue Mitglieder"
-
-#. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "New Members This Month"
-msgstr "Neue Mitglieder in diesem Monat"
-
-#. module: clubmanagement
-#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__new_state_id
-#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_search
-msgid "New State"
-msgstr "Neuer Status"
+#: model:mail.template,subject:clubmanagement.mail_template_member_registration_success_info
+msgid "New Registration: {{ object.name }}"
+msgstr "Neue Registrierung: {{ object.name }}"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_log__new_value
@@ -3710,6 +4158,12 @@ msgstr ""
 
 #. module: clubmanagement
 #. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "No linked user exists for this member."
+msgstr "Kein verknüpfter Benutzer existiert für dieses Mitglied."
+
+#. module: clubmanagement
+#. odoo-python
 #: code:addons/clubmanagement/models/club_member_mail_wizard.py:0
 msgid "No members were resolved for this dispatch context."
 msgstr "Es wurden in diesem Vermittlungskontext keine Mitglieder gefunden."
@@ -3721,16 +4175,16 @@ msgid "No preview member could be resolved."
 msgstr "Für die Vorschau konnte kein Mitglied gefunden werden."
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "No upcoming birthdays within the next"
-msgstr "Keine anstehenden Geburtstage innerhalb der nächsten"
-
-#. module: clubmanagement
 #. odoo-python
 #: code:addons/clubmanagement/models/club_member_single_billing_wizard.py:0
 msgid "No valid members are available for billing."
 msgstr "Keine Mitglieder für die Rechnungsstellung verfügbar."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club_member_transfer_wizard.py:0
+msgid "No valid members are available for transfer."
+msgstr "Keine Mitglieder für den Transfer verfügbar."
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__email_normalized
@@ -3831,9 +4285,27 @@ msgid "Only one club can be created in this system."
 msgstr "In diesem System kann nur ein Verein erstellt werden."
 
 #. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_billing_run.py:0
+msgid ""
+"Only one selection scope is allowed. Choose exactly one of team, pool, "
+"department, or subclub."
+msgstr ""
+"Es ist nur ein Auswahlbereich zulässig. Bitte nur ein Scope aus Team, Pool, "
+"Abteilung oder Unterclub auswählen."
+
+#. module: clubmanagement
 #: model:res.groups,comment:clubmanagement.group_clubmanagement_api_user
 msgid "Only to be used with API calls"
 msgstr "Nur in Verbindung mit API Calls genutzt"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Only users with Settings access can create linked users."
+msgstr ""
+"Nur Benutzer mit Zugang zu den Einstellungen können verknüpfte Benutzer "
+"erstellen."
 
 #. module: clubmanagement
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_department__effective_registration_mode__open
@@ -3846,6 +4318,11 @@ msgstr "Nur in Verbindung mit API Calls genutzt"
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_team__registration_mode__open
 msgid "Open"
 msgstr "Offen"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+msgid "Open User"
+msgstr "Benutzer öffnen"
 
 #. module: clubmanagement
 #: model:ir.model.fields,help:clubmanagement.field_club_department__hr_department_id
@@ -3863,6 +4340,15 @@ msgid ""
 msgstr ""
 "Optionale Domain für Zugriffskontrolle der Kopfzeilen (bsp. https://"
 "portal.myclub.club)"
+
+#. module: clubmanagement
+#: model:ir.model.fields,help:clubmanagement.field_club_member_state_rule__error_notify_member_id
+msgid ""
+"Optional member to notify when rule processing fails and Continue On Error "
+"is disabled."
+msgstr ""
+"Optional zu benachrichtigende Mitglieder, sollte die Regelausführung "
+"fehlschlagen oder wenn die Fortsetzung im Fehlerfall deaktiviert ist."
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
@@ -3964,8 +4450,6 @@ msgid "Payment Tokens"
 msgstr "Bezahl-Tokens"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_state__state_type__pending
 msgid "Pending"
 msgstr "Wartend"
@@ -4027,6 +4511,16 @@ msgstr "Foto"
 
 #. module: clubmanagement
 #. odoo-python
+#: code:addons/clubmanagement/models/clubmember_billing_run.py:0
+msgid ""
+"Please choose one selection scope (team, pool, department, or subclub) "
+"before loading members."
+msgstr ""
+"Bitte einen Bereich auswählen (Team, Pool, Abteilung oder Unterclub) bevor "
+"die Mitglieder geladen werden."
+
+#. module: clubmanagement
+#. odoo-python
 #: code:addons/clubmanagement/models/club_member_mail_wizard.py:0
 msgid "Please generate a preview before queueing emails."
 msgstr "Bitte eine Vorschau erstellen bevor die Mail versendet wird."
@@ -4083,6 +4577,13 @@ msgstr ""
 
 #. module: clubmanagement
 #. odoo-python
+#: code:addons/clubmanagement/models/club_member_transfer_wizard.py:0
+msgid "Please select at least one member before starting a transfer."
+msgstr ""
+"Bitte mindestens ein Mitglied auswählen, bevor ein Transfer gestartet wird."
+
+#. module: clubmanagement
+#. odoo-python
 #: code:addons/clubmanagement/models/club_member_single_billing_wizard.py:0
 msgid "Please select at least one member before starting single billing."
 msgstr ""
@@ -4091,9 +4592,22 @@ msgstr ""
 
 #. module: clubmanagement
 #. odoo-python
+#: code:addons/clubmanagement/models/club_member_state_rule_dry_run_wizard.py:0
+msgid "Please select at least one rule for the dry run."
+msgstr ""
+"Bitte mindestens eine Regel auswählen, bevor ein Testlauf gestartet wird."
+
+#. module: clubmanagement
+#. odoo-python
 #: code:addons/clubmanagement/models/club_member_single_billing_wizard.py:0
 msgid "Please select members from exactly one club."
 msgstr "Bitte nur Mitglieder einer einzelnen Organisation auswählen."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club_member_transfer_wizard.py:0
+msgid "Please select one target record."
+msgstr "Bitte nur ein Zieldatensatz auswählen."
 
 #. module: clubmanagement
 #. odoo-python
@@ -4108,6 +4622,7 @@ msgstr "Bitte nur Mitglieder einer einzelnen Organisation auswählen."
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__pool
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member__effective_membership_source_scope__pool
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_billing_run_line__effective_membership_source_scope__pool
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_transfer_wizard__target_scope__pool
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__pool
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_pool_form_view
 msgid "Pool"
@@ -4149,15 +4664,6 @@ msgstr "Pool gelöscht: %s"
 
 #. module: clubmanagement
 #. odoo-python
-#: code:addons/clubmanagement/models/res_config_settings.py:0
-msgid ""
-"Pool form view was not found (clubmanagement.club_pool_overview_form_view)."
-msgstr ""
-"Pool Form View konnte nicht gefunden werden "
-"(clubmanagement.club_pool_overview_form_view)."
-
-#. module: clubmanagement
-#. odoo-python
 #: code:addons/clubmanagement/models/clubrole.py:0
 msgid "Pool-Role needs to be assigned to a pool"
 msgstr "Pool-Rolle muss einem Pool zugewiesen werden"
@@ -4169,8 +4675,6 @@ msgid "Pool:"
 msgstr "Pool:"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.actions.act_window,name:clubmanagement.club_pool_list_action
 #: model:ir.model.fields,field_description:clubmanagement.field_club_club__pool_ids
 #: model:ir.model.fields,field_description:clubmanagement.field_club_department__pool_ids
@@ -4208,6 +4712,25 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_billing_run_form_view
 msgid "Prepare Rerun Cleanup"
 msgstr "Cleanup für erneuten Lauf vorbereiten"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__selected_member_count
+msgid "Preselected Member Count"
+msgstr "Anzahl vorausgewählter Mitglieder"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__selected_member_ids
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_billing_run_form_view
+msgid "Preselected Members"
+msgstr "Vorausgewählte Mitglieder"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_billing_run.py:0
+msgid "Preselection updated. You can still adjust the member list manually."
+msgstr ""
+"Vorselektion aktualisiert. Die Liste kann weiterhin manuell bearbeitet "
+"werden."
 
 #. module: clubmanagement
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_mail_wizard__state__preview
@@ -4283,6 +4806,31 @@ msgid "Primary Phone"
 msgstr "Primäres Festnetztelefon"
 
 #. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "Private Address"
+msgstr "Privatadresse"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_hr_employee__private_address_id
+msgid "Private Address Partner"
+msgstr "Privatadresse des Partners"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "Private Contact"
+msgstr "Privater Kontakt"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "Private Email..."
+msgstr "Private E-Mail..."
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "Private Phone..."
+msgstr "Privates Festnetztelefon..."
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run_line__product_id
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_membership_additional_product__product_id
 msgid "Product"
@@ -4308,6 +4856,11 @@ msgstr "Parameter für Linien der Eingehenden Zahlungsmethoden"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__property_outbound_payment_method_line_id
 msgid "Property Outbound Payment Method Line"
 msgstr "Parameter für Linien der Ausgehenden Zahlungsmethoden"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__action_code
+msgid "Python Action Code"
+msgstr "Python-Aktionscode"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__condition
@@ -4370,11 +4923,6 @@ msgid "Reason"
 msgstr "Grund"
 
 #. module: clubmanagement
-#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__reason
-msgid "Reason for Change"
-msgstr "Grund für die Änderung"
-
-#. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
 msgid "Rebuild Department Menu"
 msgstr "Department Menu neu aufbauen"
@@ -4383,6 +4931,16 @@ msgstr "Department Menu neu aufbauen"
 #: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
 msgid "Rebuild Department Menu Structure"
 msgstr "Department Menustruktur neu aufbauen"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
+msgid "Rebuild Membership Menu"
+msgstr "Menu Mitgliedschaften neu erstellen"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
+msgid "Rebuild Membership Menu Structure"
+msgstr "Menustruktur Mitgliedschaften neu aufbauen"
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.res_config_settings_view_form_clubmanagement
@@ -4455,6 +5013,12 @@ msgid "Registration mode is restricted. Member moved to waiting list."
 msgstr ""
 "Die Registrierung ist eingeschränkt. Die Registrierung befindet sich auf der "
 "Warteliste."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember.py:0
+msgid "Registration rule"
+msgstr "Registrierungsregel"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__parent_id
@@ -4583,6 +5147,11 @@ msgid "Result Summary"
 msgstr "Zusammenfassung des Resultats"
 
 #. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__line_ids
+msgid "Results"
+msgstr "Resultate"
+
+#. module: clubmanagement
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__role
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_role_form_view
 msgid "Role / Function"
@@ -4659,6 +5228,16 @@ msgstr ""
 #. module: clubmanagement
 #. odoo-python
 #: code:addons/clubmanagement/models/res_config_settings.py:0
+msgid ""
+"Root menu 'Memberships' was not found "
+"(clubmanagement.club_memberships_root_menu)."
+msgstr ""
+"Root Menu 'Mitglieder' konnte nicht gefunden werden "
+"(clubmanagement.club_memberships_root_menu)."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
 msgid "Root menu 'Pools' was not found (clubmanagement.club_pools_root_menu)."
 msgstr ""
 "Root Menu 'Pool' konnte nicht gefunden werden "
@@ -4673,9 +5252,43 @@ msgstr ""
 "(clubmanagement.club_teams_root_menu)."
 
 #. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__rule_id
+msgid "Rule"
+msgstr "Regel"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club_member_state_rule_dry_run_wizard.py:0
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_dry_run_wizard_form
+msgid "Rule Dry Run"
+msgstr "Testlauf Regel"
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/clubmember_state_rule.py:0
+msgid "Rule action executed for member %s"
+msgstr "Die Regelaktion wird ausgeführt für Mitglied %s"
+
+#. module: clubmanagement
+#: model:mail.template,subject:clubmanagement.mail_template_club_member_state_rule_error
+msgid "Rule error: ${object.name}"
+msgstr "Regelfehler: ${object.name}"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard__rule_ids
+msgid "Rules"
+msgstr "Regeln"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__run_date
 msgid "Run Date"
 msgstr "Laufdatum"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_dry_run_wizard_form
+msgid "Run Dry Run"
+msgstr "Testlauf ausführen"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__line_ids
@@ -4803,6 +5416,8 @@ msgstr "Sicherheit"
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_single_billing_wizard__member_count
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_single_billing_wizard__member_ids
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__member_count
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__member_ids
 msgid "Selected Members"
 msgstr "Ausgewählte Mitglieder"
 
@@ -4820,8 +5435,34 @@ msgstr ""
 
 #. module: clubmanagement
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_custom_field__field_type__selection
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_billing_run_form_view
 msgid "Selection"
 msgstr "Auswahl"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__selection_department_id
+msgid "Selection Department"
+msgstr "Abteilungen auswählen"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__selection_pool_id
+msgid "Selection Pool"
+msgstr "Pool auswählen"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_billing_run_form_view
+msgid "Selection Scope (choose one)"
+msgstr "Auswahlbereich (einen auswählen)"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__selection_subclub_id
+msgid "Selection Subclub"
+msgstr "Unterclub auswählen"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__selection_team_id
+msgid "Selection Team"
+msgstr "Team auswählen"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__self
@@ -5087,6 +5728,11 @@ msgid "State Type:"
 msgstr "Statustyp:"
 
 #. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "State..."
+msgstr "Status..."
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_billing_run__state
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_mail_wizard_line__status
 msgid "Status"
@@ -5115,10 +5761,9 @@ msgstr ""
 "Geplant: Zukünftige Aktivitäten."
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "Status:"
-msgstr "Status:"
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule__stop_processing_on_match
+msgid "Stop Processing On Match"
+msgstr "Ausführung stoppen, wenn Bedingung erfüllt"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__street
@@ -5132,6 +5777,7 @@ msgstr "Strasse 2..."
 
 #. module: clubmanagement
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
 msgid "Street..."
 msgstr "Strasse..."
 
@@ -5139,6 +5785,11 @@ msgstr "Strasse..."
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__street2
 msgid "Street2"
 msgstr "Strasse2"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "Street2..."
+msgstr "Strasse 2..."
 
 #. module: clubmanagement
 #: model:ir.model,name:clubmanagement.model_club_subclub
@@ -5175,6 +5826,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__subclub
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member__effective_membership_source_scope__subclub
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_billing_run_line__effective_membership_source_scope__subclub
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_transfer_wizard__target_scope__subclub
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__subclub
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_department_kanban_view
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_subclub_form_view
@@ -5252,14 +5904,39 @@ msgid "Tags"
 msgstr "Tags"
 
 #. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__target_department_id
+msgid "Target Department"
+msgstr "Ziel-Abteilung"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_mail_wizard__target_model
 msgid "Target Model"
 msgstr "Ziel-Model"
 
 #. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__target_pool_id
+msgid "Target Pool"
+msgstr "Ziel-Pool"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_mail_wizard__target_record_count
 msgid "Target Records"
 msgstr "Ziel-Einträge"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__target_subclub_id
+msgid "Target Subclub"
+msgstr "Ziel-Unterclub"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__target_team_id
+msgid "Target Team"
+msgstr "Ziel-Team"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__target_scope
+msgid "Target Type"
+msgstr "Ziel-Typ"
 
 #. module: clubmanagement
 #. odoo-python
@@ -5298,6 +5975,7 @@ msgstr "Steuern"
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_log__scope_type__team
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member__effective_membership_source_scope__team
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_billing_run_line__effective_membership_source_scope__team
+#: model:ir.model.fields.selection,name:clubmanagement.selection__club_member_transfer_wizard__target_scope__team
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__scope_type__team
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_team_form_view
 msgid "Team"
@@ -5333,15 +6011,6 @@ msgstr "Team gelöscht: %s"
 
 #. module: clubmanagement
 #. odoo-python
-#: code:addons/clubmanagement/models/res_config_settings.py:0
-msgid ""
-"Team form view was not found (clubmanagement.club_team_overview_form_view)."
-msgstr ""
-"Team Form View konnte nicht gefunden werden "
-"(clubmanagement.club_team_overview_form_view)."
-
-#. module: clubmanagement
-#. odoo-python
 #: code:addons/clubmanagement/models/clubteam.py:0
 msgid "Team members assigned. Team cannot be deleted! Deactivate team instead."
 msgstr ""
@@ -5360,8 +6029,6 @@ msgid "Team/Club Function or Role"
 msgstr "Team/Club Funktion oder Rolle"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.actions.act_window,name:clubmanagement.club_team_list_action
 #: model:ir.model.fields,field_description:clubmanagement.field_club_club__team_ids
 #: model:ir.model.fields,field_description:clubmanagement.field_club_department__team_ids
@@ -5439,6 +6106,16 @@ msgstr ""
 #. odoo-python
 #: code:addons/clubmanagement/models/res_config_settings.py:0
 msgid ""
+"The Memberships menu hierarchy was rebuilt from active memberships grouped "
+"by company and subclub."
+msgstr ""
+"The Memberships menu hierarchy was rebuilt from active memberships grouped "
+"by company and subclub."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/res_config_settings.py:0
+msgid ""
 "The Pools menu hierarchy was rebuilt from Subclub, Department, and Pool data."
 msgstr ""
 "Die Pool Menustruktur wurde für Unterclubs, Departemente und Pool Daten neu "
@@ -5509,6 +6186,18 @@ msgstr ""
 "Die Registernummer der Unternehmung. Verwenden, wenn diese von der Steuer-ID "
 "der Unternehmung abweicht. Die Registernummer muss eindeutig über alle "
 "Partner desselben Landes sein."
+
+#. module: clubmanagement
+#. odoo-python
+#: code:addons/clubmanagement/models/club_member_transfer_wizard.py:0
+msgid ""
+"There are %(count)s selected members assigned to multiple teams (%(names)s). "
+"To avoid accidental data loss, either switch to \"Add team assignment\" mode "
+"or enable \"Allow replacing assignments for multi-team members\"."
+msgstr ""
+"Es gibt %{count}s ausgewählte Mitglieder in mehreren Teams (%{names}s). Um "
+"Datenverlust zu vermeiden, entweder zum Modus \"Team hinzufügen\" wechseln "
+"oder \"Ersetzen der Zugehörigkeit für Multi-Team Mitglieder\" akzeptieren."
 
 #. module: clubmanagement
 #. odoo-python
@@ -5634,12 +6323,6 @@ msgid "Total Invoiced"
 msgstr "Total verrechnet"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "Total Members"
-msgstr "Total Mitglieder"
-
-#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__debit
 msgid "Total Payable"
 msgstr "Total Ausgaben"
@@ -5658,6 +6341,22 @@ msgstr "Total offener Forderungen gegenüber dem Kunden."
 #: model:ir.model.fields,help:clubmanagement.field_club_member__debit
 msgid "Total amount you have to pay to this vendor."
 msgstr "Total offener Forderungen seitens des Lieferanten."
+
+#. module: clubmanagement
+#: model:ir.actions.act_window,name:clubmanagement.action_club_member_transfer_wizard_from_member
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_transfer_wizard_form
+msgid "Transfer Members"
+msgstr "Mitglieder transferieren"
+
+#. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_transfer_wizard__transfer_mode
+msgid "Transfer Mode"
+msgstr "Transfermodus"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+msgid "Trigger"
+msgstr "Auslöser"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_res_config_settings__registration_success_on_manual_create
@@ -5712,12 +6411,6 @@ msgstr "Unbekanntes Ziel"
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_unlink
 msgid "Unlink Permission"
 msgstr "Löschen-Erlaubnis"
-
-#. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "Upcoming Birthdays"
-msgstr "Kommende Geburtstage"
 
 #. module: clubmanagement
 #. odoo-python
@@ -5834,8 +6527,6 @@ msgid "Visitors"
 msgstr "Besucher"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
 #: model:ir.ui.menu,name:clubmanagement.club_member_waiting_list_menu
 msgid "Waiting List"
 msgstr "Warteliste"
@@ -5959,6 +6650,7 @@ msgstr "Mit Cron Job"
 
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_mail_wizard_line__wizard_id
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__wizard_id
 msgid "Wizard"
 msgstr "Wizard"
 
@@ -5992,6 +6684,11 @@ msgid "Working Group"
 msgstr "Arbeitsgruppe"
 
 #. module: clubmanagement
+#: model:ir.model.fields,field_description:clubmanagement.field_club_member_state_rule_dry_run_wizard_line__would_execute_action
+msgid "Would Execute Action"
+msgstr "Wird Aktion ausführen"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_role__perm_write
 msgid "Write Permission"
 msgstr "Schreibberechtigung"
@@ -5999,6 +6696,7 @@ msgstr "Schreibberechtigung"
 #. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__year_of_birth
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
+#: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_search_view
 msgid "Year of Birth"
 msgstr "Geburtsjahr"
 
@@ -6054,6 +6752,11 @@ msgid "Zip"
 msgstr "Zip"
 
 #. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_hr_employee_form_clubmanagement
+msgid "Zip..."
+msgstr "PLZ"
+
+#. module: clubmanagement
 #: model:ir.model.fields,help:clubmanagement.field_club_member__days_sales_outstanding
 msgid ""
 "[(Total Receivable/Total Revenue) * number of days since the first invoice] "
@@ -6094,20 +6797,30 @@ msgid ""
 msgstr "days"
 
 #. module: clubmanagement
-#. odoo-javascript
-#: code:addons/clubmanagement/static/src/xml/club_dashboard_templates.xml:0
-msgid "days."
-msgstr "Tage."
-
-#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member__invoice_edi_format
 msgid "eInvoice format"
 msgstr "eInvoice Format"
 
 #. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+msgid ""
+"env['club.member.state.rule']._change_member_state(member, "
+"env['club.member.state'].search([('state_type', '=', 'pending')], limit=1), "
+"'Auto state by rule')"
+msgstr ""
+"env['club.member.state.rule']._change_member_state(member, "
+"env['club.member.state'].search([('state_type', '=', 'pending')], limit=1), "
+"'Auto state by rule')"
+
+#. module: clubmanagement
 #: model:ir.model.fields,field_description:clubmanagement.field_club_member_guardian__is_primary
 msgid "is Primary Guardian"
 msgstr "Is primäre(r) Erziehungsberechtigte(r)"
+
+#. module: clubmanagement
+#: model_terms:ir.ui.view,arch_db:clubmanagement.view_club_member_state_rule_form
+msgid "member.gender == 'female'"
+msgstr "member.gender == 'female'"
 
 #. module: clubmanagement
 #: model:ir.model.fields.selection,name:clubmanagement.selection__club_role__role_type__other
@@ -6123,6 +6836,57 @@ msgstr "Jahre alt"
 #: model_terms:ir.ui.view,arch_db:clubmanagement.club_member_form_view
 msgid "years,"
 msgstr "Jahre,"
+
+#~ msgid "Actual Members"
+#~ msgstr "Tatsächliche Mitglieder"
+
+#~ msgid ""
+#~ "Department form view was not found "
+#~ "(clubmanagement.club_department_overview_form_view)."
+#~ msgstr "Abteilungsansicht konnte nicht gefunden werden."
+
+#~ msgid "Departments:"
+#~ msgstr "Abteilungen:"
+
+#~ msgid "Loading..."
+#~ msgstr "Laden..."
+
+#~ msgid "Manage"
+#~ msgstr "Verwalten"
+
+#~ msgid "New Members"
+#~ msgstr "Neue Mitglieder"
+
+#~ msgid "New Members This Month"
+#~ msgstr "Neue Mitglieder in diesem Monat"
+
+#~ msgid "New State"
+#~ msgstr "Neuer Status"
+
+#~ msgid "No upcoming birthdays within the next"
+#~ msgstr "Keine anstehenden Geburtstage innerhalb der nächsten"
+
+#~ msgid ""
+#~ "Pool form view was not found "
+#~ "(clubmanagement.club_pool_overview_form_view)."
+#~ msgstr ""
+#~ "Pool Form View konnte nicht gefunden werden "
+#~ "(clubmanagement.club_pool_overview_form_view)."
+
+#~ msgid "Reason for Change"
+#~ msgstr "Grund für die Änderung"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "Total Members"
+#~ msgstr "Total Mitglieder"
+
+#~ msgid "Upcoming Birthdays"
+#~ msgstr "Kommende Geburtstage"
+
+#~ msgid "days."
+#~ msgstr "Tage."
 
 #~ msgid "<i class=\"fa fa-clock-o\" title=\"Days in state\"/>"
 #~ msgstr "<i class=\"fa fa-clock-o\" title=\"Tage im Zustand\"/>"
