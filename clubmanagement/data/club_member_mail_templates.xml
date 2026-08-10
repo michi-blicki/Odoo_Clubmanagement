@@ -4,49 +4,49 @@
     <record id="mail_template_member_registration_success" model="mail.template">
         <field name="name">Club Member Registration Successful</field>
         <field name="model_id" ref="clubmanagement.model_club_member"/>
-        <field name="subject">Registration confirmed: ${object.name}</field>
-        <field name="email_from">${(user.email_formatted or '')}</field>
-        <field name="email_to">${object.email or ''}</field>
+        <field name="subject">Registration confirmed: {{ object.name }}</field>
+        <field name="email_from">{{ user.email_formatted or '' }}</field>
+        <field name="email_to">{{ object.email or '' }}</field>
+        <field name="auto_delete" eval="False" />
         <field name="body_html" type="html">
             <div>
-                <p>Hello ${object.firstname or object.name},</p>
+                <p>Hello <t t-out="object.firstname or object.name"/>,</p>
                 <p>Your registration was successfully received and processed.</p>
                 <table style="border-collapse: collapse; width: 100%; max-width: 720px;">
                     <tbody>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600; width: 35%;">Last name</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.lastname or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.lastname or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">First name</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.firstname or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.firstname or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Birthdate</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.birthdate_date and format_date(object.birthdate_date) or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.birthdate_date and format_date(object.birthdate_date) or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Address</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${(object.street or '') + (object.street2 and (' ' + object.street2) or '') + ((object.zip or object.city) and ' ' or '') + (object.zip or '') + ((object.zip and object.city) and ' ' or '') + (object.city or '')}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="(object.street or '') + (object.street2 and (' ' + object.street2) or '') + ((object.zip or object.city) and ' ' or '') + (object.zip or '') + ((object.zip and object.city) and ' ' or '') + (object.city or '')"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Registration date</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.create_date and format_datetime(object.create_date) or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.create_date and format_datetime(object.create_date) or ''"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Current state</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${ctx.get('club_registration_state_name') or (object.current_state_id and object.current_state_id.name) or 'Not set'}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="ctx.get('club_registration_state_name') or (object.current_state_id and object.current_state_id.name) or 'Not set'"/></td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #d9d9d9; padding: 8px; font-weight: 600;">Member ID</td>
-                            <td style="border: 1px solid #d9d9d9; padding: 8px;">${object.member_id or ''}</td>
+                            <td style="border: 1px solid #d9d9d9; padding: 8px;"><t t-out="object.member_id or ''"/></td>
                         </tr>
                     </tbody>
                 </table>
                 <p>Thank you.</p>
             </div>
         </field>
-        <field name="auto_delete" eval="True"/>
     </record>
 
     <record id="mail_template_member_registration_success_info" model="mail.template">
@@ -55,6 +55,7 @@
         <field name="subject">New Registration: {{ object.name }}</field>
         <field name="email_from">{{ user.email_formatted or '' }}</field>
         <field name="email_to">{{ ctx.get('club_registration_info_email') or '' }}</field>
+        <field name="auto_delete" eval="False"/>
         <field name="body_html" type="html">
             <div>
                 <p>Hello,</p>
@@ -94,31 +95,31 @@
                 <p>Odoo Club Management System</p>
             </div>
         </field>
-        <field name="auto_delete" eval="True"/>
     </record>
 
     <record id="mail_template_member_manual_dispatch" model="mail.template">
         <field name="name">Club Member Manual Dispatch</field>
         <field name="model_id" ref="clubmanagement.model_club_member"/>
-        <field name="subject">${ctx.get('club_manual_subject') or 'Club Communication'}</field>
-        <field name="email_from">${(user.email_formatted or '')}</field>
-        <field name="email_to">${object.email or ''}</field>
+        <field name="subject">{{ ctx.get('club_manual_subject') or 'Club Communication' }}</field>
+        <field name="email_from">{{ user.email_formatted or '' }}</field>
+        <field name="email_to">{{ object.email or '' }}</field>
+        <field name="auto_delete" eval="False"/>
         <field name="body_html" type="html">
             <div style="font-family: Verdana, Arial, sans-serif; color: #222222; max-width: 900px;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <tbody>
                         <tr>
                             <td style="vertical-align: top; width: 42%; padding: 6px 0;">
-                                <div style="font-weight: 700;">${object.company_id and object.company_id.name or ''}</div>
-                                <div>${object.company_id and object.company_id.street or ''}</div>
-                                <div>${object.company_id and object.company_id.zip or ''} ${object.company_id and object.company_id.city or ''}</div>
-                                <div>VAT: ${object.company_id and object.company_id.vat or ''}</div>
+                                <div style="font-weight: 700;"><t t-out="object.company_id and object.company_id.name or ''"/></div>
+                                <div><t t-out="object.company_id and object.company_id.street or ''"/></div>
+                                <div><t t-out="(object.company_id and object.company_id.zip or '') + ((object.company_id and object.company_id.zip) and (object.company_id and object.company_id.city) and ' ' or '') + (object.company_id and object.company_id.city or '')"/></div>
+                                <div>VAT: <t t-out="object.company_id and object.company_id.vat or ''"/></div>
                             </td>
                             <td style="vertical-align: top; width: 38%; text-align: center; padding: 6px 12px; font-weight: 700;">
-                                ${ctx.get('club_manual_subject') or ''}
+                                <t t-out="ctx.get('club_manual_subject') or ''"/>
                             </td>
                             <td style="vertical-align: top; width: 20%; text-align: right; padding: 6px 0;">
-                                <img src="/logo.png?company=${object.company_id and object.company_id.id or 0}"
+                                <img t-att-src="'/logo.png?company=%s' % (object.company_id and object.company_id.id or 0)"
                                      style="max-height: 56px;"
                                      alt="Company Logo"/>
                             </td>
@@ -129,7 +130,7 @@
                 <hr style="background-color: #cccccc; border: none; min-height: 1px; margin: 16px 0;"/>
 
                 <div>
-                    ${ctx.get('club_manual_body_html') or ''}
+                    <t t-out="ctx.get('club_manual_body_html') or ''"/>
                 </div>
 
                 <hr style="background-color: #cccccc; border: none; min-height: 1px; margin: 16px 0;"/>
@@ -138,16 +139,15 @@
                     <tbody>
                         <tr>
                             <td style="width: 50%; vertical-align: top;">
-                                Bank: ${object.company_id and object.company_id.bank_ids and object.company_id.bank_ids[0].acc_number or ''}
+                                Bank: <t t-out="object.company_id and object.company_id.bank_ids and object.company_id.bank_ids[0].acc_number or ''"/>
                             </td>
                             <td style="width: 50%; vertical-align: top; text-align: right;">
-                                Generated: ${ctx.get('club_manual_generated_at') and format_datetime(ctx.get('club_manual_generated_at')) or ''}
+                                Generated: <t t-out="ctx.get('club_manual_generated_at') and format_datetime(ctx.get('club_manual_generated_at')) or ''"/>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </field>
-        <field name="auto_delete" eval="True"/>
     </record>
 </odoo>

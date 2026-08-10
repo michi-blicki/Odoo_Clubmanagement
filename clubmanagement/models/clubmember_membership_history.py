@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 
 class ClubMemberMembershipHistory(models.Model):
     _name = 'club.member.membership.history'
+    _inherit = ['club.security.mixin']
     _description = 'Club Member Membership History'
     _order = 'date_start DESC, id DESC'
 
@@ -29,4 +30,9 @@ class ClubMemberMembershipHistory(models.Model):
         for record in self:
             if record.date_end and record.date_start > record.date_end:
                 raise ValidationError(_("End Date must be after start date."))
+
+    def write(self, vals):
+        for record in self:
+            record._check_user_action_permissions('write', record=record.member_id)
+        return super().write(vals)
                 

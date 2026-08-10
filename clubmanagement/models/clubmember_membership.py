@@ -120,7 +120,7 @@ class ClubMemberMembership(models.Model):
                 'name': _(membership.name),
                 'res_model': 'club.member',
                 'view_mode': 'list,form',
-                'view_id': self.env.ref('clubmanagement.club_member_active_list_view').id,
+                'view_id': self.env.ref('clubmanagement.club_member_all_list_view').id,
                 'domain': [('current_membership_id', '=', membership.id)],
                 'context': {},
                 'type': 'ir.actions.act_window',
@@ -158,12 +158,12 @@ class ClubMemberMembership(models.Model):
                 if not self.env['club.member.membership.menu'].search([
                     ('membership_id', '=', membership.id)
                 ], limit=1):
-                    menu_root = self.env.ref('your_module.club_memberships_root_menu', raise_if_not_found=True)
+                    menu_root = self.env.ref('clubmanagement.club_memberships_root_menu', raise_if_not_found=True)
                     action = self.env['ir.actions.act_window'].create({
                         'name': _(membership.name),
                         'res_model': 'club.member',
-                        'view_mode': 'tree,form',
-                        'view_id': self.env.ref('your_module.club_member_active_list_view').id,
+                        'view_mode': 'list,form',
+                        'view_id': self.env.ref('clubmanagement.club_member_all_list_view').id,
                         'domain': [('current_membership_id', '=', membership.id)],
                         'context': {},
                         'type': 'ir.actions.act_window',

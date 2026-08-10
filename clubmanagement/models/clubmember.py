@@ -31,7 +31,7 @@ class ClubMember(models.Model):
     #
     # Personal Identification Fields
     partner_id              = fields.Many2one(string="Contact", comodel_name="res.partner", required=True, ondelete="restrict", store=True)
-    member_id               = fields.Integer(string="Member ID", required=True, readonly=True)
+    member_id               = fields.Integer(string="Member ID", required=True, readonly=True, aggregator=False)
     photo                   = fields.Binary(string="Photo", attachment=True, help="Member photo of size 680x960 or 1360x1920")
 
     #
@@ -109,6 +109,7 @@ class ClubMember(models.Model):
         string="Effective Membership Source ID",
         compute="_compute_effective_membership",
         store=True,
+        aggregator=False,
     )
     effective_membership_source_name = fields.Char(
         string="Effective Membership Source Name",
@@ -127,9 +128,9 @@ class ClubMember(models.Model):
 
     active                 = fields.Boolean(default=True, tracking=True)
 
-    year_of_birth          = fields.Integer(string="Year of Birth", compute="_compute_year_of_birth", store=True)
-    age                    = fields.Integer(string="Age", compute="_compute_age", store=True)
-    years_in_club          = fields.Float(string="Years in Club", compute="_compute_membership_duration", store=True)
+    year_of_birth          = fields.Integer(string="Year of Birth", compute="_compute_year_of_birth", store=True, aggregator=False)
+    age                    = fields.Integer(string="Age", compute="_compute_age", store=True, aggregator="avg")
+    years_in_club          = fields.Float(string="Years in Club", compute="_compute_membership_duration", store=True, aggregator="avg")
     months_in_club         = fields.Integer(string="Months in Club", compute="_compute_membership_duration", store=True)
     days_in_club           = fields.Integer(string="Days in Club", compute="_compute_membership_duration", store=True)
 
@@ -936,6 +937,60 @@ class ClubMember(models.Model):
             'reason': reason,
         })
 
+    def action_open_state_change_wizard(self, target_state_id=False):
+        self.ensure_one()
+        self._check_user_action_permissions('write', record=self)
+
+        current_state_id = self.current_state_id.id if self.current_state_id else False
+        if target_state_id and current_state_id and target_state_id == current_state_id:
+            return False
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'club.member.state.change.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_member_id': self.id,
+                'default_current_state_id': current_state_id,
+                'default_target_state_id': target_state_id or False,
+            },
+        }
+
+    def action_change_state_with_history(self, new_state, start_date, reason=None):
+        self.ensure_one()
+        self._check_user_action_permissions('write', record=self)
+
+        state = new_state
+        if isinstance(new_state, int):
+            state = self.env['club.member.state'].browse(new_state)
+        state = state.exists() if state else self.env['club.member.state']
+
+        if not state:
+            raise UserError(_('Please select a target state.'))
+
+        if self.current_state_id and self.current_state_id.id == state.id:
+            raise UserError(_('The selected state is already the current state.'))
+
+        change_start = fields.Datetime.to_datetime(start_date) if start_date else fields.Datetime.now()
+        if not change_start:
+            raise UserError(_('Please provide a valid start date.'))
+
+        current_open_state = self.env['club.member.state.history'].search([
+            ('member_id', '=', self.id),
+            ('end_date', '=', False),
+        ], limit=1)
+        if current_open_state and current_open_state.start_date and change_start < current_open_state.start_date:
+            raise UserError(_('Start date cannot be earlier than the current open state start date.'))
+
+        self.env['club.member.state.rule']._change_member_state(
+            self,
+            state,
+            reason or False,
+            start_date=change_start,
+        )
+        return True
+
     #######################################
     # MEMBER MEMBERSHIP - Functionalities
     #######################################
@@ -976,6 +1031,11 @@ class ClubMember(models.Model):
 
     @api.depends(
         'current_membership_id',
+        'membership_history_ids',
+        'membership_history_ids.date_start',
+        'membership_history_ids.date_end',
+        'membership_history_ids.membership_id',
+        'membership_history_ids.membership_id.is_fee_exempt',
         'team_ids',
         'team_ids.effective_membership_id',
         'team_ids.effective_membership_id.price',
@@ -1007,14 +1067,29 @@ class ClubMember(models.Model):
             selected_model = False
             selected_source = False
 
-            for scope, model_name, field_name in scope_priority:
-                best_membership, source_record = member._select_best_membership_for_scope(member[field_name])
-                if best_membership:
-                    selected_membership = best_membership
-                    selected_scope = scope
-                    selected_model = model_name
-                    selected_source = source_record
-                    break
+            # Absolute priority: an open-ended fee-exempt membership history entry
+            # always wins over scope-driven effective memberships.
+            fee_exempt_history = member.membership_history_ids.filtered(
+                lambda history: not history.date_end
+                and history.membership_id
+                and history.membership_id.is_fee_exempt
+            ).sorted(key=lambda history: (history.date_start or fields.Date.today(), history.id), reverse=True)[:1]
+
+            if fee_exempt_history:
+                selected_membership = fee_exempt_history.membership_id
+                selected_scope = 'base'
+                selected_model = 'club.member.membership.history'
+                selected_source = fee_exempt_history
+
+            if not selected_membership:
+                for scope, model_name, field_name in scope_priority:
+                    best_membership, source_record = member._select_best_membership_for_scope(member[field_name])
+                    if best_membership:
+                        selected_membership = best_membership
+                        selected_scope = scope
+                        selected_model = model_name
+                        selected_source = source_record
+                        break
 
             if not selected_membership and member.current_membership_id:
                 selected_membership = member.current_membership_id

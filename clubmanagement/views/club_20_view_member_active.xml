@@ -6,7 +6,6 @@
         <field name="model">club.member</field>
         <field name="arch" type="xml">
             <list string="Active Members" default_order="lastname, firstname">
-                <field name="member_id" />
                 <field name="partner_id" optional="hide" />
                 <field name="lastname" />
                 <field name="firstname" />
@@ -18,11 +17,9 @@
                 <field name="city" />
                 <field name="subclub_ids" widget="many2many_tags" options="{'no_create': True}" optional="show" />
                 <field name="department_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
-                <field name="team_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
+                <field name="team_ids" widget="many2many_tags" options="{'no_create': True}" optional="show" />
                 <field name="current_state_id" optional="hide" />
-                <field name="current_membership_id" optional="hide" />
                 <field name="effective_membership_id" optional="hide" />
-                <field name="effective_membership_source_scope" optional="hide" />
                 <field name="state_date_start" />
                 <field name="months_in_club" />
                 <field name="guardian_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
@@ -64,7 +61,7 @@
         <field name="view_mode">list,form</field>
         <field name="view_ids" eval="[
             (5,0),
-            (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_active_list_view')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('club_member_all_list_view')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('club_member_form_view')}),
         ]"/>
         <field name="domain">[('current_state_id.state_type', 'in', ["active", "inactive"])]</field>

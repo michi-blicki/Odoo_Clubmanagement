@@ -205,13 +205,13 @@ class ResConfigSettings(models.TransientModel):
                     )
                     for team in pool_teams:
                         team_action = action_model.create({
-                            'name': _('[Teams Menu] Team: %s') % team.name,
+                            'name': _('[Team Menu] Team: %s') % team.name,
                             'res_model': 'club.member',
                             'view_mode': 'list,form',
                             'view_id': member_list_view.id,
                             'domain': [
                                 ('active', '=', True),
-                                ('id', 'in', team.member_ids_display.ids),
+                                ('team_ids', 'in', [team.id]),
                             ],
                             'context': {},
                             'target': 'current',
@@ -231,13 +231,13 @@ class ResConfigSettings(models.TransientModel):
                 )
                 for team in department_teams:
                     team_action = action_model.create({
-                        'name': _('[Teams Menu] Team: %s') % team.name,
+                        'name': _('Team: %s') % team.name,
                         'res_model': 'club.member',
                         'view_mode': 'list,form',
                         'view_id': member_list_view.id,
                         'domain': [
                             ('active', '=', True),
-                            ('id', 'in', team.member_ids_display.ids),
+                            ('team_ids', 'in', [team.id]),
                         ],
                         'context': {},
                         'target': 'current',
@@ -354,7 +354,7 @@ class ResConfigSettings(models.TransientModel):
                         'view_id': member_list_view.id,
                         'domain': [
                             ('active', '=', True),
-                            ('id', 'in', pool.member_ids_display.ids),
+                            ('pool_ids', 'in', [pool.id]),
                         ],
                         'context': {},
                         'target': 'current',
@@ -447,7 +447,7 @@ class ResConfigSettings(models.TransientModel):
                     'view_id': member_list_view.id,
                     'domain': [
                         ('active', '=', True),
-                        ('id', 'in', department.member_ids_display.ids),
+                        ('department_ids', 'in', [department.id]),
                     ],
                     'context': {},
                     'target': 'current',

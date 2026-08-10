@@ -5,24 +5,32 @@
         <field name="name">club.member.list.view</field>
         <field name="model">club.member</field>
         <field name="arch" type="xml">
-            <list string="All Members" default_order="lastname, firstname">
-                <field name="member_id" />
+            <list string="All Members" default_order="lastname, firstname" class="club_member_groupby_readable">
                 <field name="partner_id" optional="hide" />
+                <field name="member_id" optional="hide" />
                 <field name="lastname" />
                 <field name="firstname" />
                 <field name="birthdate_date" />
+                <field name="ssnid" optional="show" />
                 <field name="year_of_birth" optional="hide" />
                 <field name="age" optional="hide" />
                 <field name="requires_guardian" optional="hide" />
-                <field name="nationality_id" />
-                <field name="city" />
-                <field name="subclub_ids" widget="many2many_tags" options="{'no_create': True}" optional="show" />
+                <field name="nationality_id" optional="hide" />
+                <field name="street" optional="show"/>
+                <field name="zip" optional="show"/>
+                <field name="city" optional="show"/>
+                <field name="email" optional="show"/>
+                <field name="phone" optional="hide"/>
+                <field name="mobile" optional="show"/>
+                <field name="subclub_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
                 <field name="department_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
                 <field name="team_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
-                <field name="current_state_id" optional="hide" />
+                <field name="current_state_id" optional="hide"/>
+                <field name="state_date_start" optional="hide" />
                 <field name="current_membership_id" optional="hide" />
-                <field name="state_date_start" />
-                <field name="months_in_club" />
+                <field name="effective_membership_id" optional="hide" />
+                <field name="effective_membership_source_scope" optional="hide" />
+                <field name="months_in_club" optional="show" />
                 <field name="guardian_ids" widget="many2many_tags" options="{'no_create': True}" optional="hide" />
             </list>
         </field>

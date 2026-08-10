@@ -19,7 +19,7 @@
                             string="Open User"
                             groups="base.group_system"
                             invisible="related_user_id == False"/>
-                    <field name="current_state_id" widget="statusbar" options="{'clickable': '1'}"/>
+                    <field name="current_state_id" widget="statusbar" readonly="0" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
                     <group>
@@ -88,9 +88,14 @@
                         <page string="Club Member" name="page_club_member">
                             <group>
                                 <field name="club_id" readonly="1"/>
-                                <field name="subclub_ids" widget="many2many_tags"/>
-                                <field name="department_ids" widget="many2many_tags" domain="[('subclub_id', 'in', subclub_ids)]"/>
-                                <field name="team_ids" widget="many2many_tags" domain="[('department_id', 'in', department_ids)]"/>
+                                <field name="subclub_ids" widget="many2many_tags" readonly="1" groups="clubmanagement.group_clubmanagement_user,clubmanagement.group_clubmanagement_key_user,!clubmanagement.group_clubmanagement_master_user,!clubmanagement.group_clubmanagement_administrator"/>
+                                <field name="subclub_ids" widget="many2many_tags" groups="clubmanagement.group_clubmanagement_master_user,clubmanagement.group_clubmanagement_administrator"/>
+
+                                <field name="department_ids" widget="many2many_tags" readonly="1" domain="[('subclub_id', 'in', subclub_ids)]" groups="clubmanagement.group_clubmanagement_user,clubmanagement.group_clubmanagement_key_user,!clubmanagement.group_clubmanagement_master_user,!clubmanagement.group_clubmanagement_administrator"/>
+                                <field name="department_ids" widget="many2many_tags" domain="[('subclub_id', 'in', subclub_ids)]" groups="clubmanagement.group_clubmanagement_master_user,clubmanagement.group_clubmanagement_administrator"/>
+
+                                <field name="team_ids" widget="many2many_tags" readonly="1" domain="[('department_id', 'in', department_ids)]" groups="clubmanagement.group_clubmanagement_user,clubmanagement.group_clubmanagement_key_user,!clubmanagement.group_clubmanagement_master_user,!clubmanagement.group_clubmanagement_administrator"/>
+                                <field name="team_ids" widget="many2many_tags" domain="[('department_id', 'in', department_ids)]" groups="clubmanagement.group_clubmanagement_master_user,clubmanagement.group_clubmanagement_administrator"/>
                             </group>
                             <group string="Billing">
                                 <field name="invoice_grouping_mode"/>

@@ -22,6 +22,7 @@ from . import clubmember_billing_run
 from . import clubmember_state
 from . import clubmember_state_history
 from . import clubmember_state_rule
+from . import club_member_state_change_wizard
 from . import club_member_state_rule_dry_run_wizard
 from . import clubmember_guardian
 from . import club_member_mail_wizard

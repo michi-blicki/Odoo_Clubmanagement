@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 class HrEmployeePrivate(models.Model):
     _inherit = 'hr.employee'
 
-    ssnid = fields.Char(string='SSN No', related='address_id.ssnid', help='Social Security Number', groups='hr.group_hr_user', store=True, readonly=False, tracking=True)
+    ssnid = fields.Char(string='SSN No', related='private_address_id.ssnid', help='Social Security Number', groups='hr.group_hr_user', store=True, readonly=False, tracking=True)
     private_address_id = fields.Many2one(string="Private Address Partner", comodel_name='res.partner', groups='hr.group_hr_user,group_clubmanagement_key_user', store=True, readonly=False, tracking=True)
 
     @api.model

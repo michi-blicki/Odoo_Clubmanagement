@@ -207,6 +207,37 @@ class ClubMemberTransferWizard(models.TransientModel):
 
         return values
 
+    def _apply_team_transfer_state_transition(self, members, target):
+        self.ensure_one()
+
+        eligible_members = members.filtered(
+            lambda member: member.current_state_id and member.current_state_id.state_type in ('registered', 'pending')
+        )
+        if not eligible_members:
+            return
+
+        active_state = self.env['club.member.state'].search([
+            ('state_type', '=', 'active'),
+            ('active', '=', True),
+        ], limit=1)
+        if not active_state:
+            raise UserError(
+                _('No active club member state (state_type = active) is configured. Please inform Administrator.')
+            )
+
+        reason = _('Automatic state change to active after transfer to team %(team)s.') % {
+            'team': target.display_name,
+        }
+        state_rule_model = self.env['club.member.state.rule']
+        now = fields.Datetime.now()
+        for member in eligible_members:
+            state_rule_model._change_member_state(
+                member,
+                active_state,
+                reason,
+                start_date=now,
+            )
+
     def action_apply_transfer(self):
         self.ensure_one()
 
@@ -223,6 +254,9 @@ class ClubMemberTransferWizard(models.TransientModel):
             vals = self._prepare_replace_values(target)
 
         members.write(vals)
+
+        if self.target_scope == 'team':
+            self._apply_team_transfer_state_transition(members, target)
 
         return {
             'type': 'ir.actions.client',

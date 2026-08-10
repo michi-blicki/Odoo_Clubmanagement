@@ -59,7 +59,6 @@
         <field name="model">club.member</field>
         <field name="arch" type="xml">
             <list string="Active Members" default_order="lastname">
-                <field name="member_id" />
                 <field name="partner_id" optional="hide" />
                 <field name="lastname" />
                 <field name="firstname" />

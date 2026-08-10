@@ -193,14 +193,50 @@ class ClubMemberMailWizard(models.TransientModel):
 
     @api.model
     def _resolve_member_recipient(self, member):
+        recipients = self._resolve_member_recipients(member)
+        return recipients[0] if recipients else False
+
+    @api.model
+    def _collect_emails_from_record(self, record):
+        recipients = []
+        seen = set()
         for field_name in ('email', 'email2', 'email_work'):
-            field_value = getattr(member, field_name, False)
+            field_value = getattr(record, field_name, False)
             if not field_value:
                 continue
             split_addresses = email_split(field_value)
-            if split_addresses:
-                return split_addresses[0].strip().lower()
-        return False
+            for address in split_addresses:
+                normalized = (address or '').strip().lower()
+                if not normalized or normalized in seen:
+                    continue
+                seen.add(normalized)
+                recipients.append(normalized)
+        return recipients
+
+    @api.model
+    def _resolve_member_recipients(self, member):
+        recipients = []
+        seen = set()
+
+        def add_candidates(candidates):
+            for address in candidates:
+                if not address or address in seen:
+                    continue
+                seen.add(address)
+                recipients.append(address)
+
+        # Member and linked contact emails are always considered first.
+        add_candidates(self._collect_emails_from_record(member))
+        if member.partner_id:
+            add_candidates(self._collect_emails_from_record(member.partner_id))
+
+        # Include guardian contact emails when guardian links exist.
+        for guardian_link in member.guardian_ids:
+            guardian_partner = guardian_link.guardian_id
+            if guardian_partner:
+                add_candidates(self._collect_emails_from_record(guardian_partner))
+
+        return recipients
 
     def _build_template_context(self):
         self.ensure_one()
@@ -221,9 +257,9 @@ class ClubMemberMailWizard(models.TransientModel):
     def _pick_preview_member(self, members):
         self.ensure_one()
         for member in members:
-            recipient = self._resolve_member_recipient(member)
-            if recipient:
-                return member, recipient
+            recipients = self._resolve_member_recipients(member)
+            if recipients:
+                return member, ', '.join(recipients)
         if members:
             return members[0], False
         return self.env['club.member'], False
@@ -302,8 +338,8 @@ class ClubMemberMailWizard(models.TransientModel):
         line_commands = [(5, 0, 0)]
 
         for member in members:
-            recipient = self._resolve_member_recipient(member)
-            if not recipient:
+            recipients = self._resolve_member_recipients(member)
+            if not recipients:
                 reason = _('Skipped: missing recipient address on email, email2 and email_work.')
                 line_commands.append((0, 0, {
                     'member_id': member.id,
@@ -313,53 +349,54 @@ class ClubMemberMailWizard(models.TransientModel):
                 self._log_dispatch(member, 'system_action', reason)
                 continue
 
-            if recipient in seen_recipients:
-                reason = _('Skipped: duplicate recipient address in this dispatch run (%s).') % recipient
-                line_commands.append((0, 0, {
-                    'member_id': member.id,
-                    'recipient_email': recipient,
-                    'status': 'skipped',
-                    'reason': reason,
-                }))
-                self._log_dispatch(member, 'system_action', reason)
-                continue
+            for recipient in recipients:
+                if recipient in seen_recipients:
+                    reason = _('Skipped: duplicate recipient address in this dispatch run (%s).') % recipient
+                    line_commands.append((0, 0, {
+                        'member_id': member.id,
+                        'recipient_email': recipient,
+                        'status': 'skipped',
+                        'reason': reason,
+                    }))
+                    self._log_dispatch(member, 'system_action', reason)
+                    continue
 
-            seen_recipients.add(recipient)
+                seen_recipients.add(recipient)
 
-            email_values = {
-                'email_to': recipient,
-                'subject': self.subject,
-            }
-            if self.scheduled_date:
-                email_values['scheduled_date'] = self.scheduled_date
-            if sender_email:
-                email_values['email_from'] = sender_email
+                email_values = {
+                    'email_to': recipient,
+                    'subject': self.subject,
+                }
+                if self.scheduled_date:
+                    email_values['scheduled_date'] = self.scheduled_date
+                if sender_email:
+                    email_values['email_from'] = sender_email
 
-            try:
-                mail_id = template.with_context(**template_ctx).send_mail(
-                    member.id,
-                    force_send=False,
-                    email_values=email_values,
-                )
-                reason = _('Queued successfully.')
-                line_commands.append((0, 0, {
-                    'member_id': member.id,
-                    'recipient_email': recipient,
-                    'status': 'queued',
-                    'mail_mail_id': mail_id,
-                    'reason': reason,
-                }))
-                self._log_dispatch(member, 'system_action', _('Member mail queued to %s.') % recipient)
-            except Exception as exc:
-                _logger.exception('Failed to queue member mail for member %s', member.id)
-                reason = _('Failed while queueing mail: %s') % str(exc)
-                line_commands.append((0, 0, {
-                    'member_id': member.id,
-                    'recipient_email': recipient,
-                    'status': 'failed',
-                    'reason': reason,
-                }))
-                self._log_dispatch(member, 'system_action', reason)
+                try:
+                    mail_id = template.with_context(**template_ctx).send_mail(
+                        member.id,
+                        force_send=False,
+                        email_values=email_values,
+                    )
+                    reason = _('Queued successfully.')
+                    line_commands.append((0, 0, {
+                        'member_id': member.id,
+                        'recipient_email': recipient,
+                        'status': 'queued',
+                        'mail_mail_id': mail_id,
+                        'reason': reason,
+                    }))
+                    self._log_dispatch(member, 'system_action', _('Member mail queued to %s.') % recipient)
+                except Exception as exc:
+                    _logger.exception('Failed to queue member mail for member %s', member.id)
+                    reason = _('Failed while queueing mail: %s') % str(exc)
+                    line_commands.append((0, 0, {
+                        'member_id': member.id,
+                        'recipient_email': recipient,
+                        'status': 'failed',
+                        'reason': reason,
+                    }))
+                    self._log_dispatch(member, 'system_action', reason)
 
         self.write({
             'line_ids': line_commands,
