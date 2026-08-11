@@ -37,7 +37,7 @@ class ClubSecurityMixin(models.AbstractModel):
     @api.model
     def _get_visible_team_ids(self, user=None):
         scopes = self._get_user_scope_entities(user)
-        Team = self.env['club.team']
+        Team = self.env['club.team'].with_context(club_security_internal=True)
         team_ids = scopes['team_ids']
 
         pool_teams = Team.search([('pool_id', 'in', scopes['pool_ids'].ids)])
@@ -49,11 +49,11 @@ class ClubSecurityMixin(models.AbstractModel):
 
     @api.model
     def _get_visible_member_ids(self, user=None):
-        Team = self.env['club.team']
-        Department = self.env['club.department']
-        Pool = self.env['club.pool']
-        SubClub = self.env['club.subclub']
-        Club = self.env['club.club']
+        Team = self.env['club.team'].with_context(club_security_internal=True)
+        Department = self.env['club.department'].with_context(club_security_internal=True)
+        Pool = self.env['club.pool'].with_context(club_security_internal=True)
+        SubClub = self.env['club.subclub'].with_context(club_security_internal=True)
+        Club = self.env['club.club'].with_context(club_security_internal=True)
 
         scopes = self._get_user_scope_entities(user)
         visible_teams = self._get_visible_team_ids(user)
