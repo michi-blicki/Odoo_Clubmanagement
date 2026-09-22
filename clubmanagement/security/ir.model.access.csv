@@ -68,7 +68,7 @@ access_club_state_admin,access.club.state.administrator,model_club_member_state,
 access_club_member_user,access.club.member.user,model_club_member,group_clubmanagement_user,1,1,1,0
 access_club_member_key_user,access.club.member.key.user,model_club_member,group_clubmanagement_key_user,1,1,1,0
 access_club_member_master_user,access.club.member.master.user,model_club_member,group_clubmanagement_master_user,1,1,1,0
-access_club_member_admin,access.club.member.administrator,model_club_member,group_clubmanagement_administrator,1,1,1,0
+access_club_member_admin,access.club.member.administrator,model_club_member,group_clubmanagement_administrator,1,1,1,1
 
 access_club_member_guardian_user,access.club.member.guardian.user,model_club_member_guardian,group_clubmanagement_user,1,0,0,0
 access_club_member_guardian_key_user,access.club.member.guardian.key.user,model_club_member_guardian,group_clubmanagement_key_user,1,1,1,0

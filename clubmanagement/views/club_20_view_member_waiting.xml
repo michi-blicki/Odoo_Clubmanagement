@@ -63,7 +63,7 @@
                 <field name="lastname" />
                 <field name="firstname" />
                 <field name="birthdate_date" />
-                <field name="year_of_birth" optional="hide" />
+                <field name="year_of_birth" optional="hide" options="{'enable_formatting': false}" />
                 <field name="age" optional="hide" />
                 <field name="requires_guardian" optional="hide" />
                 <field name="nationality_id" />

@@ -56,7 +56,7 @@
                             </div>
                             <label for="year_of_birth" string="Year of Birth"/>
                             <div>
-                                <field name="year_of_birth" class="oe_inline" />
+                                <field name="year_of_birth" class="oe_inline" options="{'enable_formatting': false}"/>
                             </div>
                             <label for="years_in_club" string="Club Membership"/>
                             <div>

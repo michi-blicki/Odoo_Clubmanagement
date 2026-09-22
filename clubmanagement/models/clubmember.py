@@ -8,7 +8,7 @@ from odoo.tools import email_split
 from dateutil.relativedelta import relativedelta
 import base64
 from io import BytesIO
-from datetime import date
+from datetime import date, timedelta
 
 from PIL import Image
 
@@ -131,8 +131,8 @@ class ClubMember(models.Model):
     year_of_birth          = fields.Integer(string="Year of Birth", compute="_compute_year_of_birth", store=True, aggregator=False)
     age                    = fields.Integer(string="Age", compute="_compute_age", store=True, aggregator="avg")
     years_in_club          = fields.Float(string="Years in Club", compute="_compute_membership_duration", store=True, aggregator="avg")
-    months_in_club         = fields.Integer(string="Months in Club", compute="_compute_membership_duration", store=True)
-    days_in_club           = fields.Integer(string="Days in Club", compute="_compute_membership_duration", store=True)
+    months_in_club         = fields.Integer(string="Months in Club", compute="_compute_membership_duration", store=True, aggregator="avg")
+    days_in_club           = fields.Integer(string="Days in Club", compute="_compute_membership_duration", store=True, aggregator="avg")
 
     custom_field_lines     = fields.Json(string="Custom Fields", compute="_compute_custom_fields")
     related_user_id        = fields.Many2one(
@@ -861,6 +861,10 @@ class ClubMember(models.Model):
         ):
             self.with_context(club_billing_internal=True)._apply_billing_defaults()
 
+        scope_fields = {'subclub_ids', 'department_ids', 'pool_ids', 'team_ids'}
+        if scope_fields.intersection(set(vals.keys())):
+            self._activate_state_on_scope_change()
+
         # Update custom fields, if available and required
         if 'custom_field_lines' in vals:
             for rec in self:
@@ -894,18 +898,44 @@ class ClubMember(models.Model):
             member.current_state_id = current_state.state_id if current_state else False
             member.state_date_start = current_state.start_date if current_state else False
 
-    @api.depends('state_history_ids.start_date', 'state_history_ids.end_date')
+    @api.depends(
+        'state_history_ids.start_date',
+        'state_history_ids.end_date',
+        'state_history_ids.state_id.state_type',
+    )
     def _compute_membership_duration(self):
+        excluded_state_types = ('registered', 'pending', 'archived', 'deleted')
+        now = fields.Datetime.now()
         today = fields.Date.context_today(self)
+
         for member in self:
-            # Ältesten State-History-Eintrag suchen
-            oldest_state = member.state_history_ids.sorted('start_date')[:1]
-            if oldest_state:
-                start_date = fields.Date.to_date(oldest_state.start_date)
-                delta = relativedelta(today, start_date)
+            total_duration = timedelta()
+            open_histories = member.env['club.member.state.history']
+            for history in member.state_history_ids:
+                if not history.start_date or not history.state_id or history.state_id.state_type in excluded_state_types:
+                    continue
+                if history.end_date:
+                    total_duration += max(history.end_date - history.start_date, timedelta())
+                else:
+                    open_histories |= history
+
+            if open_histories:
+                if len(open_histories) > 1:
+                    _logger.warning(
+                        'Member %s has %s open state history entries without end_date; only the most recent one is counted.',
+                        member.id,
+                        len(open_histories),
+                    )
+                latest_open = open_histories.sorted(key=lambda h: (h.start_date, h.id))[-1]
+                total_duration += max(now - latest_open.start_date, timedelta())
+
+            total_days = total_duration.days
+            if total_days:
+                virtual_start = today - timedelta(days=total_days)
+                delta = relativedelta(today, virtual_start)
                 member.years_in_club = delta.years + (delta.months / 12.0)
                 member.months_in_club = (delta.years * 12) + delta.months
-                member.days_in_club = (today - start_date).days
+                member.days_in_club = total_days
             else:
                 member.years_in_club = 0.0
                 member.months_in_club = 0
@@ -936,6 +966,53 @@ class ClubMember(models.Model):
             'state_id': state_id,
             'reason': reason,
         })
+
+    def _activate_state_on_scope_change(self):
+        """On subclub/department/pool/team change, (de)activate members not yet active/inactive/blocked."""
+        for member in self:
+            member._compute_current_state()
+
+            has_scope = bool(member.subclub_ids or member.department_ids or member.pool_ids or member.team_ids)
+
+            if has_scope:
+                if member.current_state_id.state_type in ('active', 'inactive', 'blocked'):
+                    continue
+
+                target_state = self.env['club.member.state'].search([
+                    ('state_type', '=', 'active'),
+                    ('active', '=', True),
+                ], limit=1)
+                if not target_state:
+                    _logger.warning(
+                        'No club.member.state with state_type=active found; cannot activate member %s after scope change.',
+                        member.id,
+                    )
+                    continue
+            else:
+                if member.current_state_id.state_type != 'active':
+                    continue
+
+                target_state = self.env['club.member.state'].search([
+                    ('state_type', '=', 'inactive'),
+                    ('active', '=', True),
+                ], limit=1)
+                if not target_state:
+                    target_state = self.env['club.member.state'].search([
+                        ('state_type', '=', 'archived'),
+                        ('active', '=', True),
+                    ], limit=1)
+                if not target_state:
+                    _logger.warning(
+                        'No club.member.state with state_type=inactive or archived found; cannot deactivate member %s after scope change.',
+                        member.id,
+                    )
+                    continue
+
+            self.env['club.member.state.history'].create({
+                'member_id': member.id,
+                'state_id': target_state.id,
+                'start_date': fields.Datetime.now(),
+            })
 
     def action_open_state_change_wizard(self, target_state_id=False):
         self.ensure_one()
